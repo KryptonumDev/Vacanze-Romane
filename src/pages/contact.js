@@ -2,10 +2,10 @@ import React from "react"
 import Wrapper from "../components/Wrapper/Wrapper"
 import PageHeader from "../components/PageHeader/PageHeader"
 import Paragraph from "../components/Paragraph/Paragraph"
-import Line from "../components/Line/line"
-import Image from "gatsby-image"
 import styled from "styled-components"
 import { graphql } from "gatsby"
+import { Formik } from "formik"
+import axios from "axios"
 
 const ContactReasonsWrapper = styled.div`
   display: flex;
@@ -98,6 +98,15 @@ const StyledButton = styled.button`
   }
 `
 
+const StyledErrorMessage = styled.p`
+  font-size: 12px;
+  line-height: 12px;
+  margin: 2px 0 0;
+  padding: 0;
+  letter-spacing: -0.03em;
+  color: #ef6565;
+`
+
 const ContactPage = ({ data }) => (
   <Wrapper margin="0 0 60px">
     {console.log(data)}
@@ -108,27 +117,145 @@ const ContactPage = ({ data }) => (
     <Paragraph fontSize="13px" fontWeight="700">
       Contact reason
     </Paragraph>
-    <form>
-      <ContactReasonsWrapper>
-        <input id="349" type="radio" name="question1" />
-        <label htmlFor="349">Project</label>
-        <input id="350" type="radio" name="question1" />
-        <label htmlFor="350">Cooperation</label>
-        <input id="351" type="radio" name="question1" />
-        <label htmlFor="351">Other</label>
-      </ContactReasonsWrapper>
-      <InputFieldsWrapper>
-        <label htmlFor="352">Name</label>
-        <input id="352" type="text" name="name" />
-        <label htmlFor="353">E-mail</label>
-        <input id="353" type="email" name="email" />
-        <label htmlFor="354">Message</label>
-        <textarea id="354" rows="6" name="email" />
-      </InputFieldsWrapper>
-    </form>
-    <ButtonWrapper>
-      <StyledButton>{data.datoCmsContactpage.buttonText}</StyledButton>
-    </ButtonWrapper>
+
+    <Formik
+      initialValues={{
+        reason: "project",
+        name: "",
+        email: "",
+        message: "",
+      }}
+      validate={values => {
+        const errors = {}
+        if (!values.reason) {
+          errors.reason = "What can we do together?"
+        }
+        if (!values.name) {
+          errors.name = "What's your name?"
+        }
+        if (!values.message) {
+          errors.message = "Say something to me."
+        }
+        if (!values.email) {
+          errors.email = "What's your email?"
+        } else if (
+          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+        ) {
+          errors.email = "Invalid email address"
+        }
+        return errors
+      }}
+      onSubmit={(values, { setSubmitting }) => {
+        console.log(values)
+        axios
+          .post(
+            "http://localhost:5001/jamstacktests/us-central1/sendEmail",
+            values
+          )
+          .then(res => {
+            console.log(res)
+            setSubmitting(false)
+          })
+          .catch(err => {
+            console.log(err)
+            setSubmitting(false)
+          })
+      }}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+      }) => (
+        <form
+          action="https://www.flexyform.com/f/0ed6203b93cfa6cc21ab8000bb4ce7bd9d24b699"
+          // onSubmit={handleSubmit}
+        >
+          <ContactReasonsWrapper>
+            <input
+              id="project"
+              type="radio"
+              value="project"
+              name="reason"
+              onChange={handleChange}
+              defaultChecked={values.reason === "project"}
+            />
+            <label htmlFor="project">Project</label>
+            <input
+              id="cooperation"
+              type="radio"
+              value="cooperation"
+              name="reason"
+              onChange={handleChange}
+              defaultChecked={values.reason === "cooperation"}
+            />
+            <label htmlFor="cooperation">Cooperation</label>
+            <input
+              id="other"
+              type="radio"
+              value="other"
+              name="reason"
+              onChange={handleChange}
+              defaultChecked={values.reason === "other"}
+            />
+            <label htmlFor="other">Other</label>
+          </ContactReasonsWrapper>
+          {errors.reason && touched.reason && (
+            <StyledErrorMessage>{errors.reason}</StyledErrorMessage>
+          )}
+
+          <InputFieldsWrapper>
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.name}
+            />
+            {errors.name && touched.name && (
+              <StyledErrorMessage>{errors.name}</StyledErrorMessage>
+            )}
+
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+            />
+            {errors.email && touched.email && (
+              <StyledErrorMessage>{errors.email}</StyledErrorMessage>
+            )}
+
+            <label htmlFor="message">Message</label>
+            <textarea
+              name="message"
+              id="message"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.message}
+              rows="6"
+            />
+            {errors.message && touched.message && (
+              <StyledErrorMessage>{errors.message}</StyledErrorMessage>
+            )}
+          </InputFieldsWrapper>
+          <ButtonWrapper>
+            <StyledButton type="submit" disabled={isSubmitting}>
+              {data.datoCmsContactpage.buttonText}
+            </StyledButton>
+          </ButtonWrapper>
+        </form>
+      )}
+    </Formik>
   </Wrapper>
 )
 
