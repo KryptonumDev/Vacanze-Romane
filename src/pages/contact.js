@@ -172,6 +172,7 @@ const ContactPage = ({ data }) => (
         isSubmitting,
       }) => (
         <form
+          method="post"
           action="https://www.flexyform.com/f/0ed6203b93cfa6cc21ab8000bb4ce7bd9d24b699"
           // onSubmit={handleSubmit}
         >
