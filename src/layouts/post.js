@@ -32,7 +32,7 @@ export const query = graphql`
     datoCmsArticle(id: { eq: $id }) {
       author
       featuredimage {
-        fixed(width: 500) {
+        fixed(width: 800) {
           ...GatsbyDatoCmsFixed
         }
       }

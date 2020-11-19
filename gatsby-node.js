@@ -19,7 +19,6 @@ exports.createPages = async ({ graphql, actions }) => {
     const slugifiedTitle = slugify(article.title, {
       lower: true,
     })
-    console.log(slugifiedTitle)
     createPage({
       path: `creators/${slugifiedTitle}`,
       component: blogPostTemplate,

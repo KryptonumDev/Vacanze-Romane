@@ -6,6 +6,7 @@ import styled from "styled-components"
 import { graphql } from "gatsby"
 import { Formik } from "formik"
 import axios from "axios"
+import { AnimatePresence, motion } from "framer-motion"
 
 const ContactReasonsWrapper = styled.div`
   display: flex;
@@ -48,7 +49,7 @@ const ContactReasonsWrapper = styled.div`
   }
 `
 
-const InputFieldsWrapper = styled.div`
+const InputFieldsWrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   margin-top: 12px;
@@ -98,10 +99,10 @@ const StyledButton = styled.button`
   }
 `
 
-const StyledErrorMessage = styled.p`
+const StyledErrorMessage = styled(motion.p)`
   font-size: 12px;
   line-height: 12px;
-  margin: 2px 0 0;
+  margin: 6px 0 0;
   padding: 0;
   letter-spacing: -0.03em;
   color: #ef6565;
@@ -109,7 +110,6 @@ const StyledErrorMessage = styled.p`
 
 const ContactPage = ({ data }) => (
   <Wrapper margin="0 0 60px">
-    {console.log(data)}
     <PageHeader>{data.datoCmsContactpage.title}</PageHeader>
     <Paragraph width="311px">
       {data.datoCmsContactpage.paragraphUnderTitle}
@@ -153,11 +153,9 @@ const ContactPage = ({ data }) => (
             values
           )
           .then(res => {
-            console.log(res)
             setSubmitting(false)
           })
           .catch(err => {
-            console.log(err)
             setSubmitting(false)
           })
       }}
@@ -185,7 +183,9 @@ const ContactPage = ({ data }) => (
               onChange={handleChange}
               defaultChecked={values.reason === "project"}
             />
-            <label htmlFor="project">Project</label>
+            <motion.label whileTap={{ scale: 1.05 }} htmlFor="project">
+              Project
+            </motion.label>
             <input
               id="cooperation"
               type="radio"
@@ -194,7 +194,9 @@ const ContactPage = ({ data }) => (
               onChange={handleChange}
               defaultChecked={values.reason === "cooperation"}
             />
-            <label htmlFor="cooperation">Cooperation</label>
+            <motion.label whileTap={{ scale: 1.05 }} htmlFor="cooperation">
+              Cooperation
+            </motion.label>
             <input
               id="other"
               type="radio"
@@ -203,52 +205,84 @@ const ContactPage = ({ data }) => (
               onChange={handleChange}
               defaultChecked={values.reason === "other"}
             />
-            <label htmlFor="other">Other</label>
+            <motion.label whileTap={{ scale: 1.05 }} htmlFor="other">
+              Other
+            </motion.label>
           </ContactReasonsWrapper>
-          {errors.reason && touched.reason && (
-            <StyledErrorMessage>{errors.reason}</StyledErrorMessage>
-          )}
-
-          <InputFieldsWrapper>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.name}
-            />
-            {errors.name && touched.name && (
-              <StyledErrorMessage>{errors.name}</StyledErrorMessage>
+          <AnimatePresence>
+            {errors.reason && touched.reason && (
+              <StyledErrorMessage
+                key={errors.reason}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+              >
+                {errors.reason}
+              </StyledErrorMessage>
             )}
 
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
-            {errors.email && touched.email && (
-              <StyledErrorMessage>{errors.email}</StyledErrorMessage>
-            )}
+            <InputFieldsWrapper>
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.name}
+              />
+              {errors.name && touched.name && (
+                <StyledErrorMessage
+                  key={errors.name}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                >
+                  {errors.name}
+                </StyledErrorMessage>
+              )}
 
-            <label htmlFor="message">Message</label>
-            <textarea
-              name="message"
-              id="message"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.message}
-              rows="6"
-            />
-            {errors.message && touched.message && (
-              <StyledErrorMessage>{errors.message}</StyledErrorMessage>
-            )}
-          </InputFieldsWrapper>
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+              />
+              {errors.email && touched.email && (
+                <StyledErrorMessage
+                  key={errors.email}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                >
+                  {errors.email}
+                </StyledErrorMessage>
+              )}
+
+              <label htmlFor="message">Message</label>
+              <textarea
+                name="message"
+                id="message"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.message}
+                rows="6"
+              />
+              {errors.message && touched.message && (
+                <StyledErrorMessage
+                  key={errors.message}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                >
+                  {errors.message}
+                </StyledErrorMessage>
+              )}
+            </InputFieldsWrapper>
+          </AnimatePresence>
           <ButtonWrapper>
             <StyledButton type="submit" disabled={isSubmitting}>
               {data.datoCmsContactpage.buttonText}
