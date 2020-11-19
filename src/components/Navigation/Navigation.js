@@ -1,9 +1,10 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import { motion } from "framer-motion"
 
 const NavigationWrapper = styled.nav`
-  padding: 20px 0;
+  padding: 0;
   height: 80px;
   display: flex;
   justify-content: flex-start;
@@ -24,12 +25,16 @@ const Logo = styled.span`
 const NavigationList = styled.ul`
   display: flex;
   list-style: none;
+  a:first-child {
+    margin-left: 40px;
+  }
 `
 
-const NavigationListItem = styled.li`
+const NavigationListItem = styled(motion.li)`
   font-weight: 600;
   font-size: 16px;
-  margin-left: 32px;
+  margin-left: 8px;
+  padding: 16px 12px;
 `
 const Navigation = () => (
   <NavigationWrapper>
@@ -37,18 +42,26 @@ const Navigation = () => (
       <Link to="/">9M13</Link>
     </Logo>
     <NavigationList>
-      <NavigationListItem>
-        <Link to="/about">about</Link>
-      </NavigationListItem>
-      <NavigationListItem>
-        <Link to="/blog">articles</Link>
-      </NavigationListItem>
-      <NavigationListItem>
-        <Link to="/gallery">gallery</Link>
-      </NavigationListItem>
-      <NavigationListItem>
-        <Link to="/contact">contact</Link>
-      </NavigationListItem>
+      <Link to="/about">
+        <NavigationListItem whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+          about
+        </NavigationListItem>
+      </Link>
+      <Link to="/blog">
+        <NavigationListItem whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+          articles
+        </NavigationListItem>
+      </Link>
+      <Link to="/gallery">
+        <NavigationListItem whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+          gallery
+        </NavigationListItem>
+      </Link>
+      <Link to="/contact">
+        <NavigationListItem whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+          contact
+        </NavigationListItem>
+      </Link>
     </NavigationList>
   </NavigationWrapper>
 )
