@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Wrapper from "../components/Wrapper/Wrapper"
 import PageHeader from "../components/PageHeader/PageHeader"
 import Paragraph from "../components/Paragraph/Paragraph"
@@ -80,6 +80,8 @@ const InputFieldsWrapper = styled(motion.div)`
 `
 const ButtonWrapper = styled.div`
   margin-top: 30px;
+  display: flex;
+  align-items: center;
 `
 
 const StyledButton = styled.button`
@@ -108,191 +110,237 @@ const StyledErrorMessage = styled(motion.p)`
   color: #ef6565;
 `
 
-const ContactPage = ({ data }) => (
-  <Wrapper margin="0 0 60px">
-    <PageHeader>{data.datoCmsContactpage.title}</PageHeader>
-    <Paragraph width="311px">
-      {data.datoCmsContactpage.paragraphUnderTitle}
-    </Paragraph>
-    <Paragraph fontSize="13px" fontWeight="700">
-      Contact reason
-    </Paragraph>
+const SuccessMessage = styled(StyledErrorMessage)`
+  color: #000;
+`
 
-    <Formik
-      initialValues={{
-        reason: "project",
-        name: "",
-        email: "",
-        message: "",
-      }}
-      validate={values => {
-        const errors = {}
-        if (!values.reason) {
-          errors.reason = "What can we do together?"
-        }
-        if (!values.name) {
-          errors.name = "What's your name?"
-        }
-        if (!values.message) {
-          errors.message = "Say something to me."
-        }
-        if (!values.email) {
-          errors.email = "What's your email?"
-        } else if (
-          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-          errors.email = "Invalid email address"
-        }
-        return errors
-      }}
-      onSubmit={(values, { setSubmitting }) => {
-        console.log(values)
-        axios
-          .post(
-            "http://localhost:5001/jamstacktests/us-central1/sendEmail",
-            values
-          )
-          .then(res => {
+const Loader = styled(motion.span)`
+  width: 24px;
+  height: 24px;
+  border-top: 2px solid #000;
+  border-radius: 24px;
+  margin-left: 24px;
+`
+
+const ContactPage = ({ data }) => {
+  const [successMessage, setSuccessMessage] = useState(false)
+
+  return (
+    <Wrapper margin="0 0 60px">
+      <PageHeader>{data.datoCmsContactpage.title}</PageHeader>
+      <Paragraph width="311px">
+        {data.datoCmsContactpage.paragraphUnderTitle}
+      </Paragraph>
+      <Paragraph fontSize="13px" fontWeight="700">
+        Contact reason
+      </Paragraph>
+
+      <Formik
+        initialValues={{
+          reason: "project",
+          name: "",
+          email: "",
+          message: "",
+        }}
+        validate={values => {
+          const errors = {}
+          if (!values.reason) {
+            errors.reason = "What can we do together?"
+          }
+          if (!values.name) {
+            errors.name = "What's your name?"
+          }
+          if (!values.message) {
+            errors.message = "Say something to me."
+          }
+          if (!values.email) {
+            errors.email = "What's your email?"
+          } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+          ) {
+            errors.email = "Invalid email address"
+          }
+          return errors
+        }}
+        onSubmit={(values, { setSubmitting }) => {
+          console.log(values)
+          setTimeout(() => {
+            setSuccessMessage(true)
             setSubmitting(false)
-          })
-          .catch(err => {
-            setSubmitting(false)
-          })
-      }}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-      }) => (
-        <form
-          method="post"
-          action="https://www.flexyform.com/f/0ed6203b93cfa6cc21ab8000bb4ce7bd9d24b699"
-          // onSubmit={handleSubmit}
-        >
-          <ContactReasonsWrapper>
-            <input
-              id="project"
-              type="radio"
-              value="project"
-              name="reason"
-              onChange={handleChange}
-              defaultChecked={values.reason === "project"}
-            />
-            <motion.label whileTap={{ scale: 1.05 }} htmlFor="project">
-              Project
-            </motion.label>
-            <input
-              id="cooperation"
-              type="radio"
-              value="cooperation"
-              name="reason"
-              onChange={handleChange}
-              defaultChecked={values.reason === "cooperation"}
-            />
-            <motion.label whileTap={{ scale: 1.05 }} htmlFor="cooperation">
-              Cooperation
-            </motion.label>
-            <input
-              id="other"
-              type="radio"
-              value="other"
-              name="reason"
-              onChange={handleChange}
-              defaultChecked={values.reason === "other"}
-            />
-            <motion.label whileTap={{ scale: 1.05 }} htmlFor="other">
-              Other
-            </motion.label>
-          </ContactReasonsWrapper>
-          <AnimatePresence>
-            {errors.reason && touched.reason && (
-              <StyledErrorMessage
-                key={errors.reason}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-              >
-                {errors.reason}
-              </StyledErrorMessage>
-            )}
-
-            <InputFieldsWrapper>
-              <label htmlFor="name">Name</label>
+          }, 2000)
+          // axios
+          //   .post(
+          //     "http://localhost:5001/jamstacktests/us-central1/sendEmail",
+          //     values
+          //   )
+          //   .then(res => {
+          //     setSubmitting(false)
+          //   })
+          //   .catch(err => {
+          //     setSubmitting(false)
+          //   })
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <form method="post" onSubmit={handleSubmit}>
+            <ContactReasonsWrapper>
               <input
-                type="text"
-                name="name"
-                id="name"
+                id="project"
+                type="radio"
+                value="project"
+                name="reason"
                 onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.name}
+                defaultChecked={values.reason === "project"}
               />
-              {errors.name && touched.name && (
-                <StyledErrorMessage
-                  key={errors.name}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                >
-                  {errors.name}
-                </StyledErrorMessage>
-              )}
-
-              <label htmlFor="email">Email</label>
+              <motion.label whileTap={{ scale: 1.05 }} htmlFor="project">
+                Project
+              </motion.label>
               <input
-                type="email"
-                name="email"
-                id="email"
+                id="cooperation"
+                type="radio"
+                value="cooperation"
+                name="reason"
                 onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
+                defaultChecked={values.reason === "cooperation"}
               />
-              {errors.email && touched.email && (
+              <motion.label whileTap={{ scale: 1.05 }} htmlFor="cooperation">
+                Cooperation
+              </motion.label>
+              <input
+                id="other"
+                type="radio"
+                value="other"
+                name="reason"
+                onChange={handleChange}
+                defaultChecked={values.reason === "other"}
+              />
+              <motion.label whileTap={{ scale: 1.05 }} htmlFor="other">
+                Other
+              </motion.label>
+            </ContactReasonsWrapper>
+            <AnimatePresence>
+              {errors.reason && touched.reason && (
                 <StyledErrorMessage
-                  key={errors.email}
+                  key={errors.reason}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
                 >
-                  {errors.email}
+                  {errors.reason}
                 </StyledErrorMessage>
               )}
 
-              <label htmlFor="message">Message</label>
-              <textarea
-                name="message"
-                id="message"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.message}
-                rows="6"
-              />
-              {errors.message && touched.message && (
-                <StyledErrorMessage
-                  key={errors.message}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                >
-                  {errors.message}
-                </StyledErrorMessage>
+              <InputFieldsWrapper>
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                />
+                {errors.name && touched.name && (
+                  <StyledErrorMessage
+                    key={errors.name}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    {errors.name}
+                  </StyledErrorMessage>
+                )}
+
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+                {errors.email && touched.email && (
+                  <StyledErrorMessage
+                    key={errors.email}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    {errors.email}
+                  </StyledErrorMessage>
+                )}
+
+                <label htmlFor="message">Message</label>
+                <textarea
+                  name="message"
+                  id="message"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.message}
+                  rows="6"
+                />
+                {errors.message && touched.message && (
+                  <StyledErrorMessage
+                    key={errors.message}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    {errors.message}
+                  </StyledErrorMessage>
+                )}
+              </InputFieldsWrapper>
+            </AnimatePresence>
+            <ButtonWrapper>
+              <StyledButton type="submit" disabled={isSubmitting}>
+                {data.datoCmsContactpage.buttonText}
+              </StyledButton>
+              {isSubmitting && (
+                <Loader
+                  initial="start"
+                  animate="end"
+                  variants={{
+                    start: {
+                      rotate: 0,
+                    },
+                    end: {
+                      rotate: 360,
+                    },
+                  }}
+                  transition={{
+                    duration: 1,
+                    yoyo: Infinity,
+                  }}
+                />
               )}
-            </InputFieldsWrapper>
-          </AnimatePresence>
-          <ButtonWrapper>
-            <StyledButton type="submit" disabled={isSubmitting}>
-              {data.datoCmsContactpage.buttonText}
-            </StyledButton>
-          </ButtonWrapper>
-        </form>
-      )}
-    </Formik>
-  </Wrapper>
-)
+            </ButtonWrapper>
+          </form>
+        )}
+      </Formik>
+      <AnimatePresence>
+        {successMessage && (
+          <SuccessMessage
+            key={"success-message"}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+          >
+            Thank you for contacting us. We'll answer soon.
+          </SuccessMessage>
+        )}
+      </AnimatePresence>
+    </Wrapper>
+  )
+}
 
 export const query = graphql`
   {
