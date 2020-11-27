@@ -1,7 +1,5 @@
 import React, { useState } from "react"
-import Wrapper from "../components/Wrapper/Wrapper"
 import PageHeader from "../components/PageHeader/PageHeader"
-import Paragraph from "../components/Paragraph/Paragraph"
 import styled from "styled-components"
 import { graphql } from "gatsby"
 import { Formik } from "formik"
@@ -126,14 +124,10 @@ const ContactPage = ({ data }) => {
   const [successMessage, setSuccessMessage] = useState(false)
 
   return (
-    <Wrapper margin="0 0 60px">
+    <React.Fragment margin="0 0 60px">
       <PageHeader>{data.datoCmsContactpage.title}</PageHeader>
-      <Paragraph width="311px">
-        {data.datoCmsContactpage.paragraphUnderTitle}
-      </Paragraph>
-      <Paragraph fontSize="13px" fontWeight="700">
-        Contact reason
-      </Paragraph>
+
+      {data.datoCmsContactpage.paragraphUnderTitle}
 
       <Formik
         initialValues={{
@@ -338,7 +332,7 @@ const ContactPage = ({ data }) => {
           </SuccessMessage>
         )}
       </AnimatePresence>
-    </Wrapper>
+    </React.Fragment>
   )
 }
 

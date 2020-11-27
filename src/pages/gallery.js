@@ -4,8 +4,6 @@ import Image from "gatsby-image"
 import { graphql } from "gatsby"
 
 import PageHeader from "../components/PageHeader/PageHeader"
-import Paragraph from "../components/Paragraph/Paragraph"
-import Wrapper from "../components/Wrapper/Wrapper"
 import GridWrapper from "../components/GridWrapper/GridWrapper"
 
 const StyledImage = styled(Image)`
@@ -22,18 +20,16 @@ const StyledImage = styled(Image)`
 `
 
 const GalleryPage = ({ data }) => (
-  <Wrapper>
+  <>
     <PageHeader>gallery</PageHeader>
-    <Paragraph width="311px">
-      While artists work from real to the abstract, architects must work from
-      the abstract to the real.
-    </Paragraph>
+    While artists work from real to the abstract, architects must work from the
+    abstract to the real.
     <GridWrapper>
       {data.allFile.nodes.map(node => (
         <StyledImage fluid={node.childImageSharp.thumb} />
       ))}
     </GridWrapper>
-  </Wrapper>
+  </>
 )
 export const query = graphql`
   {

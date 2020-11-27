@@ -31,13 +31,20 @@ const Logo = styled.span`
   font-family: "Lato";
   font-size: 14px;
   line-height: 20px;
+  letter-spacing: 1px;
   text-transform: uppercase;
+  a {
+    padding: 24px 12px;
+  }
 `
 
 const NavigationList = styled.ul`
   display: flex;
+  justify-content: flex-end;
+  flex: 1 1 auto;
   list-style: none;
   z-index: 1;
+  padding-right: 60px;
   a {
     font-family: "Cormorant Garamond";
 
