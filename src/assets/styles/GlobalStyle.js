@@ -32,6 +32,14 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
   }
+  .ciao {
+    font-size: 96px;
+    letter-spacing: 1px;
+    line-height: 0.73em;
+    color: var(--dark-red);
+    font-family: "Homemade Apple";
+    margin-top: 16px;
+  }
 `
 
 export default GlobalStyle
