@@ -4,16 +4,27 @@ import Navigation from "../components/Navigation/Navigation"
 import ContentWrapper from "../components/ContentWrapper/ContentWrapper"
 import styled from "styled-components"
 import { motion } from "framer-motion"
+import { useLocation } from "@reach/router"
 
 const Wrapper = styled(motion.div)`
-  max-width: 1440px;
   margin: 0 auto;
 `
-const PageLayout = ({ children }) => (
-  <Wrapper>
-    <GlobalStyle />
-    <Navigation />
-    <ContentWrapper>{children}</ContentWrapper>
-  </Wrapper>
-)
+
+const LocationHeaderBgMap = {
+  "/": "light",
+  "/wloski-od-zera": "different",
+  "/blog": "red",
+}
+
+const PageLayout = ({ children }) => {
+  const location = useLocation()
+  console.log(location.pathname)
+  return (
+    <Wrapper>
+      <GlobalStyle />
+      <Navigation bg={LocationHeaderBgMap[location.pathname] || "light"} />
+      <ContentWrapper>{children}</ContentWrapper>
+    </Wrapper>
+  )
+}
 export default PageLayout

@@ -20,7 +20,7 @@ exports.createPages = async ({ graphql, actions }) => {
       lower: true,
     })
     createPage({
-      path: `creators/${slugifiedTitle}`,
+      path: `blog/${slugifiedTitle}`,
       component: blogPostTemplate,
       context: {
         id: article.id,

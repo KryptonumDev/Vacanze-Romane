@@ -38,7 +38,11 @@ module.exports = {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ["Montserrat:400,600,700"],
+          families: [
+            "Cormorant Garamond:400",
+            "Homemade Apple:400",
+            "Lato:400",
+          ],
         },
       },
     },

@@ -3,9 +3,7 @@ import React from "react"
 import styled from "styled-components"
 import { useLocation } from "@reach/router"
 
-const StyledMain = styled(motion.main)`
-  margin: 20px 35px 0 25px;
-`
+const StyledMain = styled(motion.main)``
 const ContentWrapper = ({ children }) => {
   const location = useLocation()
   return (
