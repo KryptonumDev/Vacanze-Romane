@@ -3,16 +3,18 @@ import styled from "styled-components"
 import { motion } from "framer-motion"
 
 const CrossedStyles = styled(motion.span)`
-  height: ${({ height }) => (height ? height : "1px")};
-  width: ${({ width }) => (width ? width : "100%")};
-  margin: ${({ margin }) => (margin ? margin : "25px 0 50px")};
+  display: inline-block;
+  margin: ${({ margin }) => (margin ? margin : "0")};
 
   position: relative;
   &:after {
     content: "";
     position: absolute;
     left: -10px;
-    top: 50%;
+    top: ${({ top }) => top};
+    bottom: ${({ bottom }) => bottom};
+    left: ${({ left }) => left};
+    right: ${({ right }) => right};
     height: 3px;
     width: calc(100% + 12px);
     background-color: ${({ bg }) => (bg ? bg : "var(--black)")};
@@ -23,19 +25,46 @@ const CrossedStyles = styled(motion.span)`
     font-size: 36px;
     line-height: 1.11;
     letter-spacing: 1px;
-    color: ${({ color }) => (color ? color : " var(--black)")};
+    color: ${({ bg }) => (bg ? bg : " var(--black)")};
     position: absolute;
-    top: -36px;
+    top: ${({ textTop }) => textTop};
+    bottom: ${({ textBottom }) => textBottom};
+    left: ${({ textLeft }) => textLeft};
+    right: ${({ textRight }) => textRight};
+    width: 100vw;
   }
 `
 
-const Crossed = ({ margin, width, height, bg, children, italianText }) => (
+const Crossed = ({
+  margin,
+  width,
+  height,
+  bg,
+  children,
+  italianText,
+  top,
+  textTop,
+  left,
+  right,
+  bottom,
+  textBottom,
+  textLeft,
+  textRight,
+}) => (
   <CrossedStyles
     italianText={italianText}
     margin={margin}
     width={width}
     height={height}
     bg={bg}
+    top={top}
+    textTop={textTop}
+    textBottom={textBottom}
+    bottom={bottom}
+    left={left}
+    textRight={textRight}
+    textLeft={textLeft}
+    right={right}
   >
     {children}
   </CrossedStyles>

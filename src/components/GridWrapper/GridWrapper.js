@@ -7,7 +7,6 @@ const StyledGrid = styled.div`
     auto-fill,
     minmax(${({ minWidth }) => (minWidth ? minWidth : "350px")}, 1fr)
   );
-  grid-auto-rows: minmax(50px, auto);
   grid-gap: ${({ gridGap }) => (gridGap ? gridGap : "20px")};
   padding-bottom: 65px;
 `

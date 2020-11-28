@@ -11,44 +11,47 @@ import {
   TextEmphasized,
   Overlay,
   ImageWrapper,
+  Flex,
 } from "../../assets/styles/HomeStyles"
 
 const NotOnlyBasicsSection = ({ imgFluid }) => {
   return (
-    <Wrapper direction="row" gap="143px" bg="light">
+    <Wrapper padding="0 0 103px" direction="row" gap="143px" bg="light">
       <Overlay right bg="var(--dead-green)" />
-      <ImageWrapper right>
-        <Image fluid={imgFluid} />
-      </ImageWrapper>
       <ContentWrapper
         flex="3"
-        direction="column"
-        padding="110px 90px 90px 25%"
-        padding1780="110px 90px 90px 35%"
+        direction="row"
+        padding="110px 90px 90px 100px"
+        padding1780="110px 90px 90px 100px"
       >
-        <CapitalizeText margin="0 0 0 10px">Jak się uczyć?</CapitalizeText>
-        <Line bg="var(--brownOp)" width="85%" />
-        <Paragraph margin="40px 0 0 28px" maxWidth="648px">
-          <Crossed italianText="impari" bg="var(--black)">
-            Uczysz się
-          </Crossed>{" "}
-          już w trakcie oglądania i&nbsp;słuchania kolejnych lekcji,
-          <br />
-          bez potrzeby wielokrotnego samodzielnego studiowania notatek.
-        </Paragraph>
-        <ColumnText
-          margin="53px 70px 0 0"
-          alignSelf="flex-end"
-          maxWidth="353px"
-        >
-          Kurs przygotowany został tak, aby przyswajanie podstaw języka odbywało
-          się w sposób intuicyjny i stopniowy, podobny do&nbsp;sposobu
-          poznawania języka przez dziecko. Ponadto każdemu nowemu zagadnieniu
-          towarzyszą obrazowe wyjaśnienia i&nbsp;zróżnicowane ćwiczenia.
-        </ColumnText>
-        <TextEmphasized margin="60px 0 0">
-          <span className="word">imparare -</span> uczyć się
-        </TextEmphasized>
+        <Flex className="image" margin="40px 0 0">
+          <Image fluid={imgFluid} />
+        </Flex>
+        <Flex className="texts" margin="0 0 0 76px">
+          <CapitalizeText color="var(--beige-2)" margin="0 0 0 10px">
+            nie tylko podstawy
+          </CapitalizeText>
+          <Line bg="var(--beige-2)" width="85%" />
+          <Paragraph
+            lineHeight="1.28em"
+            color="var(--beige-2)"
+            margin="40px 0 0"
+            maxWidth="648px"
+          >
+            Na kanale Szkoła języka włoskiego VACANZE ROMANE na YouTube
+            dostępnych jest wiele pomocnych filmowych lekcji nt. rozmaitych
+            zagadnień gramatycznych i leksykalnych z zakresu{" "}
+            <Crossed
+              italianText="la lingua italiana"
+              top="50%"
+              textBottom="-66px"
+              textLeft="90px"
+              bg="var(--beige-2)"
+            >
+              języka włoskiego
+            </Crossed>
+          </Paragraph>
+        </Flex>
       </ContentWrapper>
     </Wrapper>
   )

@@ -4,6 +4,7 @@ import PageHeader from "../components/PageHeader/PageHeader"
 import CiaoSection from "../components/CiaoSection/CiaoSection"
 import HowToLearnSection from "../components/HomeComponents/HowToLearnSection"
 import NotOnlyBasicsSection from "../components/HomeComponents/NotOnlyBasicsSection"
+import Slider from "../components/Slider/Slider"
 
 const IndexPage = ({ data }) => (
   <>
@@ -19,6 +20,7 @@ const IndexPage = ({ data }) => (
     <NotOnlyBasicsSection
       imgFluid={data.datoCmsHomePage.backgroundImage.fluid}
     />
+    <Slider header="Ostatnio na blogu" />
   </>
 )
 

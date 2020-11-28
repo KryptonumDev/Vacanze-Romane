@@ -13,6 +13,19 @@ export const ContentWrapper = styled.div`
   }
   display: flex;
   flex-direction: ${({ direction }) => (direction ? direction : "row")};
+  .texts {
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+  }
+
+  .image {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
 `
 
 export const CiaoWrapper = styled.div`
@@ -171,16 +184,17 @@ export const TextEmphasized = styled.p`
 
 export const ImageWrapper = styled.div`
   display: flex;
-  position: absolute;
   width: 30%;
   max-width: 530px;
-  right: ${({ right }) => !right && "0"};
-  left: ${({ right }) => right && "0"};
-  top: 50%;
-  transform: translateY(-50%);
   .gatsby-image-wrapper {
     width: 100%;
-    margin-left: ${({ right }) => !right && "-25%"};
-    margin-right: ${({ right }) => !right && "-25%"};
   }
+`
+
+export const Flex = styled.div`
+  display: flex;
+  margin: ${({ margin }) => (margin ? margin : "0")};
+  padding: ${({ padding }) => (padding ? padding : "0")};
+  flex-direction: ${({ flexDirection }) =>
+    flexDirection ? flexDirection : "row"};
 `
