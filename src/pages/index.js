@@ -2,7 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 import PageHeader from "../components/PageHeader/PageHeader"
 import CiaoSection from "../components/CiaoSection/CiaoSection"
-import HowToLearnSection from "../components/HowToLearnSection/HowToLearnSection"
+import HowToLearnSection from "../components/HomeComponents/HowToLearnSection"
+import NotOnlyBasicsSection from "../components/HomeComponents/NotOnlyBasicsSection"
+
 const IndexPage = ({ data }) => (
   <>
     <PageHeader
@@ -14,6 +16,9 @@ const IndexPage = ({ data }) => (
     />
     <CiaoSection />
     <HowToLearnSection imgFluid={data.datoCmsHomePage.backgroundImage.fluid} />
+    <NotOnlyBasicsSection
+      imgFluid={data.datoCmsHomePage.backgroundImage.fluid}
+    />
   </>
 )
 

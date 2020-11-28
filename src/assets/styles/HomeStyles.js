@@ -6,7 +6,11 @@ export const ContentWrapper = styled.div`
   width: 100%;
   max-width: 1440px;
   z-index: 1;
+  flex: ${({ flex }) => flex};
   padding: ${({ padding }) => (padding ? padding : "90px 190px 125px 80px")};
+  @media only screen and (max-width: 1780px) {
+    padding: ${({ padding1780 }) => padding1780};
+  }
   display: flex;
   flex-direction: ${({ direction }) => (direction ? direction : "row")};
 `
@@ -103,15 +107,80 @@ export const CtaWrapper = styled.div`
 
 export const Overlay = styled.div`
   position: absolute;
-  left: 0;
+  right: ${({ right }) => right && "0"};
+  left: ${({ right }) => !right && "0"};
   top: 0;
   height: 100%;
-  width: 80%;
+  width: 77%;
   z-index: 0;
+  margin: ${({ margin }) => margin};
   background-color: ${({ bg }) => bg};
 `
 
-export const CapitalizeText = styled.p``
-export const Paragraph = styled.p``
-export const ColumnText = styled.p``
-export const TextEmphasized = styled.p``
+export const CapitalizeText = styled.p`
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "14px")};
+  line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : "1.04em")};
+  letter-spacing: ${({ letterSpacing }) =>
+    letterSpacing ? letterSpacing : "5px"};
+  font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
+  color: ${({ color }) => (color ? color : "var(--black)")};
+  font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : "Lato")};
+  text-transform: uppercase;
+  margin: ${({ margin }) => (margin ? margin : "0")};
+  max-width: ${({ maxWidth }) => maxWidth};
+`
+export const Paragraph = styled.p`
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "36px")};
+  line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : "1.11em")};
+  font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
+  color: ${({ color }) => (color ? color : "var(--black)")};
+  letter-spacing: ${({ letterSpacing }) =>
+    letterSpacing ? letterSpacing : "1px"};
+  font-family: ${({ fontFamily }) =>
+    fontFamily ? fontFamily : "Cormorant Garamond"};
+  margin: ${({ margin }) => (margin ? margin : "0")};
+  max-width: ${({ maxWidth }) => maxWidth};
+`
+export const ColumnText = styled.p`
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "16px")};
+  line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : "1.88em")};
+  font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
+  color: ${({ color }) => (color ? color : "var(--black)")};
+  letter-spacing: ${({ letterSpacing }) =>
+    letterSpacing ? letterSpacing : "1px"};
+  font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : "Lato")};
+  margin: ${({ margin }) => (margin ? margin : "0")};
+  max-width: ${({ maxWidth }) => maxWidth};
+  align-self: ${({ alignSelf }) => alignSelf};
+`
+export const TextEmphasized = styled.p`
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "36px")};
+  line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : "1.11em")};
+  font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
+  color: ${({ color }) => (color ? color : "var(--black)")};
+  letter-spacing: ${({ letterSpacing }) =>
+    letterSpacing ? letterSpacing : "1px"};
+  font-family: ${({ fontFamily }) =>
+    fontFamily ? fontFamily : "Cormorant Garamond"};
+  margin: ${({ margin }) => (margin ? margin : "0")};
+  max-width: ${({ maxWidth }) => maxWidth};
+  .word {
+    font-family: "Homemade Apple";
+  }
+`
+
+export const ImageWrapper = styled.div`
+  display: flex;
+  position: absolute;
+  width: 30%;
+  max-width: 530px;
+  right: ${({ right }) => !right && "0"};
+  left: ${({ right }) => right && "0"};
+  top: 50%;
+  transform: translateY(-50%);
+  .gatsby-image-wrapper {
+    width: 100%;
+    margin-left: ${({ right }) => !right && "-25%"};
+    margin-right: ${({ right }) => !right && "-25%"};
+  }
+`
