@@ -152,7 +152,8 @@ export const Paragraph = styled.p`
   font-family: ${({ fontFamily }) =>
     fontFamily ? fontFamily : "Cormorant Garamond"};
   margin: ${({ margin }) => (margin ? margin : "0")};
-  max-width: ${({ maxWidth }) => maxWidth};
+  max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : "")};
+  text-align: ${({ textAlign }) => (textAlign ? textAlign : "left")};
 `
 export const ColumnText = styled.p`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "16px")};
@@ -198,4 +199,8 @@ export const Flex = styled.div`
   flex-direction: ${({ flexDirection }) =>
     flexDirection ? flexDirection : "row"};
   flex: ${({ flex }) => flex};
+  justify-content: ${({ justifyContent }) =>
+    justifyContent ? justifyContent : "flex-start"};
+  align-items: ${({ alignItems }) => (alignItems ? alignItems : "flex-start")};
+  align-self: ${({ alignSelf }) => (alignSelf ? alignSelf : "flex-start")};
 `

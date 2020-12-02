@@ -16,6 +16,8 @@ const ContentWrapper = styled.div`
       ? "var(--bg-home)"
       : bg === "green"
       ? "var(--dead-green)"
+      : bg === "brown"
+      ? "var(--brown)"
       : ""};
   h1,
   h2 {
@@ -86,6 +88,7 @@ const PageHeader = ({
   imgFluid,
   fullHeight,
   withNav,
+  subNav,
   navItems,
 }) => (
   <ContentWrapper fullHeight={fullHeight} bg={bg}>
@@ -105,7 +108,7 @@ const PageHeader = ({
       <>
         {paragraph && <SingleParagraph>{paragraph}</SingleParagraph>}
         <ShorterImage fluid={imgFluid} />
-        <PageHeaderNav bg={bg} items={navItems} />
+        {subNav && <PageHeaderNav bg={bg} items={navItems} />}
       </>
     )}
   </ContentWrapper>

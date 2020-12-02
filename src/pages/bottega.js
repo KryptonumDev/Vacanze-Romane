@@ -1,11 +1,34 @@
+import { graphql } from "gatsby"
 import React from "react"
+import PageHeader from "../components/PageHeader/PageHeader"
+import BottegaSection from "../components/SectionsComponents/BottegaSection"
 
-const BottegaPage = () => {
+const BottegaPage = ({ data }) => {
   return (
-    <div>
-      <h2>Bottega</h2>
-    </div>
+    <>
+      <PageHeader
+        paragraph="Bottega"
+        imgFluid={data.datoCmsHomePage.backgroundImage.fluid}
+        bg="brown"
+        withNav
+      />
+      <BottegaSection />
+    </>
   )
 }
-
+export const query = graphql`
+  {
+    datoCmsHomePage {
+      ciaoTitle
+      title
+      courseName
+      subheader
+      backgroundImage {
+        fluid {
+          ...GatsbyDatoCmsFluid
+        }
+      }
+    }
+  }
+`
 export default BottegaPage

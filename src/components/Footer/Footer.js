@@ -86,6 +86,8 @@ const NavStyles = styled.div`
           ? "var(--light-red)"
           : bg === "green"
           ? "var(--light-green)"
+          : bg === "brown"
+          ? "var(--light-brown)"
           : ""};
       transform: scaleY(0);
       transform-origin: center bottom;
@@ -143,6 +145,10 @@ const FooterStyles = styled.footer`
       ? css`
           color: var(--beige-2);
         `
+      : bg === "brown"
+      ? css`
+          color: var(--beige-2);
+        `
       : ""}
 `
 
@@ -173,6 +179,8 @@ const FooterText = styled(motion.p)`
           ? "var(--light-red)"
           : bg === "green"
           ? "var(--light-green)"
+          : bg === "brown"
+          ? "var(--light-brown)"
           : ""};
       transform: scaleY(0);
       transform-origin: center bottom;
@@ -195,7 +203,7 @@ const FooterText = styled(motion.p)`
 const Footer = ({ bg }) => {
   return (
     <FooterStyles bg={bg}>
-      <Wrapper padding="62px 0 0" bg={bg} margin="40px 0 0">
+      <Wrapper padding="62px 0 0" bg={bg} margin="0">
         <ContentWrapper padding="0 105px 118px 105px" direction="row">
           <Flex flex="1">
             <h1>Vacanze Romane</h1>
@@ -209,7 +217,13 @@ const Footer = ({ bg }) => {
           <Line
             margin="0"
             height="2px"
-            bg={bg === "red" ? "var(--beige-2)" : "white"}
+            bg={
+              bg === "red"
+                ? "var(--beige-2)"
+                : bg === "brown"
+                ? "var(--beige-2)"
+                : "white"
+            }
           />
           <FooterText
             bg={bg}
@@ -218,7 +232,9 @@ const Footer = ({ bg }) => {
                 ? "var(--beige-2)"
                 : bg === "green"
                 ? "var(--beige-2)"
-                : "white"
+                : bg === "brown"
+                ? "var(--beige-2)"
+                : ""
             }
           >
             Stronę stworzyli:{" "}

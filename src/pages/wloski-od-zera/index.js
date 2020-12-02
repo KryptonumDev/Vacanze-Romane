@@ -1,6 +1,7 @@
 import { graphql } from "gatsby"
 import React from "react"
-import PageHeader from "../components/PageHeader/PageHeader"
+import PageHeader from "../../components/PageHeader/PageHeader"
+import CoursesStagesSection from "../../components/SectionsComponents/CoursesStagesSection"
 
 const navItems = [
   {
@@ -25,8 +26,10 @@ const CoursesPage = ({ data }) => {
         imgFluid={data.datoCmsHomePage.backgroundImage.fluid}
         bg="green"
         withNav
+        subNav
         navItems={navItems}
       />
+      <CoursesStagesSection />
     </>
   )
 }

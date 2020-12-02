@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
     --dark-red: #661120;
     --light-red #7b2938;
     --brown: #32251d;
+    --light-brown: #4a392e;
     --beige-2: #f1e2cc;
     --black: #000;
     --brownOp: rgba(50,37,29,0.5);
@@ -41,6 +42,9 @@ const GlobalStyle = createGlobalStyle`
     color: var(--dark-red);
     font-family: "Homemade Apple";
     margin-top: 16px;
+  }
+  .decor {
+    font-family: "Homemade Apple";
   }
 `
 

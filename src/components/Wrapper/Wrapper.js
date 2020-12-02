@@ -18,7 +18,9 @@ export const Wrapper = styled.div`
       ? "var(--dark-red)"
       : bg === "green"
       ? "var(--dead-green)"
-      : "var(--black)"};
+      : bg === "brown"
+      ? "var(--brown)"
+      : ""};
   ${Overlay} {
     margin-top: ${({ gap }) => gap};
   }

@@ -15,16 +15,36 @@ const NavigationWrapper = styled.nav`
   }
 
   ${({ bg }) =>
-    bg === "light" &&
-    css`
-      background-color: var(--bg-home);
-      a {
-        color: var(--brown);
-        &:after {
-          background-color: var(--beige-2);
-        }
-      }
-    `}
+    bg === "light"
+      ? css`
+          background-color: var(--bg-home);
+          a {
+            color: var(--brown);
+            &:after {
+              background-color: var(--beige-2);
+            }
+          }
+        `
+      : bg === "green"
+      ? css`
+          background-color: var(--dead-green);
+          a {
+            color: var(--beige-2);
+            &:after {
+              background-color: var(--light-green);
+            }
+          }
+        `
+      : bg === "brown" &&
+        css`
+          background-color: var(--brown);
+          a {
+            color: var(--beige-2);
+            &:after {
+              background-color: var(--light-brown);
+            }
+          }
+        `}
 `
 
 const Logo = styled.span`

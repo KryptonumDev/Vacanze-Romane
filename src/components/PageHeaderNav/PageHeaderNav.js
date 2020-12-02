@@ -24,6 +24,29 @@ const PageHeaderStyles = styled.ul`
   a {
     text-decoration: none;
     color: ${({ bg }) => (bg === "green" ? "var(--beige-2)" : "")};
+    position: relative;
+    &:after {
+      content: "";
+      position: absolute;
+      left: -3px;
+      top: calc(50% - 2px);
+      width: calc(100% + 6px);
+      height: 6px;
+      z-index: -1;
+      background-color: ${({ bg }) =>
+        bg === "red"
+          ? "var(--light-red)"
+          : bg === "green"
+          ? "var(--light-green)"
+          : ""};
+      transform: scaleY(0);
+      transform-origin: center bottom;
+      transition: 0.3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    &.active:after,
+    &:hover:after {
+      transform: scaleY(1);
+    }
   }
 `
 
