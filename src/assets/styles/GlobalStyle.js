@@ -5,7 +5,9 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     --bg-home: #fefbf5;
     --dead-green: #143325;
+    --light-green: #2a4536;
     --dark-red: #661120;
+    --light-red #7b2938;
     --brown: #32251d;
     --beige-2: #f1e2cc;
     --black: #000;

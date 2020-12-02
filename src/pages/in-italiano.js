@@ -1,11 +1,25 @@
+import { graphql } from "gatsby"
 import React from "react"
+import PageHeader from "../components/PageHeader/PageHeader"
 
-const ItalianoPage = () => {
-  return (
-    <div>
-      <h2>In italiano page</h2>
-    </div>
-  )
+const ItalianoPage = ({ data }) => {
+  return <>In italiano page</>
 }
+
+export const query = graphql`
+  {
+    datoCmsHomePage {
+      ciaoTitle
+      title
+      courseName
+      subheader
+      backgroundImage {
+        fluid {
+          ...GatsbyDatoCmsFluid
+        }
+      }
+    }
+  }
+`
 
 export default ItalianoPage

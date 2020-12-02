@@ -14,6 +14,7 @@ const IndexPage = ({ data }) => (
       paragraph="dla samouków i nie tylko"
       imgFluid={data.datoCmsHomePage.backgroundImage.fluid}
       bg="light"
+      fullHeight
     />
     <CiaoSection />
     <HowToLearnSection imgFluid={data.datoCmsHomePage.backgroundImage.fluid} />

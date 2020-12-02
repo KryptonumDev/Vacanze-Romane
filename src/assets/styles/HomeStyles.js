@@ -197,4 +197,5 @@ export const Flex = styled.div`
   padding: ${({ padding }) => (padding ? padding : "0")};
   flex-direction: ${({ flexDirection }) =>
     flexDirection ? flexDirection : "row"};
+  flex: ${({ flex }) => flex};
 `

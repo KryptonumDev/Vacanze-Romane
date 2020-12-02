@@ -20,9 +20,28 @@ const StyledGrid = styled.div`
   grid-column-gap: 80px;
 `
 
-const ArticlePreview = styled.article`
+const ArticlePreview = styled(motion.article)`
   display: flex;
   flex-direction: column;
+
+  span {
+    font-family: "Cormorant Garamond";
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: 1px;
+    margin: 31px 0;
+    color: var(--black);
+  }
+
+  h3 {
+    font-family: "Lato";
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 0.75em;
+    letter-spacing: 1px;
+  }
 `
 
 const query = graphql`
@@ -49,19 +68,49 @@ const Slider = ({ header }) => {
   return (
     <Wrapper bg="light" margin="40px 0 0">
       <ContentWrapper padding="90px 105px 100px 105px" direction="column">
-        <CapitalizeText margin="0 0 0 10px">{header}</CapitalizeText>
+        <CapitalizeText
+          fontSize="14px"
+          lineHeight="1.04em"
+          letterSpacing="5px"
+          margin="0 0 0 10px"
+          color="var(--brown)"
+        >
+          {header}
+        </CapitalizeText>
         <Line bg="var(--brownOp)" width="50%" />
-        <StyledGrid>
-          {data.allDatoCmsArticle.nodes
-            .slice(page, (page + 1) * pageLength)
-            .map(({ title, id, featuredimage }) => (
-              <ArticlePreview key={id}>
-                <Image fluid={featuredimage.fluid} />
-                <span>Category</span>
-                <h3>{title}</h3>
-              </ArticlePreview>
-            ))}
-        </StyledGrid>
+        <AnimateSharedLayout type="crossfade">
+          <StyledGrid>
+            <AnimatePresence exitBeforeEnter>
+              {data.allDatoCmsArticle.nodes
+                .slice(page, (page + 1) * pageLength)
+                .map(({ title, id, featuredimage }) => (
+                  <ArticlePreview
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    key={id}
+                  >
+                    <Image layout fluid={featuredimage.fluid} />
+                    <motion.span
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 4 }}
+                    >
+                      Category
+                    </motion.span>
+                    <motion.h3
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 4 }}
+                    >
+                      {title}
+                    </motion.h3>
+                  </ArticlePreview>
+                ))}
+            </AnimatePresence>
+          </StyledGrid>
+        </AnimateSharedLayout>
         <Pagination length={3} page={page} setPage={setPage} />
       </ContentWrapper>
     </Wrapper>

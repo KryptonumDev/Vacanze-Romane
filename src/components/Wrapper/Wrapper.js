@@ -11,7 +11,14 @@ export const Wrapper = styled.div`
   padding: ${({ padding }) => (padding ? padding : "50px 0 0")};
   margin: ${({ margin }) => (margin ? margin : "0")};
   padding-top: ${({ gap }) => gap};
-  background-color: ${({ bg }) => (bg === "light" ? "var(--bg-home)" : "")};
+  background-color: ${({ bg }) =>
+    bg === "light"
+      ? "var(--bg-home)"
+      : bg === "red"
+      ? "var(--dark-red)"
+      : bg === "green"
+      ? "var(--dead-green)"
+      : "var(--black)"};
   ${Overlay} {
     margin-top: ${({ gap }) => gap};
   }

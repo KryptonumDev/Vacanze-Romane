@@ -80,6 +80,7 @@ const Container = styled.div`
   padding: 0 50px 0 100px;
   justify-content: space-between;
   align-items: center;
+  min-height: 89px;
   z-index: 0;
 `
 
