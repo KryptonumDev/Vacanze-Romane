@@ -41,12 +41,12 @@ export const CiaoWrapper = styled(motion.div)`
     margin-left: 10px;
   }
 `
-export const TextWrapper = styled.div`
+export const TextWrapper = styled(motion.div)`
   display: flex;
   flex: 1;
   flex-direction: column;
 `
-export const CourseWrapper = styled.div`
+export const CourseWrapper = styled(motion.div)`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -74,7 +74,7 @@ export const CourseWrapper = styled.div`
     font-family: "Cormorant Garamond";
   }
 `
-export const CtaWrapper = styled.div`
+export const CtaWrapper = styled(motion.div)`
   margin: 50px 0 0 auto;
   p {
     font-size: 16px;
@@ -118,7 +118,7 @@ export const CtaWrapper = styled.div`
   }
 `
 
-export const Overlay = styled.div`
+export const Overlay = styled(motion.div)`
   position: absolute;
   right: ${({ right }) => right && "0"};
   left: ${({ right }) => !right && "0"};
@@ -130,7 +130,7 @@ export const Overlay = styled.div`
   background-color: ${({ bg }) => bg};
 `
 
-export const CapitalizeText = styled.p`
+export const CapitalizeText = styled(motion.p)`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "14px")};
   line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : "1.04em")};
   letter-spacing: ${({ letterSpacing }) =>
@@ -142,7 +142,7 @@ export const CapitalizeText = styled.p`
   margin: ${({ margin }) => (margin ? margin : "0")};
   max-width: ${({ maxWidth }) => maxWidth};
 `
-export const Paragraph = styled.p`
+export const Paragraph = styled(motion.p)`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "36px")};
   line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : "1.11em")};
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
@@ -154,8 +154,10 @@ export const Paragraph = styled.p`
   margin: ${({ margin }) => (margin ? margin : "0")};
   max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : "")};
   text-align: ${({ textAlign }) => (textAlign ? textAlign : "left")};
+  text-transform: ${({ textTransform }) =>
+    textTransform ? textTransform : "normal"};
 `
-export const ColumnText = styled.p`
+export const ColumnText = styled(motion.p)`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "16px")};
   line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : "1.88em")};
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
@@ -167,7 +169,7 @@ export const ColumnText = styled.p`
   max-width: ${({ maxWidth }) => maxWidth};
   align-self: ${({ alignSelf }) => alignSelf};
 `
-export const TextEmphasized = styled.p`
+export const TextEmphasized = styled(motion.p)`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "36px")};
   line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : "1.11em")};
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
@@ -183,7 +185,7 @@ export const TextEmphasized = styled.p`
   }
 `
 
-export const ImageWrapper = styled.div`
+export const ImageWrapper = styled(motion.div)`
   display: flex;
   width: 30%;
   max-width: 530px;
@@ -192,7 +194,7 @@ export const ImageWrapper = styled.div`
   }
 `
 
-export const Flex = styled.div`
+export const Flex = styled(motion.div)`
   display: flex;
   margin: ${({ margin }) => (margin ? margin : "0")};
   padding: ${({ padding }) => (padding ? padding : "0")};
@@ -203,4 +205,5 @@ export const Flex = styled.div`
     justifyContent ? justifyContent : "flex-start"};
   align-items: ${({ alignItems }) => (alignItems ? alignItems : "flex-start")};
   align-self: ${({ alignSelf }) => (alignSelf ? alignSelf : "flex-start")};
+  width: ${({ width }) => width};
 `

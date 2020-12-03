@@ -10,6 +10,8 @@ const GlobalStyle = createGlobalStyle`
     --light-red #7b2938;
     --brown: #32251d;
     --light-brown: #4a392e;
+    --blue: #110f58;
+    --light-blue: #262478;
     --beige-2: #f1e2cc;
     --black: #000;
     --brownOp: rgba(50,37,29,0.5);

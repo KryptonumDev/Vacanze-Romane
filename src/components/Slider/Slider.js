@@ -14,7 +14,7 @@ import slugify from "slugify"
 import Image from "gatsby-image"
 import Pagination from "./Pagination"
 
-const StyledGrid = styled.div`
+const StyledGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 80px;
@@ -82,7 +82,7 @@ const Slider = ({ header }) => {
           <StyledGrid>
             <AnimatePresence exitBeforeEnter>
               {data.allDatoCmsArticle.nodes
-                .slice(page, (page + 1) * pageLength)
+                .slice(page * pageLength, (page + 1) * pageLength)
                 .map(({ title, id, featuredimage }) => (
                   <ArticlePreview
                     layout
@@ -111,7 +111,7 @@ const Slider = ({ header }) => {
             </AnimatePresence>
           </StyledGrid>
         </AnimateSharedLayout>
-        <Pagination length={3} page={page} setPage={setPage} />
+        <Pagination length={pageLength + 1} page={page} setPage={setPage} />
       </ContentWrapper>
     </Wrapper>
   )

@@ -10,10 +10,13 @@ import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigat
 const BlogPage = ({ data }) => {
   const categories = ["Kultura", "Sztuka", "Podróże", "Kuchnia"]
   const [activeCategory, setActiveCategory] = useState(null)
+  const [page, setPage] = useState(0)
+  const pageLength = 6
 
   const handleClick = (e, category) => {
     e.preventDefault()
     setActiveCategory(category)
+    setPage(0)
   }
   const {
     allDatoCmsArticle: { nodes },
@@ -23,16 +26,24 @@ const BlogPage = ({ data }) => {
     <>
       <PageHeader
         paragraph="A tavola"
-        imgFluid={nodes[3].featuredimage.fluid}
+        imgFluid={nodes[0]?.featuredimage.fluid}
         bg="red"
         withNav
       />
       <CategoryNavigation
         bg="red"
         categories={categories}
+        activeCategory={activeCategory}
         setActiveCategory={handleClick}
+        smaller
       />
-      <BlogSection activeCategory={activeCategory} posts={nodes} />
+      <BlogSection
+        page={page}
+        setPage={setPage}
+        pageLength={pageLength}
+        activeCategory={activeCategory}
+        posts={nodes}
+      />
     </>
   )
 }
@@ -42,6 +53,8 @@ export const query = graphql`
     allDatoCmsArticle {
       nodes {
         title
+        category
+        id
         featuredimage {
           fluid(maxWidth: 800) {
             ...GatsbyDatoCmsFluid_tracedSVG

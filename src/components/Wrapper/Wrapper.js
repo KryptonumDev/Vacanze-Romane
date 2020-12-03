@@ -1,7 +1,8 @@
+import { motion } from "framer-motion"
 import styled from "styled-components"
 import { ImageWrapper, Overlay } from "../../assets/styles/HomeStyles"
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: ${({ direction }) => (direction ? direction : "column")};
   position: relative;
@@ -22,6 +23,8 @@ export const Wrapper = styled.div`
       ? "var(--brown)"
       : bg === "white"
       ? "var(--white)"
+      : bg === "blue"
+      ? "var(--blue)"
       : ""};
   ${Overlay} {
     margin-top: ${({ gap }) => gap};

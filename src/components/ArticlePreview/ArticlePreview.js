@@ -2,6 +2,7 @@ import React from "react"
 import Image from "gatsby-image"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import { motion } from "framer-motion"
 
 const StyledImage = styled(Image)`
   width: 100%;
@@ -34,7 +35,7 @@ const ArticleWrapper = styled(Link)`
   }
 `
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled(motion.div)`
   position: absolute;
   bottom: 45px;
   min-height: 90px;

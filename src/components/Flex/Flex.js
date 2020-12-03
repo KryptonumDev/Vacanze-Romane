@@ -1,8 +1,10 @@
+import { motion } from "framer-motion"
 import React from "react"
 import styled from "styled-components"
 
-const FlexStyles = styled.div`
+const FlexStyles = styled(motion.div)`
   display: flex;
+  width: ${({ width }) => (width ? width : "")};
 `
 
 const Flex = ({
@@ -12,6 +14,7 @@ const Flex = ({
   alignItems,
   margin,
   padding,
+  width,
 }) => {
   return (
     <FlexStyles
@@ -20,6 +23,7 @@ const Flex = ({
       alignItems={alignItems}
       margin={margin}
       padding={padding}
+      width={width}
     >
       {children}
     </FlexStyles>

@@ -34,7 +34,7 @@ const NavList = [
   },
 ]
 
-const NavStyles = styled.div`
+const NavStyles = styled(motion.div)`
   display: flex;
   flex-direction: column;
   margin-right: 40px;
@@ -88,6 +88,8 @@ const NavStyles = styled.div`
           ? "var(--light-green)"
           : bg === "brown"
           ? "var(--light-brown)"
+          : bg === "blue"
+          ? "var(--light-blue)"
           : ""};
       transform: scaleY(0);
       transform-origin: center bottom;
@@ -108,11 +110,11 @@ const NavStyles = styled.div`
 const FooterNavigation = ({ bg }) => (
   <>
     {NavList.map(column => (
-      <NavStyles bg={bg}>
+      <NavStyles key={column.title} bg={bg}>
         <h3>{column.title}</h3>
         <ul>
           {column.items.map(item => (
-            <>
+            <React.Fragment key={item.name}>
               {item.link ? (
                 <li>
                   <Link activeClassName="active" to={item.link}>
@@ -124,7 +126,7 @@ const FooterNavigation = ({ bg }) => (
                   <a href={item.href}>{item.name}</a>
                 </li>
               )}
-            </>
+            </React.Fragment>
           ))}
         </ul>
       </NavStyles>
@@ -185,6 +187,8 @@ const FooterText = styled(motion.p)`
           ? "var(--light-green)"
           : bg === "brown"
           ? "var(--light-brown)"
+          : bg === "blue"
+          ? "var(--light-blue)"
           : ""};
       transform: scaleY(0);
       transform-origin: center bottom;
@@ -226,7 +230,9 @@ const Footer = ({ bg }) => {
                 ? "var(--beige-2)"
                 : bg === "brown"
                 ? "var(--beige-2)"
-                : "white"
+                : bg === "blue"
+                ? "var(--beige-2)"
+                : ""
             }
           />
           <FooterText
@@ -237,6 +243,8 @@ const Footer = ({ bg }) => {
                 : bg === "green"
                 ? "var(--beige-2)"
                 : bg === "brown"
+                ? "var(--beige-2)"
+                : bg === "blue"
                 ? "var(--beige-2)"
                 : ""
             }

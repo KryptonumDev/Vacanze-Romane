@@ -7,10 +7,18 @@ import { PageHeaderStyles } from "../PageHeaderNav/PageHeaderNav"
 import { Wrapper } from "../Wrapper/Wrapper"
 
 const NavStyles = styled.li`
+  margin-right: ${({ italiano }) =>
+    italiano ? "103px  !important" : "173px !important"};
   button {
     text-decoration: none;
     color: ${({ bg }) =>
-      bg === "green" ? "var(--beige-2)" : bg === "red" ? "var(--beige-2)" : ""};
+      bg === "green"
+        ? "var(--beige-2)"
+        : bg === "red"
+        ? "var(--beige-2)"
+        : bg === "blue"
+        ? "var(--beige-2)"
+        : ""};
     position: relative;
     background-color: transparent;
     border: none;
@@ -32,6 +40,8 @@ const NavStyles = styled.li`
           ? "var(--light-red)"
           : bg === "green"
           ? "var(--light-green)"
+          : bg === "blue"
+          ? "var(--light-blue)"
           : ""};
       transform: scaleY(0);
       transform-origin: center bottom;
@@ -50,17 +60,29 @@ const NavStyles = styled.li`
   }
 `
 
-const CategoryNavigation = ({ bg = "red", categories, setActiveCategory }) => {
+const CategoryNavigation = ({
+  bg = "red",
+  categories,
+  activeCategory,
+  setActiveCategory,
+  smaller,
+  italiano,
+}) => {
   return (
     <Wrapper padding="0" bg={bg}>
       <ContentWrapper bg={bg} padding="40px 56px 40px 102px">
         <PageHeaderStyles bg={bg}>
           {categories.map(category => (
-            <NavStyles bg={bg}>
+            <NavStyles
+              italiano={italiano}
+              smaller={smaller}
+              key={category}
+              bg={bg}
+            >
               <motion.button
                 whileTap={{ scale: 0.9 }}
-                whileHover={{ y: -2 }}
                 onClick={e => setActiveCategory(e, category)}
+                className={activeCategory === category ? "active" : ""}
               >
                 {category}
               </motion.button>

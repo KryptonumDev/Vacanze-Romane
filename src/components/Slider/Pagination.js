@@ -18,7 +18,10 @@ const PageLine = styled.span`
     background-color: var(--brown);
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transform-origin: left center;
-    transform: ${({ page, length }) => `scaleX(${page / (length - 1)})`};
+    transform: ${({ page, length }) =>
+      length > 1
+        ? `scaleX(${page / (length - 1)})`
+        : `scaleX(${page / length})`};
   }
 `
 
@@ -42,12 +45,15 @@ const ButtonStyles = styled(Flex)`
   }
 `
 const Pagination = ({ page = 0, setPage, length = 1 }) => {
-  const handleIncrease = () => setPage(Math.min(page + 1, length - 1))
+  const handleIncrease = () =>
+    setPage(
+      length > 1 ? Math.min(page + 1, length - 1) : Math.min(page + 1, length)
+    )
 
   const handleDecrease = () => setPage(Math.max(page - 1, 0))
 
   return (
-    <Flex flexDirection="column" margin="90px 0 0">
+    <Flex width="100%" flexDirection="column" margin="90px 0 0">
       <PageLine page={page} length={length} />
       <ButtonStyles>
         <motion.button
@@ -60,7 +66,7 @@ const Pagination = ({ page = 0, setPage, length = 1 }) => {
           &larr;
         </motion.button>
         <motion.button
-          disabled={page === length - 1}
+          disabled={length > 1 ? page === length - 1 : page >= length}
           onClick={() => handleIncrease()}
           type="button"
           whileHover={{ x: 2 }}

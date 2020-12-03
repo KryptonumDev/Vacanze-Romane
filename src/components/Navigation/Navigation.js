@@ -45,13 +45,23 @@ const NavigationWrapper = styled.nav`
             }
           }
         `
-      : bg === "red" &&
-        css`
+      : bg === "red"
+      ? css`
           background-color: var(--dark-red);
           a {
             color: var(--beige-2);
             &:after {
               background-color: var(--light-red);
+            }
+          }
+        `
+      : bg === "blue" &&
+        css`
+          background-color: var(--blue);
+          a {
+            color: var(--beige-2);
+            &:after {
+              background-color: var(--light-blue);
             }
           }
         `}
@@ -107,7 +117,7 @@ const NavigationList = styled.ul`
   }
 `
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   max-width: 1440px;
   margin: 0 auto;
   display: flex;

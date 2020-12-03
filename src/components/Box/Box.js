@@ -1,7 +1,8 @@
+import { motion } from "framer-motion"
 import React from "react"
 import styled from "styled-components"
 
-const BoxStyles = styled.div`
+const BoxStyles = styled(motion.div)`
   display: flex;
   flex-direction: ${({ dir }) => (dir ? dir : "row")};
   justify-content: ${({ justifyContent }) =>

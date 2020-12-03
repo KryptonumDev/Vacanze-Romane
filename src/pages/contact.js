@@ -6,7 +6,7 @@ import { Formik } from "formik"
 import axios from "axios"
 import { AnimatePresence, motion } from "framer-motion"
 
-const ContactReasonsWrapper = styled.div`
+const ContactReasonsWrapper = styled(motion.div)`
   display: flex;
 
   > input {
@@ -76,7 +76,7 @@ const InputFieldsWrapper = styled(motion.div)`
     }
   }
 `
-const ButtonWrapper = styled.div`
+const ButtonWrapper = styled(motion.div)`
   margin-top: 30px;
   display: flex;
   align-items: center;

@@ -4,7 +4,7 @@ import Image from "gatsby-image"
 import { motion } from "framer-motion"
 import PageHeaderNav from "../PageHeaderNav/PageHeaderNav"
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,6 +20,8 @@ const ContentWrapper = styled.div`
       ? "var(--brown)"
       : bg === "red"
       ? "var(--dark-red)"
+      : bg === "blue"
+      ? "var(--blue)"
       : ""};
   h1,
   h2 {
