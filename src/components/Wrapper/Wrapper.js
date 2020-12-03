@@ -20,6 +20,8 @@ export const Wrapper = styled.div`
       ? "var(--dead-green)"
       : bg === "brown"
       ? "var(--brown)"
+      : bg === "white"
+      ? "var(--white)"
       : ""};
   ${Overlay} {
     margin-top: ${({ gap }) => gap};

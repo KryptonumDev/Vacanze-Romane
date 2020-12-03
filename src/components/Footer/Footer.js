@@ -95,8 +95,12 @@ const NavStyles = styled.div`
     }
 
     &.active:after,
-    &:hover:after {
+    &:hover:after,
+    &:focus:after {
       transform: scaleY(1);
+    }
+    &:focus {
+      outline: none;
     }
   }
 `

@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { ContentWrapper } from "../../assets/styles/HomeStyles"
 import { Wrapper } from "../Wrapper/Wrapper"
 
-const PageHeaderStyles = styled.ul`
+export const PageHeaderStyles = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
@@ -23,7 +23,8 @@ const PageHeaderStyles = styled.ul`
 
   a {
     text-decoration: none;
-    color: ${({ bg }) => (bg === "green" ? "var(--beige-2)" : "")};
+    color: ${({ bg }) =>
+      bg === "green" ? "var(--beige-2)" : bg === "red" ? "var(--beige-2)" : ""};
     position: relative;
     &:after {
       content: "";
@@ -52,7 +53,7 @@ const PageHeaderStyles = styled.ul`
 
 const PageHeaderNav = ({ items = [], bg }) => {
   return (
-    <ContentWrapper bg={bg} padding="40px 56px">
+    <ContentWrapper bg={bg} padding="40px 56px 40px 102px">
       <PageHeaderStyles bg={bg}>
         {items.map(item => (
           <li>

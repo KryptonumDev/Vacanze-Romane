@@ -35,13 +35,23 @@ const NavigationWrapper = styled.nav`
             }
           }
         `
-      : bg === "brown" &&
-        css`
+      : bg === "brown"
+      ? css`
           background-color: var(--brown);
           a {
             color: var(--beige-2);
             &:after {
               background-color: var(--light-brown);
+            }
+          }
+        `
+      : bg === "red" &&
+        css`
+          background-color: var(--dark-red);
+          a {
+            color: var(--beige-2);
+            &:after {
+              background-color: var(--light-red);
             }
           }
         `}
@@ -87,8 +97,12 @@ const NavigationList = styled.ul`
       margin-right: 0;
     }
     &.active:after,
-    &:hover:after {
+    &:hover:after,
+    &:focus:after {
       transform: scaleY(1);
+    }
+    &:focus {
+      outline: none;
     }
   }
 `

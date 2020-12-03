@@ -18,6 +18,8 @@ const ContentWrapper = styled.div`
       ? "var(--dead-green)"
       : bg === "brown"
       ? "var(--brown)"
+      : bg === "red"
+      ? "var(--dark-red)"
       : ""};
   h1,
   h2 {

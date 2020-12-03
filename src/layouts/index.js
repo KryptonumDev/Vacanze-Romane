@@ -37,6 +37,10 @@ const PageLayout = ({ children }) => {
       return "blue"
     }
 
+    if (location.pathname.includes("blog")) {
+      return "red"
+    }
+
     if (
       location.pathname.includes("bottega") ||
       location.pathname.includes("o-mnie")
@@ -45,7 +49,7 @@ const PageLayout = ({ children }) => {
     }
   }
   const getFooterBgFromLocation = () => {
-    if (location.pathname === "/") {
+    if (location.pathname === "/" || location.pathname.includes("blog")) {
       return "red"
     }
     if (location.pathname.includes("wloski-od-zera")) {

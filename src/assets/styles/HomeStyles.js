@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import motion from "framer-motion"
+import { motion } from "framer-motion"
 
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled(motion.div)`
   margin: 0 auto;
   width: 100%;
   max-width: 1440px;
@@ -28,7 +28,7 @@ export const ContentWrapper = styled.div`
   }
 `
 
-export const CiaoWrapper = styled.div`
+export const CiaoWrapper = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   h2 {
