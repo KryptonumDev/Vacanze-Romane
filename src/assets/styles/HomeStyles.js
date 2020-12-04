@@ -111,6 +111,20 @@ export const CtaWrapper = styled(motion.div)`
     padding: 18px 46px 14px;
     border: none;
 
+    transition: background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1),
+      color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      color: var(--beige-2);
+      background-color: var(--dead-green);
+      span {
+        transform: translateX(-6px);
+      }
+    }
+
     span {
       font-size: 24px;
       font-family: "Homemade Apple";

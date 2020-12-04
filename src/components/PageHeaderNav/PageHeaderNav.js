@@ -58,9 +58,9 @@ const PageHeaderNav = ({ items = [], bg }) => {
     <ContentWrapper bg={bg} padding="40px 56px 40px 102px">
       <PageHeaderStyles bg={bg}>
         {items.map(item => (
-          <li>
+          <li key={item.name}>
             <Link
-              className={pathName.includes(item.link) && "active"}
+              className={pathName.includes(item.link) ? "active" : ""}
               to={item.link}
             >
               {item.name}

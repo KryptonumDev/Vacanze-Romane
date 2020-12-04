@@ -77,7 +77,7 @@ const HeaderOverlay = styled(motion.div)`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(50, 37, 29, 0.3);
+  background-color: rgba(20, 16, 13, 0.6);
 `
 
 const SingleParagraph = styled(motion.p)`
@@ -132,7 +132,12 @@ const PageHeader = ({
             {subheader}
           </Paragraph>
         )}
-        {imgFluid && <ShorterImage fluid={imgFluid} />}
+        {imgFluid && (
+          <div style={{ width: "100%", position: "relative" }}>
+            <ShorterImage fluid={imgFluid} />
+            <HeaderOverlay />
+          </div>
+        )}
         {subNav && <PageHeaderNav bg={bg} items={navItems} />}
       </>
     )}

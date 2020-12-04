@@ -17,9 +17,9 @@ const IndexPage = ({ data }) => (
       fullHeight
     />
     <CiaoSection />
-    <HowToLearnSection imgFluid={data.datoCmsHomePage.backgroundImage.fluid} />
+    <HowToLearnSection imgFluid={data.datoCmsHomePage.jakSieUczycObraz.fluid} />
     <NotOnlyBasicsSection
-      imgFluid={data.datoCmsHomePage.backgroundImage.fluid}
+      imgFluid={data.datoCmsHomePage.nieTylkoPodstawyObraz.fluid}
     />
     <Slider header="Ostatnio na blogu" />
   </>
@@ -33,6 +33,17 @@ export const query = graphql`
       courseName
       subheader
       backgroundImage {
+        fluid {
+          ...GatsbyDatoCmsFluid
+        }
+      }
+
+      jakSieUczycObraz {
+        fluid {
+          ...GatsbyDatoCmsFluid
+        }
+      }
+      nieTylkoPodstawyObraz {
         fluid {
           ...GatsbyDatoCmsFluid
         }

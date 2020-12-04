@@ -7,6 +7,8 @@ import {
   CourseWrapper,
   CtaWrapper,
 } from "../../assets/styles/HomeStyles"
+import { motion } from "framer-motion"
+import { Link } from "gatsby"
 
 const CiaoSection = () => {
   return (
@@ -32,9 +34,11 @@ const CiaoSection = () => {
               Dostępnego bezpłatnie w formie filmów na YouTube, e-booków do
               pobrania oraz ćwiczeń.
             </p>
-            <button>
-              <span>Si</span>, chętnie
-            </button>
+            <Link to="/wloski-od-zera">
+              <motion.button whileTap={{ scale: 0.9 }}>
+                <span>Si</span>, chętnie
+              </motion.button>
+            </Link>
           </CtaWrapper>
         </TextWrapper>
       </ContentWrapper>

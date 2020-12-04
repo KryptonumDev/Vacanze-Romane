@@ -53,6 +53,7 @@ export const query = graphql`
     allDatoCmsArticle {
       nodes {
         title
+        slug
         category
         id
         featuredimage {

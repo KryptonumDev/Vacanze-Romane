@@ -14,6 +14,8 @@ import Image from "gatsby-image"
 import styled from "styled-components"
 import { useEffect } from "react"
 import Pagination from "../Slider/Pagination"
+import slugify from "slugify"
+import { Link } from "gatsby"
 
 const StyledGrid = styled(motion.div)`
   display: grid;
@@ -28,39 +30,53 @@ const PostStyles = styled(motion.div)`
   flex-direction: column;
   .gatsby-image-wrapper {
     height: 328px !important;
+    overflow: hidden !important;
     img,
     picture {
       object-fit: cover !important;
+      transition: transform 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) !important;
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+
+  &:hover {
+    img,
+    picture {
+      transform: scale(1.05);
     }
   }
 `
 
-const PostPreview = ({ category, title, featuredImage }) => (
+const PostPreview = ({ category, title, featuredImage, slug }) => (
   <PostStyles layout>
-    <Image layout fluid={featuredImage.fluid} />
-    <Paragraph
-      margin="30px 0 0"
-      fontFamily="Cormorant Garamond"
-      textTransform="uppercase"
-      fontSize="18px"
-      lineHeight="1em"
-      letterSpacing="1px"
-      color="var(--black)"
-      layout
-    >
-      {category}
-    </Paragraph>
-    <Paragraph
-      layout
-      margin="30px 0 0"
-      fontFamily="Lato"
-      fontSize="24px"
-      lineHeight="0.75em"
-      letterSpacing="1px"
-      color="var(--black)"
-    >
-      {title}
-    </Paragraph>
+    <Link to={slug}>
+      <Image layout fluid={featuredImage.fluid} />
+      <Paragraph
+        margin="30px 0 0"
+        fontFamily="Cormorant Garamond"
+        textTransform="uppercase"
+        fontSize="18px"
+        lineHeight="1em"
+        letterSpacing="1px"
+        color="var(--black)"
+        layout
+      >
+        {category}
+      </Paragraph>
+      <Paragraph
+        layout
+        margin="30px 0 0"
+        fontFamily="Lato"
+        fontSize="24px"
+        lineHeight="0.75em"
+        letterSpacing="1px"
+        color="var(--black)"
+      >
+        {title}
+      </Paragraph>
+    </Link>
   </PostStyles>
 )
 
@@ -101,6 +117,7 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
                     initial="hidden"
                     animate="show"
                     exit="exit"
+                    slug={slugify(post.slug, { lower: true })}
                     category={post.category}
                     title={post.title}
                     featuredImage={post.featuredimage}

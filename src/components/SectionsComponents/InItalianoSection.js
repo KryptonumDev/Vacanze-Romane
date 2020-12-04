@@ -14,6 +14,7 @@ import Image from "gatsby-image"
 import styled from "styled-components"
 import { useEffect } from "react"
 import Pagination from "../Slider/Pagination"
+import { Link } from "gatsby"
 
 const StyledGrid = styled(motion.div)`
   display: grid;
@@ -28,39 +29,53 @@ const PostStyles = styled(motion.div)`
   flex-direction: column;
   .gatsby-image-wrapper {
     height: 328px !important;
+    overflow: hidden !important;
     img,
     picture {
       object-fit: cover !important;
+      transition: transform 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) !important;
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+
+  &:hover {
+    img,
+    picture {
+      transform: scale(1.05);
     }
   }
 `
 
-const PostPreview = ({ category, title, featuredImage }) => (
+const PostPreview = ({ category, slug, title, featuredImage }) => (
   <PostStyles layout>
-    <Image layout fluid={featuredImage.fluid} />
-    <Paragraph
-      margin="30px 0 0"
-      fontFamily="Cormorant Garamond"
-      textTransform="uppercase"
-      fontSize="18px"
-      lineHeight="1em"
-      letterSpacing="1px"
-      color="var(--black)"
-      layout
-    >
-      {category}
-    </Paragraph>
-    <Paragraph
-      layout
-      margin="30px 0 0"
-      fontFamily="Lato"
-      fontSize="24px"
-      lineHeight="0.75em"
-      letterSpacing="1px"
-      color="var(--black)"
-    >
-      {title}
-    </Paragraph>
+    <Link to={slug}>
+      <Image layout fluid={featuredImage.fluid} />
+      <Paragraph
+        margin="30px 0 0"
+        fontFamily="Cormorant Garamond"
+        textTransform="uppercase"
+        fontSize="18px"
+        lineHeight="1em"
+        letterSpacing="1px"
+        color="var(--black)"
+        layout
+      >
+        {category}
+      </Paragraph>
+      <Paragraph
+        layout
+        margin="30px 0 0"
+        fontFamily="Lato"
+        fontSize="24px"
+        lineHeight="0.75em"
+        letterSpacing="1px"
+        color="var(--black)"
+      >
+        {title}
+      </Paragraph>
+    </Link>
   </PostStyles>
 )
 
@@ -123,6 +138,7 @@ const ItalianoSection = ({
               exit="exit"
               category={post.category}
               title={post.title}
+              slug={post.slug}
               featuredImage={post.featuredimage}
             />
           ))}

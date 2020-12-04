@@ -1,3 +1,4 @@
+import { graphql } from "gatsby"
 import React from "react"
 import PageHeader from "../../components/PageHeader/PageHeader"
 import CoursesFirstSection from "../../components/SectionsComponents/CoursesFirstSection"
@@ -17,7 +18,7 @@ const navItems = [
   },
 ]
 
-const CzescPierwszaPage = () => {
+const CzescPierwszaPage = ({ data }) => {
   return (
     <>
       <PageHeader
@@ -28,9 +29,23 @@ const CzescPierwszaPage = () => {
         subNav
         navItems={navItems}
       />
-      <CoursesFirstSection />
+      <CoursesFirstSection grid lessons={data.allDatoCmsLesson.nodes} />
     </>
   )
 }
-
+export const query = graphql`
+  {
+    allDatoCmsLesson(
+      sort: { fields: lessonNumber }
+      filter: { lekcjaPoziom: { regex: "/^cz/" } }
+    ) {
+      nodes {
+        id
+        lekcjaPoziom
+        lessonNumber
+        lessonTitle
+      }
+    }
+  }
+`
 export default CzescPierwszaPage

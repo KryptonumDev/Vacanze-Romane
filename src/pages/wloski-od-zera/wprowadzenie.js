@@ -1,3 +1,4 @@
+import { graphql } from "gatsby"
 import React from "react"
 import PageHeader from "../../components/PageHeader/PageHeader"
 import CoursesIntroductorySection from "../../components/SectionsComponents/CoursesIntroductorySection"
@@ -17,7 +18,7 @@ const navItems = [
   },
 ]
 
-const WprowadzeniePage = () => {
+const WprowadzeniePage = ({ data }) => {
   return (
     <>
       <PageHeader
@@ -28,9 +29,25 @@ const WprowadzeniePage = () => {
         subNav
         navItems={navItems}
       />
-      <CoursesIntroductorySection />
+      <CoursesIntroductorySection grid lessons={data.allDatoCmsLesson.nodes} />
     </>
   )
 }
+
+export const query = graphql`
+  {
+    allDatoCmsLesson(
+      sort: { fields: lessonNumber }
+      filter: { lekcjaPoziom: { eq: "wprowadzenie" } }
+    ) {
+      nodes {
+        id
+        lekcjaPoziom
+        lessonNumber
+        lessonTitle
+      }
+    }
+  }
+`
 
 export default WprowadzeniePage

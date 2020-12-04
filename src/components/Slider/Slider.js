@@ -8,7 +8,7 @@ import styled from "styled-components"
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion"
 import Line from "../Line/Line"
 import { Wrapper } from "../Wrapper/Wrapper"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import GridWrapper from "../GridWrapper/GridWrapper"
 import slugify from "slugify"
 import Image from "gatsby-image"
@@ -26,6 +26,19 @@ const ArticlePreview = styled(motion.article)`
 
   .gatsby-image-wrapper {
     height: 340px;
+    overflow: hidden !important;
+    img,
+    picture {
+      object-fit: cover !important;
+      transition: transform 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) !important;
+    }
+  }
+
+  &:hover {
+    img,
+    picture {
+      transform: scale(1.05);
+    }
   }
 
   span {
@@ -57,6 +70,7 @@ const query = graphql`
       nodes {
         category
         title
+        slug
         id
         featuredimage {
           fluid(maxWidth: 580) {
@@ -66,6 +80,11 @@ const query = graphql`
       }
     }
   }
+`
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: var(--black);
 `
 
 const Slider = ({ header }) => {
@@ -91,30 +110,32 @@ const Slider = ({ header }) => {
             <AnimatePresence exitBeforeEnter>
               {data.allDatoCmsArticle.nodes
                 .slice(page * pageLength, (page + 1) * pageLength)
-                .map(({ category, title, id, featuredimage }) => (
-                  <ArticlePreview
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    key={id}
-                  >
-                    <Image layout fluid={featuredimage.fluid} />
-                    <motion.span
-                      initial={{ opacity: 0, y: 4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 4 }}
+                .map(({ category, title, id, featuredimage, slug }) => (
+                  <StyledLink to={`blog/${slugify(slug, { lower: true })}`}>
+                    <ArticlePreview
+                      layout
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      key={id}
                     >
-                      {category}
-                    </motion.span>
-                    <motion.h3
-                      initial={{ opacity: 0, y: 4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 4 }}
-                    >
-                      {title}
-                    </motion.h3>
-                  </ArticlePreview>
+                      <Image layout fluid={featuredimage.fluid} />
+                      <motion.span
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 4 }}
+                      >
+                        {category}
+                      </motion.span>
+                      <motion.h3
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 4 }}
+                      >
+                        {title}
+                      </motion.h3>
+                    </ArticlePreview>
+                  </StyledLink>
                 ))}
             </AnimatePresence>
           </StyledGrid>

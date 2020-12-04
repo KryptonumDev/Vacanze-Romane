@@ -13,6 +13,15 @@ import {
   ImageWrapper,
   Flex,
 } from "../../assets/styles/HomeStyles"
+import styled from "styled-components"
+
+const StyledImage = styled(Image)`
+  width: 100%;
+  .gatsby-image-wrapper {
+    width: 100% !important;
+    height: 100% !important;
+  }
+`
 
 const NotOnlyBasicsSection = ({ imgFluid }) => {
   return (
@@ -25,7 +34,7 @@ const NotOnlyBasicsSection = ({ imgFluid }) => {
         padding1780="110px 90px 90px 100px"
       >
         <Flex className="image" margin="40px 0 0">
-          <Image fluid={imgFluid} />
+          <StyledImage fluid={imgFluid} />
         </Flex>
         <Flex className="texts" margin="0 0 0 76px">
           <CapitalizeText color="var(--beige-2)" margin="0 0 0 10px">
