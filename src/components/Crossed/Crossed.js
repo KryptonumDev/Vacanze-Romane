@@ -22,7 +22,7 @@ const CrossedStyles = styled(motion.span)`
   &:before {
     content: ${({ italianText }) => `"${italianText}"`};
     font-family: "Homemade Apple";
-    font-size: 36px;
+    font-size: ${({ decorSize }) => (decorSize ? decorSize : "36px")};
     line-height: 1.11;
     letter-spacing: 1px;
     color: ${({ bg }) => (bg ? bg : " var(--black)")};
@@ -50,6 +50,7 @@ const Crossed = ({
   textBottom,
   textLeft,
   textRight,
+  decorSize,
 }) => (
   <CrossedStyles
     italianText={italianText}
@@ -65,6 +66,7 @@ const Crossed = ({
     textRight={textRight}
     textLeft={textLeft}
     right={right}
+    decorSize={decorSize}
   >
     {children}
   </CrossedStyles>

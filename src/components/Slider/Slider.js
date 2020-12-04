@@ -24,6 +24,10 @@ const ArticlePreview = styled(motion.article)`
   display: flex;
   flex-direction: column;
 
+  .gatsby-image-wrapper {
+    height: 340px;
+  }
+
   span {
     font-family: "Cormorant Garamond";
     font-size: 18px;
@@ -46,8 +50,12 @@ const ArticlePreview = styled(motion.article)`
 
 const query = graphql`
   {
-    allDatoCmsArticle(filter: { locale: { eq: "pl" } }) {
+    allDatoCmsArticle(
+      sort: { fields: meta___publishedAt, order: DESC }
+      limit: 6
+    ) {
       nodes {
+        category
         title
         id
         featuredimage {
@@ -83,7 +91,7 @@ const Slider = ({ header }) => {
             <AnimatePresence exitBeforeEnter>
               {data.allDatoCmsArticle.nodes
                 .slice(page * pageLength, (page + 1) * pageLength)
-                .map(({ title, id, featuredimage }) => (
+                .map(({ category, title, id, featuredimage }) => (
                   <ArticlePreview
                     layout
                     initial={{ opacity: 0 }}
@@ -97,7 +105,7 @@ const Slider = ({ header }) => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 4 }}
                     >
-                      Category
+                      {category}
                     </motion.span>
                     <motion.h3
                       initial={{ opacity: 0, y: 4 }}
@@ -111,7 +119,11 @@ const Slider = ({ header }) => {
             </AnimatePresence>
           </StyledGrid>
         </AnimateSharedLayout>
-        <Pagination length={pageLength + 1} page={page} setPage={setPage} />
+        <Pagination
+          length={Math.floor(data.allDatoCmsArticle.nodes.length / pageLength)}
+          page={page}
+          setPage={setPage}
+        />
       </ContentWrapper>
     </Wrapper>
   )

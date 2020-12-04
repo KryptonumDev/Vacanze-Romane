@@ -10,7 +10,7 @@ const NavList = [
   {
     title: "Na skróty",
     items: [
-      { name: "Ciao!", link: "/ciao" },
+      { name: "Ciao!", link: "/" },
       { name: "in italiano", link: "/in-italiano" },
       { name: "Bottega", link: "/bottega" },
       { name: "o mnie", link: "/o-mnie" },
@@ -19,9 +19,9 @@ const NavList = [
   {
     title: "Włoski od zera",
     items: [
-      { name: "Wprowadzenie!", link: "/wprowadzenie" },
-      { name: "Część pierwsza", link: "/czesc-pierwsza" },
-      { name: "Kontynuacja", link: "/kontynuacja" },
+      { name: "Wprowadzenie!", link: "/wloski-od-zera/wprowadzenie" },
+      { name: "Część pierwsza", link: "/wloski-od-zera/czesc-pierwsza" },
+      { name: "Kontynuacja", link: "/wloski-od-zera/kontynuacja" },
     ],
   },
   {

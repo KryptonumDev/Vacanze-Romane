@@ -3,6 +3,7 @@ import styled from "styled-components"
 import Image from "gatsby-image"
 import { motion } from "framer-motion"
 import PageHeaderNav from "../PageHeaderNav/PageHeaderNav"
+import { Paragraph } from "../../assets/styles/HomeStyles"
 
 const ContentWrapper = styled(motion.div)`
   display: flex;
@@ -81,7 +82,11 @@ const HeaderOverlay = styled(motion.div)`
 
 const SingleParagraph = styled(motion.p)`
   font-size: 36px !important;
-  margin: 135px 40px 105px !important;
+  margin: ${({ zeroMarginBottom }) =>
+    zeroMarginBottom
+      ? "135px 40px 48px !important"
+      : "135px 40px 105px !important"};
+  font-family: ${({ fontFamily }) => fontFamily};
 `
 
 const PageHeader = ({
@@ -89,6 +94,7 @@ const PageHeader = ({
   bg,
   subtitle,
   paragraph,
+  subheader,
   imgFluid,
   fullHeight,
   withNav,
@@ -110,8 +116,23 @@ const PageHeader = ({
       </>
     ) : (
       <>
-        {paragraph && <SingleParagraph>{paragraph}</SingleParagraph>}
-        <ShorterImage fluid={imgFluid} />
+        {paragraph && (
+          <SingleParagraph zeroMarginBottom={subheader}>
+            {paragraph}
+          </SingleParagraph>
+        )}
+        {subheader && (
+          <Paragraph
+            fontSize="48px !important"
+            lineHeight="1em !important"
+            letterSpacing="1px !important"
+            fontFamily="Cormorant Garamond !important"
+            margin="0 0 97px !important"
+          >
+            {subheader}
+          </Paragraph>
+        )}
+        {imgFluid && <ShorterImage fluid={imgFluid} />}
         {subNav && <PageHeaderNav bg={bg} items={navItems} />}
       </>
     )}

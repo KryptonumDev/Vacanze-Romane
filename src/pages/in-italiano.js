@@ -4,12 +4,12 @@ import slugify from "slugify"
 import PageHeader from "../components/PageHeader/PageHeader"
 import GridWrapper from "../components/GridWrapper/GridWrapper"
 import ArticlePreview from "../components/ArticlePreview/ArticlePreview"
-import BlogSection from "../components/SectionsComponents/BlogSection"
+import ItalianoSection from "../components/SectionsComponents/InItalianoSection"
 import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigation"
 
 const InItalianoPage = ({ data }) => {
   const categories = ["Grammatica", "Vocabolario", "Frasi e citazioni"]
-  const [activeCategory, setActiveCategory] = useState(null)
+  const [activeCategory, setActiveCategory] = useState(categories[0])
   const [page, setPage] = useState(0)
   const pageLength = 6
 
@@ -37,7 +37,7 @@ const InItalianoPage = ({ data }) => {
         setActiveCategory={handleClick}
         italiano
       />
-      <BlogSection
+      <ItalianoSection
         page={page}
         setPage={setPage}
         pageLength={pageLength}

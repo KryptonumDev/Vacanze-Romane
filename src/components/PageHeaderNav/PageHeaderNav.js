@@ -3,6 +3,7 @@ import React from "react"
 import styled from "styled-components"
 import { ContentWrapper } from "../../assets/styles/HomeStyles"
 import { Wrapper } from "../Wrapper/Wrapper"
+import { useLocation } from "@reach/router"
 
 export const PageHeaderStyles = styled.ul`
   list-style: none;
@@ -52,12 +53,18 @@ export const PageHeaderStyles = styled.ul`
 `
 
 const PageHeaderNav = ({ items = [], bg }) => {
+  const pathName = useLocation().pathname
   return (
     <ContentWrapper bg={bg} padding="40px 56px 40px 102px">
       <PageHeaderStyles bg={bg}>
         {items.map(item => (
           <li>
-            <Link to={item.link}>{item.name}</Link>
+            <Link
+              className={pathName.includes(item.link) && "active"}
+              to={item.link}
+            >
+              {item.name}
+            </Link>
           </li>
         ))}
       </PageHeaderStyles>
