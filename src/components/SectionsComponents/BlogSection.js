@@ -11,18 +11,26 @@ import Grid, { GridItem } from "../Grid/Grid"
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion"
 import { fadeOutAnimation } from "../animations"
 import Image from "gatsby-image"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { useEffect } from "react"
 import Pagination from "../Slider/Pagination"
 import slugify from "slugify"
 import { Link } from "gatsby"
 
-const StyledGrid = styled(motion.div)`
+export const StyledGrid = styled(motion.div)`
   display: grid;
   width: 100%;
   max-width: ${({ smaller }) => smaller && "400px"};
-  grid-template-columns: repeat(2, minmax(360px, 1fr));
+  grid-template-columns: ${({ itemsInRow }) =>
+    `repeat(${itemsInRow}, minmax(360px, 1fr))`};
   grid-gap: 43px 78px;
+  ${({ maxHeightOfImages }) =>
+    maxHeightOfImages &&
+    css`
+      .gatsby-image-wrapper {
+        max-height: ${maxHeightOfImages} !important;
+      }
+    `}
 `
 
 const PostStyles = styled(motion.div)`
@@ -49,7 +57,7 @@ const PostStyles = styled(motion.div)`
   }
 `
 
-const PostPreview = ({ category, title, featuredImage, slug }) => (
+export const PostPreview = ({ category, title, featuredImage, slug }) => (
   <PostStyles layout>
     <Link to={slug}>
       <Image layout fluid={featuredImage.fluid} />

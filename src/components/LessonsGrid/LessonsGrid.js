@@ -1,6 +1,7 @@
 import { AnimateSharedLayout } from "framer-motion"
 import React from "react"
 import styled from "styled-components"
+import { Paragraph } from "../../assets/styles/HomeStyles"
 import Lesson from "../Lesson/Lesson"
 
 const LessonsGridStyles = styled.div`
@@ -10,19 +11,25 @@ const LessonsGridStyles = styled.div`
   grid-gap: 53px 73px;
 `
 
-const LessonsGrid = ({ lessons }) => {
+const LessonsGrid = ({ max = 1, lessons = [] }) => {
   return (
     <AnimateSharedLayout type="crossfade">
       {lessons.length > 0 ? (
         <LessonsGridStyles>
-          {lessons.map(lesson => (
+          {lessons.slice(0, max).map(lesson => (
             <Lesson key={lesson.id} lesson={lesson} />
           ))}
         </LessonsGridStyles>
       ) : (
-        <>
-          <h1>There are no lessons yet. sry</h1>
-        </>
+        <Paragraph
+          fontSize="36px"
+          lineHeight="1.11em"
+          letterSpacing="1px"
+          fontWeight="400"
+          fontFamily="Cormorant Garamond"
+        >
+          Brak lekcji do wyświetlenia.
+        </Paragraph>
       )}
     </AnimateSharedLayout>
   )

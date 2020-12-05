@@ -13,6 +13,8 @@ const LessonStyles = styled(Link)`
   text-align: center;
   text-decoration: none;
   color: var(--black);
+  max-height: 144px;
+  transition: 0.3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
   p {
     font-family: "Lato";
@@ -45,6 +47,10 @@ const LessonStyles = styled(Link)`
       transition: 0.3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
   }
+  &:hover {
+    transform: translateY(-2px);
+  }
+
   &:hover h3:after,
   &:focus h3:after {
     transform: scaleY(1);

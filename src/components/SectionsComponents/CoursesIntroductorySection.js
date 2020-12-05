@@ -70,7 +70,7 @@ const CoursesIntroductorySection = ({ grid, lessons }) => {
       )}
       {grid && (
         <ContentWrapper padding="103px 102px 95px">
-          <LessonsGrid lessons={lessons} />
+          <LessonsGrid max={lessons.length} lessons={lessons} />
         </ContentWrapper>
       )}
     </Wrapper>

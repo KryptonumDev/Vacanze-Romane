@@ -98,11 +98,16 @@ const PageHeader = ({
   fullHeight,
   withNav,
   subNav,
+  search,
   navItems,
   lesson = false,
 }) => (
-  <ContentWrapper fullHeight={fullHeight} bg={bg} padding="98px 0px 0">
-    {!lesson ? (
+  <ContentWrapper
+    fullHeight={fullHeight}
+    bg={bg}
+    padding={!search ? "98px 0px 0" : "65px 0 80px"}
+  >
+    {!search && !lesson ? (
       <>
         {!withNav ? (
           <>
@@ -144,6 +149,25 @@ const PageHeader = ({
           </>
         )}
       </>
+    ) : !search ? (
+      <>
+        {subheader && (
+          <Paragraph
+            fontSize="48px !important"
+            lineHeight="1em !important"
+            letterSpacing="1px !important"
+            fontFamily="Cormorant Garamond !important"
+            margin="0 !important"
+          >
+            {subheader}
+          </Paragraph>
+        )}
+        {paragraph && (
+          <Paragraph margin="24px 0" fontFamily="Lato !important">
+            {paragraph}
+          </Paragraph>
+        )}
+      </>
     ) : (
       <>
         {subheader && (
@@ -158,7 +182,12 @@ const PageHeader = ({
           </Paragraph>
         )}
         {paragraph && (
-          <Paragraph margin="24px 0" fontFamily="Lato">
+          <Paragraph
+            fontSize="24px"
+            lineHeight="1.08em"
+            margin="24px 0"
+            fontFamily="Lato !important"
+          >
             {paragraph}
           </Paragraph>
         )}

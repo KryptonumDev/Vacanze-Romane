@@ -44,7 +44,8 @@ const PageLayout = ({ children }) => {
 
     if (
       location.pathname.includes("bottega") ||
-      location.pathname.includes("o-mnie")
+      location.pathname.includes("o-mnie") ||
+      location.pathname.includes("szukaj")
     ) {
       return "brown"
     }
@@ -58,7 +59,8 @@ const PageLayout = ({ children }) => {
     }
     if (
       location.pathname.includes("bottega") ||
-      location.pathname.includes("o-mnie")
+      location.pathname.includes("o-mnie") ||
+      location.pathname.includes("szukaj")
     ) {
       return "brown"
     }
