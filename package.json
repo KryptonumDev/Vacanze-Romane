@@ -7,6 +7,7 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.6.16",
     "@mdx-js/react": "^1.6.16",
+    "@wildpow/datocms-search": "0.0.5",
     "axios": "^0.20.0",
     "babel-plugin-styled-components": "^1.11.1",
     "cors": "^2.8.5",

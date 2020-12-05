@@ -130,19 +130,31 @@ const ItalianoSection = ({
           animate="show"
           exit="exit"
         >
-          {filteredPosts.map(post => (
-            <PostPreview
-              key={post.id}
-              variants={fadeOutAnimation}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              category={post.category}
-              title={post.title}
-              slug={slugify(post.slug, { lower: true })}
-              featuredImage={post.featuredimage}
-            />
-          ))}
+          {filteredPosts.length >= 1 ? (
+            filteredPosts.map(post => (
+              <PostPreview
+                key={post.id}
+                variants={fadeOutAnimation}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                category={post.category}
+                title={post.title}
+                slug={slugify(post.slug, { lower: true })}
+                featuredImage={post.featuredimage}
+              />
+            ))
+          ) : (
+            <Paragraph
+              fontSize="36px"
+              lineHeight="1.11em"
+              letterSpacing="1px"
+              fontWeight="400"
+              fontFamily="Cormorant Garamond"
+            >
+              Brak artykułów do wyświetlenia.
+            </Paragraph>
+          )}
         </StyledGrid>
       </ContentWrapper>
       <ContentWrapper padding="0 102px 100px">

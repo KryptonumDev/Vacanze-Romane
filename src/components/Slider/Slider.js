@@ -3,6 +3,7 @@ import {
   CapitalizeText,
   ContentWrapper,
   Flex,
+  Paragraph,
 } from "../../assets/styles/HomeStyles"
 import styled from "styled-components"
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion"
@@ -108,35 +109,47 @@ const Slider = ({ header }) => {
         <AnimateSharedLayout type="crossfade">
           <StyledGrid>
             <AnimatePresence exitBeforeEnter>
-              {data.allDatoCmsArticle.nodes
-                .slice(page * pageLength, (page + 1) * pageLength)
-                .map(({ category, title, id, featuredimage, slug }) => (
-                  <StyledLink to={`blog/${slugify(slug, { lower: true })}`}>
-                    <ArticlePreview
-                      layout
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      key={id}
-                    >
-                      <Image layout fluid={featuredimage.fluid} />
-                      <motion.span
-                        initial={{ opacity: 0, y: 4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 4 }}
+              {data.allDatoCmsArticle.nodes.length >= 1 ? (
+                data.allDatoCmsArticle.nodes
+                  .slice(page * pageLength, (page + 1) * pageLength)
+                  .map(({ category, title, id, featuredimage, slug }) => (
+                    <StyledLink to={`blog/${slugify(slug, { lower: true })}`}>
+                      <ArticlePreview
+                        layout
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        key={id}
                       >
-                        {category}
-                      </motion.span>
-                      <motion.h3
-                        initial={{ opacity: 0, y: 4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 4 }}
-                      >
-                        {title}
-                      </motion.h3>
-                    </ArticlePreview>
-                  </StyledLink>
-                ))}
+                        <Image layout fluid={featuredimage.fluid} />
+                        <motion.span
+                          initial={{ opacity: 0, y: 4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 4 }}
+                        >
+                          {category}
+                        </motion.span>
+                        <motion.h3
+                          initial={{ opacity: 0, y: 4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 4 }}
+                        >
+                          {title}
+                        </motion.h3>
+                      </ArticlePreview>
+                    </StyledLink>
+                  ))
+              ) : (
+                <Paragraph
+                  fontSize="36px"
+                  lineHeight="1.11em"
+                  letterSpacing="1px"
+                  fontWeight="400"
+                  fontFamily="Cormorant Garamond"
+                >
+                  Brak artykułów do wyświetlenia.
+                </Paragraph>
+              )}
             </AnimatePresence>
           </StyledGrid>
         </AnimateSharedLayout>

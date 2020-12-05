@@ -58,19 +58,31 @@ const Pagination = ({ page = 0, setPage, length = 1 }) => {
       <ButtonStyles>
         <motion.button
           disabled={page === 0}
-          whileHover={{ x: -2 }}
-          whileTap={{ x: -4 }}
-          onClick={() => handleDecrease()}
+          whileHover={page !== 0 && { x: -2 }}
+          whileTap={page !== 0 && { x: -4 }}
+          onClick={page !== 0 && (() => handleDecrease())}
           type="button"
         >
           &larr;
         </motion.button>
         <motion.button
           disabled={length > 1 ? page === length - 1 : page >= length}
-          onClick={() => handleIncrease()}
+          onClick={
+            length > 1
+              ? page !== length - 1 && (() => handleIncrease())
+              : page < length && (() => handleIncrease())
+          }
           type="button"
-          whileHover={{ x: 2 }}
-          whileTap={{ x: 4 }}
+          whileHover={
+            length > 1
+              ? page !== length - 1 && { x: 2 }
+              : page < length && { x: 2 }
+          }
+          whileTap={
+            length > 1
+              ? page !== length - 1 && { x: 4 }
+              : page < length && { x: 4 }
+          }
         >
           &rarr;
         </motion.button>

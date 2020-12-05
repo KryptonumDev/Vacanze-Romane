@@ -6,6 +6,7 @@ import styled from "styled-components"
 import { motion } from "framer-motion"
 import { useLocation } from "@reach/router"
 import Footer from "../components/Footer/Footer"
+import { SearchComponent, DatoCmsSearch } from "@wildpow/datocms-search"
 
 const Wrapper = styled(motion.div)`
   margin: 0 auto;
@@ -66,10 +67,13 @@ const PageLayout = ({ children }) => {
     }
   }
 
+  const client = new DatoCmsSearch(process.env.API_DATO_SEARCH, "production")
+
   return (
     <Wrapper>
       <GlobalStyle />
       <Navigation bg={getHeaderBgFromLocation()} />
+      <SearchComponent client={client} />
       <ContentWrapper>{children}</ContentWrapper>
       <Footer bg={getFooterBgFromLocation()} />
     </Wrapper>
