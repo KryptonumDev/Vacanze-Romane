@@ -129,7 +129,7 @@ const PageHeader = ({
                 lineHeight="1em !important"
                 letterSpacing="1px !important"
                 fontFamily="Cormorant Garamond !important"
-                margin="0 !important"
+                margin="24px 0 70px !important"
               >
                 {subheader}
               </Paragraph>

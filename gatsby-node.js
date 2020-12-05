@@ -70,7 +70,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  result.data.allDatoCmsLesson.nodes.forEach(lesson => {
+  result.data.allDatoCmsLesson.nodes.forEach((lesson, i) => {
     const slugifiedTitle = slugify(lesson.lessonTitle, {
       lower: true,
     })
@@ -81,6 +81,14 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         id: lesson.id,
         number: lesson.lessonNumber.split("Lekcja")[1].trim(),
+        prev:
+          i >= 1 ? result.data.allDatoCmsLesson.nodes[i - 1].lessonTitle : null,
+        next:
+          i <= result.data.allDatoCmsLesson.nodes.length - 1 &&
+          lesson.lekcjaPoziom ===
+            result.data.allDatoCmsLesson.nodes[i + 1].lekcjaPoziom
+            ? result.data.allDatoCmsLesson.nodes[i + 1].lessonTitle
+            : null,
       },
     })
     console.log(lesson.lessonTitle, lesson.lessonNumber)

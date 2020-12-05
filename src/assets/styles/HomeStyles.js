@@ -12,6 +12,7 @@ export const ContentWrapper = styled(motion.div)`
     padding: ${({ padding1780 }) => padding1780};
   }
   display: flex;
+  justify-content: ${({ justifyContent }) => justifyContent};
   flex-direction: ${({ direction }) => (direction ? direction : "row")};
   .texts {
     display: flex;
