@@ -134,35 +134,37 @@ const NavigationListItem = styled(motion.li)`
   letter-spacing: 1px;
 `
 
-const Navigation = ({ bg }) => (
-  <NavigationWrapper bg={bg}>
-    <Container>
-      <Logo>
-        <Link to="/">Vacanze Romane</Link>
-      </Logo>
-      <NavigationList bg={bg}>
-        <Link activeClassName="active" to="/">
-          <NavigationListItem bg={bg}>Ciao</NavigationListItem>
-        </Link>
-        <Link activeClassName="active" to="/wloski-od-zera">
-          <NavigationListItem bg={bg}>Włoski od Zera</NavigationListItem>
-        </Link>
-        <Link activeClassName="active" to="/in-italiano">
-          <NavigationListItem bg={bg}>in italiano</NavigationListItem>
-        </Link>
-        <Link activeClassName="active" to="/blog">
-          <NavigationListItem bg={bg}>Blog</NavigationListItem>
-        </Link>
-        <Link activeClassName="active" to="/bottega">
-          <NavigationListItem bg={bg}>Bottega</NavigationListItem>
-        </Link>
-        <Link activeClassName="active" to="/o-mnie">
-          <NavigationListItem bg={bg}>O mnie</NavigationListItem>
-        </Link>
-      </NavigationList>
-      <Search />
-    </Container>
-  </NavigationWrapper>
-)
+const Navigation = ({ bg }) => {
+  return (
+    <NavigationWrapper bg={bg}>
+      <Container>
+        <Logo>
+          <Link to="/">Vacanze Romane</Link>
+        </Logo>
+        <NavigationList bg={bg}>
+          <Link activeClassName="active" to="/">
+            <NavigationListItem bg={bg}>Ciao</NavigationListItem>
+          </Link>
+          <Link activeClassName="active" to="/wloski-od-zera">
+            <NavigationListItem bg={bg}>Włoski od Zera</NavigationListItem>
+          </Link>
+          <Link activeClassName="active" to="/in-italiano">
+            <NavigationListItem bg={bg}>in italiano</NavigationListItem>
+          </Link>
+          <Link activeClassName="active" to="/blog">
+            <NavigationListItem bg={bg}>Blog</NavigationListItem>
+          </Link>
+          <Link activeClassName="active" to="/bottega">
+            <NavigationListItem bg={bg}>Bottega</NavigationListItem>
+          </Link>
+          <Link activeClassName="active" to="/o-mnie">
+            <NavigationListItem bg={bg}>O mnie</NavigationListItem>
+          </Link>
+        </NavigationList>
+        <Search bg={bg} />
+      </Container>
+    </NavigationWrapper>
+  )
+}
 
 export default Navigation
