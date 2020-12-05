@@ -91,7 +91,5 @@ exports.createPages = async ({ graphql, actions }) => {
             : null,
       },
     })
-    console.log(lesson.lessonTitle, lesson.lessonNumber)
-    console.log(`Created: wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`)
   })
 }
