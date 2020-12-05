@@ -15,6 +15,7 @@ import styled from "styled-components"
 import { useEffect } from "react"
 import Pagination from "../Slider/Pagination"
 import { Link } from "gatsby"
+import slugify from "slugify"
 
 const StyledGrid = styled(motion.div)`
   display: grid;
@@ -138,7 +139,7 @@ const ItalianoSection = ({
               exit="exit"
               category={post.category}
               title={post.title}
-              slug={post.slug}
+              slug={slugify(post.slug, { lower: true })}
               featuredImage={post.featuredimage}
             />
           ))}

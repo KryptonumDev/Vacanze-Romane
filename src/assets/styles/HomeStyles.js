@@ -170,6 +170,21 @@ export const Paragraph = styled(motion.p)`
   text-align: ${({ textAlign }) => (textAlign ? textAlign : "left")};
   text-transform: ${({ textTransform }) =>
     textTransform ? textTransform : "normal"};
+  p {
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : "36px")};
+    line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : "1.11em")};
+    font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
+    color: ${({ color }) => (color ? color : "var(--black)")};
+    letter-spacing: ${({ letterSpacing }) =>
+      letterSpacing ? letterSpacing : "1px"};
+    font-family: ${({ fontFamily }) =>
+      fontFamily ? fontFamily : "Cormorant Garamond"};
+    margin: ${({ margin }) => (margin ? margin : "0")};
+    max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : "")};
+    text-align: ${({ textAlign }) => (textAlign ? textAlign : "left")};
+    text-transform: ${({ textTransform }) =>
+      textTransform ? textTransform : "normal"};
+  }
 `
 export const ColumnText = styled(motion.p)`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "16px")};

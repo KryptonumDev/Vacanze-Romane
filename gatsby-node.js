@@ -7,9 +7,27 @@ exports.createPages = async ({ graphql, actions }) => {
   const lessonTemplate = path.resolve(`src/layouts/lesson.js`)
   const result = await graphql(`
     query allArticlesAndLessons {
-      allDatoCmsArticle {
+      redArticles: allDatoCmsArticle(
+        filter: {
+          category: { in: ["Kultura", "Sztuka", "Podróże", "Kuchnia"] }
+        }
+      ) {
         nodes {
           title
+          category
+          slug
+          id
+        }
+      }
+      blueArticles: allDatoCmsArticle(
+        filter: {
+          category: { in: ["Grammatica", "Vocabolario", "Frasi e citazioni"] }
+        }
+      ) {
+        nodes {
+          title
+          category
+          slug
           id
         }
       }
@@ -17,14 +35,15 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           lessonTitle
           lekcjaPoziom
+          lessonNumber
           id
         }
       }
     }
   `)
 
-  result.data.allDatoCmsArticle.nodes.forEach(article => {
-    const slugifiedTitle = slugify(article.title, {
+  result.data.redArticles.nodes.forEach(article => {
+    const slugifiedTitle = slugify(article.slug, {
       lower: true,
     })
     createPage({
@@ -32,6 +51,21 @@ exports.createPages = async ({ graphql, actions }) => {
       component: blogPostTemplate,
       context: {
         id: article.id,
+        category: article.category,
+      },
+    })
+  })
+
+  result.data.blueArticles.nodes.forEach(article => {
+    const slugifiedTitle = slugify(article.slug, {
+      lower: true,
+    })
+    createPage({
+      path: `in-italiano/${slugifiedTitle}`,
+      component: blogPostTemplate,
+      context: {
+        id: article.id,
+        category: article.category,
       },
     })
   })
@@ -46,7 +80,10 @@ exports.createPages = async ({ graphql, actions }) => {
       component: lessonTemplate,
       context: {
         id: lesson.id,
+        number: lesson.lessonNumber.split("Lekcja")[1].trim(),
       },
     })
+    console.log(lesson.lessonTitle, lesson.lessonNumber)
+    console.log(`Created: wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`)
   })
 }

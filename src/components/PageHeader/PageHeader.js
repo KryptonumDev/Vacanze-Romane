@@ -12,6 +12,7 @@ const ContentWrapper = styled(motion.div)`
   align-items: center;
   height: ${({ fullHeight }) => (fullHeight ? "calc(100vh - 89px)" : "")};
   position: relative;
+  padding: ${({ padding }) => padding};
   background-color: ${({ bg }) =>
     bg === "light"
       ? "var(--bg-home)"
@@ -83,9 +84,7 @@ const HeaderOverlay = styled(motion.div)`
 const SingleParagraph = styled(motion.p)`
   font-size: 36px !important;
   margin: ${({ zeroMarginBottom }) =>
-    zeroMarginBottom
-      ? "135px 40px 48px !important"
-      : "135px 40px 105px !important"};
+    zeroMarginBottom ? "0 !important" : "0 0 120px !important"};
   font-family: ${({ fontFamily }) => fontFamily};
 `
 
@@ -100,45 +99,69 @@ const PageHeader = ({
   withNav,
   subNav,
   navItems,
+  lesson = false,
 }) => (
-  <ContentWrapper fullHeight={fullHeight} bg={bg}>
-    {!withNav ? (
+  <ContentWrapper fullHeight={fullHeight} bg={bg} padding="98px 0px 0">
+    {!lesson ? (
       <>
-        {title && <h1>{title}</h1>}
-        {subtitle && <h2>{subtitle}</h2>}
-        {paragraph && <p>{paragraph}</p>}
-        {fullHeight && (
+        {!withNav ? (
           <>
-            <StyledImage fluid={imgFluid} />
-            <HeaderOverlay />
+            {title && <h1>{title}</h1>}
+            {subtitle && <h2>{subtitle}</h2>}
+            {paragraph && <p>{paragraph}</p>}
+            {fullHeight && (
+              <>
+                <StyledImage fluid={imgFluid} />
+                <HeaderOverlay />
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            {paragraph && (
+              <SingleParagraph zeroMarginBottom={subheader}>
+                {paragraph}
+              </SingleParagraph>
+            )}
+            {subheader && (
+              <Paragraph
+                fontSize="48px !important"
+                lineHeight="1em !important"
+                letterSpacing="1px !important"
+                fontFamily="Cormorant Garamond !important"
+                margin="0 !important"
+              >
+                {subheader}
+              </Paragraph>
+            )}
+            {imgFluid && (
+              <div style={{ width: "100%", position: "relative" }}>
+                <ShorterImage fluid={imgFluid} />
+                <HeaderOverlay />
+              </div>
+            )}
+            {subNav && <PageHeaderNav bg={bg} items={navItems} />}
           </>
         )}
       </>
     ) : (
       <>
-        {paragraph && (
-          <SingleParagraph zeroMarginBottom={subheader}>
-            {paragraph}
-          </SingleParagraph>
-        )}
         {subheader && (
           <Paragraph
             fontSize="48px !important"
             lineHeight="1em !important"
             letterSpacing="1px !important"
             fontFamily="Cormorant Garamond !important"
-            margin="0 0 97px !important"
+            margin="0 !important"
           >
             {subheader}
           </Paragraph>
         )}
-        {imgFluid && (
-          <div style={{ width: "100%", position: "relative" }}>
-            <ShorterImage fluid={imgFluid} />
-            <HeaderOverlay />
-          </div>
+        {paragraph && (
+          <Paragraph margin="24px 0" fontFamily="Lato">
+            {paragraph}
+          </Paragraph>
         )}
-        {subNav && <PageHeaderNav bg={bg} items={navItems} />}
       </>
     )}
   </ContentWrapper>

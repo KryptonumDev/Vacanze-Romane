@@ -232,6 +232,8 @@ const Footer = ({ bg }) => {
                 ? "var(--beige-2)"
                 : bg === "blue"
                 ? "var(--beige-2)"
+                : bg === "green"
+                ? "var(--beige-2)"
                 : ""
             }
           />
