@@ -84,7 +84,7 @@ exports.createPages = async ({ graphql, actions }) => {
         prev:
           i >= 1 ? result.data.allDatoCmsLesson.nodes[i - 1].lessonTitle : null,
         next:
-          i <= result.data.allDatoCmsLesson.nodes.length - 1 &&
+          i < result.data.allDatoCmsLesson.nodes.length - 1 &&
           lesson.lekcjaPoziom ===
             result.data.allDatoCmsLesson.nodes[i + 1].lekcjaPoziom
             ? result.data.allDatoCmsLesson.nodes[i + 1].lessonTitle
