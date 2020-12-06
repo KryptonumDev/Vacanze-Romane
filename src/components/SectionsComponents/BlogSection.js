@@ -57,9 +57,9 @@ const PostStyles = styled(motion.div)`
   }
 `
 
-export const PostPreview = ({ category, title, featuredImage, slug }) => (
+export const PostPreview = ({ category, title, featuredImage, slug, base }) => (
   <PostStyles layout>
-    <Link to={slug}>
+    <Link to={base ? `/${base}/${slug}` : slug}>
       <Image layout fluid={featuredImage.fluid} />
       <Paragraph
         margin="30px 0 0"
@@ -117,6 +117,8 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
                 initial="hidden"
                 animate="show"
                 exit="exit"
+                itemsInRow={3}
+                maxHeightOfImages="218px"
               >
                 {filteredPosts.length >= 1 ? (
                   filteredPosts.map(post => (

@@ -68,6 +68,10 @@ const SearchPage = ({ data }) => {
         filteredArticles.length +
         filteredItalianoArticles.length
     )
+    console.log("Lessons", filteredLessons)
+    console.log("Articles: ", filteredArticles)
+    console.log("Italiano: ", filteredItalianoArticles)
+    console.log("QUERY: ", query)
   }, [query])
 
   return (
@@ -132,6 +136,7 @@ const SearchPage = ({ data }) => {
                             animate="show"
                             exit="exit"
                             slug={slugify(post.slug, { lower: true })}
+                            base="blog"
                             category={post.category}
                             title={post.title}
                             featuredImage={post.featuredimage}
@@ -150,7 +155,13 @@ const SearchPage = ({ data }) => {
                     )}
                   </StyledGrid>
                   <Pagination
-                    length={Math.floor(blogArticles.length / gridPageLength)}
+                    length={
+                      filteredArticles.length / gridPageLength >
+                      Math.floor(filteredArticles.length / gridPageLength)
+                        ? 1 +
+                          Math.floor(filteredArticles.length / gridPageLength)
+                        : Math.floor(filteredArticles.length / gridPageLength)
+                    }
                     page={gridPage}
                     setPage={setGridPage}
                   />
@@ -181,6 +192,7 @@ const SearchPage = ({ data }) => {
                             animate="show"
                             exit="exit"
                             slug={slugify(post.slug, { lower: true })}
+                            base="in-italiano"
                             category={post.category}
                             title={post.title}
                             featuredImage={post.featuredimage}
@@ -199,9 +211,19 @@ const SearchPage = ({ data }) => {
                     )}
                   </StyledGrid>
                   <Pagination
-                    length={Math.floor(
-                      italianoArticles.length / italianoGridPageLength
-                    )}
+                    length={
+                      filteredItalianoArticles.length / italianoGridPage >
+                      Math.floor(
+                        filteredItalianoArticles.length / italianoGridPage
+                      )
+                        ? 1 +
+                          Math.floor(
+                            filteredItalianoArticles.length / italianoGridPage
+                          )
+                        : Math.floor(
+                            filteredItalianoArticles.length / italianoGridPage
+                          )
+                    }
                     page={italianoGridPage}
                     setPage={setItalianoGridPage}
                   />
@@ -210,7 +232,13 @@ const SearchPage = ({ data }) => {
             </Flex>
           </ContentWrapper>
         ) : (
-          <Paragraph>Niestety, niczego nie znaleziono.</Paragraph>
+          <ContentWrapper
+            direction="column"
+            bg="white"
+            padding="78px 102px 100px"
+          >
+            <Paragraph>Niestety, niczego nie znaleziono.</Paragraph>
+          </ContentWrapper>
         )}
       </Wrapper>
     </>

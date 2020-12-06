@@ -129,6 +129,7 @@ const ItalianoSection = ({
           initial="hidden"
           animate="show"
           exit="exit"
+          itemsInRow={2}
         >
           {filteredPosts.length >= 1 ? (
             filteredPosts.map(post => (

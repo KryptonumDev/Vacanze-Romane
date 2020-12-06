@@ -143,8 +143,7 @@ const Search = ({ bg }) => {
 
   const minimalLengthOfQuery = 3
   const handleSearch = () => {
-    console.log("query: ", query)
-    if (query.length >= minimalLengthOfQuery) {
+    if (query.trim().length >= minimalLengthOfQuery) {
       setActive(false)
       navigate("/szukaj")
       setMessage(null)
@@ -160,7 +159,7 @@ const Search = ({ bg }) => {
 
   const handleChange = e => {
     dispatch({ type: "SET_QUERY", payload: e.target.value })
-    if (e.target.value.length >= minimalLengthOfQuery) {
+    if (e.target.value.trim().length >= minimalLengthOfQuery) {
       setMessage(null)
     }
   }
@@ -173,20 +172,17 @@ const Search = ({ bg }) => {
     setActive(true)
   }
 
-  const escPress = e => {
+  const keyPress = e => {
     if (e.keyCode === 27) {
       setActive(false)
       setMessage(null)
     }
-    if (e.keyCode === 13) {
-      handleSearch()
-    }
   }
 
   useEffect(() => {
-    document && document.addEventListener("keydown", escPress, false)
+    document && document.addEventListener("keydown", keyPress, false)
     return function cleanup() {
-      document.removeEventListener("keydown", escPress, false)
+      document.removeEventListener("keydown", keyPress, false)
     }
   }, [])
 
