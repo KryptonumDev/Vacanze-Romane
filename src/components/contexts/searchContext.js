@@ -14,7 +14,7 @@ function searchReducer(state, action) {
   }
 }
 function SearchProvider({ children }) {
-  const [state, dispatch] = React.useReducer(searchReducer, { query: "a" })
+  const [state, dispatch] = React.useReducer(searchReducer, { query: "" })
   return (
     <SearchStateContext.Provider value={state}>
       <SearchDispatchContext.Provider value={dispatch}>

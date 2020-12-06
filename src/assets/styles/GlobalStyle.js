@@ -4,6 +4,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     --bg-home: #fefbf5;
+    --bg-top: #f8f5f1;
     --dead-green: #143325;
     --light-green: #2a4536;
     --dark-red: #661120;
@@ -47,6 +48,13 @@ const GlobalStyle = createGlobalStyle`
   }
   .decor {
     font-family: "Homemade Apple";
+  }
+  p::selection, span::selection, h1::selection, h2::selection, h3::selection, input::selection, button::selection {
+    background-color: var(--dark-red);
+    color: var(--beige-2);
+  }
+  img::selection {
+    background-color: transparent;
   }
 `
 

@@ -236,4 +236,5 @@ export const Flex = styled(motion.div)`
   align-items: ${({ alignItems }) => (alignItems ? alignItems : "flex-start")};
   align-self: ${({ alignSelf }) => (alignSelf ? alignSelf : "flex-start")};
   width: ${({ width }) => width};
+  max-width: ${({ maxWidth }) => maxWidth};
 `

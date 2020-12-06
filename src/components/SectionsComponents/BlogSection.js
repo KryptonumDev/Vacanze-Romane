@@ -22,7 +22,7 @@ export const StyledGrid = styled(motion.div)`
   width: 100%;
   max-width: ${({ smaller }) => smaller && "400px"};
   grid-template-columns: ${({ itemsInRow }) =>
-    `repeat(${itemsInRow}, minmax(360px, 1fr))`};
+    `repeat(${itemsInRow}, minmax(200px, 1fr))`};
   grid-gap: 43px 78px;
   ${({ maxHeightOfImages }) =>
     maxHeightOfImages &&

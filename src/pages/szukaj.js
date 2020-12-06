@@ -35,6 +35,7 @@ const SearchPage = ({ data }) => {
   const [filteredItalianoArticles, setFilteredItalianoArticles] = useState(
     italianoArticles
   )
+  const [total, setTotal] = useState(0)
 
   useEffect(() => {
     const queryToUse = query.trim().toLowerCase()
@@ -62,6 +63,11 @@ const SearchPage = ({ data }) => {
           article.slug.toLowerCase().includes(queryToUse)
       )
     )
+    setTotal(
+      filteredLessons.length +
+        filteredArticles.length +
+        filteredItalianoArticles.length
+    )
   }, [query])
 
   return (
@@ -69,145 +75,143 @@ const SearchPage = ({ data }) => {
       <PageHeader
         search
         subheader={query}
-        paragraph={`${
-          filteredLessons.length +
-          filteredArticles.length +
-          filteredItalianoArticles.length
-        } wyników wyszukiwania`}
+        paragraph={`${total} wyników wyszukiwania`}
         bg="brown"
         withNav
       />
       <Wrapper>
-        <input
-          value={query}
-          onChange={e =>
-            dispatch({ type: "SET_QUERY", payload: e.target.value })
-          }
-        />
-        <h1>Querytouse: {query}</h1>
-        <ContentWrapper
-          direction="column"
-          bg="white"
-          padding="78px 102px 100px"
-        >
-          {filteredLessons.length > 0 && (
+        {total > 0 ? (
+          <ContentWrapper
+            direction="column"
+            bg="white"
+            padding="78px 102px 100px"
+          >
+            {filteredLessons.length > 0 && (
+              <Flex
+                width="100%"
+                padding="0"
+                margin="0 0 100px"
+                flexDirection="column"
+              >
+                <Paragraph margin="0 0 33px 2px">Lekcje</Paragraph>
+                <LessonsGrid
+                  max={filteredLessons.length}
+                  lessons={filteredLessons}
+                />
+              </Flex>
+            )}
+
             <Flex
               width="100%"
               padding="0"
-              margin="0 0 100px"
+              margin="0 0 0"
               flexDirection="column"
             >
-              <Paragraph margin="0 0 33px 2px">Lekcje</Paragraph>
-              <LessonsGrid
-                max={filteredLessons.length}
-                lessons={filteredLessons}
-              />
+              {filteredArticles.length > 0 && (
+                <>
+                  <Paragraph margin="0 0 33px 2px">Blog</Paragraph>
+                  <StyledGrid
+                    variants={fadeOutAnimation}
+                    initial="hidden"
+                    animate="show"
+                    exit="exit"
+                    itemsInRow={3}
+                    maxHeightOfImages="218px"
+                  >
+                    {filteredArticles.length >= 1 ? (
+                      filteredArticles
+                        .slice(
+                          gridPage * gridPageLength,
+                          (gridPage + 1) * gridPageLength
+                        )
+                        .map(post => (
+                          <PostPreview
+                            key={post.id}
+                            variants={fadeOutAnimation}
+                            initial="hidden"
+                            animate="show"
+                            exit="exit"
+                            slug={slugify(post.slug, { lower: true })}
+                            category={post.category}
+                            title={post.title}
+                            featuredImage={post.featuredimage}
+                          />
+                        ))
+                    ) : (
+                      <Paragraph
+                        fontSize="36px"
+                        lineHeight="1.11em"
+                        letterSpacing="1px"
+                        fontWeight="400"
+                        fontFamily="Cormorant Garamond"
+                      >
+                        Brak artykułów do wyświetlenia.
+                      </Paragraph>
+                    )}
+                  </StyledGrid>
+                  <Pagination
+                    length={Math.floor(blogArticles.length / gridPageLength)}
+                    page={gridPage}
+                    setPage={setGridPage}
+                  />
+                </>
+              )}
+              {filteredItalianoArticles.length > 0 && (
+                <>
+                  <Paragraph margin="100px 0 33px 2px">in Italiano</Paragraph>
+                  <StyledGrid
+                    variants={fadeOutAnimation}
+                    initial="hidden"
+                    animate="show"
+                    exit="exit"
+                    itemsInRow={3}
+                    maxHeightOfImages="218px"
+                  >
+                    {filteredItalianoArticles.length >= 1 ? (
+                      filteredItalianoArticles
+                        .slice(
+                          italianoGridPage * italianoGridPageLength,
+                          (italianoGridPage + 1) * italianoGridPageLength
+                        )
+                        .map(post => (
+                          <PostPreview
+                            key={post.id}
+                            variants={fadeOutAnimation}
+                            initial="hidden"
+                            animate="show"
+                            exit="exit"
+                            slug={slugify(post.slug, { lower: true })}
+                            category={post.category}
+                            title={post.title}
+                            featuredImage={post.featuredimage}
+                          />
+                        ))
+                    ) : (
+                      <Paragraph
+                        fontSize="36px"
+                        lineHeight="1.11em"
+                        letterSpacing="1px"
+                        fontWeight="400"
+                        fontFamily="Cormorant Garamond"
+                      >
+                        Brak artykułów do wyświetlenia.
+                      </Paragraph>
+                    )}
+                  </StyledGrid>
+                  <Pagination
+                    length={Math.floor(
+                      italianoArticles.length / italianoGridPageLength
+                    )}
+                    page={italianoGridPage}
+                    setPage={setItalianoGridPage}
+                  />
+                </>
+              )}
             </Flex>
-          )}
-
-          <Flex width="100%" padding="0" margin="0 0 0" flexDirection="column">
-            {filteredArticles.length > 0 && (
-              <>
-                <Paragraph margin="0 0 33px 2px">Blog</Paragraph>
-                <StyledGrid
-                  variants={fadeOutAnimation}
-                  initial="hidden"
-                  animate="show"
-                  exit="exit"
-                  itemsInRow={3}
-                  maxHeightOfImages="218px"
-                >
-                  {filteredArticles.length >= 1 ? (
-                    filteredArticles
-                      .slice(
-                        gridPage * gridPageLength,
-                        (gridPage + 1) * gridPageLength
-                      )
-                      .map(post => (
-                        <PostPreview
-                          key={post.id}
-                          variants={fadeOutAnimation}
-                          initial="hidden"
-                          animate="show"
-                          exit="exit"
-                          slug={slugify(post.slug, { lower: true })}
-                          category={post.category}
-                          title={post.title}
-                          featuredImage={post.featuredimage}
-                        />
-                      ))
-                  ) : (
-                    <Paragraph
-                      fontSize="36px"
-                      lineHeight="1.11em"
-                      letterSpacing="1px"
-                      fontWeight="400"
-                      fontFamily="Cormorant Garamond"
-                    >
-                      Brak artykułów do wyświetlenia.
-                    </Paragraph>
-                  )}
-                </StyledGrid>
-                <Pagination
-                  length={Math.floor(blogArticles.length / gridPageLength)}
-                  page={gridPage}
-                  setPage={setGridPage}
-                />
-              </>
-            )}
-            {filteredItalianoArticles.length > 0 && (
-              <>
-                <Paragraph margin="100px 0 33px 2px">in Italiano</Paragraph>
-                <StyledGrid
-                  variants={fadeOutAnimation}
-                  initial="hidden"
-                  animate="show"
-                  exit="exit"
-                  itemsInRow={3}
-                  maxHeightOfImages="218px"
-                >
-                  {filteredItalianoArticles.length >= 1 ? (
-                    filteredItalianoArticles
-                      .slice(
-                        italianoGridPage * italianoGridPageLength,
-                        (italianoGridPage + 1) * italianoGridPageLength
-                      )
-                      .map(post => (
-                        <PostPreview
-                          key={post.id}
-                          variants={fadeOutAnimation}
-                          initial="hidden"
-                          animate="show"
-                          exit="exit"
-                          slug={slugify(post.slug, { lower: true })}
-                          category={post.category}
-                          title={post.title}
-                          featuredImage={post.featuredimage}
-                        />
-                      ))
-                  ) : (
-                    <Paragraph
-                      fontSize="36px"
-                      lineHeight="1.11em"
-                      letterSpacing="1px"
-                      fontWeight="400"
-                      fontFamily="Cormorant Garamond"
-                    >
-                      Brak artykułów do wyświetlenia.
-                    </Paragraph>
-                  )}
-                </StyledGrid>
-                <Pagination
-                  length={Math.floor(
-                    italianoArticles.length / italianoGridPageLength
-                  )}
-                  page={italianoGridPage}
-                  setPage={setItalianoGridPage}
-                />
-              </>
-            )}
-          </Flex>
-        </ContentWrapper>
+          </ContentWrapper>
+        ) : (
+          <Paragraph>Niestety, niczego nie znaleziono.</Paragraph>
+        )}
       </Wrapper>
     </>
   )
