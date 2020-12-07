@@ -31,6 +31,7 @@ const SearchPage = ({ data }) => {
   const italianoGridPageLength = 3
 
   const [filteredLessons, setFilteredLessons] = useState(lessons)
+  const lessonsMaxLength = 3
   const [filteredArticles, setFilteredArticles] = useState(blogArticles)
   const [filteredItalianoArticles, setFilteredItalianoArticles] = useState(
     italianoArticles
@@ -63,23 +64,28 @@ const SearchPage = ({ data }) => {
           article.slug.toLowerCase().includes(queryToUse)
       )
     )
+  }, [query])
+
+  useEffect(() => {
     setTotal(
-      filteredLessons.length +
+      Math.min(lessonsMaxLength, filteredLessons.length) +
         filteredArticles.length +
         filteredItalianoArticles.length
     )
-    console.log("Lessons", filteredLessons)
-    console.log("Articles: ", filteredArticles)
-    console.log("Italiano: ", filteredItalianoArticles)
-    console.log("QUERY: ", query)
-  }, [query])
+  }, [filteredLessons, filteredArticles, filteredItalianoArticles])
 
   return (
     <>
       <PageHeader
         search
-        subheader={query}
-        paragraph={`${total} wyników wyszukiwania`}
+        subheader={query ? query : "Brak hasła do wyszukania"}
+        paragraph={
+          query
+            ? total === 0
+              ? "Brak wyników wyszukiwania"
+              : `${total} wynik${total > 1 ? "ów" : ""} wyszukiwania`
+            : "Kliknij lupkę w prawym górnym rogu, aby je wpisać"
+        }
         bg="brown"
         withNav
       />
@@ -98,10 +104,7 @@ const SearchPage = ({ data }) => {
                 flexDirection="column"
               >
                 <Paragraph margin="0 0 33px 2px">Lekcje</Paragraph>
-                <LessonsGrid
-                  max={filteredLessons.length}
-                  lessons={filteredLessons}
-                />
+                <LessonsGrid max={lessonsMaxLength} lessons={filteredLessons} />
               </Flex>
             )}
 
@@ -212,16 +215,18 @@ const SearchPage = ({ data }) => {
                   </StyledGrid>
                   <Pagination
                     length={
-                      filteredItalianoArticles.length / italianoGridPage >
+                      filteredItalianoArticles.length / italianoGridPageLength >
                       Math.floor(
-                        filteredItalianoArticles.length / italianoGridPage
+                        filteredItalianoArticles.length / italianoGridPageLength
                       )
                         ? 1 +
                           Math.floor(
-                            filteredItalianoArticles.length / italianoGridPage
+                            filteredItalianoArticles.length /
+                              italianoGridPageLength
                           )
                         : Math.floor(
-                            filteredItalianoArticles.length / italianoGridPage
+                            filteredItalianoArticles.length /
+                              italianoGridPageLength
                           )
                     }
                     page={italianoGridPage}

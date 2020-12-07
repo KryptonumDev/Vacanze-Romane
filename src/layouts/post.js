@@ -180,6 +180,7 @@ const PostLayout = ({ data }) => {
       <PageHeader
         subheader={title}
         withNav
+        article
         bg={
           category === "Kultura" ||
           category === "Sztuka" ||

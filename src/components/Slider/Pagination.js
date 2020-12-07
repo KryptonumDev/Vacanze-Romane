@@ -60,14 +60,14 @@ const Pagination = ({ page = 0, setPage, length = 1 }) => {
           disabled={page === 0}
           whileHover={page !== 0 && { x: -2 }}
           whileTap={page !== 0 && { x: -4 }}
-          onClick={page !== 0 && (() => handleDecrease())}
+          onClick={page !== 0 ? handleDecrease : undefined}
           type="button"
         >
           &larr;
         </motion.button>
         <motion.button
           disabled={page >= length - 1}
-          onClick={page < length - 1 && (() => handleIncrease())}
+          onClick={page < length - 1 ? handleIncrease : undefined}
           type="button"
           whileHover={page < length - 1 && { x: 2 }}
           whileTap={page < length - 1 && { x: 4 }}

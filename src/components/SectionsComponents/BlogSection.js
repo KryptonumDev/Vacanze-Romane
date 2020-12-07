@@ -97,7 +97,7 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
         .filter(post => post.category === activeCategory)
         .slice(page * pageLength, (page + 1) * pageLength)
     )
-  }, [activeCategory, page, posts])
+  }, [activeCategory, page, posts, pageLength])
 
   return (
     <Wrapper padding="0" bg="white">
@@ -117,8 +117,8 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
                 initial="hidden"
                 animate="show"
                 exit="exit"
-                itemsInRow={3}
-                maxHeightOfImages="218px"
+                itemsInRow={2}
+                maxHeightOfImages="328px"
               >
                 {filteredPosts.length >= 1 ? (
                   filteredPosts.map(post => (

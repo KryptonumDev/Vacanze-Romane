@@ -101,6 +101,7 @@ const PageHeader = ({
   search,
   navItems,
   lesson = false,
+  article = false,
 }) => (
   <ContentWrapper
     fullHeight={fullHeight}
@@ -134,7 +135,9 @@ const PageHeader = ({
                 lineHeight="1em !important"
                 letterSpacing="1px !important"
                 fontFamily="Cormorant Garamond !important"
-                margin="24px 0 70px !important"
+                margin={
+                  article ? "24px 0 148px !important" : "24px 0 70px !important"
+                }
               >
                 {subheader}
               </Paragraph>

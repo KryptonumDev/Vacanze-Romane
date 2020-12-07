@@ -132,6 +132,7 @@ const StyledMessage = styled(motion.p)`
 
 const Search = ({ bg }) => {
   const [active, setActive] = useState(false)
+  const [inputValue, setInputValue] = useState("")
   const { query } = useSearchState()
   const dispatch = useSearchDispatch()
   const [message, setMessage] = useState(null)
@@ -142,12 +143,15 @@ const Search = ({ bg }) => {
   const inputRef = useRef()
 
   const minimalLengthOfQuery = 3
-  const handleSearch = () => {
-    if (query.trim().length >= minimalLengthOfQuery) {
-      setActive(false)
+  const handleSearch = async () => {
+    if (inputValue.trim().length >= minimalLengthOfQuery) {
+      await dispatch({ type: "SET_QUERY", payload: inputValue })
       navigate("/szukaj")
       setMessage(null)
       setError(false)
+      setTimeout(() => {
+        setActive(false)
+      }, 400)
     } else {
       setMessage(
         `Wprowadź tekst o długości co najmniej ${minimalLengthOfQuery} znaków.`
@@ -158,7 +162,7 @@ const Search = ({ bg }) => {
   }
 
   const handleChange = e => {
-    dispatch({ type: "SET_QUERY", payload: e.target.value })
+    setInputValue(e.target.value)
     if (e.target.value.trim().length >= minimalLengthOfQuery) {
       setMessage(null)
     }
@@ -218,7 +222,7 @@ const Search = ({ bg }) => {
                   ref={inputRef}
                   key="input"
                   placeholder="Wyszukaj"
-                  value={query}
+                  value={inputValue}
                   onChange={e => handleChange(e)}
                   error={message !== null}
                   autoFocus
