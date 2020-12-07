@@ -7,6 +7,10 @@ import { motion } from "framer-motion"
 import { useLocation } from "@reach/router"
 import Footer from "../components/Footer/Footer"
 import { SearchProvider } from "../components/contexts/searchContext"
+import {
+  MenuProvider,
+  useMenuState,
+} from "../components/contexts/mobileMenuContext"
 
 const Wrapper = styled(motion.div)`
   margin: 0 auto;
@@ -70,14 +74,16 @@ const PageLayout = ({ children }) => {
   }
 
   return (
-    <SearchProvider>
-      <Wrapper>
-        <GlobalStyle />
-        <Navigation bg={getHeaderBgFromLocation()} />
-        <ContentWrapper>{children}</ContentWrapper>
-        <Footer bg={getFooterBgFromLocation()} />
-      </Wrapper>
-    </SearchProvider>
+    <MenuProvider>
+      <SearchProvider>
+        <Wrapper>
+          <GlobalStyle />
+          <Navigation bg={getHeaderBgFromLocation()} />
+          <ContentWrapper>{children}</ContentWrapper>
+          <Footer bg={getFooterBgFromLocation()} />
+        </Wrapper>
+      </SearchProvider>
+    </MenuProvider>
   )
 }
 export default PageLayout

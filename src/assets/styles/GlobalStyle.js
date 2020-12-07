@@ -1,6 +1,8 @@
+import React from "react"
 import { createGlobalStyle } from "styled-components"
+import { useMenuState } from "../../components/contexts/mobileMenuContext"
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   html {
     box-sizing: border-box;
     --bg-home: #fefbf5;
@@ -26,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: 'Lato';
+    position: ${({ fixed }) => fixed && "fixed"};
   }
   button {
     cursor: pointer;
@@ -60,5 +63,10 @@ const GlobalStyle = createGlobalStyle`
     background-color: transparent;
   }
 `
+
+const GlobalStyle = () => {
+  const { show } = useMenuState()
+  return <GlobalStyles fixed={show} />
+}
 
 export default GlobalStyle

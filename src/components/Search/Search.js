@@ -16,6 +16,21 @@ const SearchStyles = styled(motion.button)`
   border: none;
   background-color: transparent;
   display: inline-block;
+  @media only screen and (min-width: 1106px) {
+    &.mobile {
+      display: none;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+  @media only screen and (max-width: 1105px) {
+    margin-top: 20px;
+    &.desktop {
+      display: none;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
 
   svg {
     transition: transform 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
@@ -43,6 +58,19 @@ const SearchModal = styled(motion.div)`
   justify-content: center;
   align-items: center;
   z-index: 10;
+  @media only screen and (max-width: 1105px) {
+    &.desktop {
+      display: none;
+      visibility: hidden;
+    }
+  }
+  @media only screen and (min-width: 1106px) {
+    &.mobile {
+      display: none;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
   .btn--close {
     position: absolute;
     right: 52px;
@@ -130,7 +158,7 @@ const StyledMessage = styled(motion.p)`
   color: var(--dark-red);
 `
 
-const Search = () => {
+const Search = ({ bg, className }) => {
   const [active, setActive] = useState(false)
   const [inputValue, setInputValue] = useState("")
   const dispatch = useSearchDispatch()
@@ -186,12 +214,20 @@ const Search = () => {
 
   return (
     <>
-      <SearchStyles type="button" onClick={handleOpenModal}>
-        <RiSearchLine size="26px" color="var(--beige-2)" />
+      <SearchStyles
+        className={className}
+        type="button"
+        onClick={handleOpenModal}
+      >
+        <RiSearchLine
+          size="26px"
+          color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+        />
       </SearchStyles>
       <AnimatePresence>
         {active && (
           <SearchModal
+            className={className}
             variants={fadeOutAnimation}
             initial="hidden"
             animate="show"

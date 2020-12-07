@@ -1,9 +1,13 @@
 import React from "react"
 import styled, { css } from "styled-components"
-import { Link } from "gatsby"
-import { motion } from "framer-motion"
+import { Link, useStaticQuery } from "gatsby"
+import { AnimatePresence, motion } from "framer-motion"
 import Search from "../Search/Search"
+import { FiMenu, FiFacebook, FiInstagram, FiYoutube } from "react-icons/fi"
+import { IoClose } from "react-icons/io5"
 
+import { useMenuDispatch, useMenuState } from "../contexts/mobileMenuContext"
+import { fadeOutAnimation } from "../animations"
 const NavigationWrapper = styled.nav`
   background-color: var(--bg-home);
   a {
@@ -73,21 +77,33 @@ const Logo = styled.span`
   line-height: 20px;
   letter-spacing: 1px;
   text-transform: uppercase;
+  z-index: 6;
   a {
     padding: 24px 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  img {
+    width: 36px;
+    margin-right: 10px;
   }
 `
 
-const NavigationList = styled.ul`
+const NavigationList = styled(motion.ul)`
   display: flex;
   justify-content: flex-end;
   flex: 1 1 auto;
   list-style: none;
   z-index: 1;
   padding-right: 60px;
+
+  @media only screen and (max-width: 1105px) {
+    visibility: hidden;
+    display: none;
+  }
   a {
     font-family: "Cormorant Garamond";
-
     position: relative;
     padding: 24px 12px;
     margin: 0 12px 0 0;
@@ -117,6 +133,69 @@ const NavigationList = styled.ul`
   }
 `
 
+const MobileNavigationList = styled(motion.ul)`
+  display: flex;
+  list-style: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 100px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-right: 0;
+    background-color: ${({ bg }) =>
+      bg === "green"
+        ? "var(--dead-green)"
+        : bg === "red"
+        ? "var(--dark-red)"
+        : bg === "blue"
+        ? "var(--blue)"
+        : bg === "brown"
+        ? "var(--brown)"
+        : "var(--bg-top)"};
+    z-index: 5;
+    color: var(--beige-2);
+  }
+  a {
+    font-family: "Cormorant Garamond";
+    position: relative;
+    padding: 24px 12px;
+    margin: 0 12px 0 0;
+    &:after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: calc(50% - 2px);
+      width: calc(100% - 12px);
+      height: 6px;
+      z-index: -1;
+      transform: scaleY(0);
+      transform-origin: center bottom;
+      transition: 0.3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+    &.active:after,
+    &:hover:after,
+    &:focus:after {
+      transform: scaleY(1);
+    }
+    &:focus {
+      outline: none;
+    }
+    padding: 14px 64px;
+    margin: 0;
+    &:after {
+      height: 11px;
+      top: calc(50% - 6px);
+    }
+  }
+`
+
 const Container = styled(motion.div)`
   max-width: 1440px;
   margin: 0 auto;
@@ -132,39 +211,266 @@ const NavigationListItem = styled(motion.li)`
   font-size: 18px;
   line-height: 1.11em;
   letter-spacing: 1px;
+  @media only screen and (max-width: 1105px) {
+    font-size: 24px;
+  }
+`
+
+const query = graphql`
+  {
+    allDatoCmsHomePage {
+      nodes {
+        logo {
+          url
+        }
+      }
+    }
+  }
 `
 
 const Navigation = ({ bg }) => {
+  const data = useStaticQuery(query)
+  const { show } = useMenuState()
+  const dispatch = useMenuDispatch()
+
   return (
     <NavigationWrapper bg={bg}>
+      {console.log(data)}
       <Container>
         <Logo>
-          <Link to="/">Vacanze Romane</Link>
+          <Link to="/">
+            <img
+              src={data.allDatoCmsHomePage.nodes[0].logo.url}
+              alt="Girl on a Vespa scooter"
+            />
+            Vacanze Romane
+          </Link>
         </Logo>
-        <NavigationList bg={bg}>
+        <NavigationList show={show} bg={bg}>
           <Link activeClassName="active" to="/">
-            <NavigationListItem bg={bg}>Ciao</NavigationListItem>
+            <NavigationListItem
+              bg={bg}
+              onClick={() => dispatch({ type: "CLOSE_MENU" })}
+            >
+              Ciao
+            </NavigationListItem>
           </Link>
           <Link activeClassName="active" to="/wloski-od-zera">
-            <NavigationListItem bg={bg}>Włoski od Zera</NavigationListItem>
+            <NavigationListItem
+              bg={bg}
+              onClick={() => dispatch({ type: "CLOSE_MENU" })}
+            >
+              Włoski od Zera
+            </NavigationListItem>
           </Link>
           <Link activeClassName="active" to="/in-italiano">
-            <NavigationListItem bg={bg}>in italiano</NavigationListItem>
+            <NavigationListItem
+              bg={bg}
+              onClick={() => dispatch({ type: "CLOSE_MENU" })}
+            >
+              in italiano
+            </NavigationListItem>
           </Link>
           <Link activeClassName="active" to="/blog">
-            <NavigationListItem bg={bg}>Blog</NavigationListItem>
+            <NavigationListItem
+              bg={bg}
+              onClick={() => dispatch({ type: "CLOSE_MENU" })}
+            >
+              Blog
+            </NavigationListItem>
           </Link>
           <Link activeClassName="active" to="/bottega">
-            <NavigationListItem bg={bg}>Bottega</NavigationListItem>
+            <NavigationListItem
+              bg={bg}
+              onClick={() => dispatch({ type: "CLOSE_MENU" })}
+            >
+              Bottega
+            </NavigationListItem>
           </Link>
           <Link activeClassName="active" to="/o-mnie">
-            <NavigationListItem bg={bg}>O mnie</NavigationListItem>
+            <NavigationListItem
+              bg={bg}
+              onClick={() => dispatch({ type: "CLOSE_MENU" })}
+            >
+              O mnie
+            </NavigationListItem>
           </Link>
+          {show && <Search className="mobile" bg={bg} />}
         </NavigationList>
-        <Search bg={bg} />
+        <AnimatePresence>
+          {show && (
+            <MobileNavigationList
+              show={show}
+              bg={bg}
+              variants={fadeOutAnimation}
+              initial="hidden"
+              animate={{
+                opacity: 1,
+                transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+              }}
+              exit="exit"
+            >
+              <Link activeClassName="active" to="/">
+                <NavigationListItem
+                  bg={bg}
+                  onClick={() => dispatch({ type: "CLOSE_MENU" })}
+                >
+                  Ciao
+                </NavigationListItem>
+              </Link>
+              <Link activeClassName="active" to="/wloski-od-zera">
+                <NavigationListItem
+                  bg={bg}
+                  onClick={() => dispatch({ type: "CLOSE_MENU" })}
+                >
+                  Włoski od Zera
+                </NavigationListItem>
+              </Link>
+              <Link activeClassName="active" to="/in-italiano">
+                <NavigationListItem
+                  bg={bg}
+                  onClick={() => dispatch({ type: "CLOSE_MENU" })}
+                >
+                  in italiano
+                </NavigationListItem>
+              </Link>
+              <Link activeClassName="active" to="/blog">
+                <NavigationListItem
+                  bg={bg}
+                  onClick={() => dispatch({ type: "CLOSE_MENU" })}
+                >
+                  Blog
+                </NavigationListItem>
+              </Link>
+              <Link activeClassName="active" to="/bottega">
+                <NavigationListItem
+                  bg={bg}
+                  onClick={() => dispatch({ type: "CLOSE_MENU" })}
+                >
+                  Bottega
+                </NavigationListItem>
+              </Link>
+              <Link activeClassName="active" to="/o-mnie">
+                <NavigationListItem
+                  bg={bg}
+                  onClick={() => dispatch({ type: "CLOSE_MENU" })}
+                >
+                  O mnie
+                </NavigationListItem>
+              </Link>
+              {show && <Search className="mobile" bg={bg} />}
+            </MobileNavigationList>
+          )}
+        </AnimatePresence>
+        {!show && <Search className="desktop" bg={bg} />}
+        <MenuToggleButton
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => dispatch({ type: "TOGGLE_MENU" })}
+          bg={bg}
+          show={show}
+        >
+          {show ? (
+            <IoClose
+              color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+              size="32px"
+            />
+          ) : (
+            <FiMenu
+              color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+              size="32px"
+            />
+          )}
+        </MenuToggleButton>
+        {show && <SocialMediaBar bg={bg} />}
       </Container>
     </NavigationWrapper>
   )
 }
+
+const MenuToggleButton = styled(motion.button)`
+  z-index: 6;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  margin-right: ${({ show }) => show && "16px"};
+  &::focus,
+  &:active {
+    outline: none;
+    box-shadow: 0 0 0 2px
+      ${({ bg }) => (bg === "light" ? "var(--brown)" : "var(--beige-2)")};
+  }
+  @media only screen and (min-width: 1026px) {
+    visibility: hidden;
+    display: none;
+  }
+`
+
+const SocialStyles = styled.ul`
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+  padding: 20px;
+  background-color: ${({ bg }) =>
+    bg === "green"
+      ? "var(--light-green)"
+      : bg === "red"
+      ? "var(--light-red)"
+      : bg === "blue"
+      ? "var(--light-blue)"
+      : bg === "brown"
+      ? "var(--light-brown)"
+      : "var(--beige-2)"};
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    padding: 0;
+    list-style-type: none;
+    margin-right: 8px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  a {
+    padding: 8px 16px;
+  }
+`
+
+const SocialMediaBar = ({ bg }) => (
+  <SocialStyles bg={bg}>
+    <li>
+      <a
+        target="_blank"
+        href="https://www.facebook.com/italiano.Vacanze.Romane/"
+      >
+        <FiFacebook color="var(--beige-2)" size="26px" />
+      </a>
+    </li>
+    <li>
+      <a target="_blank" href="">
+        <FiInstagram color="var(--beige-2)" size="26px" />
+      </a>
+    </li>
+    <li>
+      <a
+        target="_blank"
+        href="https://www.youtube.com/channel/UCXqPFvurDxiAFJknjZC5UbQ"
+      >
+        <FiYoutube color="var(--beige-2)" size="26px" />
+      </a>
+    </li>
+  </SocialStyles>
+)
 
 export default Navigation

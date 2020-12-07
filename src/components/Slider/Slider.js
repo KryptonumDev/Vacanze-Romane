@@ -113,7 +113,10 @@ const Slider = ({ header }) => {
                 data.allDatoCmsArticle.nodes
                   .slice(page * pageLength, (page + 1) * pageLength)
                   .map(({ category, title, id, featuredimage, slug }) => (
-                    <StyledLink to={`blog/${slugify(slug, { lower: true })}`}>
+                    <StyledLink
+                      key={id}
+                      to={`blog/${slugify(slug, { lower: true })}`}
+                    >
                       <ArticlePreview
                         layout
                         initial={{ opacity: 0 }}
