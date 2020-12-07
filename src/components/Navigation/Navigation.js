@@ -88,6 +88,15 @@ const Logo = styled.span`
     width: 36px;
     margin-right: 10px;
   }
+
+  @media only screen and (max-width: 1105px) {
+    a {
+      padding: 4px 12px;
+    }
+    img {
+      width: 30px;
+    }
+  }
 `
 
 const NavigationList = styled(motion.ul)`
@@ -205,6 +214,10 @@ const Container = styled(motion.div)`
   align-items: center;
   min-height: 89px;
   z-index: 0;
+  @media only screen and (max-width: 1105px) {
+    padding: 0px 30px;
+    min-height: 60px;
+  }
 `
 
 const NavigationListItem = styled(motion.li)`

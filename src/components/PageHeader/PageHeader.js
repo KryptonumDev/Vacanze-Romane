@@ -11,6 +11,9 @@ const ContentWrapper = styled(motion.div)`
   justify-content: center;
   align-items: center;
   height: ${({ fullHeight }) => (fullHeight ? "calc(100vh - 89px)" : "")};
+  @media only screen and (max-width: 1105px) {
+    height: ${({ fullHeight }) => (fullHeight ? "calc(100vh - 60px)" : "")};
+  }
   position: relative;
   padding: ${({ padding }) => padding};
   background-color: ${({ bg }) =>
