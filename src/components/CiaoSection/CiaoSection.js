@@ -13,7 +13,7 @@ import { Link } from "gatsby"
 const CiaoSection = () => {
   return (
     <Wrapper bg="light">
-      <ContentWrapper>
+      <ContentWrapper className="ciao-wrapper">
         <CiaoWrapper>
           <p className="ciao">Ciao!</p>
         </CiaoWrapper>
@@ -21,10 +21,7 @@ const CiaoSection = () => {
           <CourseWrapper>
             <h2>Kurs włoskiego od zera</h2>
             <span className="line"></span>
-            <p>
-              Chcesz rozpocząć naukę
-              <br /> języka włoskiego?
-            </p>
+            <p className="question">Chcesz rozpocząć naukę języka włoskiego?</p>
           </CourseWrapper>
           <CtaWrapper>
             <p>Skorzystaj z naszego</p>

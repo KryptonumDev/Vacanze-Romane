@@ -130,25 +130,20 @@ const StyledMessage = styled(motion.p)`
   color: var(--dark-red);
 `
 
-const Search = ({ bg }) => {
+const Search = () => {
   const [active, setActive] = useState(false)
   const [inputValue, setInputValue] = useState("")
-  const { query } = useSearchState()
   const dispatch = useSearchDispatch()
   const [message, setMessage] = useState(null)
-  const [error, setError] = useState(false)
-
-  const pathname = useLocation().pathname
 
   const inputRef = useRef()
 
-  const minimalLengthOfQuery = 3
+  const minimalLengthOfQuery = 1
   const handleSearch = async () => {
     if (inputValue.trim().length >= minimalLengthOfQuery) {
       await dispatch({ type: "SET_QUERY", payload: inputValue })
       navigate("/szukaj")
       setMessage(null)
-      setError(false)
       setTimeout(() => {
         setActive(false)
       }, 400)
@@ -156,7 +151,6 @@ const Search = ({ bg }) => {
       setMessage(
         `Wprowadź tekst o długości co najmniej ${minimalLengthOfQuery} znaków.`
       )
-      setError(true)
       inputRef.current.focus()
     }
   }

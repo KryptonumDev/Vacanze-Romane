@@ -45,6 +45,9 @@ const GlobalStyle = createGlobalStyle`
     color: var(--dark-red);
     font-family: "Homemade Apple";
     margin-top: 16px;
+    @media only screen and (max-width: 1160px) {
+      font-size: 80px;
+    }
   }
   .decor {
     font-family: "Homemade Apple";

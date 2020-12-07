@@ -64,6 +64,8 @@ const SearchPage = ({ data }) => {
           article.slug.toLowerCase().includes(queryToUse)
       )
     )
+    setGridPage(0)
+    setItalianoGridPage(0)
   }, [query])
 
   useEffect(() => {

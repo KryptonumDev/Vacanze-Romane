@@ -27,6 +27,12 @@ export const ContentWrapper = styled(motion.div)`
     justify-content: center;
     margin-bottom: 10px;
   }
+
+  &.ciao-wrapper {
+    @media only screen and (max-width: 1160px) {
+      padding: 90px 120px 125px 80px;
+    }
+  }
 `
 
 export const CiaoWrapper = styled(motion.div)`
@@ -66,6 +72,9 @@ export const CourseWrapper = styled(motion.div)`
     background-color: var(--brown);
     width: 100%;
     margin: 25px 0 50px;
+  }
+  .question {
+    max-width: 370px;
   }
   p {
     font-size: 36px;
