@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react"
 
 const getWidth = () =>
-  window.innerWidth ||
-  (document.documentElement && document.documentElement.clientWidth) ||
-  (document.body && document.body.clientWidth)
+  (window && window.innerWidth) ||
+  (document &&
+    document.documentElement &&
+    document.documentElement.clientWidth) ||
+  (document && document.body && document.body.clientWidth)
 
 /**
  * React hook to calculate the window width.
