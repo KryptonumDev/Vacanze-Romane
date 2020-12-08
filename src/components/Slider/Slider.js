@@ -182,6 +182,17 @@ const Slider = ({ header }) => {
     }
   }, [])
 
+  const getBase = category => {
+    const italianoCategories = [
+      "vocabolario",
+      "grammatica",
+      "frasi e citazioni",
+    ]
+    return italianoCategories.includes(category.toLowerCase())
+      ? "in-italiano"
+      : "blog"
+  }
+
   return (
     <StyledWrapper bg="light" margin="0">
       <StyledContentWrapper padding="90px 105px 100px 105px" direction="column">
@@ -204,7 +215,9 @@ const Slider = ({ header }) => {
                   .map(({ category, title, id, featuredimage, slug }) => (
                     <StyledLink
                       key={id}
-                      to={`blog/${slugify(slug, { lower: true })}`}
+                      to={`${getBase(category)}/${slugify(slug, {
+                        lower: true,
+                      })}`}
                     >
                       <ArticlePreview
                         layout
