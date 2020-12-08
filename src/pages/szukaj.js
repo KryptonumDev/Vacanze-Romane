@@ -159,17 +159,19 @@ const SearchPage = ({ data }) => {
                       </Paragraph>
                     )}
                   </StyledGrid>
-                  <Pagination
-                    length={
-                      filteredArticles.length / gridPageLength >
-                      Math.floor(filteredArticles.length / gridPageLength)
-                        ? 1 +
-                          Math.floor(filteredArticles.length / gridPageLength)
-                        : Math.floor(filteredArticles.length / gridPageLength)
-                    }
-                    page={gridPage}
-                    setPage={setGridPage}
-                  />
+                  {filteredArticles.length >= 1 && (
+                    <Pagination
+                      length={
+                        filteredArticles.length / gridPageLength >
+                        Math.floor(filteredArticles.length / gridPageLength)
+                          ? 1 +
+                            Math.floor(filteredArticles.length / gridPageLength)
+                          : Math.floor(filteredArticles.length / gridPageLength)
+                      }
+                      page={gridPage}
+                      setPage={setGridPage}
+                    />
+                  )}
                 </>
               )}
               {filteredItalianoArticles.length > 0 && (
@@ -215,25 +217,29 @@ const SearchPage = ({ data }) => {
                       </Paragraph>
                     )}
                   </StyledGrid>
-                  <Pagination
-                    length={
-                      filteredItalianoArticles.length / italianoGridPageLength >
-                      Math.floor(
-                        filteredItalianoArticles.length / italianoGridPageLength
-                      )
-                        ? 1 +
-                          Math.floor(
-                            filteredItalianoArticles.length /
-                              italianoGridPageLength
-                          )
-                        : Math.floor(
-                            filteredItalianoArticles.length /
-                              italianoGridPageLength
-                          )
-                    }
-                    page={italianoGridPage}
-                    setPage={setItalianoGridPage}
-                  />
+                  {filteredItalianoArticles.length >= 1 && (
+                    <Pagination
+                      length={
+                        filteredItalianoArticles.length /
+                          italianoGridPageLength >
+                        Math.floor(
+                          filteredItalianoArticles.length /
+                            italianoGridPageLength
+                        )
+                          ? 1 +
+                            Math.floor(
+                              filteredItalianoArticles.length /
+                                italianoGridPageLength
+                            )
+                          : Math.floor(
+                              filteredItalianoArticles.length /
+                                italianoGridPageLength
+                            )
+                      }
+                      page={italianoGridPage}
+                      setPage={setItalianoGridPage}
+                    />
+                  )}
                 </>
               )}
             </Flex>

@@ -159,11 +159,13 @@ const ItalianoSection = ({
         </StyledGrid>
       </ContentWrapper>
       <ContentWrapper padding="0 102px 100px">
-        <Pagination
-          length={Math.floor(filteredPosts.length / pageLength)}
-          page={page}
-          setPage={setPage}
-        />
+        {filteredPosts.length >= 1 && (
+          <Pagination
+            length={Math.floor(filteredPosts.length / pageLength)}
+            page={page}
+            setPage={setPage}
+          />
+        )}
       </ContentWrapper>
     </Wrapper>
   )

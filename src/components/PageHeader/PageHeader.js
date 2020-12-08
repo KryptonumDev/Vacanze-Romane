@@ -16,6 +16,7 @@ const ContentWrapper = styled(motion.div)`
   }
   position: relative;
   padding: ${({ padding }) => padding};
+  text-align: ${({ centered }) => centered && "center"};
   background-color: ${({ bg }) =>
     bg === "light"
       ? "var(--bg-home)"
@@ -56,6 +57,16 @@ const ContentWrapper = styled(motion.div)`
     letter-spacing: 1px;
     z-index: 1;
     color: var(--beige-2);
+  }
+
+  @media only screen and (max-width: 680px) {
+    h1 {
+      font-size: 36px;
+    }
+    h2,
+    p {
+      font-size: 18px;
+    }
   }
 `
 
@@ -105,11 +116,13 @@ const PageHeader = ({
   navItems,
   lesson = false,
   article = false,
+  padding,
 }) => (
   <ContentWrapper
     fullHeight={fullHeight}
     bg={bg}
-    padding={!search ? "98px 0px 0" : "65px 0 80px"}
+    padding={padding ? padding : !search ? "98px 0px 0" : "65px 0 80px"}
+    centered
   >
     {!search && !lesson ? (
       <>
@@ -138,6 +151,7 @@ const PageHeader = ({
                 lineHeight="1em !important"
                 letterSpacing="1px !important"
                 fontFamily="Cormorant Garamond !important"
+                textAling="center"
                 margin={
                   article ? "24px 0 148px !important" : "24px 0 70px !important"
                 }

@@ -156,11 +156,15 @@ const Slider = ({ header }) => {
             </AnimatePresence>
           </StyledGrid>
         </AnimateSharedLayout>
-        <Pagination
-          length={Math.floor(data.allDatoCmsArticle.nodes.length / pageLength)}
-          page={page}
-          setPage={setPage}
-        />
+        {data.allDatoCmsArticle.nodes.length >= 1 && (
+          <Pagination
+            length={Math.floor(
+              data.allDatoCmsArticle.nodes.length / pageLength
+            )}
+            page={page}
+            setPage={setPage}
+          />
+        )}
       </ContentWrapper>
     </Wrapper>
   )

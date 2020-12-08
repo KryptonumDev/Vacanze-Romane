@@ -15,6 +15,7 @@ const IndexPage = ({ data }) => (
       imgFluid={data.datoCmsHomePage.backgroundImage.fluid}
       bg="light"
       fullHeight
+      padding="0 20px"
     />
     <CiaoSection />
     <HowToLearnSection imgFluid={data.datoCmsHomePage.jakSieUczycObraz.fluid} />

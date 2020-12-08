@@ -93,6 +93,7 @@ const SearchModal = styled(motion.div)`
     align-items: center;
     border: 1px solid transparent;
     box-shadow: none;
+    color: var(--beige-2);
 
     &:hover,
     &:focus,
@@ -124,7 +125,7 @@ const SearchModal = styled(motion.div)`
     padding: 34px 8px 34px 12px;
     border: none;
     transition: background-color 0.2 cubic-bezier(0.55, 0.085, 0.68, 0.53);
-
+    color: var(--beige-2);
     &:focus,
     &:active,
     &:hover {
@@ -176,7 +177,7 @@ const SearchModal = styled(motion.div)`
     line-height: 1.17;
     letter-spacing: 1px;
     color: var(--light-brown);
-    background-color: "var(--bg-top)";
+    background-color: var(--bg-top);
     border-color: transparent;
     width: 100%;
     transition: border-color 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
@@ -368,10 +369,7 @@ const Search = ({ bg, className }) => {
                   onClick={handleSearch}
                 >
                   {className !== "mobile" ? (
-                    <BsArrowRight
-                      size="36px"
-                      color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
-                    />
+                    <BsArrowRight size="36px" color={"var(--beige-2)"} />
                   ) : (
                     <RiSearchLine
                       size="24px"
@@ -389,7 +387,13 @@ const Search = ({ bg, className }) => {
               >
                 <IoClose
                   size="26px"
-                  color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+                  color={
+                    className !== "mobile"
+                      ? "var(--beige-2)"
+                      : bg === "light"
+                      ? "var(--brown)"
+                      : "var(--beige-2)"
+                  }
                 />
               </motion.button>
               {message && (
