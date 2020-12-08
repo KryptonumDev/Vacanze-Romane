@@ -91,10 +91,10 @@ const Logo = styled.span`
 
   @media only screen and (max-width: 1105px) {
     a {
-      padding: 4px 12px;
+      padding: 6px 12px;
     }
     img {
-      width: 30px;
+      width: 32px;
     }
   }
 `
@@ -319,7 +319,11 @@ const Navigation = ({ bg }) => {
               initial="hidden"
               animate={{
                 opacity: 1,
-                transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+                transition: {
+                  delay: -0.2,
+                  staggerChildren: 0.1,
+                  delayChildren: 0.2,
+                },
               }}
               exit="exit"
             >
@@ -386,16 +390,31 @@ const Navigation = ({ bg }) => {
           {show ? (
             <IoClose
               color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
-              size="32px"
+              size="28px"
             />
           ) : (
             <FiMenu
               color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
-              size="32px"
+              size="28px"
             />
           )}
         </MenuToggleButton>
-        {show && <SocialMediaBar bg={bg} />}
+        <AnimatePresence>
+          {show && (
+            <SocialMediaBar
+              variants={fadeOutAnimation}
+              initial="hidden"
+              animate={{
+                opacity: 1,
+                transition: {
+                  delay: 0.2,
+                },
+              }}
+              exit="exit"
+              bg={bg}
+            />
+          )}
+        </AnimatePresence>
       </Container>
     </NavigationWrapper>
   )
@@ -408,7 +427,10 @@ const MenuToggleButton = styled(motion.button)`
   align-items: center;
   border: none;
   background-color: transparent;
-  margin-right: ${({ show }) => show && "16px"};
+  position: absolute;
+  right: 36px;
+  top: 16px;
+
   &::focus,
   &:active {
     outline: none;
@@ -421,7 +443,7 @@ const MenuToggleButton = styled(motion.button)`
   }
 `
 
-const SocialStyles = styled.ul`
+const SocialStyles = styled(motion.ul)`
   display: flex;
   justify-content: center;
   position: fixed;
@@ -461,18 +483,30 @@ const SocialStyles = styled.ul`
 `
 
 const SocialMediaBar = ({ bg }) => (
-  <SocialStyles bg={bg}>
+  <SocialStyles
+    variants={fadeOutAnimation}
+    initial="hidden"
+    animate="show"
+    exit="exit"
+    bg={bg}
+  >
     <li>
       <a
         target="_blank"
         href="https://www.facebook.com/italiano.Vacanze.Romane/"
       >
-        <FiFacebook color="var(--beige-2)" size="26px" />
+        <FiFacebook
+          color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+          size="26px"
+        />
       </a>
     </li>
     <li>
       <a target="_blank" href="">
-        <FiInstagram color="var(--beige-2)" size="26px" />
+        <FiInstagram
+          color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+          size="26px"
+        />
       </a>
     </li>
     <li>
@@ -480,7 +514,10 @@ const SocialMediaBar = ({ bg }) => (
         target="_blank"
         href="https://www.youtube.com/channel/UCXqPFvurDxiAFJknjZC5UbQ"
       >
-        <FiYoutube color="var(--beige-2)" size="26px" />
+        <FiYoutube
+          color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+          size="26px"
+        />
       </a>
     </li>
   </SocialStyles>
