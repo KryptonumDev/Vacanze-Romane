@@ -26,11 +26,28 @@ export const ContentWrapper = styled(motion.div)`
     flex-direction: column;
     justify-content: center;
     margin-bottom: 10px;
+    @media only screen and (max-width: 1090px) {
+      margin: 0 -40px 0 -25px;
+    }
+    @media only screen and (max-width: 798px) {
+      margin: 0;
+    }
   }
 
   &.ciao-wrapper {
     @media only screen and (max-width: 1160px) {
       padding: 90px 120px 125px 80px;
+    }
+    @media only screen and (max-width: 978px) {
+      padding: 90px 80px 125px 40px;
+    }
+    @media only screen and (max-width: 978px) {
+      padding: 90px 80px 125px 40px;
+    }
+    @media only screen and (max-width: 798px) {
+      flex-direction: column;
+      padding: 50px 30px 65px;
+      align-items: stretch;
     }
   }
 `
@@ -47,6 +64,9 @@ export const CiaoWrapper = styled(motion.div)`
     font-weight: 400;
     margin-left: 10px;
   }
+  @media only screen and (max-width: 798px) {
+    justify-content: center;
+  }
 `
 export const TextWrapper = styled(motion.div)`
   display: flex;
@@ -58,6 +78,10 @@ export const CourseWrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   padding: 0 184px 0 60px;
+  @media only screen and (max-width: 1032px) {
+    padding: 0 80px 0 60px;
+  }
+
   h2 {
     font-size: 14px;
     line-height: 1.04em;
@@ -83,11 +107,40 @@ export const CourseWrapper = styled(motion.div)`
     font-weight: 400;
     font-family: "Cormorant Garamond";
   }
+  @media only screen and (max-width: 798px) {
+    padding: 0;
+    margin-top: 55px;
+
+    h2 {
+      font-size: 10px;
+      line-height: 12px;
+      letter-spacing: 4px;
+    }
+    .line {
+      margin: 11px 0 26px;
+    }
+    .question {
+      max-width: 75%;
+      font-size: 18px;
+      line-height: 20px;
+    }
+  }
+  @media only screen and (max-width: 330px) {
+    .question {
+      max-width: 90%;
+    }
+  }
 `
 export const CtaWrapper = styled(motion.div)`
   margin: 50px 0 0 auto;
+  @media only screen and (max-width: 798px) {
+    margin: 22px 0 0 0;
+  }
   p {
     font-size: 16px;
+    @media only screen and (max-width: 798px) {
+      font-size: 15px;
+    }
     font-style: normal;
     line-height: 1.88;
     letter-spacing: 1px;
@@ -95,12 +148,20 @@ export const CtaWrapper = styled(motion.div)`
   }
   .narrow {
     max-width: 330px;
+    @media only screen and (max-width: 798px) {
+      max-width: 100%;
+    }
   }
   .corso {
     margin: 31px 0 26px;
     font-family: "Homemade Apple";
     font-size: 24px;
     line-height: 0.6;
+    @media only screen and (max-width: 798px) {
+      margin: 13px 0 26px;
+      font-family: "Homemade Apple";
+      font-size: 18px;
+    }
   }
   .capital {
     margin: 26px 0 10px;
@@ -108,6 +169,10 @@ export const CtaWrapper = styled(motion.div)`
     font-size: 24px;
     line-height: 0.6;
     text-transform: uppercase;
+    @media only screen and (max-width: 798px) {
+      margin: 4px 0 8px;
+      font-size: 18px;
+    }
   }
 
   button {
@@ -152,6 +217,10 @@ export const Overlay = styled(motion.div)`
   z-index: 0;
   margin: ${({ margin }) => margin};
   background-color: ${({ bg }) => bg};
+
+  @media only screen and (max-width: 798px) {
+    width: 100%;
+  }
 `
 
 export const CapitalizeText = styled(motion.p)`

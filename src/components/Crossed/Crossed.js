@@ -17,12 +17,23 @@ const CrossedStyles = styled(motion.span)`
     right: ${({ right }) => right};
     height: 3px;
     width: calc(100% + 12px);
+    @media only screen and (max-width: 1181px) {
+      height: 2px;
+      left: -6px;
+      width: calc(100% + 8px);
+    }
     background-color: ${({ bg }) => (bg ? bg : "var(--black)")};
   }
   &:before {
     content: ${({ italianText }) => `"${italianText}"`};
     font-family: "Homemade Apple";
     font-size: ${({ decorSize }) => (decorSize ? decorSize : "36px")};
+    @media only screen and (max-width: 1181px) {
+      font-size: 28px;
+    }
+    @media only screen and (max-width: 798px) {
+      font-size: 18px;
+    }
     line-height: 1.11;
     letter-spacing: 1px;
     color: ${({ bg }) => (bg ? bg : " var(--black)")};
@@ -30,6 +41,10 @@ const CrossedStyles = styled(motion.span)`
     top: ${({ textTop }) => textTop};
     bottom: ${({ textBottom }) => textBottom};
     left: ${({ textLeft }) => textLeft};
+    @media only screen and (max-width: 798px) {
+      left: ${({ textLeft }) => textLeft && "-25px"};
+      bottom: ${({ textBottom }) => textBottom && "-40px"};
+    }
     right: ${({ textRight }) => textRight};
     width: 100vw;
   }

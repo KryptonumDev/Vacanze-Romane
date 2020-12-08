@@ -51,6 +51,13 @@ const GlobalStyles = createGlobalStyle`
     @media only screen and (max-width: 1160px) {
       font-size: 80px;
     }
+    @media only screen and (max-width: 1032px) {
+      font-size: 60px;
+    }
+    @media only screen and (max-width: 798px) {
+      font-size: 72px;
+      text-align: center;
+    }
   }
   .decor {
     font-family: "Homemade Apple";

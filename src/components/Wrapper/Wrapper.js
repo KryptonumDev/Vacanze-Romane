@@ -28,5 +28,8 @@ export const Wrapper = styled(motion.div)`
       : ""};
   ${Overlay} {
     margin-top: ${({ gap }) => gap};
+    @media only screen and (max-width: 798px) {
+      margin-top: 0;
+    }
   }
 `
