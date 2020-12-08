@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import React from "react"
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs"
 import styled from "styled-components"
 import { Flex } from "../../assets/styles/HomeStyles"
 
@@ -43,7 +44,18 @@ const ButtonStyles = styled(Flex)`
       outline: none;
     }
   }
+  @media only screen and (max-width: 645px) {
+    justify-content: space-between;
+    width: 100%;
+  }
 `
+
+const StyledFlex = styled(Flex)`
+  @media only screen and (max-width: 645px) {
+    margin-top: 55px;
+  }
+`
+
 const Pagination = ({ page = 0, setPage, length = 1 }) => {
   const handleIncrease = () =>
     setPage(
@@ -53,7 +65,7 @@ const Pagination = ({ page = 0, setPage, length = 1 }) => {
   const handleDecrease = () => setPage(Math.max(page - 1, 0))
 
   return (
-    <Flex width="100%" flexDirection="column" margin="90px 0 0">
+    <StyledFlex width="100%" flexDirection="column" margin="90px 0 0">
       <PageLine page={page} length={length} />
       <ButtonStyles>
         <motion.button
@@ -63,7 +75,10 @@ const Pagination = ({ page = 0, setPage, length = 1 }) => {
           onClick={page !== 0 ? handleDecrease : undefined}
           type="button"
         >
-          &larr;
+          <BsArrowLeft
+            size="36px"
+            color={page === 0 ? "var(--gray)" : "var(--black)"}
+          />
         </motion.button>
         <motion.button
           disabled={page >= length - 1}
@@ -72,10 +87,13 @@ const Pagination = ({ page = 0, setPage, length = 1 }) => {
           whileHover={page < length - 1 && { x: 2 }}
           whileTap={page < length - 1 && { x: 4 }}
         >
-          &rarr;
+          <BsArrowRight
+            size="36px"
+            color={page >= length - 1 ? "var(--gray)" : "var(--black)"}
+          />
         </motion.button>
       </ButtonStyles>
-    </Flex>
+    </StyledFlex>
   )
 }
 

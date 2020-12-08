@@ -18,6 +18,7 @@ const GlobalStyles = createGlobalStyle`
     --beige-2: #f1e2cc;
     --black: #000;
     --brownOp: rgba(50,37,29,0.5);
+    --gray: #999;
   }
   *,
   *::before,
