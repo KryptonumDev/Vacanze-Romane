@@ -21,14 +21,26 @@ export const StyledGrid = styled(motion.div)`
   display: grid;
   width: 100%;
   max-width: ${({ smaller }) => smaller && "400px"};
-  grid-template-columns: ${({ itemsInRow }) =>
-    `repeat(${itemsInRow}, minmax(200px, 1fr))`};
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   grid-gap: 43px 78px;
+  @media only screen and (max-width: 1191px) {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  @media only screen and (max-width: 791px) {
+    grid-gap: 43px 40px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
   ${({ maxHeightOfImages }) =>
     maxHeightOfImages &&
     css`
       .gatsby-image-wrapper {
         max-height: ${maxHeightOfImages} !important;
+        @media only screen and (max-width: 1085px) {
+          max-height: 248px !important;
+        }
+        @media only screen and (max-width: 791px) {
+          max-height: 180px !important;
+        }
       }
     `}
 `
@@ -57,11 +69,25 @@ const PostStyles = styled(motion.div)`
   }
 `
 
+const StyledCategory = styled(Paragraph)`
+  @media only screen and (max-width: 565px) {
+    font-size: 14px;
+    line-height: 18px;
+    margin: 14px 0 0;
+  }
+`
+const StyledTitle = styled(Paragraph)`
+  @media only screen and (max-width: 565px) {
+    font-size: 15px;
+    line-height: 24px;
+    margin: 14px 0 0;
+  }
+`
 export const PostPreview = ({ category, title, featuredImage, slug, base }) => (
   <PostStyles layout>
     <Link to={base ? `/${base}/${slug}` : slug}>
       <Image layout fluid={featuredImage.fluid} />
-      <Paragraph
+      <StyledCategory
         margin="30px 0 0"
         fontFamily="Cormorant Garamond"
         textTransform="uppercase"
@@ -72,8 +98,8 @@ export const PostPreview = ({ category, title, featuredImage, slug, base }) => (
         layout
       >
         {category}
-      </Paragraph>
-      <Paragraph
+      </StyledCategory>
+      <StyledTitle
         layout
         margin="30px 0 0"
         fontFamily="Lato"
@@ -83,11 +109,39 @@ export const PostPreview = ({ category, title, featuredImage, slug, base }) => (
         color="var(--black)"
       >
         {title}
-      </Paragraph>
+      </StyledTitle>
     </Link>
   </PostStyles>
 )
 
+const StyledContentWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 1407px) {
+    padding: 90px 102px;
+  }
+  @media only screen and (max-width: 1065px) {
+    padding: 80px 60px;
+  }
+  @media only screen and (max-width: 865px) {
+    padding: 40px 30px 60px;
+  }
+`
+
+const StyledPaginationWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 1407px) {
+    padding: 20px 102px 80px;
+  }
+  @media only screen and (max-width: 1065px) {
+    padding: 0px 60px 80px;
+  }
+  @media only screen and (max-width: 865px) {
+    padding: 0px 30px 80px;
+  }
+`
+const StyledNoPosts = styled(Paragraph)`
+  @media only screen and (max-width: 1085px) {
+    font-size: 30px;
+  }
+`
 const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
   const [filteredPosts, setFilteredPosts] = useState(posts)
 
@@ -104,7 +158,7 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
       <AnimatePresence>
         {activeCategory !== null ? (
           <>
-            <ContentWrapper
+            <StyledContentWrapper
               variants={fadeOutAnimation}
               initial="hidden"
               animate="show"
@@ -135,7 +189,7 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
                     />
                   ))
                 ) : (
-                  <Paragraph
+                  <StyledNoPosts
                     fontSize="36px"
                     lineHeight="1.11em"
                     letterSpacing="1px"
@@ -143,11 +197,11 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
                     fontFamily="Cormorant Garamond"
                   >
                     Brak artykułów do wyświetlenia.
-                  </Paragraph>
+                  </StyledNoPosts>
                 )}
               </StyledGrid>
-            </ContentWrapper>
-            <ContentWrapper padding="0 102px 100px">
+            </StyledContentWrapper>
+            <StyledPaginationWrapper padding="0 102px 100px">
               {filteredPosts.length >= 1 && (
                 <Pagination
                   length={Math.floor(filteredPosts.length / pageLength)}
@@ -155,7 +209,7 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
                   setPage={setPage}
                 />
               )}
-            </ContentWrapper>
+            </StyledPaginationWrapper>
           </>
         ) : (
           <>

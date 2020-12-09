@@ -160,6 +160,12 @@ const PostPreview = ({ category, slug, title, featuredImage }) => (
   </PostStyles>
 )
 
+const StyledNoPosts = styled(Paragraph)`
+  @media only screen and (max-width: 1085px) {
+    font-size: 30px;
+  }
+`
+
 const ItalianoSection = ({
   activeCategory,
   posts,
@@ -226,7 +232,7 @@ const ItalianoSection = ({
               />
             ))
           ) : (
-            <Paragraph
+            <StyledNoPosts
               fontSize="36px"
               lineHeight="1.11em"
               letterSpacing="1px"
@@ -234,7 +240,7 @@ const ItalianoSection = ({
               fontFamily="Cormorant Garamond"
             >
               Brak artykułów do wyświetlenia.
-            </Paragraph>
+            </StyledNoPosts>
           )}
         </StyledGrid>
       </StyledPostsWrapper>
