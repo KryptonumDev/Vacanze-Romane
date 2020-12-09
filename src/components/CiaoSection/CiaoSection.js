@@ -9,10 +9,17 @@ import {
 } from "../../assets/styles/HomeStyles"
 import { motion } from "framer-motion"
 import { Link } from "gatsby"
+import styled from "styled-components"
+
+const StyledWrapper = styled(Wrapper)`
+  @media only screen and (max-width: 798px) {
+    padding: 0;
+  }
+`
 
 const CiaoSection = () => {
   return (
-    <Wrapper bg="light">
+    <StyledWrapper bg="light">
       <ContentWrapper className="ciao-wrapper">
         <CiaoWrapper>
           <p className="ciao">Ciao!</p>
@@ -39,7 +46,7 @@ const CiaoSection = () => {
           </CtaWrapper>
         </TextWrapper>
       </ContentWrapper>
-    </Wrapper>
+    </StyledWrapper>
   )
 }
 

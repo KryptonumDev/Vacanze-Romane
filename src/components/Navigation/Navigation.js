@@ -91,10 +91,11 @@ const Logo = styled.span`
 
   @media only screen and (max-width: 1105px) {
     a {
-      padding: 6px 12px;
+      padding: 6px 12px 6px 0;
     }
     img {
-      width: 32px;
+      width: 28px;
+      margin-right: 6px;
     }
   }
 `
@@ -437,7 +438,7 @@ const MenuToggleButton = styled(motion.button)`
     box-shadow: 0 0 0 2px
       ${({ bg }) => (bg === "light" ? "var(--brown)" : "var(--beige-2)")};
   }
-  @media only screen and (min-width: 1026px) {
+  @media only screen and (min-width: 1106px) {
     visibility: hidden;
     display: none;
   }

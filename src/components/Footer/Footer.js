@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import React from "react"
 import styled, { css } from "styled-components"
 import { ContentWrapper, Flex } from "../../assets/styles/HomeStyles"
+import useWindowSize from "../../utils/useWindowSize"
 import Line from "../Line/Line"
 import { Wrapper } from "../Wrapper/Wrapper"
 
@@ -42,8 +43,17 @@ const NavStyles = styled(motion.div)`
     margin-right: 0;
   }
 
+  @media only screen and (max-width: 798px) {
+    flex: 1 1 50%;
+    margin-right: 0;
+    margin-top: 40px;
+  }
+
   h3 {
     margin: 0 2px 30px 0;
+    @media only screen and (max-width: 798px) {
+      margin: 0 0 24px 0;
+    }
     font-family: Lato;
     font-size: 10px;
     font-weight: bold;
@@ -142,6 +152,7 @@ const FooterStyles = styled.footer`
     line-height: 1.11;
     letter-spacing: 1px;
   }
+
   ${({ bg }) =>
     bg === "red"
       ? css`
@@ -166,6 +177,11 @@ const FooterText = styled(motion.p)`
   font-size: 14px;
   line-height: 0.86em;
   letter-spacing: 1px;
+  @media only screen and (max-width: 798px) {
+    font-size: 10px;
+    line-height: 12px;
+    margin: 10px 0px 30px;
+  }
   a {
     text-decoration: none;
     color: ${({ color }) => (color ? color : "white")};
@@ -208,23 +224,65 @@ const FooterText = styled(motion.p)`
   }
 `
 
+const StyledWrapper = styled(Wrapper)``
+
+const StyledContentWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 1051px) {
+    padding: 0 65px 105px;
+  }
+  @media only screen and (max-width: 798px) {
+    padding: 32px 30px 50px;
+    flex-wrap: wrap;
+  }
+`
+
+const LineWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 1051px) {
+    padding: 0 65px;
+  }
+  @media only screen and (max-width: 798px) {
+    padding: 0 30px;
+  }
+`
+
+const StyledHeaderFlex = styled(Flex)`
+  @media only screen and (max-width: 1051px) {
+    flex: 1 1 30%;
+  }
+  @media only screen and (max-width: 798px) {
+    flex: 1 1 100%;
+  }
+`
+
+const StyleNavigationWrapper = styled(Flex)`
+  @media only screen and (max-width: 1051px) {
+    flex: 2 2 auto;
+  }
+  @media only screen and (max-width: 798px) {
+    margin-top: 0;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+  }
+`
+
 const Footer = ({ bg }) => {
+  const width = useWindowSize()
   return (
     <FooterStyles bg={bg}>
       <Wrapper padding="62px 0 0" bg={bg} margin="0">
-        <ContentWrapper padding="0 105px 118px 105px" direction="row">
-          <Flex flex="1">
+        <StyledContentWrapper padding="0 105px 118px 105px" direction="row">
+          <StyledHeaderFlex flex="1">
             <h1>Vacanze Romane</h1>
-          </Flex>
-          <Flex flex="1">
+          </StyledHeaderFlex>
+          <StyleNavigationWrapper flex="1">
             <FooterNavigation bg={bg} />
-          </Flex>
-        </ContentWrapper>
+          </StyleNavigationWrapper>
+        </StyledContentWrapper>
 
-        <ContentWrapper padding="0 105px 0px 105px" direction="column">
+        <LineWrapper padding="0 105px 0px 105px" direction="column">
           <Line
             margin="0"
-            height="2px"
+            height={width > 798 ? "2px" : "1px"}
             bg={
               bg === "red"
                 ? "var(--beige-2)"
@@ -258,7 +316,7 @@ const Footer = ({ bg }) => {
               Kryptonum Studio
             </motion.a>
           </FooterText>
-        </ContentWrapper>
+        </LineWrapper>
       </Wrapper>
     </FooterStyles>
   )

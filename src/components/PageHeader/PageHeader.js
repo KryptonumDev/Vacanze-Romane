@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import Image from "gatsby-image"
 import { motion } from "framer-motion"
 import PageHeaderNav from "../PageHeaderNav/PageHeaderNav"
@@ -93,13 +93,64 @@ const HeaderOverlay = styled(motion.div)`
   width: 100%;
   height: 100%;
   background-color: rgba(20, 16, 13, 0.6);
+  @media only screen and (max-width: 798px) {
+    background-color: rgba(20, 16, 13, 0.3);
+  }
 `
 
 const SingleParagraph = styled(motion.p)`
-  font-size: 36px !important;
-  margin: ${({ zeroMarginBottom }) =>
-    zeroMarginBottom ? "0 !important" : "0 0 120px !important"};
-  font-family: ${({ fontFamily }) => fontFamily};
+  &.single {
+    font-size: 36px;
+    margin: ${({ zeroMarginBottom }) => (zeroMarginBottom ? "0" : "0 0 120px")};
+    font-family: ${({ fontFamily }) => fontFamily};
+  }
+`
+
+const StyledContentWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 798px) {
+    padding: 76px 0 0;
+    ${({ fullHeight }) =>
+      fullHeight &&
+      css`
+        justify-content: flex-start;
+        padding-top: 40px;
+        color: var(--brown);
+        height: calc(80vh - 61px);
+        ${StyledImage} {
+          top: 30vh;
+          height: calc(50vh - 61px);
+        }
+        ${HeaderOverlay} {
+          top: 30vh;
+          height: calc(50vh - 61px);
+          background-color: rgba(20, 16, 13, 0.3);
+        }
+        h1,
+        h2,
+        p {
+          color: var(--brown);
+        }
+      `}
+  }
+`
+
+const StyledSingleParagraph = styled(SingleParagraph)`
+  @media only screen and (max-width: 1105px) {
+    &.single {
+      font-size: 28px;
+    }
+  }
+  @media only screen and (max-width: 798px) {
+    &.single {
+      font-size: 24px;
+    }
+  }
+  @media only screen and (max-width: 520px) {
+    &.single {
+      font-size: 18px;
+      margin: 0 0 90px;
+    }
+  }
 `
 
 const PageHeader = ({
@@ -118,7 +169,7 @@ const PageHeader = ({
   article = false,
   padding,
 }) => (
-  <ContentWrapper
+  <StyledContentWrapper
     fullHeight={fullHeight}
     bg={bg}
     padding={padding ? padding : !search ? "98px 0px 0" : "65px 0 80px"}
@@ -141,9 +192,12 @@ const PageHeader = ({
         ) : (
           <>
             {paragraph && (
-              <SingleParagraph zeroMarginBottom={subheader}>
+              <StyledSingleParagraph
+                className="single"
+                zeroMarginBottom={subheader}
+              >
                 {paragraph}
-              </SingleParagraph>
+              </StyledSingleParagraph>
             )}
             {subheader && (
               <Paragraph
@@ -213,6 +267,6 @@ const PageHeader = ({
         )}
       </>
     )}
-  </ContentWrapper>
+  </StyledContentWrapper>
 )
 export default PageHeader

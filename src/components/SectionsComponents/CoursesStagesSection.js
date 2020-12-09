@@ -1,4 +1,5 @@
 import React from "react"
+import styled from "styled-components"
 import {
   CapitalizeText,
   ContentWrapper,
@@ -8,19 +9,35 @@ import {
 import Line from "../Line/Line"
 import { Wrapper } from "../Wrapper/Wrapper"
 
+const StyledContentWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 1081px) {
+    padding: 90px 70px 100px 60px;
+  }
+  @media only screen and (max-width: 889px) {
+    padding: 80px 30px 90px;
+  }
+`
+
+const StyledParagraph = styled(Paragraph)`
+  @media only screen and (max-width: 1081px) {
+    font-size: 30px;
+    margin: 0 32px 0 5px;
+  }
+`
+
 const CoursesStagesSection = () => {
   return (
     <Wrapper padding="0" bg="light">
-      <ContentWrapper padding="90px 107px 110px 102px">
+      <StyledContentWrapper padding="90px 107px 110px 102px">
         <Flex margin="0 16px 0 0" flex="1" flexDirection="column">
           <CapitalizeText margin="0 0 0 5px">
             Etapy kursu od zera
           </CapitalizeText>
           <Line />
-          <Paragraph margin="0 52px 0 5px">
+          <StyledParagraph margin="0 52px 0 5px">
             Tempo, w jakim chcesz robić postępy, dostosujesz do własnych,
             indywidualnych potrzeb i&nbsp;możliwości.
-          </Paragraph>
+          </StyledParagraph>
         </Flex>
         <Flex margin="140px 0 0" flex="1" flexDirection="column">
           <Paragraph fontSize="18px" lineHeight="1.44em" letterSpacing="1px">
@@ -50,7 +67,7 @@ const CoursesStagesSection = () => {
             KONTYNUACJA.
           </Paragraph>
         </Flex>
-      </ContentWrapper>
+      </StyledContentWrapper>
     </Wrapper>
   )
 }

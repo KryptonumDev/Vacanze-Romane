@@ -22,6 +22,25 @@ export const PageHeaderStyles = styled.ul`
     }
   }
 
+  @media only screen and (max-width: 863px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    li {
+      margin: 28px 0 0;
+      &:first-child {
+        margin: 0;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 577px) {
+    li {
+      font-size: 18px;
+    }
+  }
+
   a {
     text-decoration: none;
     color: ${({ bg }) =>
@@ -52,10 +71,20 @@ export const PageHeaderStyles = styled.ul`
   }
 `
 
+const StyledContentWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 1128px) {
+    padding: 40px 56px;
+    justify-content: center;
+  }
+  @media only screen and (max-width: 798px) {
+    padding: 36px 20px;
+  }
+`
+
 const PageHeaderNav = ({ items = [], bg }) => {
   const pathName = useLocation().pathname
   return (
-    <ContentWrapper bg={bg} padding="40px 56px 40px 102px">
+    <StyledContentWrapper bg={bg} padding="40px 56px 40px 102px">
       <PageHeaderStyles bg={bg}>
         {items.map(item => (
           <li key={item.name}>
@@ -68,7 +97,7 @@ const PageHeaderNav = ({ items = [], bg }) => {
           </li>
         ))}
       </PageHeaderStyles>
-    </ContentWrapper>
+    </StyledContentWrapper>
   )
 }
 
