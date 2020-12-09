@@ -10,7 +10,13 @@ import Line from "../Line/Line"
 import { Wrapper } from "../Wrapper/Wrapper"
 import Button from "../Button/Button"
 import LessonsGrid from "../LessonsGrid/LessonsGrid"
+import styled from "styled-components"
 
+const StyledContentWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 618px) {
+    padding: 40px 30px 100px;
+  }
+`
 const CoursesFirstSection = ({ grid, lessons }) => {
   return (
     <Wrapper padding="0" bg="white">
@@ -64,9 +70,9 @@ const CoursesFirstSection = ({ grid, lessons }) => {
         </ContentWrapper>
       )}
       {grid && (
-        <ContentWrapper padding="103px 102px 95px">
+        <StyledContentWrapper padding="103px 102px 95px">
           <LessonsGrid max={lessons.length} lessons={lessons} />
-        </ContentWrapper>
+        </StyledContentWrapper>
       )}
     </Wrapper>
   )

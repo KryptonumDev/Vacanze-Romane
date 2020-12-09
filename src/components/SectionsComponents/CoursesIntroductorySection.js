@@ -12,9 +12,9 @@ import Button from "../Button/Button"
 import LessonsGrid from "../LessonsGrid/LessonsGrid"
 import styled from "styled-components"
 
-
 const StyledContentWrapper = styled(ContentWrapper)`
-  @media only screen and (max-width: 1237px) {
+  @media only screen and (max-width: 618px) {
+    padding: 40px 30px 100px;
   }
 `
 
@@ -22,7 +22,7 @@ const CoursesIntroductorySection = ({ grid, lessons }) => {
   return (
     <Wrapper padding="0" bg="white">
       {!grid && (
-        <StyledContentWrapper padding="103px 120px 95px 102px">
+        <ContentWrapper padding="103px 120px 95px 102px">
           <Flex margin="0 120px 0 0" flex="1" flexDirection="column">
             <CapitalizeText color="var(--brown)" margin="0 0 0 10px">
               Czego nauczysz się na początku?
@@ -73,12 +73,12 @@ const CoursesIntroductorySection = ({ grid, lessons }) => {
               text="Lekcja 0.1."
             ></Button>
           </Flex>
-        </StyledContentWrapper>
+        </ContentWrapper>
       )}
       {grid && (
-        <ContentWrapper padding="103px 102px 95px">
+        <StyledContentWrapper padding="103px 102px 95px">
           <LessonsGrid max={lessons.length} lessons={lessons} />
-        </ContentWrapper>
+        </StyledContentWrapper>
       )}
     </Wrapper>
   )
