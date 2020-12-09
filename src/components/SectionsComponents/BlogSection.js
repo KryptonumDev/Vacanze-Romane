@@ -122,7 +122,11 @@ const StyledContentWrapper = styled(ContentWrapper)`
     padding: 80px 60px;
   }
   @media only screen and (max-width: 865px) {
-    padding: 40px 30px 60px;
+    padding: 40px 30px 40px;
+  }
+
+  @media only screen and (max-width: 798px) {
+    flex-direction: column;
   }
 `
 
@@ -137,11 +141,99 @@ const StyledPaginationWrapper = styled(ContentWrapper)`
     padding: 0px 30px 80px;
   }
 `
+
 const StyledNoPosts = styled(Paragraph)`
   @media only screen and (max-width: 1085px) {
     font-size: 30px;
   }
 `
+
+const StyledGridDecorText = styled(GridItem)`
+  @media only screen and (max-width: 1235px) {
+    grid-column: 2/9;
+  }
+  @media only screen and (max-width: 798px) {
+    grid-column: 1/-1;
+  }
+`
+
+const StyledGridContent = styled(GridItem)`
+  @media only screen and (max-width: 1235px) {
+    grid-column: 4/11;
+  }
+  @media only screen and (max-width: 798px) {
+    grid-column: 1/-1;
+    margin-top: 20px;
+    ${Paragraph} {
+      font-size: 15px;
+    }
+  }
+`
+
+const StyledGridWritten = styled(GridItem)`
+  @media only screen and (max-width: 1235px) {
+    grid-column: 2/11;
+    ${Paragraph} {
+      font-size: 20px;
+    }
+  }
+  @media only screen and (max-width: 798px) {
+    grid-column: 1/-1;
+    margin: 30px 0 0;
+    ${Paragraph} {
+      font-size: 18px;
+    }
+  }
+`
+
+const StyledFlex = styled(Flex)`
+  @media only screen and (max-width: 1035px) {
+    padding: 0 0 0 60px;
+  }
+  @media only screen and (max-width: 798px) {
+    padding: 0;
+    margin: 20px 0 0;
+  }
+`
+
+const StyledParagraph = styled(Paragraph)`
+  @media only screen and (max-width: 1081px) {
+    font-size: 30px;
+    margin: 0 0 0 5px;
+  }
+  @media only screen and (max-width: 798px) {
+    margin-top: 26px;
+  }
+  @media only screen and (max-width: 645px) {
+    font-size: 18px;
+    margin: 3px 0 0;
+  }
+`
+const StyledParagraphProseco = styled(Paragraph)`
+  @media only screen and (max-width: 1235px) {
+    font-size: 18px;
+  }
+  @media only screen and (max-width: 798px) {
+    font-size: 15px;
+  }
+`
+const StyledParagraphGrid = styled(Paragraph)`
+  @media only screen and (max-width: 1235px) {
+    font-size: 30px;
+  }
+  @media only screen and (max-width: 645px) {
+    font-size: 18px;
+  }
+`
+
+const StyledCapitalizedText = styled(CapitalizeText)`
+  @media only screen and (max-width: 645px) {
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 4px;
+  }
+`
+
 const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
   const [filteredPosts, setFilteredPosts] = useState(posts)
 
@@ -154,7 +246,7 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
   }, [activeCategory, page, posts, pageLength])
 
   return (
-    <Wrapper padding="0" bg="white">
+    <Wrapper padding="0" bg="light">
       <AnimatePresence>
         {activeCategory !== null ? (
           <>
@@ -213,7 +305,7 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
           </>
         ) : (
           <>
-            <ContentWrapper
+            <StyledContentWrapper
               padding="90px 102px 50px"
               variants={fadeOutAnimation}
               initial="hidden"
@@ -222,21 +314,23 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
               key="content"
             >
               <Flex margin="0 5px 0 0" flex="1" flexDirection="column">
-                <CapitalizeText margin="0 0 0 10px">A tavola</CapitalizeText>
+                <StyledCapitalizedText margin="0 0 0 10px">
+                  A tavola
+                </StyledCapitalizedText>
                 <Line />
-                <Paragraph margin="0 52px 0 5px">
+                <StyledParagraph margin="0 52px 0 5px">
                   Znam wielu ludzi, którzy ożywiają się i natychmiast
                   rozpromieniają na dźwięk jakiekolwiek słowa związanego z
                   Italią.
-                </Paragraph>
+                </StyledParagraph>
               </Flex>
-              <Flex
+              <StyledFlex
                 margin="132px 0 0"
                 padding="0 0 0 85px"
                 flex="1"
                 flexDirection="column"
               >
-                <Paragraph
+                <StyledParagraphProseco
                   fontFamily="Lato"
                   fontSize="18px"
                   lineHeight="1.44em"
@@ -254,10 +348,10 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
                   <br />
                   Wiem, co mówię, bo też mam takie objawy. A przecież nie jestem
                   żadnym wyjątkiem.
-                </Paragraph>
-              </Flex>
-            </ContentWrapper>
-            <ContentWrapper
+                </StyledParagraphProseco>
+              </StyledFlex>
+            </StyledContentWrapper>
+            <StyledPaginationWrapper
               padding="0 102px 100px"
               variants={fadeOutAnimation}
               initial="hidden"
@@ -265,13 +359,17 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
               exit="exit"
             >
               <Grid cols="repeat(12, 1fr)" rows="repeat(3, auto)">
-                <GridItem gridColumn="2/7" gridRow="0/1">
-                  <Paragraph>
+                <StyledGridDecorText gridColumn="2/7" gridRow="0/1">
+                  <StyledParagraphGrid>
                     Jeżeli chcesz dołączyć do tej niekończącej się, wciągającej
                     rozmowy, to chętnie podrzucę temat....
-                  </Paragraph>
-                </GridItem>
-                <GridItem margin="50px 0 0" gridColumn="5/11" gridRow="2/3">
+                  </StyledParagraphGrid>
+                </StyledGridDecorText>
+                <StyledGridContent
+                  margin="50px 0 0"
+                  gridColumn="5/11"
+                  gridRow="2/3"
+                >
                   <Paragraph
                     fontFamily="Lato"
                     fontSize="18px"
@@ -279,26 +377,27 @@ const BlogSection = ({ activeCategory, posts, page, setPage, pageLength }) => {
                     letterSpacing="1px"
                   >
                     O kulturze Włoch, albo o historii? Nie ma sprawy - od czasów
-                    Romulusa jest w czym <br />
-                    <br />
-                    wybierać.. O podróżach, wakacjach, krajobrazach i włóczeniu
+                    Romulusa jest w czym wybierać...
+                    <br /> O podróżach, wakacjach, krajobrazach i&nbsp;włóczeniu
                     się po Italii? Sama przyjemność!
-                    <br />
-                    <br /> O sztuce i architekturze włoskiej? A istnieje jakaś
-                    inna sztuka czy architektura?...
-                    <br />
+                    <br /> O sztuce i architekturze włoskiej? A&nbsp;istnieje
+                    jakaś inna sztuka czy architektura?...
                     <br /> Że podobno nie samą sztuką człowiek żyje i że czasem
                     trzeba coś zjeść? Tak mówią tylko ci, którzy nic nie wiedzą,
                     co to jest włoska sztuka kulinarna.
                   </Paragraph>
-                </GridItem>
-                <GridItem margin="60px 0 0" gridColumn="3/9" gridRow="3/4">
+                </StyledGridContent>
+                <StyledGridWritten
+                  margin="60px 0 0"
+                  gridColumn="3/10"
+                  gridRow="3/4"
+                >
                   <Paragraph fontFamily="Homemade Apple">
                     Allora, parliamone a tavola!
                   </Paragraph>
-                </GridItem>
+                </StyledGridWritten>
               </Grid>
-            </ContentWrapper>
+            </StyledPaginationWrapper>
           </>
         )}
       </AnimatePresence>
