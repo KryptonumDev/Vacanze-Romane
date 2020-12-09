@@ -81,15 +81,17 @@ const Pagination = ({ page = 0, setPage, length = 1 }) => {
           />
         </motion.button>
         <motion.button
-          disabled={page >= length - 1}
-          onClick={page < length - 1 ? handleIncrease : undefined}
+          disabled={length === 0 || page > length}
+          onClick={page <= length - 1 ? handleIncrease : undefined}
           type="button"
-          whileHover={page < length - 1 && { x: 2 }}
-          whileTap={page < length - 1 && { x: 4 }}
+          whileHover={page <= length - 1 && { x: 2 }}
+          whileTap={page <= length - 1 && { x: 4 }}
         >
           <BsArrowRight
             size="36px"
-            color={page >= length - 1 ? "var(--gray)" : "var(--black)"}
+            color={
+              page > length || length === 0 ? "var(--gray)" : "var(--black)"
+            }
           />
         </motion.button>
       </ButtonStyles>

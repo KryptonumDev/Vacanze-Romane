@@ -428,7 +428,7 @@ const MenuToggleButton = styled(motion.button)`
   align-items: center;
   border: none;
   background-color: transparent;
-  position: absolute;
+  position: ${({ show }) => (show ? "fixed" : "absolute")};
   right: 36px;
   top: 16px;
 
