@@ -9,6 +9,15 @@ import { Wrapper } from "../Wrapper/Wrapper"
 const NavStyles = styled.li`
   margin-right: ${({ italiano }) =>
     italiano ? "103px  !important" : "173px !important"};
+  @media only screen and (max-width: 1126px) {
+    margin-right: 88px !important;
+    &:last-child {
+      margin-right: 0 !important;
+    }
+  }
+  @media only screen and (max-width: 863px) {
+    margin-right: 0 !important;
+  }
   button {
     text-decoration: none;
     color: ${({ bg }) =>
@@ -60,6 +69,16 @@ const NavStyles = styled.li`
   }
 `
 
+const StyledContentWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 1128px) {
+    padding: 40px 56px;
+    justify-content: center;
+  }
+  @media only screen and (max-width: 798px) {
+    padding: 36px 20px;
+  }
+`
+
 const CategoryNavigation = ({
   bg = "red",
   categories,
@@ -70,7 +89,7 @@ const CategoryNavigation = ({
 }) => {
   return (
     <Wrapper padding="0" bg={bg}>
-      <ContentWrapper bg={bg} padding="40px 56px 40px 102px">
+      <StyledContentWrapper bg={bg} padding="40px 56px 40px 102px">
         <PageHeaderStyles bg={bg}>
           {categories.map(category => (
             <NavStyles
@@ -89,7 +108,7 @@ const CategoryNavigation = ({
             </NavStyles>
           ))}
         </PageHeaderStyles>
-      </ContentWrapper>
+      </StyledContentWrapper>
     </Wrapper>
   )
 }
