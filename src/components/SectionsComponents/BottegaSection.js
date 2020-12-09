@@ -1,4 +1,5 @@
 import React from "react"
+import styled from "styled-components"
 import {
   CapitalizeText,
   ContentWrapper,
@@ -8,26 +9,78 @@ import {
 import Line from "../Line/Line"
 import { Wrapper } from "../Wrapper/Wrapper"
 
+const StyledContentWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 1370px) {
+    padding: 78px 102px 120px;
+  }
+  @media only screen and (max-width: 1268px) {
+    ${Paragraph} {
+      font-size: 26px;
+    }
+  }
+  @media only screen and (max-width: 1022px) {
+    padding: 40px 30px 80px;
+  }
+  @media only screen and (max-width: 798px) {
+    ${Paragraph} {
+      font-size: 18px;
+    }
+  }
+`
+
+const StyledFlex = styled(Flex)`
+  @media only screen and (max-width: 1370px) {
+    margin: 72px 0 0;
+  }
+`
+
+const StyledParagraph = styled(Paragraph)`
+  @media only screen and (max-width: 1022px) {
+    margin: 0;
+  }
+`
+const StyledCapitalizedText = styled(CapitalizeText)`
+  @media only screen and (max-width: 645px) {
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 4px;
+  }
+`
+
+const StyledFlexFull = styled(Flex)`
+  @media only screen and (max-width: 798px) {
+    flex: 1 1 100%;
+  }
+`
+
+const StyledFlexStart = styled(Flex)`
+  @media only screen and (max-width: 798px) {
+    align-items: flex-start;
+  }
+`
+
 const BottegaSection = () => {
   return (
     <Wrapper padding="0" bg="light">
-      <ContentWrapper direction="column" padding="78px 219px 140px 102px">
+      <StyledContentWrapper direction="column" padding="78px 219px 140px 102px">
         <Flex>
-          <Flex margin="0 16px 0 0" flex="1" flexDirection="column">
-            <CapitalizeText margin="0 0 0 5px">Bottega</CapitalizeText>
+          <StyledFlexFull margin="0 16px 0 0" flex="1" flexDirection="column">
+            <StyledCapitalizedText margin="0 0 0 5px">
+              Bottega
+            </StyledCapitalizedText>
             <Line />
-            <Paragraph margin="0 41px 0 0px">
+            <StyledParagraph margin="0 41px 0 0px">
               Włoskie słowo <span className="decor">bottega</span> oznacza
               niewielki sklepik, będący też często pracownią czy warsztatem, do
               którego możemy zajrzeć oraz wejść prosto z ulicy.
               <br />
               Zwykle spotkamy w nim właściciela, który chętnie zamieni z nami
               parę słów.
-            </Paragraph>
-          </Flex>
+            </StyledParagraph>
+          </StyledFlexFull>
           <Flex flex="1"></Flex>
         </Flex>
-        <Flex flexDirection="column" alignItems="flex-end">
+        <StyledFlexStart flexDirection="column" alignItems="flex-end">
           <Paragraph margin="33px 39px 0 0px">
             <span className="decor">andare a bottega - </span>iść do “bottegi”
           </Paragraph>
@@ -38,7 +91,7 @@ const BottegaSection = () => {
           <Paragraph margin="12px 0 0">
             <span className="decor">ancora in fase si preparazione</span>
           </Paragraph>
-          <Flex alignSelf="center" margin="82px 86px 0 0">
+          <StyledFlex alignSelf="center" margin="82px 86px 0 0">
             <Flex
               margin="0 60px 0 0"
               flexDirection="column"
@@ -73,9 +126,9 @@ const BottegaSection = () => {
                 Część Trzecia 3.0.
               </Paragraph>
             </Flex>
-          </Flex>
-        </Flex>
-      </ContentWrapper>
+          </StyledFlex>
+        </StyledFlexStart>
+      </StyledContentWrapper>
     </Wrapper>
   )
 }
