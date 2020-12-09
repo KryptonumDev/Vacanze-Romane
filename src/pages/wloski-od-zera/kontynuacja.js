@@ -1,6 +1,8 @@
+import { graphql } from "gatsby"
 import React from "react"
 import PageHeader from "../../components/PageHeader/PageHeader"
 import CoursesContinueSection from "../../components/SectionsComponents/CoursesContinueSection"
+import useWindowSize from "../../utils/useWindowSize"
 
 const navItems = [
   {
@@ -17,12 +19,14 @@ const navItems = [
   },
 ]
 
-const KontynuacjaPage = () => {
+const KontynuacjaPage = ({ data }) => {
+  const width = useWindowSize();
   return (
     <>
       <PageHeader
         paragraph="continuazione"
-        subheader="Kontynuacja 2.0."
+        imgFluid={width < 864 && data.datoCmsHomePage.backgroundImage.fluid}
+        subheader={width >= 864 && "Kontynuacja 2.0."}
         bg="green"
         withNav
         subNav
@@ -32,5 +36,16 @@ const KontynuacjaPage = () => {
     </>
   )
 }
+export const query = graphql`
+  {
+    datoCmsHomePage {
+      backgroundImage {
+        fluid {
+          ...GatsbyDatoCmsFluid
+        }
+      }
+    }
+  }
+`
 
 export default KontynuacjaPage

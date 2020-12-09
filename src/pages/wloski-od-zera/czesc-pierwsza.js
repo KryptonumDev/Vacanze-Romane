@@ -2,6 +2,7 @@ import { graphql } from "gatsby"
 import React from "react"
 import PageHeader from "../../components/PageHeader/PageHeader"
 import CoursesFirstSection from "../../components/SectionsComponents/CoursesFirstSection"
+import useWindowSize from "../../utils/useWindowSize"
 
 const navItems = [
   {
@@ -19,11 +20,13 @@ const navItems = [
 ]
 
 const CzescPierwszaPage = ({ data }) => {
+  const width = useWindowSize();
   return (
     <>
       <PageHeader
         paragraph="parte prima"
-        subheader="Część Pierwsza 1.0."
+        imgFluid={width < 864 && data.datoCmsHomePage.backgroundImage.fluid}
+        subheader={width >= 864 && "Część Pierwsza 1.0."}
         bg="green"
         withNav
         subNav
@@ -44,6 +47,13 @@ export const query = graphql`
         lekcjaPoziom
         lessonNumber
         lessonTitle
+      }
+    }
+    datoCmsHomePage {
+      backgroundImage {
+        fluid {
+          ...GatsbyDatoCmsFluid
+        }
       }
     }
   }

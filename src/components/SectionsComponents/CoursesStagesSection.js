@@ -17,7 +17,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
     padding: 80px 30px 90px;
   }
   @media only screen and (max-width: 798px) {
-    padding: 40px 30px 190px;
+    padding: 40px 30px 100px;
     flex-direction: column;
   }
 `
@@ -29,6 +29,22 @@ const StyledParagraph = styled(Paragraph)`
   }
   @media only screen and (max-width: 798px) {
     margin-top: 26px;
+  }
+  @media only screen and (max-width: 645px) {
+    font-size: 18px;
+    margin: 3px 0 0;
+  }
+`
+const SecondParagraph = styled(Paragraph)`
+  @media only screen and (max-width: 645px) {
+    font-size: 15px;
+    margin: 16px 0 0;
+  }
+`
+const ThirdParagraph = styled(Paragraph)`
+  @media only screen and (max-width: 645px) {
+    font-size: 15px;
+    margin: 16px 0 0;
   }
 `
 
@@ -64,7 +80,7 @@ const CoursesStagesSection = () => {
           </StyledParagraph>
         </Flex>
         <StyledColumnFlex margin="140px 0 0" flex="1" flexDirection="column">
-          <Paragraph
+          <SecondParagraph
             fontSize="18px"
             lineHeight="1.44em"
             letterSpacing="1px"
@@ -73,8 +89,8 @@ const CoursesStagesSection = () => {
             Jeżeli dopiero zaczynasz - zacznij od WPROWADZENIA. Jest to część
             wstępna kursu, dzięki której zadomowisz się w podstawach języka
             włoskiego i dalsza samodzielna nauka będzie znacnzie łatwiejsza.
-          </Paragraph>
-          <Paragraph
+          </SecondParagraph>
+          <SecondParagraph
             margin="32px 0 0"
             fontSize="18px"
             lineHeight="1.44em"
@@ -83,8 +99,8 @@ const CoursesStagesSection = () => {
           >
             Kolejny etap, czyli CZĘŚĆ PIERWSZA, pomoże Ci zacząć mówić o sobie
             i&nbsp;używać włoskich czasowników.
-          </Paragraph>
-          <Paragraph
+          </SecondParagraph>
+          <ThirdParagraph
             margin="32px 0 0"
             fontSize="18px"
             lineHeight="1.44em"
@@ -96,7 +112,7 @@ const CoursesStagesSection = () => {
             i&nbsp;podzielonych na kolejne etapy lekcji. Informacje o następnych
             częściach “Kursu języka włoskiego od zera” pojawią się w zakłądce
             KONTYNUACJA.
-          </Paragraph>
+          </ThirdParagraph>
         </StyledColumnFlex>
       </StyledContentWrapper>
     </Wrapper>
