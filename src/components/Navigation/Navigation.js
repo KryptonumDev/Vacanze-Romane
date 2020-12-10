@@ -32,7 +32,7 @@ const NavigationWrapper = styled.nav`
           }
         `
       : bg === "green"
-      ? css`
+        ? css`
           background-color: var(--dead-green);
           a {
             color: var(--beige-2);
@@ -41,8 +41,8 @@ const NavigationWrapper = styled.nav`
             }
           }
         `
-      : bg === "brown"
-      ? css`
+        : bg === "brown"
+          ? css`
           background-color: var(--brown);
           a {
             color: var(--beige-2);
@@ -51,8 +51,8 @@ const NavigationWrapper = styled.nav`
             }
           }
         `
-      : bg === "red"
-      ? css`
+          : bg === "red"
+            ? css`
           background-color: var(--dark-red);
           a {
             color: var(--beige-2);
@@ -61,8 +61,8 @@ const NavigationWrapper = styled.nav`
             }
           }
         `
-      : bg === "blue" &&
-        css`
+            : bg === "blue" &&
+            css`
           background-color: var(--blue);
           a {
             color: var(--beige-2);
@@ -159,15 +159,15 @@ const MobileNavigationList = styled(motion.ul)`
     align-items: center;
     padding-right: 0;
     background-color: ${({ bg }) =>
-      bg === "green"
-        ? "var(--dead-green)"
-        : bg === "red"
+    bg === "green"
+      ? "var(--dead-green)"
+      : bg === "red"
         ? "var(--dark-red)"
         : bg === "blue"
-        ? "var(--blue)"
-        : bg === "brown"
-        ? "var(--brown)"
-        : "var(--bg-top)"};
+          ? "var(--blue)"
+          : bg === "brown"
+            ? "var(--brown)"
+            : "var(--bg-top)"};
     z-index: 5;
     color: var(--beige-2);
   }
@@ -378,7 +378,7 @@ const Navigation = ({ bg }) => {
                   O mnie
                 </NavigationListItem>
               </Link>
-              {show && <Search className="mobile" bg={bg} />}
+              {show && <Search mobile className="mobile" bg={bg} />}
             </MobileNavigationList>
           )}
         </AnimatePresence>
@@ -396,11 +396,11 @@ const Navigation = ({ bg }) => {
               size="28px"
             />
           ) : (
-            <FiMenu
-              color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
-              size="28px"
-            />
-          )}
+              <FiMenu
+                color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+                size="28px"
+              />
+            )}
         </MenuToggleButton>
         <AnimatePresence>
           {show && (
@@ -459,12 +459,12 @@ const SocialStyles = styled(motion.ul)`
     bg === "green"
       ? "var(--light-green)"
       : bg === "red"
-      ? "var(--light-red)"
-      : bg === "blue"
-      ? "var(--light-blue)"
-      : bg === "brown"
-      ? "var(--light-brown)"
-      : "var(--beige-2)"};
+        ? "var(--light-red)"
+        : bg === "blue"
+          ? "var(--light-blue)"
+          : bg === "brown"
+            ? "var(--light-brown)"
+            : "var(--beige-2)"};
 
   ul {
     list-style: none;

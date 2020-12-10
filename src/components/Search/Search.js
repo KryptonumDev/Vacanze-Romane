@@ -45,6 +45,13 @@ const SearchStyles = styled(motion.button)`
       transform: scale(1.1) translateX(-1px);
     }
   }
+
+  ${({ mobile }) => mobile && css`
+    display: inline-flex;
+    align-items: center;
+    font-size: 18px;
+    color: var(--beige-2);
+  `}
 `
 
 const SearchModal = styled(motion.div)`
@@ -106,7 +113,7 @@ const SearchModal = styled(motion.div)`
       right: -12px;
       background-color: transparent;
       color: ${({ bg }) =>
-        bg === "light" ? "var(--brown)" : "var(--beige-2)"};
+    bg === "light" ? "var(--brown)" : "var(--beige-2)"};
       &:hover,
       &:focus,
       &:active {
@@ -139,28 +146,28 @@ const SearchModal = styled(motion.div)`
       justify-content: center;
       height: 42px;
       background-color: ${({ bg }) =>
-        bg === "red"
-          ? "var(--light-red)"
-          : bg === "green"
-          ? "var(--light-green)"
-          : bg === "blue"
+    bg === "red"
+      ? "var(--light-red)"
+      : bg === "green"
+        ? "var(--light-green)"
+        : bg === "blue"
           ? "var(--light-blue)"
           : bg === "brown"
-          ? "var(--light-brown)"
-          : "var(--beige-2)"};
+            ? "var(--light-brown)"
+            : "var(--beige-2)"};
 
       &:focus,
       &:active,
       &:hover {
         outline: none;
         background-color: ${({ bg }) =>
-          bg === "red"
-            ? "var(--dark-red)"
-            : bg === "green"
-            ? "var(--dead-green)"
-            : bg === "blue"
-            ? "var(--blue)"
-            : bg === "brown"
+    bg === "red"
+      ? "var(--dark-red)"
+      : bg === "green"
+        ? "var(--dead-green)"
+        : bg === "blue"
+          ? "var(--blue)"
+          : bg === "brown"
             ? "var(--brown)"
             : "var(--beige-2)"};
       }
@@ -199,17 +206,17 @@ const SearchModal = styled(motion.div)`
       line-height: 1.6;
       letter-spacing: 1px;
       color: ${({ bg }) =>
-        bg === "light" ? "var(--brown)" : "var(--beige-2)"};
+    bg === "light" ? "var(--brown)" : "var(--beige-2)"};
       background-color: ${({ bg }) =>
-        bg === "red"
-          ? "var(--light-red)"
-          : bg === "green"
-          ? "var(--light-green)"
-          : bg === "blue"
+    bg === "red"
+      ? "var(--light-red)"
+      : bg === "green"
+        ? "var(--light-green)"
+        : bg === "blue"
           ? "var(--light-blue)"
           : bg === "brown"
-          ? "var(--light-brown)"
-          : "var(--beige-2)"};
+            ? "var(--light-brown)"
+            : "var(--beige-2)"};
       &:focus,
       &:active,
       &:hover {
@@ -218,7 +225,7 @@ const SearchModal = styled(motion.div)`
       }
       &::placeholder {
         color: ${({ bg }) =>
-          bg === "light" ? "var(--brown)" : "var(--beige-2)"};
+    bg === "light" ? "var(--brown)" : "var(--beige-2)"};
       }
     }
   }
@@ -260,7 +267,7 @@ const StyledMessage = styled(motion.p)`
 //     `}
 // `
 
-const Search = ({ bg, className }) => {
+const Search = ({ bg, className, mobile }) => {
   const [active, setActive] = useState(false)
   const [inputValue, setInputValue] = useState("")
   const dispatch = useSearchDispatch()
@@ -322,89 +329,93 @@ const Search = ({ bg, className }) => {
         className={className}
         type="button"
         onClick={handleOpenModal}
+        mobile={mobile}
       >
+        {active && <span>Test</span>}
         <RiSearchLine
           size="26px"
           color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
         />
       </SearchStyles>
-      <AnimatePresence>
-        {active && (
-          <SearchModal
-            className={className}
-            variants={fadeOutAnimation}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            bg={bg}
-          >
-            <StyledFlex
-              key="wrapper"
-              variants={listAnimation}
+      {!mobile &&
+        <AnimatePresence>
+          {active && (
+            <SearchModal
+              className={className}
+              variants={fadeOutAnimation}
               initial="hidden"
-              animate="visible"
+              animate="show"
               exit="exit"
+              bg={bg}
             >
-              <Flex
-                alignItems="stretch"
-                flexDirection="row"
-                key="input-wrapper"
-                width="100%"
-                maxWidth="580px"
-                variants={itemAnimation}
+              <StyledFlex
+                key="wrapper"
+                variants={listAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
               >
-                <motion.input
-                  ref={inputRef}
-                  key="input"
-                  placeholder="Wyszukaj"
-                  value={inputValue}
-                  onChange={e => handleChange(e)}
-                  error={message !== null}
-                  autoFocus
-                  bg={bg}
-                />
-                <motion.button
-                  key="input-btn"
-                  className="btn--search"
-                  onClick={handleSearch}
+                <Flex
+                  alignItems="stretch"
+                  flexDirection="row"
+                  key="input-wrapper"
+                  width="100%"
+                  maxWidth="580px"
+                  variants={itemAnimation}
                 >
-                  {className !== "mobile" ? (
-                    <BsArrowRight size="36px" color={"var(--beige-2)"} />
-                  ) : (
-                    <RiSearchLine
-                      size="24px"
-                      color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
-                    />
-                  )}
+                  <motion.input
+                    ref={inputRef}
+                    key="input"
+                    placeholder="Wyszukaj"
+                    value={inputValue}
+                    onChange={e => handleChange(e)}
+                    error={message !== null}
+                    autoFocus
+                    bg={bg}
+                  />
+                  <motion.button
+                    key="input-btn"
+                    className="btn--search"
+                    onClick={handleSearch}
+                  >
+                    {className !== "mobile" ? (
+                      <BsArrowRight size="36px" color={"var(--beige-2)"} />
+                    ) : (
+                        <RiSearchLine
+                          size="24px"
+                          color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+                        />
+                      )}
+                  </motion.button>
+                </Flex>
+                <motion.button
+                  className="btn--close"
+                  type="button"
+                  onClick={handleClose}
+                  key="close-btn"
+                  variants={itemAnimation}
+                >
+                  <IoClose
+                    size="26px"
+                    color={
+                      className !== "mobile"
+                        ? "var(--beige-2)"
+                        : bg === "light"
+                          ? "var(--brown)"
+                          : "var(--beige-2)"
+                    }
+                  />
                 </motion.button>
-              </Flex>
-              <motion.button
-                className="btn--close"
-                type="button"
-                onClick={handleClose}
-                key="close-btn"
-                variants={itemAnimation}
-              >
-                <IoClose
-                  size="26px"
-                  color={
-                    className !== "mobile"
-                      ? "var(--beige-2)"
-                      : bg === "light"
-                      ? "var(--brown)"
-                      : "var(--beige-2)"
-                  }
-                />
-              </motion.button>
-              {message && (
-                <StyledMessage variants={itemAnimation}>
-                  {message}
-                </StyledMessage>
-              )}
-            </StyledFlex>
-          </SearchModal>
-        )}
-      </AnimatePresence>
+                {message && (
+                  <StyledMessage variants={itemAnimation}>
+                    {message}
+                  </StyledMessage>
+                )}
+              </StyledFlex>
+            </SearchModal>
+          )}
+        </AnimatePresence>
+      }
     </>
   )
 }
