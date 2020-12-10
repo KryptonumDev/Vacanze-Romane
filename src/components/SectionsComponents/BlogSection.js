@@ -146,6 +146,11 @@ const StyledNoPosts = styled(Paragraph)`
   @media only screen and (max-width: 1085px) {
     font-size: 30px;
   }
+
+  @media only screen and (max-width: 798px) {
+    font-size: 22px;
+    text-align: center;
+  }
 `
 
 const StyledGridDecorText = styled(GridItem)`
@@ -282,16 +287,16 @@ const BlogSection = forwardRef(
                       />
                     ))
                   ) : (
-                    <StyledNoPosts
-                      fontSize="36px"
-                      lineHeight="1.11em"
-                      letterSpacing="1px"
-                      fontWeight="400"
-                      fontFamily="Cormorant Garamond"
-                    >
-                      Brak artykułów do wyświetlenia.
-                    </StyledNoPosts>
-                  )}
+                      <StyledNoPosts
+                        fontSize="36px"
+                        lineHeight="1.11em"
+                        letterSpacing="1px"
+                        fontWeight="400"
+                        fontFamily="Cormorant Garamond"
+                      >
+                        Brak artykułów do wyświetlenia.
+                      </StyledNoPosts>
+                    )}
                 </StyledGrid>
               </StyledContentWrapper>
               <StyledPaginationWrapper padding="0 102px 100px">
@@ -305,80 +310,80 @@ const BlogSection = forwardRef(
               </StyledPaginationWrapper>
             </>
           ) : (
-            <>
-              <StyledContentWrapper
-                padding="90px 102px 50px"
-                variants={fadeOutAnimation}
-                initial="hidden"
-                animate="show"
-                exit="exit"
-                key="content"
-              >
-                <Flex margin="0 5px 0 0" flex="1" flexDirection="column">
-                  <StyledCapitalizedText margin="0 0 0 10px">
-                    A tavola
-                  </StyledCapitalizedText>
-                  <Line />
-                  <StyledParagraph margin="0 52px 0 5px">
-                    Znam wielu ludzi, którzy ożywiają się i natychmiast
-                    rozpromieniają na dźwięk jakiekolwiek słowa związanego z
-                    Italią.
-                  </StyledParagraph>
-                </Flex>
-                <StyledFlex
-                  margin="132px 0 0"
-                  padding="0 0 0 85px"
-                  flex="1"
-                  flexDirection="column"
+              <>
+                <StyledContentWrapper
+                  padding="90px 102px 50px"
+                  variants={fadeOutAnimation}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                  key="content"
                 >
-                  <StyledParagraphProseco
-                    fontFamily="Lato"
-                    fontSize="18px"
-                    lineHeight="1.44em"
-                    letterSpacing="1px"
+                  <Flex margin="0 5px 0 0" flex="1" flexDirection="column">
+                    <StyledCapitalizedText margin="0 0 0 10px">
+                      A tavola
+                  </StyledCapitalizedText>
+                    <Line />
+                    <StyledParagraph margin="0 52px 0 5px">
+                      Znam wielu ludzi, którzy ożywiają się i natychmiast
+                      rozpromieniają na dźwięk jakiekolwiek słowa związanego z
+                      Italią.
+                  </StyledParagraph>
+                  </Flex>
+                  <StyledFlex
+                    margin="132px 0 0"
+                    padding="0 0 0 85px"
+                    flex="1"
+                    flexDirection="column"
                   >
-                    Florencja, Prosecco, Michał Anioł, Ferrari, Parmigiano
-                    Reggiano, San Remo, Sardynia, cappuccino, Vespa - o każdym z
-                    tych haseł, i o dziesiątkach innych, miłośnik Włoch gotów
-                    jest rozmawiać godzinami z drugim takim samym jak on
-                    maniakiem. I nieważne, że to akurat będzie ktoś nieznajomy,
-                    spotkany przypadkiem w barze, w samolocie czy u cioci na
-                    imieninach. Italomianiacy rozpoznają się bezbłędnie w
-                    największym tłumie. A gdy się już wzajemnie dopadną,
-                    zapominają wtedy o całej nudnej reszcie świata. <br />
-                    <br />
-                    Wiem, co mówię, bo też mam takie objawy. A przecież nie
-                    jestem żadnym wyjątkiem.
-                  </StyledParagraphProseco>
-                </StyledFlex>
-              </StyledContentWrapper>
-              <StyledPaginationWrapper
-                padding="0 102px 100px"
-                variants={fadeOutAnimation}
-                initial="hidden"
-                animate="show"
-                exit="exit"
-              >
-                <Grid cols="repeat(12, 1fr)" rows="repeat(3, auto)">
-                  <StyledGridDecorText gridColumn="2/7" gridRow="0/1">
-                    <StyledParagraphGrid>
-                      Jeżeli chcesz dołączyć do tej niekończącej się,
-                      wciągającej rozmowy, to chętnie podrzucę temat....
-                    </StyledParagraphGrid>
-                  </StyledGridDecorText>
-                  <StyledGridContent
-                    margin="50px 0 0"
-                    gridColumn="5/11"
-                    gridRow="2/3"
-                  >
-                    <Paragraph
+                    <StyledParagraphProseco
                       fontFamily="Lato"
                       fontSize="18px"
                       lineHeight="1.44em"
                       letterSpacing="1px"
                     >
-                      O kulturze Włoch, albo o historii? Nie ma sprawy - od
-                      czasów Romulusa jest w czym wybierać...
+                      Florencja, Prosecco, Michał Anioł, Ferrari, Parmigiano
+                      Reggiano, San Remo, Sardynia, cappuccino, Vespa - o każdym z
+                      tych haseł, i o dziesiątkach innych, miłośnik Włoch gotów
+                      jest rozmawiać godzinami z drugim takim samym jak on
+                      maniakiem. I nieważne, że to akurat będzie ktoś nieznajomy,
+                      spotkany przypadkiem w barze, w samolocie czy u cioci na
+                      imieninach. Italomianiacy rozpoznają się bezbłędnie w
+                      największym tłumie. A gdy się już wzajemnie dopadną,
+                    zapominają wtedy o całej nudnej reszcie świata. <br />
+                      <br />
+                    Wiem, co mówię, bo też mam takie objawy. A przecież nie
+                    jestem żadnym wyjątkiem.
+                  </StyledParagraphProseco>
+                  </StyledFlex>
+                </StyledContentWrapper>
+                <StyledPaginationWrapper
+                  padding="0 102px 100px"
+                  variants={fadeOutAnimation}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                >
+                  <Grid cols="repeat(12, 1fr)" rows="repeat(3, auto)">
+                    <StyledGridDecorText gridColumn="2/7" gridRow="0/1">
+                      <StyledParagraphGrid>
+                        Jeżeli chcesz dołączyć do tej niekończącej się,
+                        wciągającej rozmowy, to chętnie podrzucę temat....
+                    </StyledParagraphGrid>
+                    </StyledGridDecorText>
+                    <StyledGridContent
+                      margin="50px 0 0"
+                      gridColumn="5/11"
+                      gridRow="2/3"
+                    >
+                      <Paragraph
+                        fontFamily="Lato"
+                        fontSize="18px"
+                        lineHeight="1.44em"
+                        letterSpacing="1px"
+                      >
+                        O kulturze Włoch, albo o historii? Nie ma sprawy - od
+                        czasów Romulusa jest w czym wybierać...
                       <br /> O podróżach, wakacjach, krajobrazach
                       i&nbsp;włóczeniu się po Italii? Sama przyjemność!
                       <br /> O sztuce i architekturze włoskiej? A&nbsp;istnieje
@@ -387,20 +392,20 @@ const BlogSection = forwardRef(
                       czasem trzeba coś zjeść? Tak mówią tylko ci, którzy nic
                       nie wiedzą, co to jest włoska sztuka kulinarna.
                     </Paragraph>
-                  </StyledGridContent>
-                  <StyledGridWritten
-                    margin="60px 0 0"
-                    gridColumn="3/10"
-                    gridRow="3/4"
-                  >
-                    <Paragraph fontFamily="Homemade Apple">
-                      Allora, parliamone a tavola!
+                    </StyledGridContent>
+                    <StyledGridWritten
+                      margin="60px 0 0"
+                      gridColumn="3/10"
+                      gridRow="3/4"
+                    >
+                      <Paragraph fontFamily="Homemade Apple">
+                        Allora, parliamone a tavola!
                     </Paragraph>
-                  </StyledGridWritten>
-                </Grid>
-              </StyledPaginationWrapper>
-            </>
-          )}
+                    </StyledGridWritten>
+                  </Grid>
+                </StyledPaginationWrapper>
+              </>
+            )}
         </AnimatePresence>
       </Wrapper>
     )

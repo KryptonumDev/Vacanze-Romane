@@ -73,7 +73,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
     padding: 40px 30px 60px;
   }
 `
-const StyledPostsWrapper = styled(ContentWrapper)`
+export const StyledPostsWrapper = styled(ContentWrapper)`
   @media only screen and (max-width: 1407px) {
     padding: 50px 102px;
   }
@@ -164,6 +164,11 @@ const StyledNoPosts = styled(Paragraph)`
   @media only screen and (max-width: 1085px) {
     font-size: 30px;
   }
+
+  @media only screen and (max-width: 798px) {
+    font-size: 22px;
+    text-align: center;
+  }
 `
 
 const ItalianoSection = forwardRef(
@@ -228,16 +233,16 @@ const ItalianoSection = forwardRef(
                 />
               ))
             ) : (
-              <StyledNoPosts
-                fontSize="36px"
-                lineHeight="1.11em"
-                letterSpacing="1px"
-                fontWeight="400"
-                fontFamily="Cormorant Garamond"
-              >
-                Brak artykułów do wyświetlenia.
-              </StyledNoPosts>
-            )}
+                <StyledNoPosts
+                  fontSize="36px"
+                  lineHeight="1.11em"
+                  letterSpacing="1px"
+                  fontWeight="400"
+                  fontFamily="Cormorant Garamond"
+                >
+                  Brak artykułów do wyświetlenia.
+                </StyledNoPosts>
+              )}
           </StyledGrid>
         </StyledPostsWrapper>
         <StyledPaginationWrapper padding="0 102px 100px">
