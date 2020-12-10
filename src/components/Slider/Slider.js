@@ -15,6 +15,7 @@ import slugify from "slugify"
 import Image from "gatsby-image"
 import Pagination from "./Pagination"
 import useWindowSize from "../../utils/useWindowSize"
+import { fadeOutAnimation } from "../animations"
 
 const StyledGrid = styled(motion.div)`
   display: grid;
@@ -246,6 +247,10 @@ const Slider = ({ header }) => {
                   ))
               ) : (
                 <Paragraph
+                  variants={fadeOutAnimation}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
                   fontSize="36px"
                   lineHeight="1.11em"
                   letterSpacing="1px"

@@ -18,6 +18,10 @@ const LessonsGridStyles = styled.div`
   }
 `
 
+const StyledParagraph = styled(Paragraph)`
+  text-align: center;
+`
+
 const LessonsGrid = ({ max = 1, lessons = [] }) => {
   return (
     <AnimateSharedLayout type="crossfade">
@@ -28,7 +32,7 @@ const LessonsGrid = ({ max = 1, lessons = [] }) => {
           ))}
         </LessonsGridStyles>
       ) : (
-        <Paragraph
+        <StyledParagraph
           fontSize="36px"
           lineHeight="1.11em"
           letterSpacing="1px"
@@ -36,7 +40,7 @@ const LessonsGrid = ({ max = 1, lessons = [] }) => {
           fontFamily="Cormorant Garamond"
         >
           Brak lekcji do wyświetlenia.
-        </Paragraph>
+        </StyledParagraph>
       )}
     </AnimateSharedLayout>
   )

@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion"
 import React, { useRef, useState } from "react"
 import styled, { css } from "styled-components"
 import { useSearchDispatch, useSearchState } from "../contexts/searchContext"
@@ -17,6 +17,7 @@ const SearchStyles = styled(motion.button)`
   border: none;
   background-color: transparent;
   display: inline-block;
+  pointer-events: ${({ mobileSearchShown }) => mobileSearchShown && "none"};
   @media only screen and (min-width: 1106px) {
     &.mobile {
       display: none;
@@ -46,17 +47,19 @@ const SearchStyles = styled(motion.button)`
     }
   }
 
-  ${({ mobile }) => mobile && css`
-    display: inline-flex;
-    align-items: center;
-    font-size: 18px;
-    color: var(--beige-2);
-  `}
+  ${({ mobile }) =>
+    mobile &&
+    css`
+      display: inline-flex;
+      align-items: center;
+      font-size: 18px;
+      color: var(--beige-2);
+    `}
 `
 
 const SearchModal = styled(motion.div)`
   display: flex;
-  position: ${({ className }) => (className !== "mobile" ? "absolute" : "")};
+  position: ${({ className }) => (className !== "mobile" ? "fixed" : "")};
   left: 0;
   top: 0;
   right: 0;
@@ -113,7 +116,7 @@ const SearchModal = styled(motion.div)`
       right: -12px;
       background-color: transparent;
       color: ${({ bg }) =>
-    bg === "light" ? "var(--brown)" : "var(--beige-2)"};
+        bg === "light" ? "var(--brown)" : "var(--beige-2)"};
       &:hover,
       &:focus,
       &:active {
@@ -146,28 +149,28 @@ const SearchModal = styled(motion.div)`
       justify-content: center;
       height: 42px;
       background-color: ${({ bg }) =>
-    bg === "red"
-      ? "var(--light-red)"
-      : bg === "green"
-        ? "var(--light-green)"
-        : bg === "blue"
+        bg === "red"
+          ? "var(--light-red)"
+          : bg === "green"
+          ? "var(--light-green)"
+          : bg === "blue"
           ? "var(--light-blue)"
           : bg === "brown"
-            ? "var(--light-brown)"
-            : "var(--beige-2)"};
+          ? "var(--light-brown)"
+          : "var(--beige-2)"};
 
       &:focus,
       &:active,
       &:hover {
         outline: none;
         background-color: ${({ bg }) =>
-    bg === "red"
-      ? "var(--dark-red)"
-      : bg === "green"
-        ? "var(--dead-green)"
-        : bg === "blue"
-          ? "var(--blue)"
-          : bg === "brown"
+          bg === "red"
+            ? "var(--dark-red)"
+            : bg === "green"
+            ? "var(--dead-green)"
+            : bg === "blue"
+            ? "var(--blue)"
+            : bg === "brown"
             ? "var(--brown)"
             : "var(--beige-2)"};
       }
@@ -206,17 +209,17 @@ const SearchModal = styled(motion.div)`
       line-height: 1.6;
       letter-spacing: 1px;
       color: ${({ bg }) =>
-    bg === "light" ? "var(--brown)" : "var(--beige-2)"};
+        bg === "light" ? "var(--brown)" : "var(--beige-2)"};
       background-color: ${({ bg }) =>
-    bg === "red"
-      ? "var(--light-red)"
-      : bg === "green"
-        ? "var(--light-green)"
-        : bg === "blue"
+        bg === "red"
+          ? "var(--light-red)"
+          : bg === "green"
+          ? "var(--light-green)"
+          : bg === "blue"
           ? "var(--light-blue)"
           : bg === "brown"
-            ? "var(--light-brown)"
-            : "var(--beige-2)"};
+          ? "var(--light-brown)"
+          : "var(--beige-2)"};
       &:focus,
       &:active,
       &:hover {
@@ -225,7 +228,7 @@ const SearchModal = styled(motion.div)`
       }
       &::placeholder {
         color: ${({ bg }) =>
-    bg === "light" ? "var(--brown)" : "var(--beige-2)"};
+          bg === "light" ? "var(--brown)" : "var(--beige-2)"};
       }
     }
   }
@@ -242,7 +245,7 @@ const StyledFlex = styled(Flex)`
 
   @media only screen and (max-width: 1440px) {
     width: 90%;
-    padding: 50px 0;
+    padding: 120px 0 80px;
   }
 `
 
@@ -254,6 +257,9 @@ const StyledMessage = styled(motion.p)`
   bottom: 80px;
   text-align: center;
   color: var(--dark-red);
+  @media only screen and (max-width: 1440px) {
+    bottom: 0px;
+  }
 `
 
 // const MobileStyles = styled(motion.div)`
@@ -267,30 +273,111 @@ const StyledMessage = styled(motion.p)`
 //     `}
 // `
 
+const InputWrapper = styled(motion.div)`
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: ${({ bg }) =>
+    bg === "red"
+      ? "var(--light-red)"
+      : bg === "green"
+      ? "var(--light-green)"
+      : bg === "blue"
+      ? "var(--light-blue)"
+      : bg === "brown"
+      ? "var(--light-brown)"
+      : "var(--beige-2)"};
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  pointer-events: all;
+  ${({ showMobileSearch }) =>
+    showMobileSearch &&
+    css`
+      justify-content: space-between;
+      max-width: 264px;
+      width: 80vw;
+      padding: 0 13px 0 0;
+    `}
+
+  input {
+    background-color: transparent;
+    font-size: 15px;
+    line-height: 1.6em;
+    font-family: "Lato";
+    color: var(--beige-2);
+    padding: 8px 13px;
+    height: 42px;
+    border: 1px solid
+      ${({ bg }) =>
+        bg === "red"
+          ? "var(--light-red)"
+          : bg === "green"
+          ? "var(--light-green)"
+          : bg === "blue"
+          ? "var(--light-blue)"
+          : bg === "brown"
+          ? "var(--light-brown)"
+          : "var(--beige-2)"};
+    transition: border-color 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    &:focus,
+    &:active {
+      outline: none;
+      border: 1px solid var(--beige-2);
+    }
+  }
+`
+
+const ButtonSearch = styled(motion.button)`
+  border: none;
+  background-color: var(--beige-2);
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const BtnSearchWrapper = styled(motion.div)`
+  border: none;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  visibility: ${({ hide }) => hide && "hidden"};
+  display: ${({ hide }) => hide && "none"};
+`
+
 const Search = ({ bg, className, mobile }) => {
   const [active, setActive] = useState(false)
+  const [showMobileSearch, setShowMobileSearch] = useState(false)
+  const [showButtonSearch, setShowButtonSearch] = useState(false)
   const [inputValue, setInputValue] = useState("")
   const dispatch = useSearchDispatch()
   const menuDispatch = useMenuDispatch()
   const [message, setMessage] = useState(null)
 
   const inputRef = useRef()
+  const mobileInputRef = useRef()
 
-  const minimalLengthOfQuery = 1
+  const minimalLengthOfQuery = 3
   const handleSearch = async () => {
     if (inputValue.trim().length >= minimalLengthOfQuery) {
+      setMessage(null)
       await dispatch({ type: "SET_QUERY", payload: inputValue })
       await menuDispatch({ type: "CLOSE_MENU" })
       navigate("/szukaj")
-      setMessage(null)
       setTimeout(() => {
         setActive(false)
-      }, 400)
+      }, 100)
     } else {
       setMessage(
         `Wprowadź tekst o długości co najmniej ${minimalLengthOfQuery} znaków.`
       )
-      inputRef.current.focus()
+      if (!mobile && !showMobileSearch && active) {
+        inputRef.current.focus()
+      }
     }
   }
 
@@ -298,21 +385,35 @@ const Search = ({ bg, className, mobile }) => {
     setInputValue(e.target.value)
     if (e.target.value.trim().length >= minimalLengthOfQuery) {
       setMessage(null)
+      setShowButtonSearch(true)
+    } else {
+      setShowButtonSearch(false)
     }
   }
 
   const handleClose = () => {
     setActive(false)
+    setShowMobileSearch(false)
+    setShowButtonSearch(false)
   }
 
   const handleOpenModal = () => {
     setActive(true)
   }
 
+  const handleShowSearch = () => {
+    setShowMobileSearch(true)
+  }
+
+  const handleCloseSearch = () => {
+    setShowMobileSearch(false)
+    setShowButtonSearch(true)
+  }
+
   const keyPress = e => {
-    if (e.keyCode === 27) {
-      setActive(false)
-      setMessage(null)
+    console.log(inputValue, e.keyCode)
+    if (e.keyCode === 13) {
+      handleSearch()
     }
   }
 
@@ -328,16 +429,87 @@ const Search = ({ bg, className, mobile }) => {
       <SearchStyles
         className={className}
         type="button"
-        onClick={handleOpenModal}
+        onClick={!mobile ? handleOpenModal : handleShowSearch}
         mobile={mobile}
+        mobileSearchShown={showMobileSearch}
       >
-        {active && <span>Test</span>}
-        <RiSearchLine
-          size="26px"
-          color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
-        />
+        <AnimateSharedLayout>
+          <InputWrapper
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            active={showMobileSearch}
+            bg={bg}
+            layout
+          >
+            <AnimatePresence>
+              {mobile && showMobileSearch && (
+                <motion.input
+                  key="mobileInput"
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { duration: 0.2, delay: 0.1 },
+                  }}
+                  exit={{ opacity: 0 }}
+                  placeholder="Wyszukaj"
+                  value={inputValue}
+                  onChange={e => handleChange(e)}
+                  error={message !== null}
+                  bg={bg}
+                  layout
+                />
+              )}
+              {!showButtonSearch ? (
+                <BtnSearchWrapper
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { duration: 0.2, delay: 0.1 },
+                  }}
+                  exit={{ opacity: 0 }}
+                  key="SearchLineWrapper"
+                  layout
+                >
+                  <RiSearchLine
+                    key="SearchLine"
+                    size="26px"
+                    color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+                  />
+                </BtnSearchWrapper>
+              ) : (
+                <ButtonSearch
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { duration: 0.2, delay: 0.1 },
+                  }}
+                  exit={{ opacity: 0 }}
+                  key="search-btn"
+                  onClick={handleSearch}
+                  bg={bg}
+                >
+                  <BsArrowRight
+                    size="26px"
+                    color={
+                      bg === "green"
+                        ? "var(--dead-green)"
+                        : bg === "red"
+                        ? "var(--dark-red)"
+                        : bg === "blue"
+                        ? "var(--blue)"
+                        : bg === "brown"
+                        ? "var(--brown)"
+                        : "var(--beige-2)"
+                    }
+                  />
+                </ButtonSearch>
+              )}
+            </AnimatePresence>
+          </InputWrapper>
+        </AnimateSharedLayout>
       </SearchStyles>
-      {!mobile &&
+      {!mobile && (
         <AnimatePresence>
           {active && (
             <SearchModal
@@ -381,11 +553,13 @@ const Search = ({ bg, className, mobile }) => {
                     {className !== "mobile" ? (
                       <BsArrowRight size="36px" color={"var(--beige-2)"} />
                     ) : (
-                        <RiSearchLine
-                          size="24px"
-                          color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
-                        />
-                      )}
+                      <RiSearchLine
+                        size="24px"
+                        color={
+                          bg === "light" ? "var(--brown)" : "var(--beige-2)"
+                        }
+                      />
+                    )}
                   </motion.button>
                 </Flex>
                 <motion.button
@@ -401,8 +575,8 @@ const Search = ({ bg, className, mobile }) => {
                       className !== "mobile"
                         ? "var(--beige-2)"
                         : bg === "light"
-                          ? "var(--brown)"
-                          : "var(--beige-2)"
+                        ? "var(--brown)"
+                        : "var(--beige-2)"
                     }
                   />
                 </motion.button>
@@ -415,7 +589,7 @@ const Search = ({ bg, className, mobile }) => {
             </SearchModal>
           )}
         </AnimatePresence>
-      }
+      )}
     </>
   )
 }

@@ -30,6 +30,7 @@ const StyledGrid = styled(motion.div)`
     grid-gap: 43px 40px;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
+  grid-template-columns: ${({ noPosts }) => noPosts && "1fr !important"};
 `
 
 const PostStyles = styled(motion.div)`
@@ -161,6 +162,7 @@ const PostPreview = ({ category, slug, title, featuredImage }) => (
 )
 
 const StyledNoPosts = styled(Paragraph)`
+  text-align: center;
   @media only screen and (max-width: 1085px) {
     font-size: 30px;
   }
@@ -217,6 +219,7 @@ const ItalianoSection = forwardRef(
             animate="show"
             exit="exit"
             itemsInRow={2}
+            noPosts={filteredPosts.length === 0}
           >
             {filteredPosts.length >= 1 ? (
               filteredPosts.map(post => (
@@ -233,16 +236,20 @@ const ItalianoSection = forwardRef(
                 />
               ))
             ) : (
-                <StyledNoPosts
-                  fontSize="36px"
-                  lineHeight="1.11em"
-                  letterSpacing="1px"
-                  fontWeight="400"
-                  fontFamily="Cormorant Garamond"
-                >
-                  Brak artykułów do wyświetlenia.
-                </StyledNoPosts>
-              )}
+              <StyledNoPosts
+                variants={fadeOutAnimation}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                fontSize="36px"
+                lineHeight="1.11em"
+                letterSpacing="1px"
+                fontWeight="400"
+                fontFamily="Cormorant Garamond"
+              >
+                Brak artykułów do wyświetlenia.
+              </StyledNoPosts>
+            )}
           </StyledGrid>
         </StyledPostsWrapper>
         <StyledPaginationWrapper padding="0 102px 100px">

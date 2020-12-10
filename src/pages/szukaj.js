@@ -149,6 +149,10 @@ const SearchPage = ({ data }) => {
                         ))
                     ) : (
                       <Paragraph
+                        variants={fadeOutAnimation}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
                         fontSize="36px"
                         lineHeight="1.11em"
                         letterSpacing="1px"
@@ -207,6 +211,10 @@ const SearchPage = ({ data }) => {
                         ))
                     ) : (
                       <Paragraph
+                        variants={fadeOutAnimation}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
                         fontSize="36px"
                         lineHeight="1.11em"
                         letterSpacing="1px"
@@ -217,7 +225,7 @@ const SearchPage = ({ data }) => {
                       </Paragraph>
                     )}
                   </StyledGrid>
-                  {filteredItalianoArticles.length >= 1 && (
+                  {filteredItalianoArticles.length >= 2 && (
                     <Pagination
                       length={
                         filteredItalianoArticles.length /
