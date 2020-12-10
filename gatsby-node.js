@@ -31,12 +31,12 @@ exports.createPages = async ({ graphql, actions }) => {
           id
         }
       }
-      allDatoCmsLesson {
+      allDatoCmsLesson(sort:{fields:lessonNumber}) {
         nodes {
-          lessonTitle
+          id
           lekcjaPoziom
           lessonNumber
-          id
+          lessonTitle
         }
       }
     }
@@ -82,10 +82,10 @@ exports.createPages = async ({ graphql, actions }) => {
         id: lesson.id,
         number: lesson.lessonNumber.split("Lekcja")[1].trim(),
         prev:
-          i >= 1 ? result.data.allDatoCmsLesson.nodes[i - 1].lessonTitle : null,
+          (i >= 1 && lesson.lekcjaPoziom === result.data.allDatoCmsLesson.nodes[i - 1].lekcjaPoziom) ? result.data.allDatoCmsLesson.nodes[i - 1].lessonTitle : null,
         next:
           i < result.data.allDatoCmsLesson.nodes.length - 1 &&
-          lesson.lekcjaPoziom ===
+            lesson.lekcjaPoziom ===
             result.data.allDatoCmsLesson.nodes[i + 1].lekcjaPoziom
             ? result.data.allDatoCmsLesson.nodes[i + 1].lessonTitle
             : null,

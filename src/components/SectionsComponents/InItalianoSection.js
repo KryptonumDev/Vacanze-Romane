@@ -115,14 +115,14 @@ const StyledParagraph = styled(Paragraph)`
 `
 
 const StyledCategory = styled(Paragraph)`
-  @media only screen and (max-width: 565px) {
+  @media only screen and (max-width: 798px) {
     font-size: 14px;
     line-height: 18px;
     margin: 14px 0 0;
   }
 `
 const StyledTitle = styled(Paragraph)`
-  @media only screen and (max-width: 565px) {
+  @media only screen and (max-width: 798px) {
     font-size: 15px;
     line-height: 24px;
     margin: 14px 0 0;

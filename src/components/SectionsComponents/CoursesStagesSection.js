@@ -111,9 +111,7 @@ const StyledPaginationWrapper = styled(ContentWrapper)`
 `
 
 const StyledWrapper = styled(Wrapper)`
-  @media only screen and (max-width: 1065px) {
-    padding: 50px 0 0;
-  }
+    padding: 90px 0 100px;
 `
 
 const CoursesStagesSection = React.forwardRef(({
@@ -240,7 +238,7 @@ const CoursesStagesSection = React.forwardRef(({
                 </StyledGrid>
 
               </StyledPostsWrapper>
-              <StyledPaginationWrapper padding="0 102px 100px">
+              {/* <StyledPaginationWrapper padding="0 102px 100px">
                 {filteredLessons.length >= 1 && (
                   <Pagination
                     length={Math.floor(filteredLessons.length / pageLength)}
@@ -248,7 +246,7 @@ const CoursesStagesSection = React.forwardRef(({
                     setPage={setPage}
                   />
                 )}
-              </StyledPaginationWrapper>
+              </StyledPaginationWrapper> */}
             </>
           )}
 

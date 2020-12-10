@@ -25,7 +25,7 @@ const CoursesPage = ({ data }) => {
   const courses = ["Wprowadzenie 0.0", "Część pierwsza 1.0", "Kontynuacja"]
   const [activeCourse, setActiveCourse] = useState(null)
   const [page, setPage] = useState(0)
-  const pageLength = 6
+  const pageLength = 15
   const postsRef = useRef()
 
   const scroll = () => postsRef.current.scrollIntoView({ behavior: "smooth" })
