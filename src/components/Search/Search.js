@@ -54,6 +54,7 @@ const SearchStyles = styled(motion.button)`
       align-items: center;
       font-size: 18px;
       color: var(--beige-2);
+      position: relative;
     `}
 `
 
@@ -256,9 +257,14 @@ const StyledMessage = styled(motion.p)`
   position: absolute;
   bottom: 80px;
   text-align: center;
-  color: var(--dark-red);
+  color: ${({ bg }) => (bg === "red" ? "var(--beige-2)" : "var(--light-red)")};
   @media only screen and (max-width: 1440px) {
     bottom: 0px;
+  }
+  @media only screen and (max-width: 1105px) {
+    text-align: center;
+    bottom: -50px;
+    font-size: 13px;
   }
 `
 
@@ -277,16 +283,18 @@ const InputWrapper = styled(motion.div)`
   display: flex;
   align-items: center;
   position: relative;
-  background-color: ${({ bg }) =>
-    bg === "red"
-      ? "var(--light-red)"
-      : bg === "green"
-      ? "var(--light-green)"
-      : bg === "blue"
-      ? "var(--light-blue)"
-      : bg === "brown"
-      ? "var(--light-brown)"
-      : "var(--beige-2)"};
+  @media only screen and (max-width: 1105px) {
+    background-color: ${({ bg }) =>
+      bg === "red"
+        ? "var(--light-red)"
+        : bg === "green"
+        ? "var(--light-green)"
+        : bg === "blue"
+        ? "var(--light-blue)"
+        : bg === "brown"
+        ? "var(--light-brown)"
+        : "var(--beige-2)"};
+  }
   width: 100%;
   height: 100%;
   padding: 0;
@@ -305,7 +313,7 @@ const InputWrapper = styled(motion.div)`
     font-size: 15px;
     line-height: 1.6em;
     font-family: "Lato";
-    color: var(--beige-2);
+    color: ${({ bg }) => (bg === "light" ? "var(--brown)" : "var(--beige-2)")};
     padding: 8px 13px;
     height: 42px;
     border: 1px solid
@@ -323,14 +331,16 @@ const InputWrapper = styled(motion.div)`
     &:focus,
     &:active {
       outline: none;
-      border: 1px solid var(--beige-2);
+      border: 1px solid
+        ${({ bg }) => (bg === "light" ? "var(--brown)" : "var(--beige-2)")};
     }
   }
 `
 
 const ButtonSearch = styled(motion.button)`
   border: none;
-  background-color: var(--beige-2);
+  background-color: ${({ bg }) =>
+    bg === "light" ? "var(--brown)" : "var(--beige-2)"};
   width: 42px;
   height: 42px;
   display: inline-flex;
@@ -370,7 +380,9 @@ const Search = ({ bg, className, mobile }) => {
       navigate("/szukaj")
       setTimeout(() => {
         setActive(false)
-      }, 100)
+        setShowMobileSearch(false)
+        setShowButtonSearch(false)
+      }, 50)
     } else {
       setMessage(
         `Wprowadź tekst o długości co najmniej ${minimalLengthOfQuery} znaków.`
@@ -407,7 +419,8 @@ const Search = ({ bg, className, mobile }) => {
 
   const handleCloseSearch = () => {
     setShowMobileSearch(false)
-    setShowButtonSearch(true)
+    setShowButtonSearch(false)
+    setMessage(null)
   }
 
   const keyPress = e => {
@@ -433,81 +446,86 @@ const Search = ({ bg, className, mobile }) => {
         mobile={mobile}
         mobileSearchShown={showMobileSearch}
       >
-        <AnimateSharedLayout>
-          <InputWrapper
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            active={showMobileSearch}
-            bg={bg}
-            layout
-          >
-            <AnimatePresence>
-              {mobile && showMobileSearch && (
-                <motion.input
-                  key="mobileInput"
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: 1,
-                    transition: { duration: 0.2, delay: 0.1 },
-                  }}
-                  exit={{ opacity: 0 }}
-                  placeholder="Wyszukaj"
-                  value={inputValue}
-                  onChange={e => handleChange(e)}
-                  error={message !== null}
-                  bg={bg}
-                  layout
-                />
-              )}
-              {!showButtonSearch ? (
-                <BtnSearchWrapper
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: 1,
-                    transition: { duration: 0.2, delay: 0.1 },
-                  }}
-                  exit={{ opacity: 0 }}
-                  key="SearchLineWrapper"
-                  layout
-                >
-                  <RiSearchLine
-                    key="SearchLine"
-                    size="26px"
-                    color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
-                  />
-                </BtnSearchWrapper>
-              ) : (
-                <ButtonSearch
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: 1,
-                    transition: { duration: 0.2, delay: 0.1 },
-                  }}
-                  exit={{ opacity: 0 }}
-                  key="search-btn"
-                  onClick={handleSearch}
-                  bg={bg}
-                >
-                  <BsArrowRight
-                    size="26px"
-                    color={
-                      bg === "green"
-                        ? "var(--dead-green)"
-                        : bg === "red"
-                        ? "var(--dark-red)"
-                        : bg === "blue"
-                        ? "var(--blue)"
-                        : bg === "brown"
-                        ? "var(--brown)"
-                        : "var(--beige-2)"
-                    }
-                  />
-                </ButtonSearch>
-              )}
-            </AnimatePresence>
-          </InputWrapper>
-        </AnimateSharedLayout>
+        <InputWrapper
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          active={showMobileSearch}
+          bg={bg}
+          layout
+        >
+          {mobile && showMobileSearch && (
+            <motion.input
+              key="mobileInput"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{ opacity: 0 }}
+              placeholder="Wyszukaj"
+              value={inputValue}
+              onChange={e => handleChange(e)}
+              error={message !== null}
+              bg={bg}
+            />
+          )}
+          {!showButtonSearch ? (
+            <BtnSearchWrapper
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{ opacity: 0 }}
+              key="SearchLineWrapper"
+            >
+              <RiSearchLine
+                key="SearchLine"
+                size="26px"
+                color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+              />
+            </BtnSearchWrapper>
+          ) : (
+            <ButtonSearch
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.2, delay: 0.1 },
+              }}
+              exit={{ opacity: 0 }}
+              key="search-btn"
+              onClick={handleSearch}
+              bg={bg}
+            >
+              <BsArrowRight
+                size="26px"
+                color={
+                  bg === "green"
+                    ? "var(--dead-green)"
+                    : bg === "red"
+                    ? "var(--dark-red)"
+                    : bg === "blue"
+                    ? "var(--blue)"
+                    : bg === "brown"
+                    ? "var(--brown)"
+                    : "var(--beige-2)"
+                }
+              />
+            </ButtonSearch>
+          )}
+        </InputWrapper>
+        <AnimatePresence>
+          {message && (
+            <StyledMessage
+              variants={fadeOutAnimation}
+              initial="hidden"
+              animate="show"
+              exit="exit"
+              bg={bg}
+            >
+              {message}
+            </StyledMessage>
+          )}
+        </AnimatePresence>
       </SearchStyles>
       {!mobile && (
         <AnimatePresence>

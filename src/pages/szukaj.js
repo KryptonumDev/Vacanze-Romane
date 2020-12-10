@@ -14,6 +14,17 @@ import { fadeOutAnimation } from "../components/animations"
 import { PostPreview } from "../components/SectionsComponents/BlogSection"
 import slugify from "slugify"
 import Pagination from "../components/Slider/Pagination"
+import styled from "styled-components"
+
+const StyledParagraph = styled(Paragraph)`
+  text-align: center;
+  @media only screen and (max-width: 1105px) {
+    font-size: 28px;
+  }
+  @media only screen and (max-width: 798px) {
+    font-size: 22px;
+  }
+`
 
 const SearchPage = ({ data }) => {
   const {
@@ -258,7 +269,7 @@ const SearchPage = ({ data }) => {
             bg="white"
             padding="78px 102px 100px"
           >
-            <Paragraph>Niestety, niczego nie znaleziono.</Paragraph>
+            <StyledParagraph>Niestety, niczego nie znaleziono.</StyledParagraph>
           </ContentWrapper>
         )}
       </Wrapper>
