@@ -1,4 +1,4 @@
-import React from "react"
+import React, { forwardRef } from "react"
 import {
   CapitalizeText,
   ContentWrapper,
@@ -17,9 +17,9 @@ const StyledContentWrapper = styled(ContentWrapper)`
     padding: 40px 30px 100px;
   }
 `
-const CoursesFirstSection = ({ grid, lessons }) => {
+const CoursesFirstSection = forwardRef(({ grid, lessons }, ref) => {
   return (
-    <Wrapper padding="0" bg="white">
+    <Wrapper padding="0" bg="white" ref={ref}>
       {!grid && (
         <ContentWrapper padding="103px 120px 95px 102px">
           <Flex margin="0 120px 0 0" flex="1" flexDirection="column">
@@ -76,6 +76,6 @@ const CoursesFirstSection = ({ grid, lessons }) => {
       )}
     </Wrapper>
   )
-}
+})
 
 export default CoursesFirstSection

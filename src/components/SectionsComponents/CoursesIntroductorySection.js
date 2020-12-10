@@ -11,6 +11,7 @@ import { Wrapper } from "../Wrapper/Wrapper"
 import Button from "../Button/Button"
 import LessonsGrid from "../LessonsGrid/LessonsGrid"
 import styled from "styled-components"
+import { forwardRef } from "react"
 
 const StyledContentWrapper = styled(ContentWrapper)`
   @media only screen and (max-width: 618px) {
@@ -18,9 +19,9 @@ const StyledContentWrapper = styled(ContentWrapper)`
   }
 `
 
-const CoursesIntroductorySection = ({ grid, lessons }) => {
+const CoursesIntroductorySection = forwardRef(({ grid, lessons }, ref) => {
   return (
-    <Wrapper padding="0" bg="white">
+    <Wrapper padding="0" bg="white" ref={ref}>
       {!grid && (
         <ContentWrapper padding="103px 120px 95px 102px">
           <Flex margin="0 120px 0 0" flex="1" flexDirection="column">
@@ -82,6 +83,6 @@ const CoursesIntroductorySection = ({ grid, lessons }) => {
       )}
     </Wrapper>
   )
-}
+})
 
 export default CoursesIntroductorySection

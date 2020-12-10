@@ -6,17 +6,21 @@ import GridWrapper from "../components/GridWrapper/GridWrapper"
 import ArticlePreview from "../components/ArticlePreview/ArticlePreview"
 import ItalianoSection from "../components/SectionsComponents/InItalianoSection"
 import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigation"
+import { useRef } from "react"
 
 const InItalianoPage = ({ data }) => {
   const categories = ["Grammatica", "Vocabolario", "Frasi e citazioni"]
   const [activeCategory, setActiveCategory] = useState(categories[0])
   const [page, setPage] = useState(0)
   const pageLength = 6
+  const postsRef = useRef()
 
+  const scroll = () => postsRef.current.scrollIntoView({ behavior: "smooth" })
   const handleClick = (e, category) => {
     e.preventDefault()
     setActiveCategory(category)
     setPage(0)
+    scroll()
   }
   const {
     allDatoCmsArticle: { nodes },
@@ -43,6 +47,8 @@ const InItalianoPage = ({ data }) => {
         pageLength={pageLength}
         activeCategory={activeCategory}
         posts={nodes}
+        ref={postsRef}
+        scroll={scroll}
       />
     </>
   )

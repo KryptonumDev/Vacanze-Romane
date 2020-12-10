@@ -10,11 +10,13 @@ import { useMenuDispatch, useMenuState } from "../contexts/mobileMenuContext"
 import { fadeOutAnimation } from "../animations"
 const NavigationWrapper = styled.nav`
   background-color: var(--bg-home);
+  transition: background-color 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
   a {
     text-decoration: none;
     color: var(--brown);
     &:after {
       background-color: var(--beige-2);
+      transition: background-color 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
     }
   }
 

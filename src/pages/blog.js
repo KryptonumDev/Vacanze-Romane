@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import { graphql } from "gatsby"
 import slugify from "slugify"
 import PageHeader from "../components/PageHeader/PageHeader"
@@ -12,11 +12,13 @@ const BlogPage = ({ data }) => {
   const [activeCategory, setActiveCategory] = useState(null)
   const [page, setPage] = useState(0)
   const pageLength = 6
+  const postsRef = useRef()
 
   const handleClick = (e, category) => {
     e.preventDefault()
     setActiveCategory(category)
     setPage(0)
+    postsRef.current.scrollIntoView({ behavior: "smooth" })
   }
   const {
     allDatoCmsArticle: { nodes },
@@ -43,6 +45,7 @@ const BlogPage = ({ data }) => {
         pageLength={pageLength}
         activeCategory={activeCategory}
         posts={nodes}
+        ref={postsRef}
       />
     </>
   )

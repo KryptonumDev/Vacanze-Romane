@@ -11,6 +11,10 @@ const LessonsGridStyles = styled.div`
   grid-gap: 53px 73px;
   @media only screen and (max-width: 882px) {
     grid-gap: 31px 60px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+  @media only screen and (max-width: 356px) {
+    grid-template-columns: 1fr;
   }
 `
 

@@ -166,6 +166,10 @@ const FooterStyles = styled.footer`
       ? css`
           color: var(--beige-2);
         `
+      : bg === "blue"
+      ? css`
+          color: var(--beige-2);
+        `
       : ""}
 `
 

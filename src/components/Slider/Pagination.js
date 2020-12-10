@@ -57,12 +57,15 @@ const StyledFlex = styled(Flex)`
 `
 
 const Pagination = ({ page = 0, setPage, length = 1 }) => {
-  const handleIncrease = () =>
-    setPage(
+  const handleIncrease = async () => {
+    await setPage(
       length > 1 ? Math.min(page + 1, length - 1) : Math.min(page + 1, length)
     )
+  }
 
-  const handleDecrease = () => setPage(Math.max(page - 1, 0))
+  const handleDecrease = async () => {
+    await setPage(Math.max(page - 1, 0))
+  }
 
   return (
     <StyledFlex width="100%" flexDirection="column" margin="90px 0 0">

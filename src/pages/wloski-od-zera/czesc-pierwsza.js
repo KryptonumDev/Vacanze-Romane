@@ -1,5 +1,5 @@
 import { graphql } from "gatsby"
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import PageHeader from "../../components/PageHeader/PageHeader"
 import CoursesFirstSection from "../../components/SectionsComponents/CoursesFirstSection"
 import useWindowSize from "../../utils/useWindowSize"
@@ -20,7 +20,11 @@ const navItems = [
 ]
 
 const CzescPierwszaPage = ({ data }) => {
-  const width = useWindowSize();
+  const width = useWindowSize()
+  const wrapperRef = useRef()
+  useEffect(() => {
+    wrapperRef.current.scrollIntoView({ behavior: "smooth" })
+  }, [])
   return (
     <>
       <PageHeader
@@ -32,7 +36,11 @@ const CzescPierwszaPage = ({ data }) => {
         subNav
         navItems={navItems}
       />
-      <CoursesFirstSection grid lessons={data.allDatoCmsLesson.nodes} />
+      <CoursesFirstSection
+        ref={wrapperRef}
+        grid
+        lessons={data.allDatoCmsLesson.nodes}
+      />
     </>
   )
 }

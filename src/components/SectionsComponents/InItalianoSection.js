@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { forwardRef, useState } from "react"
 import {
   CapitalizeText,
   ContentWrapper,
@@ -166,95 +166,92 @@ const StyledNoPosts = styled(Paragraph)`
   }
 `
 
-const ItalianoSection = ({
-  activeCategory,
-  posts,
-  page,
-  setPage,
-  pageLength,
-}) => {
-  const [filteredPosts, setFilteredPosts] = useState(posts)
+const ItalianoSection = forwardRef(
+  ({ activeCategory, posts, page, setPage, pageLength }, ref) => {
+    const [filteredPosts, setFilteredPosts] = useState(posts)
 
-  useEffect(() => {
-    setFilteredPosts(
-      posts
-        .filter(post => post.category === activeCategory)
-        .slice(page * pageLength, (page + 1) * pageLength)
-    )
-  }, [activeCategory, page, posts])
+    useEffect(() => {
+      setFilteredPosts(
+        posts
+          .filter(post => post.category === activeCategory)
+          .slice(page * pageLength, (page + 1) * pageLength)
+      )
+    }, [activeCategory, page, posts])
 
-  return (
-    <Wrapper padding="0" bg="white">
-      <StyledContentWrapper
-        padding="90px 192px 104px"
-        variants={fadeOutAnimation}
-        initial="hidden"
-        animate="show"
-        exit="exit"
-        key="italianoParagraph"
-      >
-        <StyledParagraph textAlign="center">
-          Ucząc się włoskiego nieustannie poruszasz się od szczegółu do ogółu:
-          od znaczenia słowa do reguł gramatycznych
-          -&nbsp;i&nbsp;z&nbsp;powrotem.
-          <br />
-          Zasady gramatyczne, zasób słownictwa i konkretne przykłady użycia słów
-          -&nbsp;w&nbsp;taką sieć złowimy sens każdej wypowiedzi po włosku.
-        </StyledParagraph>
-      </StyledContentWrapper>
-      <StyledPostsWrapper
-        variants={fadeOutAnimation}
-        initial="hidden"
-        animate="show"
-        exit="exit"
-        key="postsGrid"
-        padding="0 102px 50px"
-      >
-        <StyledGrid
+    return (
+      <Wrapper padding="0" bg="white" ref={ref}>
+        <StyledContentWrapper
+          padding="90px 192px 104px"
           variants={fadeOutAnimation}
           initial="hidden"
           animate="show"
           exit="exit"
-          itemsInRow={2}
+          key="italianoParagraph"
         >
-          {filteredPosts.length >= 1 ? (
-            filteredPosts.map(post => (
-              <PostPreview
-                key={post.id}
-                variants={fadeOutAnimation}
-                initial="hidden"
-                animate="show"
-                exit="exit"
-                category={post.category}
-                title={post.title}
-                slug={slugify(post.slug, { lower: true })}
-                featuredImage={post.featuredimage}
-              />
-            ))
-          ) : (
-            <StyledNoPosts
-              fontSize="36px"
-              lineHeight="1.11em"
-              letterSpacing="1px"
-              fontWeight="400"
-              fontFamily="Cormorant Garamond"
-            >
-              Brak artykułów do wyświetlenia.
-            </StyledNoPosts>
+          <StyledParagraph textAlign="center">
+            Ucząc się włoskiego nieustannie poruszasz się od szczegółu do ogółu:
+            od znaczenia słowa do reguł gramatycznych
+            -&nbsp;i&nbsp;z&nbsp;powrotem.
+            <br />
+            Zasady gramatyczne, zasób słownictwa i konkretne przykłady użycia
+            słów -&nbsp;w&nbsp;taką sieć złowimy sens każdej wypowiedzi po
+            włosku.
+          </StyledParagraph>
+        </StyledContentWrapper>
+        <StyledPostsWrapper
+          variants={fadeOutAnimation}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          key="postsGrid"
+          padding="0 102px 50px"
+        >
+          <StyledGrid
+            variants={fadeOutAnimation}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            itemsInRow={2}
+          >
+            {filteredPosts.length >= 1 ? (
+              filteredPosts.map(post => (
+                <PostPreview
+                  key={post.id}
+                  variants={fadeOutAnimation}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                  category={post.category}
+                  title={post.title}
+                  slug={slugify(post.slug, { lower: true })}
+                  featuredImage={post.featuredimage}
+                />
+              ))
+            ) : (
+              <StyledNoPosts
+                fontSize="36px"
+                lineHeight="1.11em"
+                letterSpacing="1px"
+                fontWeight="400"
+                fontFamily="Cormorant Garamond"
+              >
+                Brak artykułów do wyświetlenia.
+              </StyledNoPosts>
+            )}
+          </StyledGrid>
+        </StyledPostsWrapper>
+        <StyledPaginationWrapper padding="0 102px 100px">
+          {filteredPosts.length >= 1 && (
+            <Pagination
+              length={Math.floor(filteredPosts.length / pageLength)}
+              page={page}
+              setPage={setPage}
+            />
           )}
-        </StyledGrid>
-      </StyledPostsWrapper>
-      <StyledPaginationWrapper padding="0 102px 100px">
-        {filteredPosts.length >= 1 && (
-          <Pagination
-            length={Math.floor(filteredPosts.length / pageLength)}
-            page={page}
-            setPage={setPage}
-          />
-        )}
-      </StyledPaginationWrapper>
-    </Wrapper>
-  )
-}
+        </StyledPaginationWrapper>
+      </Wrapper>
+    )
+  }
+)
 
 export default ItalianoSection

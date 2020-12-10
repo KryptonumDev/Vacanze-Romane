@@ -6,6 +6,7 @@ import {
   Flex,
   Paragraph,
 } from "../../assets/styles/HomeStyles"
+import useWindowSize from "../../utils/useWindowSize"
 import Line from "../Line/Line"
 import { Wrapper } from "../Wrapper/Wrapper"
 
@@ -31,6 +32,10 @@ const StyledContentWrapper = styled(ContentWrapper)`
 const StyledFlex = styled(Flex)`
   @media only screen and (max-width: 1370px) {
     margin: 72px 0 0;
+  }
+  @media only screen and (max-width: 798px) {
+    margin: 42px 0 0;
+    flex-direction: column;
   }
 `
 
@@ -59,7 +64,50 @@ const StyledFlexStart = styled(Flex)`
   }
 `
 
+const StyledParagraphHigher = styled(Paragraph)`
+  @media only screen and (max-width: 980px) {
+    margin: 100px 60px;
+  }
+  @media only screen and (max-width: 798px) {
+    margin: 20px 0px;
+  }
+`
+
+const StyledParagraphRight = styled(Paragraph)`
+  @media only screen and (max-width: 980px) {
+    margin: 30px 0 0;
+  }
+  @media only screen and (max-width: 798px) {
+    margin: 16px 0 0;
+    line-height: 1.7em;
+  }
+`
+
+const StyledDecoratedParagraph = styled(Paragraph)`
+  @media only screen and (max-width: 798px) {
+    margin: 6px 0 0;
+  }
+`
+
+const StyledFlexLeft = styled(Flex)`
+  @media only screen and (max-width: 798px) {
+    margin: 0;
+  }
+`
+const StyledFlexRight = styled(Flex)`
+  @media only screen and (max-width: 798px) {
+    margin: 37px 0 0;
+  }
+`
+
+const StyledItalianParagraph = styled(Paragraph)`
+  @media only screen and (max-width: 798px) {
+    margin: 12px 0 0;
+  }
+`
+
 const BottegaSection = () => {
+  const width = useWindowSize()
   return (
     <Wrapper padding="0" bg="light">
       <StyledContentWrapper direction="column" padding="78px 219px 140px 102px">
@@ -81,18 +129,19 @@ const BottegaSection = () => {
           <Flex flex="1"></Flex>
         </Flex>
         <StyledFlexStart flexDirection="column" alignItems="flex-end">
-          <Paragraph margin="33px 39px 0 0px">
-            <span className="decor">andare a bottega - </span>iść do “bottegi”
-          </Paragraph>
-          <Paragraph margin="131px 78px 0 120px">
+          <StyledParagraphRight margin="33px 39px 0 0px">
+            <span className="decor">andare a bottega</span>
+            {width <= 798 && <br />} - iść do “bottegi”
+          </StyledParagraphRight>
+          <StyledParagraphHigher margin="131px 78px 0 120px">
             Lekcje, które będzie można tu wykupić jako kontynuację “Kursu
             włoskiego od zera”, są jeszcze w przygotowaniu.
-          </Paragraph>
-          <Paragraph margin="12px 0 0">
+          </StyledParagraphHigher>
+          <StyledDecoratedParagraph margin="12px 0 0">
             <span className="decor">ancora in fase si preparazione</span>
-          </Paragraph>
+          </StyledDecoratedParagraph>
           <StyledFlex alignSelf="center" margin="82px 86px 0 0">
-            <Flex
+            <StyledFlexLeft
               margin="0 60px 0 0"
               flexDirection="column"
               alignItems="center"
@@ -103,13 +152,13 @@ const BottegaSection = () => {
                 <br />
                 <span className="decor">in preparazione</span>
               </Paragraph>
-              <Paragraph margin="36px 0 0" textAlign="center">
+              <StyledItalianParagraph margin="36px 0 0" textAlign="center">
                 Włoski od zera
                 <br />
                 Część Druga 2.0.
-              </Paragraph>
-            </Flex>
-            <Flex
+              </StyledItalianParagraph>
+            </StyledFlexLeft>
+            <StyledFlexRight
               margin="0 0 0 60px"
               flexDirection="column"
               alignItems="center"
@@ -120,12 +169,12 @@ const BottegaSection = () => {
                 <br />
                 <span className="decor">in preparazione</span>
               </Paragraph>
-              <Paragraph margin="36px 0 0" textAlign="center">
+              <StyledItalianParagraph margin="36px 0 0" textAlign="center">
                 Włoski od zera
                 <br />
                 Część Trzecia 3.0.
-              </Paragraph>
-            </Flex>
+              </StyledItalianParagraph>
+            </StyledFlexRight>
           </StyledFlex>
         </StyledFlexStart>
       </StyledContentWrapper>

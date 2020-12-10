@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { ContentWrapper } from "../../assets/styles/HomeStyles"
 import { Wrapper } from "../Wrapper/Wrapper"
 import { useLocation } from "@reach/router"
+import { useEffect } from "react"
 
 export const PageHeaderStyles = styled.ul`
   list-style: none;

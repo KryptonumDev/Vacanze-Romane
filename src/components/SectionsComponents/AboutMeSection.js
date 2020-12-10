@@ -1,4 +1,5 @@
 import React from "react"
+import styled from "styled-components"
 import {
   CapitalizeText,
   ContentWrapper,
@@ -8,13 +9,96 @@ import {
 import Line from "../Line/Line"
 import { Wrapper } from "../Wrapper/Wrapper"
 
+const StyledContentWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 1354px) {
+    padding: 78px 140px 120px 102px;
+  }
+  @media only screen and (max-width: 1077px) {
+    padding: 78px 102px 120px 102px;
+  }
+  @media only screen and (max-width: 798px) {
+    padding: 78px 30px 100px;
+  }
+  @media only screen and (max-width: 598px) {
+    padding: 41px 30px 100px;
+  }
+`
+
+const MainParagraph = styled(Paragraph)`
+  @media only screen and (max-width: 1354px) {
+    margin: 0;
+    font-size: 30px;
+  }
+  @media only screen and (max-width: 692px) {
+    font-size: 18px;
+  }
+`
+
+const StyledContent = styled(Paragraph)`
+  @media only screen and (max-width: 692px) {
+    font-size: 15px;
+  }
+`
+
+const StyledWaterParagraph = styled(Paragraph)`
+  @media only screen and (max-width: 1354px) {
+    margin: 60px 0 0;
+    font-size: 30px;
+  }
+  @media only screen and (max-width: 692px) {
+    margin: 40px 0 0;
+    font-size: 18px;
+  }
+`
+
+const StyledTogether = styled(Paragraph)`
+  @media only screen and (max-width: 1354px) {
+    margin: 24px 0 0;
+    font-size: 30px;
+  }
+  @media only screen and (max-width: 692px) {
+    font-size: 18px;
+  }
+`
+
+const StyledDecor = styled(Paragraph)`
+  @media only screen and (max-width: 1354px) {
+    margin: 30px 0 0;
+    font-size: 30px;
+  }
+  @media only screen and (max-width: 692px) {
+    font-size: 18px;
+    align-self: flex-start;
+  }
+`
+
+const StyledSign = styled(Paragraph)`
+  @media only screen and (max-width: 1354px) {
+    margin: 24px 0 0;
+    font-size: 30px;
+  }
+  @media only screen and (max-width: 692px) {
+    font-size: 18px;
+    line-height: 2em;
+  }
+`
+const StyledCapitalizedText = styled(CapitalizeText)`
+  @media only screen and (max-width: 645px) {
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 4px;
+  }
+`
+
 const AboutMeSection = () => {
   return (
     <Wrapper padding="0" bg="white">
-      <ContentWrapper direction="column" padding="78px 219px 140px 102px">
-        <CapitalizeText margin="0 0 0 5px">Gen italski</CapitalizeText>
+      <StyledContentWrapper direction="column" padding="78px 219px 140px 102px">
+        <StyledCapitalizedText margin="0 0 0 5px">
+          Gen italski
+        </StyledCapitalizedText>
         <Line width="50%" />
-        <Paragraph margin="0 41px 0 0px">
+        <MainParagraph margin="0 41px 0 0px">
           Italia sama mnie wybrała.
           <br />
           <span style={{ display: "block", margin: "6px 0 0 0" }}>
@@ -27,9 +111,9 @@ const AboutMeSection = () => {
           <span style={{ display: "block", margin: "6px 0 0 0" }}>
             I bazylia.
           </span>
-        </Paragraph>
+        </MainParagraph>
         <div style={{ margin: "0 auto", maxWidth: "730px" }}>
-          <Paragraph
+          <StyledContent
             fontSize="18px"
             lineHeight="1.44em"
             letterSpacing="1px"
@@ -94,25 +178,25 @@ const AboutMeSection = () => {
             które złożyły mi się pięknie w jedną całość - a widzę to dopiero z
             perspektywy czasu - pomogą mi stworzyć tu prawdziwą oazę dla
             wszystkich obdarzonych Italskim Genem.
-          </Paragraph>
+          </StyledContent>
         </div>
-        <Paragraph margin="106px 280px 0 0">
+        <StyledWaterParagraph margin="106px 280px 0 0">
           Chciałabym - i zrobię wszystko - aby Wasz Italski Gen poczuł się tu
           jak ryba w wodzie
-        </Paragraph>
-        <Paragraph
+        </StyledWaterParagraph>
+        <StyledDecor
           fontFamily="Homemade Apple"
           textAlign="right"
           margin="30px 230px 0"
         >
           come un pesce nell’acqua
-        </Paragraph>
-        <Paragraph margin="22px 0 0">A wy razem z nim</Paragraph>
-        <Paragraph fontFamily="Homemade Apple" margin="56px 0 0">
+        </StyledDecor>
+        <StyledTogether margin="22px 0 0">A wy razem z nim</StyledTogether>
+        <StyledSign fontFamily="Homemade Apple" margin="56px 0 0">
           Monika <br />
           ps. <br />a jak Italia wybrała sobie Ciebie?
-        </Paragraph>
-      </ContentWrapper>
+        </StyledSign>
+      </StyledContentWrapper>
     </Wrapper>
   )
 }

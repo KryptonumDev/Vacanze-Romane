@@ -1,5 +1,6 @@
 import { graphql } from "gatsby"
-import React from "react"
+import React, { useRef } from "react"
+import { useEffect } from "react"
 import PageHeader from "../../components/PageHeader/PageHeader"
 import CoursesStagesSection from "../../components/SectionsComponents/CoursesStagesSection"
 

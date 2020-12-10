@@ -1,4 +1,4 @@
-import React from "react"
+import React, { forwardRef } from "react"
 import {
   CapitalizeText,
   ContentWrapper,
@@ -66,9 +66,9 @@ const StyledColumnFlex = styled(Flex)`
     margin: 24px 0 0;
   }
 `
-const CoursesContinueSection = () => {
+const CoursesContinueSection = forwardRef(({}, ref) => {
   return (
-    <Wrapper padding="0" bg="white">
+    <Wrapper padding="0" bg="white" ref={ref}>
       <StyledContentWrapper padding="103px 120px 95px 102px">
         <Flex margin="0" flex="1" flexDirection="column">
           <StyledCapitalizedText color="var(--brown)" margin="0 0 0 10px">
@@ -112,6 +112,6 @@ const CoursesContinueSection = () => {
       </StyledContentWrapper>
     </Wrapper>
   )
-}
+})
 
 export default CoursesContinueSection

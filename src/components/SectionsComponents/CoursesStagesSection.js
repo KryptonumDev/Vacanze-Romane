@@ -65,9 +65,9 @@ const StyledColumnFlex = styled(Flex)`
   }
 `
 
-const CoursesStagesSection = () => {
+const CoursesStagesSection = React.forwardRef((props, ref) => {
   return (
-    <Wrapper padding="0" bg="light">
+    <Wrapper ref={ref} padding="0" bg="light">
       <StyledContentWrapper padding="90px 107px 110px 102px">
         <Flex margin="0 16px 0 0" flex="1" flexDirection="column">
           <StyledCapitalizedText margin="0 0 0 5px">
@@ -117,6 +117,6 @@ const CoursesStagesSection = () => {
       </StyledContentWrapper>
     </Wrapper>
   )
-}
+})
 
 export default CoursesStagesSection

@@ -1,5 +1,5 @@
 import { graphql } from "gatsby"
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import PageHeader from "../../components/PageHeader/PageHeader"
 import CoursesContinueSection from "../../components/SectionsComponents/CoursesContinueSection"
 import useWindowSize from "../../utils/useWindowSize"
@@ -20,7 +20,11 @@ const navItems = [
 ]
 
 const KontynuacjaPage = ({ data }) => {
-  const width = useWindowSize();
+  const width = useWindowSize()
+  const wrapperRef = useRef()
+  useEffect(() => {
+    wrapperRef.current.scrollIntoView({ behavior: "smooth" })
+  }, [])
   return (
     <>
       <PageHeader
@@ -32,7 +36,7 @@ const KontynuacjaPage = ({ data }) => {
         subNav
         navItems={navItems}
       />
-      <CoursesContinueSection />
+      <CoursesContinueSection ref={wrapperRef} />
     </>
   )
 }
