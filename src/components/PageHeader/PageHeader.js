@@ -108,7 +108,7 @@ const SingleParagraph = styled(motion.p)`
 
 const StyledContentWrapper = styled(ContentWrapper)`
   @media only screen and (max-width: 798px) {
-    padding: 76px 20px 0;
+    padding: 76px 0px 0;
     text-align: center;
     ${({ fullHeight }) =>
       fullHeight &&
@@ -131,6 +131,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
         p {
           color: var(--brown);
           text-align: center;
+          padding: 0 20px;
         }
       `}
   }
@@ -145,6 +146,7 @@ const StyledSingleParagraph = styled(SingleParagraph)`
   @media only screen and (max-width: 798px) {
     &.single {
       font-size: 24px;
+      padding: 0 20px;
     }
   }
   @media only screen and (max-width: 520px) {
@@ -158,6 +160,7 @@ const StyledSingleParagraph = styled(SingleParagraph)`
 const StyledParagraph = styled(Paragraph)`
   @media only screen and (max-width: 1105px) {
     font-size: 28px !important;
+    padding: 0 20px;
   }
 `
 
@@ -167,6 +170,7 @@ const StyledPlainParagraph = styled(Paragraph)`
   }
   @media only screen and (max-width: 798px) {
     font-size: 15px !important;
+    padding: 0 20px;
   }
 `
 
