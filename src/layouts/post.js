@@ -27,9 +27,9 @@ const PostStyles = styled.article`
   .gatsby-image-wrapper {
     margin: 64px 0 80px;
 
-  @media only screen and (max-width: 565px) {
-   margin: 40px 40px 60px;
-  }
+    @media only screen and (max-width: 565px) {
+      margin: 40px 40px 60px;
+    }
   }
 `
 
@@ -61,10 +61,10 @@ const PostParagraph = styled.p`
       margin: 0;
       font-size: 18px;
       font-family: "Lato";
-  @media only screen and (max-width: 565px) {
-    font-size: 15px;
-    line-height: 24px;
-  }
+      @media only screen and (max-width: 565px) {
+        font-size: 15px;
+        line-height: 24px;
+      }
     }
   }
 
@@ -75,16 +75,16 @@ const PostParagraph = styled.p`
     font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
     color: ${({ color }) => (color ? color : "var(--black)")};
     letter-spacing: ${({ letterSpacing }) =>
-    letterSpacing ? letterSpacing : "1px"};
+      letterSpacing ? letterSpacing : "1px"};
     font-family: ${({ fontFamily }) => (fontFamily ? fontFamily : "Lato")};
     max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : "")};
     text-align: ${({ textAlign }) => (textAlign ? textAlign : "left")};
     text-transform: ${({ textTransform }) =>
-    textTransform ? textTransform : "normal"};
-  @media only screen and (max-width: 565px) {
-    font-size: 15px;
-    line-height: 24px;
-  }
+      textTransform ? textTransform : "normal"};
+    @media only screen and (max-width: 565px) {
+      font-size: 15px;
+      line-height: 24px;
+    }
   }
 `
 
@@ -102,11 +102,11 @@ const PostHeading = styled.h2`
   text-align: ${({ textAlign }) => (textAlign ? textAlign : "left")};
   text-transform: ${({ textTransform }) =>
     textTransform ? textTransform : "normal"};
-    @media only screen and (max-width: 565px) {
-      font-size: 24px;
-      line-height: 28px;
-      margin: 40px 0 16px;
-    }
+  @media only screen and (max-width: 565px) {
+    font-size: 24px;
+    line-height: 28px;
+    margin: 40px 0 16px;
+  }
 `
 
 const ArticlesGrid = styled.div`
@@ -115,25 +115,25 @@ const ArticlesGrid = styled.div`
   grid-template-columns: repeat(3, minmax(200px, 1fr));
   grid-gap: 41px;
   @media only screen and (max-width: 1214px) {
-    grid-template-columns: repeat(3, minmax(150px, 1fr));  
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
   }
   @media only screen and (max-width: 798px) {
     grid-template-columns: 1fr;
-    margin-top: 57px;  
+    margin-top: 57px;
   }
 
   .gatsby-image-wrapper {
     overflow: hidden !important;
     height: 218px;
-  @media only screen and (max-width: 1214px) {
-    height: 140px;
-  }
-  @media only screen and (max-width: 798px) {
-    height: 220px; 
-  }
-  @media only screen and (max-width: 565px) {
-    height: 180px; 
-  }
+    @media only screen and (max-width: 1214px) {
+      height: 140px;
+    }
+    @media only screen and (max-width: 798px) {
+      height: 220px;
+    }
+    @media only screen and (max-width: 565px) {
+      height: 180px;
+    }
     img,
     picture {
       object-fit: cover !important;
@@ -156,18 +156,18 @@ const ArticlesGrid = styled.div`
 const StyledContentWrapper = styled(ContentWrapper)`
   @media only screen and (max-width: 1400px) {
     padding: 100px 102px;
-  @media only screen and (max-width: 798px) {
-    padding: 41px 30px;
-  }
+    @media only screen and (max-width: 798px) {
+      padding: 41px 30px;
+    }
   }
 `
 const StyledArticlesWrapper = styled(ContentWrapper)`
-@media only screen and (max-width: 1014px) {
-  padding: 50px 60px 80px;
-}
-@media only screen and (max-width: 798px) {
-  padding: 50px 30px 120px;
-}
+  @media only screen and (max-width: 1014px) {
+    padding: 50px 60px 80px;
+  }
+  @media only screen and (max-width: 798px) {
+    padding: 50px 30px 120px;
+  }
 `
 
 const StyledCategory = styled(Paragraph)`
@@ -179,7 +179,7 @@ const StyledCategory = styled(Paragraph)`
 `
 
 const StyledDate = styled(Paragraph)`
-@media only screen and (max-width: 565px) {
+  @media only screen and (max-width: 565px) {
     font-size: 10px;
     line-height: 12px;
     letter-spacing: 4px;
@@ -187,15 +187,15 @@ const StyledDate = styled(Paragraph)`
 `
 
 const StyledArticleCategory = styled(Paragraph)`
-@media only screen and (max-width: 1400px) {
+  @media only screen and (max-width: 1400px) {
     font-size: 18px;
     line-height: 30px;
   }
-@media only screen and (max-width: 1100px) {
+  @media only screen and (max-width: 1100px) {
     font-size: 16px;
     line-height: 27px;
   }
-@media only screen and (max-width: 565px) {
+  @media only screen and (max-width: 565px) {
     font-size: 14px;
     line-height: 18px;
     margin: 15px 0;
@@ -203,15 +203,15 @@ const StyledArticleCategory = styled(Paragraph)`
 `
 
 const StyledArticleTitle = styled(Paragraph)`
-@media only screen and (max-width: 1400px) {
+  @media only screen and (max-width: 1400px) {
     font-size: 20px;
     line-height: 30px;
   }
-@media only screen and (max-width: 1100px) {
+  @media only screen and (max-width: 1100px) {
     font-size: 18px;
     line-height: 27px;
   }
-@media only screen and (max-width: 565px) {
+  @media only screen and (max-width: 565px) {
     font-size: 15px;
     line-height: 24px;
   }
@@ -274,12 +274,11 @@ const PostLayout = ({ data }) => {
       lowerCategory === "podróże" ||
       lowerCategory === "kuchnia"
       ? "blog"
-      : lowerCategory === "kultura" ||
-        lowerCategory === "sztuka" ||
-        lowerCategory === "podróże" ||
-        lowerCategory === "kuchnia"
-        ? "in-italiano"
-        : ""
+      : lowerCategory === "grammatica" ||
+        lowerCategory === "vocabolario" ||
+        lowerCategory === "frasi e citazioni"
+      ? "in-italiano"
+      : ""
   }
 
   return (
@@ -290,15 +289,15 @@ const PostLayout = ({ data }) => {
         article
         bg={
           category === "Kultura" ||
-            category === "Sztuka" ||
-            category === "Podróże" ||
-            category === "Kuchnia"
+          category === "Sztuka" ||
+          category === "Podróże" ||
+          category === "Kuchnia"
             ? "red"
             : category === "Grammatica" ||
               category === "Vocabolario" ||
               category === "Frasi e citazioni"
-              ? "blue"
-              : "green"
+            ? "blue"
+            : "green"
         }
       />
       <Wrapper padding="0" bg="light">
@@ -365,69 +364,69 @@ const PostLayout = ({ data }) => {
           <ArticlesGrid>
             {similarArticles.nodes.length > 0
               ? similarArticles.nodes.map(article => (
-                <article key={article.id}>
-                  <Link
-                    to={`/${baseURLFromCategory(article.category)}/${slugify(
-                      article.slug
-                    )}`}
-                  >
-                    <Image fluid={article.featuredimage.fluid} />
-                    <StyledArticleCategory
-                      fontFamily="Cormorant Garamond"
-                      fontSize="18px"
-                      fontWeight="normal"
-                      lineHeight="1em"
-                      letterSpacing="1px"
-                      textTransform="uppercase"
-                      margin="31px 0"
+                  <article key={article.id}>
+                    <Link
+                      to={`/${baseURLFromCategory(
+                        article.category
+                      )}/${slugify(article.slug, { lower: true })}`}
                     >
-                      {article.category}
-                    </StyledArticleCategory>
-                    <StyledArticleTitle
-                      fontFamily="Lato"
-                      fontSize="24px"
-                      fontWeight="500"
-                      lineHeight="0.75em"
-                      letterSpacing="1px"
-                      margin="0"
-                    >
-                      {article.title}
-                    </StyledArticleTitle>
-                  </Link>
-                </article>
-              ))
+                      <Image fluid={article.featuredimage.fluid} />
+                      <StyledArticleCategory
+                        fontFamily="Cormorant Garamond"
+                        fontSize="18px"
+                        fontWeight="normal"
+                        lineHeight="1em"
+                        letterSpacing="1px"
+                        textTransform="uppercase"
+                        margin="31px 0"
+                      >
+                        {article.category}
+                      </StyledArticleCategory>
+                      <StyledArticleTitle
+                        fontFamily="Lato"
+                        fontSize="24px"
+                        fontWeight="500"
+                        lineHeight="0.75em"
+                        letterSpacing="1px"
+                        margin="0"
+                      >
+                        {article.title}
+                      </StyledArticleTitle>
+                    </Link>
+                  </article>
+                ))
               : newArticles.nodes.map(article => (
-                <article key={article.id}>
-                  <Link
-                    to={`/${baseURLFromCategory(article.category)}/${slugify(
-                      article.slug
-                    )}`}
-                  >
-                    <Image fluid={article.featuredimage.fluid} />
-                    <StyledArticleCategory
-                      fontFamily="Cormorant Garamond"
-                      fontSize="18px"
-                      fontWeight="normal"
-                      lineHeight="1em"
-                      letterSpacing="1px"
-                      textTransform="uppercase"
-                      margin="31px 0"
+                  <article key={article.id}>
+                    <Link
+                      to={`/${baseURLFromCategory(
+                        article.category
+                      )}/${slugify(article.slug, { lower: true })}`}
                     >
-                      {article.category}
-                    </StyledArticleCategory>
-                    <StyledArticleTitle
-                      fontFamily="Lato"
-                      fontSize="24px"
-                      fontWeight="500"
-                      lineHeight="0.75em"
-                      letterSpacing="1px"
-                      margin="0"
-                    >
-                      {article.title}
-                    </StyledArticleTitle>
-                  </Link>
-                </article>
-              ))}
+                      <Image fluid={article.featuredimage.fluid} />
+                      <StyledArticleCategory
+                        fontFamily="Cormorant Garamond"
+                        fontSize="18px"
+                        fontWeight="normal"
+                        lineHeight="1em"
+                        letterSpacing="1px"
+                        textTransform="uppercase"
+                        margin="31px 0"
+                      >
+                        {article.category}
+                      </StyledArticleCategory>
+                      <StyledArticleTitle
+                        fontFamily="Lato"
+                        fontSize="24px"
+                        fontWeight="500"
+                        lineHeight="0.75em"
+                        letterSpacing="1px"
+                        margin="0"
+                      >
+                        {article.title}
+                      </StyledArticleTitle>
+                    </Link>
+                  </article>
+                ))}
           </ArticlesGrid>
         </StyledArticlesWrapper>
       </Wrapper>

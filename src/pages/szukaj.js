@@ -250,7 +250,7 @@ const SearchPage = ({ data }) => {
                       </Paragraph>
                     )}
                   </PostsGrid>
-                  {filteredArticles.length >= 1 && (
+                  {filteredArticles.length > gridPageLength && (
                     <Pagination
                       length={
                         filteredArticles.length / gridPageLength >
@@ -265,7 +265,7 @@ const SearchPage = ({ data }) => {
                   )}
                 </>
               )}
-              {filteredItalianoArticles.length > 0 && (
+              {filteredItalianoArticles.length >= 1 && (
                 <>
                   <StyledHeaderParagraph margin="100px 0 33px 2px">
                     in Italiano
@@ -314,7 +314,7 @@ const SearchPage = ({ data }) => {
                       </Paragraph>
                     )}
                   </StyledGrid>
-                  {filteredItalianoArticles.length >= 2 && (
+                  {filteredItalianoArticles.length > italianoGridPageLength && (
                     <Pagination
                       length={
                         filteredItalianoArticles.length /

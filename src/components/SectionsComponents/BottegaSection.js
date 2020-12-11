@@ -112,12 +112,12 @@ const BottegaSection = () => {
     <Wrapper padding="0" bg="light">
       <StyledContentWrapper direction="column" padding="78px 219px 140px 102px">
         <Flex>
-          <StyledFlexFull margin="0 16px 0 0" flex="1" flexDirection="column">
+          <StyledFlexFull margin="0 16px 0 0" flex="3" flexDirection="column">
             <StyledCapitalizedText margin="0 0 0 5px">
               Bottega
             </StyledCapitalizedText>
             <Line />
-            <StyledParagraph margin="0 41px 0 0px">
+            <StyledParagraph margin="0 11px 0 0px">
               Włoskie słowo <span className="decor">bottega</span> oznacza
               niewielki sklepik, będący też często pracownią czy warsztatem, do
               którego możemy zajrzeć oraz wejść prosto z ulicy.
@@ -138,7 +138,7 @@ const BottegaSection = () => {
             włoskiego od zera”, są jeszcze w przygotowaniu.
           </StyledParagraphHigher>
           <StyledDecoratedParagraph margin="12px 0 0">
-            <span className="decor">ancora in fase si preparazione</span>
+            <span className="decor">ancora in fase di preparazione</span>
           </StyledDecoratedParagraph>
           <StyledFlex alignSelf="center" margin="82px 86px 0 0">
             <StyledFlexLeft

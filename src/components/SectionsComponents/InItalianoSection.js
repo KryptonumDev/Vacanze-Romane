@@ -176,12 +176,16 @@ const StyledNoPosts = styled(Paragraph)`
 const ItalianoSection = forwardRef(
   ({ activeCategory, posts, page, setPage, pageLength }, ref) => {
     const [filteredPosts, setFilteredPosts] = useState(posts)
+    const [postsNumber, setPostsNumber] = useState(posts.length)
 
     useEffect(() => {
       setFilteredPosts(
         posts
           .filter(post => post.category === activeCategory)
           .slice(page * pageLength, (page + 1) * pageLength)
+      )
+      setPostsNumber(
+        posts.filter(post => post.category === activeCategory).length
       )
     }, [activeCategory, page, posts])
 
@@ -213,47 +217,51 @@ const ItalianoSection = forwardRef(
           key="postsGrid"
           padding="0 102px 50px"
         >
-          <StyledGrid
-            variants={fadeOutAnimation}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            itemsInRow={2}
-            noPosts={filteredPosts.length === 0}
-          >
-            {filteredPosts.length >= 1 ? (
-              filteredPosts.map(post => (
-                <PostPreview
-                  key={post.id}
-                  variants={fadeOutAnimation}
-                  initial="hidden"
-                  animate="show"
-                  exit="exit"
-                  category={post.category}
-                  title={post.title}
-                  slug={slugify(post.slug, { lower: true })}
-                  featuredImage={post.featuredimage}
-                />
-              ))
-            ) : (
-              <StyledNoPosts
-                variants={fadeOutAnimation}
-                initial="hidden"
-                animate="show"
-                exit="exit"
-                fontSize="36px"
-                lineHeight="1.11em"
-                letterSpacing="1px"
-                fontWeight="400"
-                fontFamily="Cormorant Garamond"
-              >
-                Brak artykułów do wyświetlenia.
-              </StyledNoPosts>
-            )}
-          </StyledGrid>
+          <AnimateSharedLayout type="crossfade">
+            <StyledGrid
+              variants={fadeOutAnimation}
+              initial="hidden"
+              animate="show"
+              exit="exit"
+              itemsInRow={2}
+              noPosts={filteredPosts.length === 0}
+            >
+              <AnimatePresence exitBeforeEnter>
+                {filteredPosts.length >= 1 ? (
+                  filteredPosts.map(post => (
+                    <PostPreview
+                      key={post.id}
+                      layout
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      category={post.category}
+                      title={post.title}
+                      slug={slugify(post.slug, { lower: true })}
+                      featuredImage={post.featuredimage}
+                    />
+                  ))
+                ) : (
+                  <StyledNoPosts
+                    variants={fadeOutAnimation}
+                    initial="hidden"
+                    animate="show"
+                    exit="exit"
+                    fontSize="36px"
+                    lineHeight="1.11em"
+                    letterSpacing="1px"
+                    fontWeight="400"
+                    fontFamily="Cormorant Garamond"
+                  >
+                    Brak artykułów do wyświetlenia.
+                  </StyledNoPosts>
+                )}
+              </AnimatePresence>
+            </StyledGrid>
+          </AnimateSharedLayout>
         </StyledPostsWrapper>
         <StyledPaginationWrapper padding="0 102px 100px">
-          {filteredPosts.length >= 1 && (
+          {postsNumber > 2 && (
             <Pagination
               length={Math.floor(filteredPosts.length / pageLength)}
               page={page}

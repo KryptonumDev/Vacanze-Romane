@@ -114,7 +114,7 @@ const NotOnlyBasicsSection = ({ imgFluid }) => {
             dostępnych jest wiele pomocnych filmowych lekcji nt. rozmaitych
             zagadnień gramatycznych i leksykalnych z zakresu{" "}
             <StyledCrossed
-              italianText="la lingua italiana"
+              italianText="della lingua italiana"
               top="50%"
               textBottom="-66px"
               textLeft="90px"

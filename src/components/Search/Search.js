@@ -32,6 +32,12 @@ const SearchStyles = styled(motion.button)`
       visibility: hidden;
       pointer-events: none;
     }
+    ${({ mobileSearchShown }) =>
+      mobileSearchShown &&
+      css`
+        position: absolute;
+        top: 80px;
+      `}
   }
 
   svg {
@@ -370,6 +376,16 @@ const BtnSearchWrapper = styled(motion.div)`
   display: ${({ hide }) => hide && "none"};
 `
 
+const Overlay = styled(motion.div)`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.4);
+`
+
 const Search = ({ bg, className, mobile }) => {
   const [active, setActive] = useState(false)
   const [showMobileSearch, setShowMobileSearch] = useState(false)
@@ -445,6 +461,15 @@ const Search = ({ bg, className, mobile }) => {
 
   return (
     <>
+      <AnimatePresence>
+        {showMobileSearch && (
+          <Overlay
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+        )}
+      </AnimatePresence>
       <SearchStyles
         className={className}
         type="button"
