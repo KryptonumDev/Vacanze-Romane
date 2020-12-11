@@ -4,16 +4,17 @@ import styled from "styled-components"
 import { Paragraph } from "../../assets/styles/HomeStyles"
 import Lesson from "../Lesson/Lesson"
 
-const LessonsGridStyles = styled.div`
+export const LessonsGridStyles = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 53px 73px;
-  @media only screen and (max-width: 882px) {
-    grid-gap: 31px 60px;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 43px 78px;
+  @media only screen and (max-width: 1303px) {
+    grid-gap: 43px 40px;
+
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
-  @media only screen and (max-width: 356px) {
+  @media only screen and (max-width: 791px) {
     grid-template-columns: 1fr;
   }
 `

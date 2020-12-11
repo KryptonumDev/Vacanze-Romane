@@ -9,7 +9,7 @@ import { Wrapper } from "../Wrapper/Wrapper"
 const NavStyles = styled.li`
   margin-right: ${({ italiano }) =>
     italiano ? "103px  !important" : "173px !important"};
-  @media only screen and (max-width: 1126px) {
+  @media only screen and (max-width: 1250px) {
     margin-right: 88px !important;
     &:last-child {
       margin-right: 0 !important;

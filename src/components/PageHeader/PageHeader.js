@@ -108,7 +108,8 @@ const SingleParagraph = styled(motion.p)`
 
 const StyledContentWrapper = styled(ContentWrapper)`
   @media only screen and (max-width: 798px) {
-    padding: 76px 0 0;
+    padding: 76px 20px 0;
+    text-align: center;
     ${({ fullHeight }) =>
       fullHeight &&
       css`
@@ -129,6 +130,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
         h2,
         p {
           color: var(--brown);
+          text-align: center;
         }
       `}
   }
@@ -150,6 +152,21 @@ const StyledSingleParagraph = styled(SingleParagraph)`
       font-size: 18px;
       margin: 0 0 90px;
     }
+  }
+`
+
+const StyledParagraph = styled(Paragraph)`
+  @media only screen and (max-width: 1105px) {
+    font-size: 28px !important;
+  }
+`
+
+const StyledPlainParagraph = styled(Paragraph)`
+  @media only screen and (max-width: 1105px) {
+    font-size: 18px !important;
+  }
+  @media only screen and (max-width: 798px) {
+    font-size: 15px !important;
   }
 `
 
@@ -195,23 +212,24 @@ const PageHeader = ({
               <StyledSingleParagraph
                 className="single"
                 zeroMarginBottom={subheader}
+                textAlign="center"
               >
                 {paragraph}
               </StyledSingleParagraph>
             )}
             {subheader && (
-              <Paragraph
+              <StyledParagraph
                 fontSize="48px !important"
                 lineHeight="1em !important"
                 letterSpacing="1px !important"
                 fontFamily="Cormorant Garamond !important"
-                textAling="center"
+                textAlign="center"
                 margin={
                   article ? "24px 0 148px !important" : "24px 0 70px !important"
                 }
               >
                 {subheader}
-              </Paragraph>
+              </StyledParagraph>
             )}
             {imgFluid && (
               <div style={{ width: "100%", position: "relative" }}>
@@ -226,18 +244,23 @@ const PageHeader = ({
     ) : !search ? (
       <>
         {subheader && (
-          <Paragraph
+          <StyledParagraph
             fontSize="48px !important"
             lineHeight="1em !important"
             letterSpacing="1px !important"
             fontFamily="Cormorant Garamond !important"
             margin="0 !important"
+            textAlign="center"
           >
             {subheader}
-          </Paragraph>
+          </StyledParagraph>
         )}
         {paragraph && (
-          <Paragraph margin="24px 0" fontFamily="Lato !important">
+          <Paragraph
+            textAlign="center"
+            margin="24px 0"
+            fontFamily="Lato !important"
+          >
             {paragraph}
           </Paragraph>
         )}
@@ -245,25 +268,27 @@ const PageHeader = ({
     ) : (
       <>
         {subheader && (
-          <Paragraph
+          <StyledParagraph
             fontSize="48px !important"
             lineHeight="1em !important"
             letterSpacing="1px !important"
             fontFamily="Cormorant Garamond !important"
             margin="0 !important"
+            textAlign="center"
           >
             {subheader}
-          </Paragraph>
+          </StyledParagraph>
         )}
         {paragraph && (
-          <Paragraph
+          <StyledPlainParagraph
             fontSize="24px"
             lineHeight="1.08em"
             margin="24px 0"
             fontFamily="Lato !important"
+            textAlign="center"
           >
             {paragraph}
-          </Paragraph>
+          </StyledPlainParagraph>
         )}
       </>
     )}

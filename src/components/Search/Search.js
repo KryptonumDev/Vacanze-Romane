@@ -334,6 +334,17 @@ const InputWrapper = styled(motion.div)`
       border: 1px solid
         ${({ bg }) => (bg === "light" ? "var(--brown)" : "var(--beige-2)")};
     }
+    /* &:-webkit-search-cancel-button {
+      width: 24px;
+      height: 24px;
+      background-color: ${({
+      bg,
+    }) =>
+      bg === "light"
+        ? "var(--brown)"
+        : "var(--beige-2)"};
+      -webkit-appearance: none;
+    } */
   }
 `
 
@@ -365,6 +376,7 @@ const Search = ({ bg, className, mobile }) => {
   const [showButtonSearch, setShowButtonSearch] = useState(false)
   const [inputValue, setInputValue] = useState("")
   const dispatch = useSearchDispatch()
+  const query = useSearchState()
   const menuDispatch = useMenuDispatch()
   const [message, setMessage] = useState(null)
 
@@ -395,6 +407,7 @@ const Search = ({ bg, className, mobile }) => {
 
   const handleChange = e => {
     setInputValue(e.target.value)
+    console.log("Handle change", inputValue, "  ", e.target.value)
     if (e.target.value.trim().length >= minimalLengthOfQuery) {
       setMessage(null)
       setShowButtonSearch(true)
@@ -423,19 +436,12 @@ const Search = ({ bg, className, mobile }) => {
     setMessage(null)
   }
 
-  const keyPress = e => {
-    console.log(inputValue, e.keyCode)
-    if (e.keyCode === 13) {
+  const handleKeyPress = ev => {
+    if (ev.key === "Enter") {
       handleSearch()
+      ev.preventDefault()
     }
   }
-
-  useEffect(() => {
-    document && document.addEventListener("keydown", keyPress, false)
-    return function cleanup() {
-      document.removeEventListener("keydown", keyPress, false)
-    }
-  }, [])
 
   return (
     <>
@@ -467,6 +473,8 @@ const Search = ({ bg, className, mobile }) => {
               onChange={e => handleChange(e)}
               error={message !== null}
               bg={bg}
+              type="search"
+              onKeyPress={handleKeyPress}
             />
           )}
           {!showButtonSearch ? (
@@ -562,6 +570,7 @@ const Search = ({ bg, className, mobile }) => {
                     error={message !== null}
                     autoFocus
                     bg={bg}
+                    type="search"
                   />
                   <motion.button
                     key="input-btn"

@@ -21,14 +21,15 @@ export const StyledGrid = styled(motion.div)`
   display: grid;
   width: 100%;
   max-width: ${({ smaller }) => smaller && "400px"};
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 43px 78px;
-  @media only screen and (max-width: 1191px) {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  @media only screen and (max-width: 1303px) {
+    grid-gap: 43px 40px;
+
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
   @media only screen and (max-width: 791px) {
-    grid-gap: 43px 40px;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: 1fr;
   }
   ${({ maxHeightOfImages }) =>
     maxHeightOfImages &&

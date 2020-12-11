@@ -8,13 +8,16 @@ import {
 } from "../components/contexts/searchContext"
 import { Wrapper } from "../components/Wrapper/Wrapper"
 import { ContentWrapper, Flex, Paragraph } from "../assets/styles/HomeStyles"
-import LessonsGrid from "../components/LessonsGrid/LessonsGrid"
+import LessonsGrid, {
+  LessonsGridStyles,
+} from "../components/LessonsGrid/LessonsGrid"
 import { StyledGrid } from "../components/SectionsComponents/BlogSection"
 import { fadeOutAnimation } from "../components/animations"
 import { PostPreview } from "../components/SectionsComponents/BlogSection"
 import slugify from "slugify"
 import Pagination from "../components/Slider/Pagination"
 import styled from "styled-components"
+import useWindowSize from "../utils/useWindowSize"
 
 const StyledParagraph = styled(Paragraph)`
   text-align: center;
@@ -23,6 +26,59 @@ const StyledParagraph = styled(Paragraph)`
   }
   @media only screen and (max-width: 798px) {
     font-size: 22px;
+  }
+`
+
+const PostsGrid = styled(StyledGrid)`
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 43px 78px;
+  @media only screen and (max-width: 1303px) {
+    grid-gap: 43px 40px;
+
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+  @media only screen and (max-width: 791px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const StyledContentWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 1407px) {
+    padding: 90px 102px;
+  }
+  @media only screen and (max-width: 1065px) {
+    padding: 80px 60px;
+  }
+  @media only screen and (max-width: 865px) {
+    padding: 40px 30px 40px;
+  }
+
+  @media only screen and (max-width: 798px) {
+    flex-direction: column;
+  }
+`
+
+const StyledNoPostsWrapper = styled(StyledContentWrapper)`
+  @media only screen and (max-width: 1407px) {
+    padding: 90px 102px 140px;
+  }
+  @media only screen and (max-width: 798px) {
+    padding: 90px 40px 140px;
+  }
+  @media only screen and (max-width: 400px) {
+    padding: 80px 20px 130px;
+  }
+`
+
+const StyledHeaderParagraph = styled(Paragraph)`
+  @media only screen and (max-width: 450px) {
+    font-size: 18px;
+  }
+`
+
+const StyledWrapper = styled(Wrapper)`
+  @media only screen and (max-width: 798px) {
+    padding-top: 0;
   }
 `
 
@@ -35,14 +91,16 @@ const SearchPage = ({ data }) => {
 
   const { query } = useSearchState()
   const dispatch = useSearchDispatch()
+  const width = useWindowSize()
 
   const [gridPage, setGridPage] = useState(0)
-  const gridPageLength = 3
+  const [gridPageLength, setGridPageLength] = useState(3)
   const [italianoGridPage, setItalianoGridPage] = useState(0)
-  const italianoGridPageLength = 3
+  const [italianoGridPageLength, setItalianoGridPageLength] = useState(3)
 
   const [filteredLessons, setFilteredLessons] = useState(lessons)
-  const lessonsMaxLength = 3
+  const [lessonsMaxLength, setLessonsMaxLength] = useState(3)
+
   const [filteredArticles, setFilteredArticles] = useState(blogArticles)
   const [filteredItalianoArticles, setFilteredItalianoArticles] = useState(
     italianoArticles
@@ -87,6 +145,22 @@ const SearchPage = ({ data }) => {
     )
   }, [filteredLessons, filteredArticles, filteredItalianoArticles])
 
+  useEffect(() => {
+    if (width >= 1244) {
+      setItalianoGridPageLength(3)
+      setGridPageLength(3)
+      setLessonsMaxLength(3)
+    } else if (width < 791) {
+      setItalianoGridPageLength(1)
+      setGridPageLength(1)
+      setLessonsMaxLength(2)
+    } else {
+      setItalianoGridPageLength(2)
+      setGridPageLength(2)
+      setLessonsMaxLength(2)
+    }
+  }, [width])
+
   return (
     <>
       <PageHeader
@@ -97,18 +171,16 @@ const SearchPage = ({ data }) => {
             ? total === 0
               ? "Brak wyników wyszukiwania"
               : `${total} wynik${total > 1 ? "ów" : ""} wyszukiwania`
-            : "Kliknij lupkę w prawym górnym rogu, aby je wpisać"
+            : width > 1105
+            ? "Kliknij lupkę w prawym górnym rogu, aby je wpisać."
+            : "Kliknij przycisk menu w prawym górnym rogu strony, a następnie lupę i wyszukaj."
         }
         bg="brown"
         withNav
       />
-      <Wrapper>
+      <StyledWrapper bg="light">
         {total > 0 ? (
-          <ContentWrapper
-            direction="column"
-            bg="white"
-            padding="78px 102px 100px"
-          >
+          <StyledContentWrapper direction="column" padding="78px 102px 100px">
             {filteredLessons.length > 0 && (
               <Flex
                 width="100%"
@@ -116,7 +188,9 @@ const SearchPage = ({ data }) => {
                 margin="0 0 100px"
                 flexDirection="column"
               >
-                <Paragraph margin="0 0 33px 2px">Lekcje</Paragraph>
+                <StyledHeaderParagraph margin="0 0 33px 2px">
+                  Lekcje
+                </StyledHeaderParagraph>
                 <LessonsGrid max={lessonsMaxLength} lessons={filteredLessons} />
               </Flex>
             )}
@@ -129,8 +203,10 @@ const SearchPage = ({ data }) => {
             >
               {filteredArticles.length > 0 && (
                 <>
-                  <Paragraph margin="0 0 33px 2px">Blog</Paragraph>
-                  <StyledGrid
+                  <StyledHeaderParagraph margin="0 0 33px 2px">
+                    Blog
+                  </StyledHeaderParagraph>
+                  <PostsGrid
                     variants={fadeOutAnimation}
                     initial="hidden"
                     animate="show"
@@ -173,7 +249,7 @@ const SearchPage = ({ data }) => {
                         Brak artykułów do wyświetlenia.
                       </Paragraph>
                     )}
-                  </StyledGrid>
+                  </PostsGrid>
                   {filteredArticles.length >= 1 && (
                     <Pagination
                       length={
@@ -191,7 +267,9 @@ const SearchPage = ({ data }) => {
               )}
               {filteredItalianoArticles.length > 0 && (
                 <>
-                  <Paragraph margin="100px 0 33px 2px">in Italiano</Paragraph>
+                  <StyledHeaderParagraph margin="100px 0 33px 2px">
+                    in Italiano
+                  </StyledHeaderParagraph>
                   <StyledGrid
                     variants={fadeOutAnimation}
                     initial="hidden"
@@ -262,17 +340,17 @@ const SearchPage = ({ data }) => {
                 </>
               )}
             </Flex>
-          </ContentWrapper>
+          </StyledContentWrapper>
         ) : (
-          <ContentWrapper
+          <StyledNoPostsWrapper
             direction="column"
             bg="white"
             padding="78px 102px 100px"
           >
             <StyledParagraph>Niestety, niczego nie znaleziono.</StyledParagraph>
-          </ContentWrapper>
+          </StyledNoPostsWrapper>
         )}
-      </Wrapper>
+      </StyledWrapper>
     </>
   )
 }
