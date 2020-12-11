@@ -16,17 +16,25 @@ const ButtonStyles = styled(motion.button)`
   transition: background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1),
     color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
 
+    @media only screen and (max-width: 798px) {
+      font-size: 15px;
+      padding: ${({ shorter }) => (shorter ? "13px 10px" : "14px 10px")};
+
+    min-width: 142px;
+    }
+
   ${({ disabled }) =>
     disabled &&
     css`
       opacity: 0.6;
       cursor: not-allowed;
+      pointer-events: none;
     `}
 
   &:hover {
     ${({ disabled }) =>
-      !disabled &&
-      css`
+    !disabled &&
+    css`
         color: var(--beige-2);
         background-color: var(--dead-green);
         .arrow--right {
@@ -40,7 +48,6 @@ const ButtonStyles = styled(motion.button)`
 
   ${({ bg, disabled }) =>
     bg === "green" &&
-    !disabled &&
     css`
       background-color: var(--dead-green);
       color: var(--beige-2);
@@ -48,8 +55,8 @@ const ButtonStyles = styled(motion.button)`
       &:focus,
       &:active {
         outline: none;
-        color: var(--dead-green);
-        background-color: var(--beige-2);
+        color: ${({ disabled }) => disabled ? "var(--beige-2)" : "var(--dead-green)"};
+        background-color: ${({ disabled }) => disabled ? "var(--dead-green)" : "var(--beige-2)"};
       }
     `}
 
@@ -81,6 +88,23 @@ const ButtonStyles = styled(motion.button)`
       margin-right: 30px;
     }
   }
+  @media only screen and (max-width: 798px) {
+    span {
+    font-size: 16px;
+  }
+
+  .arrow {
+    display: inline-block;
+    font-size: 26px;
+    transition: transform 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+    &--right {
+      margin-left: 6px;
+    }
+    &--left {
+      margin-right: 6px;
+    }
+  }
+    }
 `
 
 const Button = ({

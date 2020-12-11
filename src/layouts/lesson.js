@@ -17,6 +17,19 @@ const WelcomeSectionStyles = styled.section`
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr 1fr;
   grid-row-gap: 78px;
+
+  @media only screen and (max-width: 1196px) {
+    grid-row-gap: 50px;
+    padding: 0 80px;
+  }
+  @media only screen and (max-width: 898px) {
+    grid-row-gap: 40px;
+    padding: 0 50px;
+  }
+  @media only screen and (max-width: 565px) {
+    grid-row-gap: 32px;
+    padding: 0 30px;
+  }
 `
 
 const CenteredParagraph = styled.p`
@@ -37,6 +50,19 @@ const CenteredParagraph = styled.p`
 
   grid-column: 1/4;
   grid-row: 1/2;
+
+  @media only screen and (max-width: 1196px) {
+    font-size: 30px;
+    p {
+      font-size: 30px;
+    }
+  }
+  @media only screen and (max-width: 898px) {
+    font-size: 24px;
+    p {
+      font-size: 24px;
+    }
+  }
 `
 
 const SmallerParagraph = styled.p`
@@ -55,6 +81,21 @@ const SmallerParagraph = styled.p`
 
   grid-column: 1/3;
   grid-row: 2/3;
+  @media only screen and (max-width: 1196px) {
+    grid-column: 1/4;
+  }
+  @media only screen and (max-width: 898px) {
+    font-size: 16px;
+    p {
+      font-size: 16px;
+    }
+  }
+  @media only screen and (max-width: 565px) {
+    font-size: 15px;
+    p {
+      font-size: 15px;
+    }
+  }
 `
 
 const VideoSectionStyles = styled.section`
@@ -78,11 +119,54 @@ const VideoSectionStyles = styled.section`
       margin-top: 0;
     }
   }
+
+  @media only screen and (max-width: 1196px) {
+    padding: 70px 80px 73px 100px;
+    grid-template-columns: 1fr;
+    grid-row-gap: 60px;
+    ${Paragraph} {
+      font-size: 30px;
+    }
+    ol {
+      padding-right: 12px;
+    }
+    li {
+      font-size: 16px;
+      
+    }
+  }
+
+  @media only screen and (max-width: 898px) {
+    padding: 70px 50px 73px;
+    ${Paragraph} {
+      font-size: 24px;
+    }
+    ol {
+      padding-right: 12px;
+    }
+    li {
+      font-size: 15px;
+      
+    }
+  }
+  @media only screen and (max-width: 565px) {
+    padding: 60px 30px;
+  }
+
 `
 
 const InteractiveSectionStyles = styled.section`
   padding: 0 102px 0;
   margin: 82px 0;
+
+  @media only screen and (max-width: 898px) {
+    padding: 0 30px 0;
+    margin: 60px 0;
+  }
+
+  @media only screen and (max-width: 565px) {
+    margin: 50px 0;
+  }
 `
 
 const ParagraphSectionStyles = styled.section`
@@ -92,6 +176,78 @@ const ParagraphSectionStyles = styled.section`
     font-size: 18px;
     line-height: 1.44em;
     letter-spacing: 1px;
+  }
+
+  @media only screen and (max-width: 898px) {
+    padding: 24px 50px 0;
+    p {
+      font-size: 15px;
+    }
+  }
+  @media only screen and (max-width: 898px) {
+    padding: 24px 30px 0;
+  }
+
+`
+
+const StyledContentWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 1326px) {
+    padding: 78px 102px 0;
+  }
+  @media only screen and (max-width: 1196px) {
+    padding: 78px 0 0;
+  }
+  @media only screen and (max-width: 565px) {
+    padding: 41px 0 0;
+  }
+`
+
+const StyledButtonsWrapper = styled(ContentWrapper)`
+  @media only screen and (max-width: 1380px) {
+    padding: 80px 270px 100px;
+  }
+  @media only screen and (max-width: 1140px) {
+    padding: 80px 12% 100px;
+  }
+  @media only screen and (max-width: 798px) {
+    padding: 60px 30px 100px;
+  }
+  @media only screen and (max-width: 565px) {
+    padding: 50px 30px 100px;
+  }
+  @media only screen and (max-width: 414px) {
+    flex-direction: column;
+    align-items: stretch;
+      button {
+        width: 100%;
+      }
+      a:last-child {
+          margin-top: 12px;
+        }
+
+  }
+`
+
+const StyledVideoWrapper = styled.div`
+  @media only screen and (max-width: 1196px) {
+    margin: 0 !important;
+    height: 372px;
+  }
+  @media only screen and (max-width: 700px) {
+    margin: 0 !important;
+    height: 302px;
+  }
+  @media only screen and (max-width: 500px) {
+    margin: 0 !important;
+    height: 262px;
+  }
+  @media only screen and (max-width: 430px) {
+    margin: 0 !important;
+    height: 202px;
+  }
+  @media only screen and (max-width: 360px) {
+    margin: 0 !important;
+    height: 160px;
   }
 `
 
@@ -113,14 +269,14 @@ const LessonLayout = ({ data, pageContext }) => {
 
   const prevLink = prev
     ? `/wloski-od-zera/${slugify(lekcjaPoziom, {
-        lower: true,
-      })}/${slugify(prev, { lower: true })}`
+      lower: true,
+    })}/${slugify(prev, { lower: true })}`
     : null
 
   const nextLink = next
     ? `/wloski-od-zera/${slugify(lekcjaPoziom, {
-        lower: true,
-      })}/${slugify(next, { lower: true })}`
+      lower: true,
+    })}/${slugify(next, { lower: true })}`
     : null
 
   const flatNumber = +lessonNumber.split(".")[1].trim()
@@ -135,7 +291,7 @@ const LessonLayout = ({ data, pageContext }) => {
         lesson
       />
       <Wrapper padding="0" bg="white">
-        <ContentWrapper direction="column" padding="78px 122px 0">
+        <StyledContentWrapper direction="column" padding="78px 122px 0">
           {lessonContent.map(block => (
             <React.Fragment key={block.id}>
               {block.model.apiKey === "welcome_section" && (
@@ -175,7 +331,7 @@ const LessonLayout = ({ data, pageContext }) => {
                       />
                     </a>
                   </Flex>
-                  <div style={{ marginLeft: "70px" }}>
+                  <StyledVideoWrapper style={{ marginLeft: "70px" }}>
                     <ReactPlayer
                       light
                       width="100%"
@@ -183,7 +339,7 @@ const LessonLayout = ({ data, pageContext }) => {
                       url="https://www.youtube.com/watch?v=25YTx1DeH08"
                       playIcon={<IoPlayCircleSharp size="135px" color="gray" />}
                     />
-                  </div>
+                  </StyledVideoWrapper>
                 </VideoSectionStyles>
               )}
               {block.model.apiKey === "paragraf_z_tekstem" && (
@@ -203,18 +359,18 @@ const LessonLayout = ({ data, pageContext }) => {
               )}
             </React.Fragment>
           ))}
-        </ContentWrapper>
-        <ContentWrapper
+        </StyledContentWrapper>
+        <StyledButtonsWrapper
           justifyContent="space-between"
           padding="80px 370px 100px"
         >
           <Link to={prevLink}>
-            <Button disabled={prevLink === null} arrowLeft text="Poprzednia" />
+            <Button bg="green" disabled={prevLink === null} arrowLeft text="Poprzednia" />
           </Link>
           <Link to={nextLink}>
-            <Button disabled={nextLink === null} arrowRight text="Następna" />
+            <Button bg="green" disabled={nextLink === null} arrowRight text="Następna" />
           </Link>
-        </ContentWrapper>
+        </StyledButtonsWrapper>
       </Wrapper>
     </>
   )
