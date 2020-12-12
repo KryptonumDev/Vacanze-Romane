@@ -12,6 +12,7 @@ import styled from "styled-components"
 import Line from "../components/Line/Line"
 import slugify from "slugify"
 import { useLocation } from "@reach/router"
+import { Helmet } from "react-helmet"
 
 const PostStyles = styled.article`
   div {
@@ -283,6 +284,10 @@ const PostLayout = ({ data }) => {
 
   return (
     <>
+      <Helmet
+        title={`Vacanze Romane | ${data.datoCmsArticle.title}`}
+        defer={false}
+      />
       <PageHeader
         subheader={title}
         withNav

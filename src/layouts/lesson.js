@@ -9,6 +9,7 @@ import Button from "../components/Button/Button"
 import ReactPlayer from "react-player/lazy"
 import { IoPlayCircleSharp } from "react-icons/io5"
 import slugify from "slugify"
+import { Helmet } from "react-helmet"
 
 const WelcomeSectionStyles = styled.section`
   padding: 0 102px;
@@ -132,7 +133,6 @@ const VideoSectionStyles = styled.section`
     }
     li {
       font-size: 16px;
-      
     }
   }
 
@@ -146,13 +146,11 @@ const VideoSectionStyles = styled.section`
     }
     li {
       font-size: 15px;
-      
     }
   }
   @media only screen and (max-width: 565px) {
     padding: 60px 30px;
   }
-
 `
 
 const InteractiveSectionStyles = styled.section`
@@ -187,7 +185,6 @@ const ParagraphSectionStyles = styled.section`
   @media only screen and (max-width: 898px) {
     padding: 24px 30px 0;
   }
-
 `
 
 const StyledContentWrapper = styled(ContentWrapper)`
@@ -218,13 +215,12 @@ const StyledButtonsWrapper = styled(ContentWrapper)`
   @media only screen and (max-width: 414px) {
     flex-direction: column;
     align-items: stretch;
-      button {
-        width: 100%;
-      }
-      a:last-child {
-          margin-top: 12px;
-        }
-
+    button {
+      width: 100%;
+    }
+    a:last-child {
+      margin-top: 12px;
+    }
   }
 `
 
@@ -269,20 +265,24 @@ const LessonLayout = ({ data, pageContext }) => {
 
   const prevLink = prev
     ? `/wloski-od-zera/${slugify(lekcjaPoziom, {
-      lower: true,
-    })}/${slugify(prev, { lower: true })}`
+        lower: true,
+      })}/${slugify(prev, { lower: true })}`
     : null
 
   const nextLink = next
     ? `/wloski-od-zera/${slugify(lekcjaPoziom, {
-      lower: true,
-    })}/${slugify(next, { lower: true })}`
+        lower: true,
+      })}/${slugify(next, { lower: true })}`
     : null
 
   const flatNumber = +lessonNumber.split(".")[1].trim()
 
   return (
     <>
+      <Helmet
+        title={`Vacanze Romane | ${lessonNumber.split(" ")[1]} ${lessonTitle}`}
+        defer={false}
+      />
       <PageHeader
         paragraph={lessonTitle}
         subheader={lessonNumber}
@@ -350,6 +350,7 @@ const LessonLayout = ({ data, pageContext }) => {
               {block.model.apiKey === "cwiczenie_interaktywne" && (
                 <InteractiveSectionStyles>
                   <iframe
+                    title={`interaktywne ćwiczenie ${lessonTitle}`}
                     src={block.link}
                     style={{ border: "0", width: "100%", height: "500px" }}
                     webkitallowfullscreen="true"
@@ -365,10 +366,20 @@ const LessonLayout = ({ data, pageContext }) => {
           padding="80px 370px 100px"
         >
           <Link to={prevLink}>
-            <Button bg="green" disabled={prevLink === null} arrowLeft text="Poprzednia" />
+            <Button
+              bg="green"
+              disabled={prevLink === null}
+              arrowLeft
+              text="Poprzednia"
+            />
           </Link>
           <Link to={nextLink}>
-            <Button bg="green" disabled={nextLink === null} arrowRight text="Następna" />
+            <Button
+              bg="green"
+              disabled={nextLink === null}
+              arrowRight
+              text="Następna"
+            />
           </Link>
         </StyledButtonsWrapper>
       </Wrapper>

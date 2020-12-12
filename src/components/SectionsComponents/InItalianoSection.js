@@ -190,7 +190,7 @@ const ItalianoSection = forwardRef(
     }, [activeCategory, page, posts])
 
     return (
-      <Wrapper padding="0" bg="white" ref={ref}>
+      <Wrapper padding="0" bg="white">
         <StyledContentWrapper
           padding="90px 192px 104px"
           variants={fadeOutAnimation}
@@ -216,6 +216,7 @@ const ItalianoSection = forwardRef(
           exit="exit"
           key="postsGrid"
           padding="0 102px 50px"
+          ref={ref}
         >
           <AnimateSharedLayout type="crossfade">
             <StyledGrid
@@ -226,37 +227,35 @@ const ItalianoSection = forwardRef(
               itemsInRow={2}
               noPosts={filteredPosts.length === 0}
             >
-              <AnimatePresence exitBeforeEnter>
-                {filteredPosts.length >= 1 ? (
-                  filteredPosts.map(post => (
-                    <PostPreview
-                      key={post.id}
-                      layout
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      category={post.category}
-                      title={post.title}
-                      slug={slugify(post.slug, { lower: true })}
-                      featuredImage={post.featuredimage}
-                    />
-                  ))
-                ) : (
-                  <StyledNoPosts
-                    variants={fadeOutAnimation}
-                    initial="hidden"
-                    animate="show"
-                    exit="exit"
-                    fontSize="36px"
-                    lineHeight="1.11em"
-                    letterSpacing="1px"
-                    fontWeight="400"
-                    fontFamily="Cormorant Garamond"
-                  >
-                    Brak artykułów do wyświetlenia.
-                  </StyledNoPosts>
-                )}
-              </AnimatePresence>
+              {filteredPosts.length >= 1 ? (
+                filteredPosts.map(post => (
+                  <PostPreview
+                    key={post.id}
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    category={post.category}
+                    title={post.title}
+                    slug={slugify(post.slug, { lower: true })}
+                    featuredImage={post.featuredimage}
+                  />
+                ))
+              ) : (
+                <StyledNoPosts
+                  variants={fadeOutAnimation}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                  fontSize="36px"
+                  lineHeight="1.11em"
+                  letterSpacing="1px"
+                  fontWeight="400"
+                  fontFamily="Cormorant Garamond"
+                >
+                  Brak artykułów do wyświetlenia.
+                </StyledNoPosts>
+              )}
             </StyledGrid>
           </AnimateSharedLayout>
         </StyledPostsWrapper>

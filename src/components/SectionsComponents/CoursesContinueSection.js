@@ -13,13 +13,9 @@ import styled from "styled-components"
 
 const StyledContentWrapper = styled(ContentWrapper)`
   @media only screen and (max-width: 1081px) {
-    padding: 90px 70px 100px 60px;
+    padding: 0;
   }
-  @media only screen and (max-width: 889px) {
-    padding: 80px 30px 90px;
-  }
-  @media only screen and (max-width: 798px) {
-    padding: 40px 30px 100px;
+  @media only screen and (max-width: 981px) {
     flex-direction: column;
   }
 `
@@ -59,58 +55,58 @@ const StyledCapitalizedText = styled(CapitalizeText)`
 `
 
 const StyledColumnFlex = styled(Flex)`
-  @media only screen and (max-width: 798px) {
+  @media only screen and (max-width: 981px) {
     margin: 50px 0 0;
   }
   @media only screen and (max-width: 645px) {
     margin: 24px 0 0;
   }
 `
+
+const StyledFlex = styled(Flex)`
+  @media only screen and (max-width: 1221px) {
+    flex: 2;
+  }
+`
 const CoursesContinueSection = forwardRef(({}, ref) => {
   return (
-    <Wrapper padding="0" bg="white" ref={ref}>
-      <StyledContentWrapper padding="103px 120px 95px 102px">
-        <Flex margin="0" flex="1" flexDirection="column">
-          <StyledCapitalizedText color="var(--brown)" margin="0 0 0 10px">
-            KONTYNUACJA “KURSU WŁOSKIEGO OD ZERA”
-          </StyledCapitalizedText>
-          <Line bg="var(--brown)" />
-          <StyledParagraph
-            fontFamily="Cormorant Garamond"
-            fontSize="36px"
-            lineHeight="1.11em"
-            letterSpacing="1px"
-            margin="0 52px 0 0"
-          >
-            Jeśli masz już opanowane podstawy “Kursu języka włoskiego od zera”,
-            możesz kontynuować naukę korzystając z pakietów płatnych lekcji.
-            <br />
-            Każdy pakiet będzie składał się z wielu filmów, z e-booka dokładnie
-            opisującego materiał z filmów oraz z ćwiczeń na zakończenie każdej
-            filmowej lekcji.
-            <br />
-            Wszystkie kolejne części kursu dostępne będą do kupienia w zakładce
-            BOTTEGA
-          </StyledParagraph>
-        </Flex>
-        <StyledColumnFlex
-          margin="140px 0 0 15px"
-          flex="1"
-          flexDirection="column"
+    <StyledContentWrapper padding="0">
+      <StyledFlex margin="0" flex="1" flexDirection="column">
+        <StyledCapitalizedText color="var(--brown)" margin="0 0 0 10px">
+          KONTYNUACJA “KURSU WŁOSKIEGO OD ZERA”
+        </StyledCapitalizedText>
+        <Line bg="var(--brown)" />
+        <StyledParagraph
+          fontFamily="Cormorant Garamond"
+          fontSize="36px"
+          lineHeight="1.11em"
+          letterSpacing="1px"
+          margin="0 52px 0 0"
         >
-          <SecondParagraph
-            fontFamily="Lato"
-            fontSize="18px"
-            lineHeight="1.44em"
-            letterSpacing="1px"
-          >
-            Poniżej znajdziesz dokładny spis treści każdej kolejnej części
-            “Kursu języka włoskiego od zera”. W tej chwili kolejne części kursu
-            są dopiero w przygotowaniu.
-          </SecondParagraph>
-        </StyledColumnFlex>
-      </StyledContentWrapper>
-    </Wrapper>
+          Jeśli masz już opanowane podstawy “Kursu języka włoskiego od zera”,
+          możesz kontynuować naukę korzystając z pakietów płatnych lekcji.
+          <br />
+          Każdy pakiet będzie składał się z wielu filmów, z e-booka dokładnie
+          opisującego materiał z filmów oraz z ćwiczeń na zakończenie każdej
+          filmowej lekcji.
+          <br />
+          Wszystkie kolejne części kursu dostępne będą do kupienia w zakładce
+          BOTTEGA
+        </StyledParagraph>
+      </StyledFlex>
+      <StyledColumnFlex margin="140px 0 0 15px" flex="1" flexDirection="column">
+        <SecondParagraph
+          fontFamily="Lato"
+          fontSize="18px"
+          lineHeight="1.44em"
+          letterSpacing="1px"
+        >
+          Poniżej znajdziesz dokładny spis treści każdej kolejnej części “Kursu
+          języka włoskiego od zera”. W tej chwili kolejne części kursu są
+          dopiero w przygotowaniu.
+        </SecondParagraph>
+      </StyledColumnFlex>
+    </StyledContentWrapper>
   )
 })
 

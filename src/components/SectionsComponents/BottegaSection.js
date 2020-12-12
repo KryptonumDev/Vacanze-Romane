@@ -140,7 +140,7 @@ const BottegaSection = () => {
           <StyledDecoratedParagraph margin="12px 0 0">
             <span className="decor">ancora in fase di preparazione</span>
           </StyledDecoratedParagraph>
-          <StyledFlex alignSelf="center" margin="82px 86px 0 0">
+          <StyledFlex alignSelf="center" margin="82px 0 0 0">
             <StyledFlexLeft
               margin="0 60px 0 0"
               flexDirection="column"

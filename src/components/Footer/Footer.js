@@ -20,16 +20,22 @@ const NavList = [
   {
     title: "Włoski od zera",
     items: [
-      { name: "Wprowadzenie!", link: "/wloski-od-zera/wprowadzenie" },
-      { name: "Część pierwsza", link: "/wloski-od-zera/czesc-pierwsza" },
-      { name: "Kontynuacja", link: "/wloski-od-zera/kontynuacja" },
+      { name: "Wprowadzenie!", link: "/wloski-od-zera" },
+      { name: "Część pierwsza", link: "/wloski-od-zera" },
+      { name: "Kontynuacja", link: "/wloski-od-zera" },
     ],
   },
   {
     title: "Jestem tutaj",
     items: [
-      { name: "Facebook!", href: "https://facebook.com" },
-      { name: "Youtube", href: "https://youtube.com" },
+      {
+        name: "Facebook!",
+        href: "https://www.facebook.com/italiano.Vacanze.Romane/",
+      },
+      {
+        name: "Youtube",
+        href: "https://www.youtube.com/channel/UCXqPFvurDxiAFJknjZC5UbQ",
+      },
       { name: "Instagram", href: "https://instagram.com" },
     ],
   },
@@ -114,6 +120,15 @@ const NavStyles = styled(motion.div)`
     &:focus {
       outline: none;
     }
+    &.italiano:after {
+      transform: scaleY(0);
+    }
+  }
+`
+
+const StyledLink = styled(Link)`
+  &:after {
+    transform: ${({ italiano }) => italiano && "scaleY(0)"};
   }
 `
 
@@ -127,9 +142,13 @@ const FooterNavigation = ({ bg }) => (
             <React.Fragment key={item.name}>
               {item.link ? (
                 <li>
-                  <Link activeClassName="active" to={item.link}>
+                  <StyledLink
+                    activeClassName="active"
+                    className={item.link.includes("wloski") && "italiano"}
+                    to={item.link}
+                  >
                     {item.name}
-                  </Link>
+                  </StyledLink>
                 </li>
               ) : (
                 <li>

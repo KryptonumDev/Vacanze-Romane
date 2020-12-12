@@ -98,9 +98,10 @@ const SearchPage = ({ data }) => {
   const [italianoGridPage, setItalianoGridPage] = useState(0)
   const [italianoGridPageLength, setItalianoGridPageLength] = useState(3)
 
-  const [filteredLessons, setFilteredLessons] = useState(lessons)
-  const [lessonsMaxLength, setLessonsMaxLength] = useState(3)
+  const [lessonsPage, setLessonsPage] = useState(0)
+  const [lessonsPageLength, setLessonsPageLength] = useState(3)
 
+  const [filteredLessons, setFilteredLessons] = useState(lessons)
   const [filteredArticles, setFilteredArticles] = useState(blogArticles)
   const [filteredItalianoArticles, setFilteredItalianoArticles] = useState(
     italianoArticles
@@ -139,7 +140,7 @@ const SearchPage = ({ data }) => {
 
   useEffect(() => {
     setTotal(
-      Math.min(lessonsMaxLength, filteredLessons.length) +
+      filteredLessons.length +
         filteredArticles.length +
         filteredItalianoArticles.length
     )
@@ -149,15 +150,15 @@ const SearchPage = ({ data }) => {
     if (width >= 1244) {
       setItalianoGridPageLength(3)
       setGridPageLength(3)
-      setLessonsMaxLength(3)
+      setLessonsPageLength(3)
     } else if (width < 791) {
       setItalianoGridPageLength(1)
       setGridPageLength(1)
-      setLessonsMaxLength(2)
+      setLessonsPageLength(2)
     } else {
       setItalianoGridPageLength(2)
       setGridPageLength(2)
-      setLessonsMaxLength(2)
+      setLessonsPageLength(2)
     }
   }, [width])
 
@@ -191,7 +192,29 @@ const SearchPage = ({ data }) => {
                 <StyledHeaderParagraph margin="0 0 33px 2px">
                   Lekcje
                 </StyledHeaderParagraph>
-                <LessonsGrid max={lessonsMaxLength} lessons={filteredLessons} />
+                <LessonsGrid
+                  max={lessonsPageLength}
+                  lessons={filteredLessons.slice(
+                    lessonsPage * lessonsPageLength,
+                    (lessonsPage + 1) * lessonsPageLength
+                  )}
+                  withPage
+                  page={lessonsPage}
+                  setPage={setLessonsPage}
+                />
+                {filteredLessons.length > lessonsPageLength && (
+                  <Pagination
+                    length={
+                      filteredLessons.length / lessonsPageLength >
+                      Math.floor(filteredLessons.length / lessonsPageLength)
+                        ? 1 +
+                          Math.floor(filteredLessons.length / lessonsPageLength)
+                        : Math.floor(filteredLessons.length / lessonsPageLength)
+                    }
+                    page={lessonsPage}
+                    setPage={setLessonsPage}
+                  />
+                )}
               </Flex>
             )}
 

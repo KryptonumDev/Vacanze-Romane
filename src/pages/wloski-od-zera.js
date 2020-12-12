@@ -2,9 +2,9 @@ import { graphql } from "gatsby"
 import React, { useRef, useState } from "react"
 import { useEffect } from "react"
 import slugify from "slugify"
-import CategoryNavigation from "../../components/CategoryNavigation/CategoryNavigation"
-import PageHeader from "../../components/PageHeader/PageHeader"
-import CoursesStagesSection from "../../components/SectionsComponents/CoursesStagesSection"
+import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigation"
+import PageHeader from "../components/PageHeader/PageHeader"
+import CoursesStagesSection from "../components/SectionsComponents/CoursesStagesSection"
 
 const navItems = [
   {
@@ -22,8 +22,13 @@ const navItems = [
 ]
 
 const CoursesPage = ({ data }) => {
-  const courses = ["Wprowadzenie 0.0", "Część pierwsza 1.0", "Kontynuacja"]
-  const [activeCourse, setActiveCourse] = useState(null)
+  const courses = [
+    "Kurs włoskiego od zera",
+    "Wprowadzenie 0.0",
+    "Część pierwsza 1.0",
+    "Kontynuacja",
+  ]
+  const [activeCourse, setActiveCourse] = useState(courses[0])
   const [page, setPage] = useState(0)
   const pageLength = 15
   const postsRef = useRef()
@@ -33,13 +38,12 @@ const CoursesPage = ({ data }) => {
     e.preventDefault()
     setActiveCourse(course)
     setPage(0)
-    // scroll()
+    scroll()
   }
 
   useEffect(() => {
-    setActiveCourse(null);
+    setActiveCourse(courses[0])
   }, [])
-
 
   return (
     <>
@@ -62,6 +66,7 @@ const CoursesPage = ({ data }) => {
         page={page}
         setPage={setPage}
         pageLength={pageLength}
+        ref={postsRef}
       />
     </>
   )
@@ -80,16 +85,15 @@ export const query = graphql`
         }
       }
     }
-    lessons: allDatoCmsLesson(sort:{fields:lessonNumber}) {
-    nodes {
-      id
-      lekcjaPoziom
-      lessonNumber
-      lessonTitle
+    lessons: allDatoCmsLesson(sort: { fields: lessonNumber }) {
+      nodes {
+        id
+        lekcjaPoziom
+        lessonNumber
+        lessonTitle
+      }
     }
   }
-}
-
 `
 
 export default CoursesPage

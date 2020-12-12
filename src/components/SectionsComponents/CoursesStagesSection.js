@@ -13,6 +13,7 @@ import Lesson from "../Lesson/Lesson"
 import Line from "../Line/Line"
 import Pagination from "../Slider/Pagination"
 import { Wrapper } from "../Wrapper/Wrapper"
+import CoursesContinueSection from "./CoursesContinueSection"
 import { StyledPostsWrapper } from "./InItalianoSection"
 
 const StyledContentWrapper = styled(ContentWrapper)`
@@ -54,7 +55,7 @@ const StyledParagraph = styled(Paragraph)`
     margin-top: 26px;
   }
   @media only screen and (max-width: 645px) {
-    font-size: 18px;
+    font-size: 22px;
     margin: 3px 0 0;
   }
 `
@@ -110,9 +111,17 @@ const StyledPaginationWrapper = styled(ContentWrapper)`
   }
 `
 
-const StyledWrapper = styled(Wrapper)`
-  padding: 90px 0 100px;
+const StyledPosts = styled(StyledPostsWrapper)`
+  padding: 90px 102px 100px;
+  @media only screen and (max-width: 1064px) {
+    padding: 60px 60px 100px;
+  }
+  @media only screen and (max-width: 645px) {
+    padding: 40px 30px 100px;
+  }
 `
+
+const StyledWrapper = styled(Wrapper)``
 
 const CoursesStagesSection = React.forwardRef(
   ({ lessons, activeCourse, page, setPage, pageLength }, ref) => {
@@ -135,7 +144,7 @@ const CoursesStagesSection = React.forwardRef(
     return (
       <StyledWrapper ref={ref} padding="0" bg="light">
         <AnimatePresence>
-          {activeCourse === null ? (
+          {activeCourse === "Kurs włoskiego od zera" ? (
             <StyledContentWrapper
               key="content"
               variants={fadeOutAnimation}
@@ -197,7 +206,7 @@ const CoursesStagesSection = React.forwardRef(
             </StyledContentWrapper>
           ) : (
             <>
-              <StyledPostsWrapper
+              <StyledPosts
                 variants={fadeOutAnimation}
                 initial="hidden"
                 animate="show"
@@ -225,22 +234,10 @@ const CoursesStagesSection = React.forwardRef(
                       />
                     ))
                   ) : (
-                    <StyledNoPosts
-                      variants={fadeOutAnimation}
-                      initial="hidden"
-                      animate="show"
-                      exit="exit"
-                      fontSize="36px"
-                      lineHeight="1.11em"
-                      letterSpacing="1px"
-                      fontWeight="400"
-                      fontFamily="Cormorant Garamond"
-                    >
-                      Brak lekcji do wyświetlenia.
-                    </StyledNoPosts>
+                    <CoursesContinueSection />
                   )}
                 </StyledGrid>
-              </StyledPostsWrapper>
+              </StyledPosts>
               {/* <StyledPaginationWrapper padding="0 102px 100px">
                 {filteredLessons.length >= 1 && (
                   <Pagination

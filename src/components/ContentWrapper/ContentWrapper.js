@@ -29,7 +29,7 @@ const ContentWrapper = ({ children }) => {
           pageExit: {
             opacity: 0,
             transition: {
-              duration: 0.3,
+              duration: 0.5,
               ease: [0.39, 0.575, 0.565, 1],
             },
           },

@@ -7,10 +7,21 @@ import { PageHeaderStyles } from "../PageHeaderNav/PageHeaderNav"
 import { Wrapper } from "../Wrapper/Wrapper"
 
 const NavStyles = styled.li`
-  margin-right: ${({ italiano }) =>
-    italiano ? "103px  !important" : "173px !important"};
+  margin-right: 103px;
   @media only screen and (max-width: 1250px) {
-    margin-right: 88px !important;
+    margin-right: 88px;
+    &:last-child {
+      margin-right: 0 !important;
+    }
+  }
+  @media only screen and (max-width: 1131px) {
+    margin-right: 60px !important;
+    &:last-child {
+      margin-right: 0 !important;
+    }
+  }
+  @media only screen and (max-width: 1006px) {
+    margin-right: 40px !important;
     &:last-child {
       margin-right: 0 !important;
     }
@@ -35,6 +46,13 @@ const NavStyles = styled.li`
     font-size: 24px;
     line-height: 0.6em;
     letter-spacing: 1px;
+
+    @media only screen and (max-width: 1263px) {
+      font-size: 20px;
+    }
+    @media only screen and (max-width: 1006px) {
+      font-size: 18px;
+    }
 
     &:after {
       content: "";
@@ -73,6 +91,9 @@ const StyledContentWrapper = styled(ContentWrapper)`
   @media only screen and (max-width: 1128px) {
     padding: 40px 56px;
     justify-content: center;
+  }
+  @media only screen and (max-width: 1005px) {
+    padding: 40px 30px;
   }
   @media only screen and (max-width: 798px) {
     padding: 36px 20px;

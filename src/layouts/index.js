@@ -13,6 +13,7 @@ import {
 } from "../components/contexts/mobileMenuContext"
 import ScrollToTop from "react-scroll-to-top"
 import { HiOutlineArrowNarrowUp } from "react-icons/hi"
+import { Helmet } from "react-helmet"
 const Wrapper = styled(motion.div)`
   margin: 0 auto;
 `
@@ -74,26 +75,43 @@ const PageLayout = ({ children }) => {
   }
 
   return (
-    <MenuProvider>
-      <SearchProvider>
-        <Wrapper>
-          <GlobalStyle />
-          <Navigation bg={getHeaderBgFromLocation()} />
-          <AnimatePresence>
-            <ContentWrapper>{children}</ContentWrapper>
-          </AnimatePresence>
-          <Footer bg={getFooterBgFromLocation()} />
-        </Wrapper>
-        <ScrollToTop
-          smooth
-          top={700}
-          className="scroll-to-top"
-          component={
-            <HiOutlineArrowNarrowUp size="26px" color="var(--beige-2)" />
-          }
-        />
-      </SearchProvider>
-    </MenuProvider>
+    <>
+      <Helmet
+        title={`Vacanze Romane | ${
+          location.pathname === "/"
+            ? "Ciao"
+            : location.pathname
+                .replaceAll("/", "")
+                .split("-")
+                .map(
+                  name => `${name.charAt(0).toUpperCase()}${name.substring(1)}`
+                )
+                .join(" ")
+                .replace("Wloski", "Włoski")
+        }`}
+        defer={false}
+      />
+      <MenuProvider>
+        <SearchProvider>
+          <Wrapper>
+            <GlobalStyle />
+            <Navigation bg={getHeaderBgFromLocation()} />
+            <AnimatePresence>
+              <ContentWrapper>{children}</ContentWrapper>
+            </AnimatePresence>
+            <Footer bg={getFooterBgFromLocation()} />
+          </Wrapper>
+          <ScrollToTop
+            smooth
+            top={700}
+            className="scroll-to-top"
+            component={
+              <HiOutlineArrowNarrowUp size="26px" color="var(--beige-2)" />
+            }
+          />
+        </SearchProvider>
+      </MenuProvider>
+    </>
   )
 }
 export default PageLayout

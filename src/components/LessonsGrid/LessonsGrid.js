@@ -3,6 +3,7 @@ import React from "react"
 import styled from "styled-components"
 import { Paragraph } from "../../assets/styles/HomeStyles"
 import Lesson from "../Lesson/Lesson"
+import Pagination from "../Slider/Pagination"
 
 export const LessonsGridStyles = styled.div`
   width: 100%;

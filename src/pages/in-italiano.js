@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import slugify from "slugify"
 import PageHeader from "../components/PageHeader/PageHeader"
@@ -14,8 +14,12 @@ const InItalianoPage = ({ data }) => {
   const [page, setPage] = useState(0)
   const pageLength = 6
   const postsRef = useRef()
+  const [firstLaunch, setFirstLaunch] = useState(true)
 
-  const scroll = () => postsRef.current.scrollIntoView({ behavior: "smooth" })
+  const scroll = () => {
+    postsRef.current.scrollIntoView({ behavior: "smooth" })
+  }
+
   const handleClick = (e, category) => {
     e.preventDefault()
     setActiveCategory(category)
@@ -25,6 +29,18 @@ const InItalianoPage = ({ data }) => {
   const {
     allDatoCmsArticle: { nodes },
   } = data
+
+  useEffect(() => {
+    if (!firstLaunch) {
+      setTimeout(() => {
+        scroll()
+      }, 150)
+    }
+  }, [page])
+
+  useEffect(() => {
+    setFirstLaunch(false)
+  }, [])
 
   return (
     <>

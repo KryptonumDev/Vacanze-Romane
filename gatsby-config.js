@@ -2,9 +2,10 @@ require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Vacanze Romane`,
+    siteUrl: `https://wonderful-allen-76ffff.netlify.app/`,
+    description: `Vacanze Romane to internetowa szkoła języka włoskiego. Przeznaczona dla samouków i nie tylko.`,
+    author: `@kryptonum`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -40,12 +41,13 @@ module.exports = {
         google: {
           families: [
             "Cormorant Garamond:400",
-            "Homemade Apple:400",
+            "Homemade Apple:400:latin-ext",
             "Lato:400",
           ],
         },
       },
     },
+    `gatsby-plugin-advanced-sitemap`,
     {
       resolve: `gatsby-source-datocms`,
       options: {
@@ -54,20 +56,18 @@ module.exports = {
         apiToken: process.env.API_DATO_CMS,
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-manifest`,
-    //   options: {
-    //     name: `gatsby-starter-default`,
-    //     short_name: `starter`,
-    //     start_url: `/`,
-    //     background_color: `#663399`,
-    //     theme_color: `#663399`,
-    //     display: `minimal-ui`,
-    //     icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
-    //   },
-    // },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Vacanze Romane szkoła języka włoskiego`,
+        short_name: `Vacanze Romane`,
+        start_url: `/`,
+        background_color: `#f8f5f1`,
+        theme_color: `#f8f5f1`,
+        display: `minimal-ui`,
+        icon: `src/assets/images/logo-vacanze.svg`, // This path is relative to the root of the site.
+      },
+    },
+    `gatsby-plugin-offline`,
   ],
 }

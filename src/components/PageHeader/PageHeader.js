@@ -92,10 +92,7 @@ const HeaderOverlay = styled(motion.div)`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(20, 16, 13, 0.6);
-  @media only screen and (max-width: 798px) {
-    background-color: rgba(20, 16, 13, 0.3);
-  }
+  background-color: rgba(20, 16, 13, 0.3);
 `
 
 const SingleParagraph = styled(motion.p)`
@@ -206,7 +203,7 @@ const PageHeader = ({
                 animate={{
                   opacity: 1,
                   transition: {
-                    duration: 0.4,
+                    duration: 1,
                     delay: 0.2,
                     ease: [0.39, 0.575, 0.565, 1],
                   },
@@ -222,8 +219,8 @@ const PageHeader = ({
                 animate={{
                   opacity: 1,
                   transition: {
-                    duration: 0.4,
-                    delay: 0.45,
+                    duration: 1,
+                    delay: 0.8,
                     ease: [0.39, 0.575, 0.565, 1],
                   },
                 }}
@@ -238,8 +235,8 @@ const PageHeader = ({
                 animate={{
                   opacity: 1,
                   transition: {
-                    duration: 0.4,
-                    delay: 0.7,
+                    duration: 1,
+                    delay: 1.4,
                     ease: [0.39, 0.575, 0.565, 1],
                   },
                 }}
@@ -263,7 +260,10 @@ const PageHeader = ({
                 zeroMarginBottom={subheader}
                 textAlign="center"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { delay: 0.3 } }}
+                animate={{
+                  opacity: 1,
+                  transition: { duration: 0.8, delay: 0.4 },
+                }}
                 exit={{ opacity: 0 }}
               >
                 {paragraph}
@@ -280,7 +280,10 @@ const PageHeader = ({
                   article ? "24px 0 148px !important" : "24px 0 70px !important"
                 }
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { delay: 0.3 } }}
+                animate={{
+                  opacity: 1,
+                  transition: { duration: 0.8, delay: 0.4 },
+                }}
                 exit={{ opacity: 0 }}
               >
                 {subheader}
@@ -292,8 +295,8 @@ const PageHeader = ({
                 animate={{
                   opacity: 1,
                   transition: {
-                    delay: 0.4,
-                    duration: 0.6,
+                    delay: 0.9,
+                    duration: 1,
                     ease: [0.39, 0.575, 0.565, 1],
                   },
                 }}
@@ -319,7 +322,7 @@ const PageHeader = ({
             margin="0 !important"
             textAlign="center"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { delay: 0.3 } }}
+            animate={{ opacity: 1, transition: { duration: 0.8, delay: 0.4 } }}
             exit={{ opacity: 0 }}
           >
             {subheader}
@@ -331,7 +334,7 @@ const PageHeader = ({
             margin="24px 0"
             fontFamily="Lato !important"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { delay: 0.3 } }}
+            animate={{ opacity: 1, transition: { duration: 0.8, delay: 0.4 } }}
             exit={{ opacity: 0 }}
           >
             {paragraph}
@@ -349,7 +352,7 @@ const PageHeader = ({
             margin="0 !important"
             textAlign="center"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { delay: 0.3 } }}
+            animate={{ opacity: 1, transition: { duration: 0.8, delay: 0.4 } }}
             exit={{ opacity: 0 }}
           >
             {subheader}
@@ -363,7 +366,7 @@ const PageHeader = ({
             fontFamily="Lato !important"
             textAlign="center"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { delay: 0.5 } }}
+            animate={{ opacity: 1, transition: { duration: 0.6, delay: 0.5 } }}
             exit={{ opacity: 0 }}
           >
             {paragraph}

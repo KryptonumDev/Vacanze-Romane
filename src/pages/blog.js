@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { graphql } from "gatsby"
 import slugify from "slugify"
 import PageHeader from "../components/PageHeader/PageHeader"
@@ -13,6 +13,7 @@ const BlogPage = ({ data }) => {
   const [page, setPage] = useState(0)
   const pageLength = 6
   const postsRef = useRef()
+  const [firstLaunch, setFirstLaunch] = useState(true)
 
   const handleClick = (e, category) => {
     e.preventDefault()
@@ -24,11 +25,23 @@ const BlogPage = ({ data }) => {
     allDatoCmsArticle: { nodes },
   } = data
 
+  useEffect(() => {
+    if (!firstLaunch) {
+      setTimeout(() => {
+        postsRef.current.scrollIntoView({ behavior: "smooth" })
+      }, 150)
+    }
+  }, [page])
+
+  useEffect(() => {
+    setFirstLaunch(false)
+  }, [])
+
   return (
     <>
       <PageHeader
         paragraph="A tavola"
-        imgFluid={nodes[0]?.featuredimage.fluid}
+        imgFluid={nodes[1]?.featuredimage.fluid}
         bg="red"
         withNav
       />
