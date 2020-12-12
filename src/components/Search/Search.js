@@ -12,7 +12,7 @@ import { navigate } from "gatsby"
 import { useLocation } from "@reach/router"
 import { useMenuDispatch, useMenuState } from "../contexts/mobileMenuContext"
 
-const SearchStyles = styled(motion.button)`
+const SearchStyles = styled(motion.div)`
   cursor: pointer;
   border: none;
   background-color: transparent;
@@ -26,18 +26,12 @@ const SearchStyles = styled(motion.button)`
     }
   }
   @media only screen and (max-width: 1105px) {
-    margin-top: 20px;
+    margin-bottom: 20px;
     &.desktop {
       display: none;
       visibility: hidden;
       pointer-events: none;
     }
-    ${({ mobileSearchShown }) =>
-      mobileSearchShown &&
-      css`
-        position: absolute;
-        top: 80px;
-      `}
   }
 
   svg {
@@ -48,9 +42,6 @@ const SearchStyles = styled(motion.button)`
   &:active,
   &:focus {
     outline: none;
-    svg {
-      transform: scale(1.1) translateX(-1px);
-    }
   }
 
   ${({ mobile }) =>
@@ -269,8 +260,8 @@ const StyledMessage = styled(motion.p)`
   }
   @media only screen and (max-width: 1105px) {
     text-align: center;
-    bottom: -50px;
-    font-size: 13px;
+    font-size: 12px;
+    bottom: 48px;
   }
 `
 
@@ -305,14 +296,6 @@ const InputWrapper = styled(motion.div)`
   height: 100%;
   padding: 0;
   pointer-events: all;
-  ${({ showMobileSearch }) =>
-    showMobileSearch &&
-    css`
-      justify-content: space-between;
-      max-width: 264px;
-      width: 80vw;
-      padding: 0 13px 0 0;
-    `}
 
   input {
     background-color: transparent;
@@ -340,17 +323,6 @@ const InputWrapper = styled(motion.div)`
       border: 1px solid
         ${({ bg }) => (bg === "light" ? "var(--brown)" : "var(--beige-2)")};
     }
-    /* &:-webkit-search-cancel-button {
-      width: 24px;
-      height: 24px;
-      background-color: ${({
-      bg,
-    }) =>
-      bg === "light"
-        ? "var(--brown)"
-        : "var(--beige-2)"};
-      -webkit-appearance: none;
-    } */
   }
 `
 
@@ -384,6 +356,16 @@ const Overlay = styled(motion.div)`
   height: 100vh;
   pointer-events: none;
   background-color: rgba(0, 0, 0, 0.4);
+`
+
+const ExitMenu = styled(motion.button)`
+  position: absolute;
+  top: -30px;
+  right: -12px;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
 `
 
 const Search = ({ bg, className, mobile }) => {
@@ -423,12 +405,19 @@ const Search = ({ bg, className, mobile }) => {
 
   const handleChange = e => {
     setInputValue(e.target.value)
-    console.log("Handle change", inputValue, "  ", e.target.value)
     if (e.target.value.trim().length >= minimalLengthOfQuery) {
       setMessage(null)
       setShowButtonSearch(true)
     } else {
       setShowButtonSearch(false)
+      if (message === null) {
+        setMessage(
+          `Wprowadź tekst o długości co najmniej ${minimalLengthOfQuery} znaków.`
+        )
+      }
+    }
+    if (e.target.value.trim().length === 0) {
+      setMessage(null)
     }
   }
 
@@ -444,12 +433,14 @@ const Search = ({ bg, className, mobile }) => {
 
   const handleShowSearch = () => {
     setShowMobileSearch(true)
+    // mobileInputRef.current.focus()
   }
 
-  const handleCloseSearch = () => {
-    setShowMobileSearch(false)
-    setShowButtonSearch(false)
-    setMessage(null)
+  const handleCloseSearch = async () => {
+    await setShowMobileSearch(false)
+    await setShowButtonSearch(false)
+    await setMessage(null)
+    console.log("CLICKED: ", showMobileSearch)
   }
 
   const handleKeyPress = ev => {
@@ -461,25 +452,28 @@ const Search = ({ bg, className, mobile }) => {
 
   return (
     <>
-      <AnimatePresence>
-        {showMobileSearch && (
-          <Overlay
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          />
-        )}
-      </AnimatePresence>
       <SearchStyles
         className={className}
-        type="button"
-        onClick={!mobile ? handleOpenModal : handleShowSearch}
+        onClick={!mobile && handleOpenModal}
         mobile={mobile}
         mobileSearchShown={showMobileSearch}
       >
+        <AnimatePresence>
+          {message && (
+            <StyledMessage
+              variants={fadeOutAnimation}
+              initial="hidden"
+              animate="show"
+              exit="exit"
+              bg={bg}
+            >
+              {message}
+            </StyledMessage>
+          )}
+        </AnimatePresence>
         <InputWrapper
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={{ opacity: 1, originX: 0 }}
           exit={{ opacity: 0 }}
           active={showMobileSearch}
           bg={bg}
@@ -500,6 +494,9 @@ const Search = ({ bg, className, mobile }) => {
               bg={bg}
               type="search"
               onKeyPress={handleKeyPress}
+              ref={mobileInputRef}
+              layout
+              layoutId="input"
             />
           )}
           {!showButtonSearch ? (
@@ -510,6 +507,11 @@ const Search = ({ bg, className, mobile }) => {
               }}
               exit={{ opacity: 0 }}
               key="SearchLineWrapper"
+              onClick={mobile && handleShowSearch}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              layout
+              layoutId="input"
             >
               <RiSearchLine
                 key="SearchLine"
@@ -522,12 +524,14 @@ const Search = ({ bg, className, mobile }) => {
               initial={{ opacity: 0 }}
               animate={{
                 opacity: 1,
-                transition: { duration: 0.2, delay: 0.1 },
+                transition: { duration: 0.2 },
               }}
               exit={{ opacity: 0 }}
               key="search-btn"
               onClick={handleSearch}
               bg={bg}
+              whileTap={{ scale: 0.9 }}
+              layout
             >
               <BsArrowRight
                 size="26px"
@@ -545,20 +549,25 @@ const Search = ({ bg, className, mobile }) => {
               />
             </ButtonSearch>
           )}
+          <AnimatePresence>
+            {showMobileSearch && (
+              <ExitMenu
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 0.6 } }}
+                exit={{ opacity: 0 }}
+                bg={bg}
+                onClick={handleCloseSearch}
+                whileTap={{ scale: 0.9 }}
+                layout
+              >
+                <IoClose
+                  color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+                  size="20px"
+                />
+              </ExitMenu>
+            )}
+          </AnimatePresence>
         </InputWrapper>
-        <AnimatePresence>
-          {message && (
-            <StyledMessage
-              variants={fadeOutAnimation}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              bg={bg}
-            >
-              {message}
-            </StyledMessage>
-          )}
-        </AnimatePresence>
       </SearchStyles>
       {!mobile && (
         <AnimatePresence>
@@ -592,6 +601,7 @@ const Search = ({ bg, className, mobile }) => {
                     placeholder="Wyszukaj"
                     value={inputValue}
                     onChange={e => handleChange(e)}
+                    onKeyPress={handleKeyPress}
                     error={message !== null}
                     autoFocus
                     bg={bg}

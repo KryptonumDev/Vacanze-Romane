@@ -330,6 +330,7 @@ const Navigation = ({ bg }) => {
               }}
               exit="exit"
             >
+              <Search mobile className="mobile" bg={bg} />
               <Link activeClassName="active" to="/">
                 <NavigationListItem
                   bg={bg}
@@ -378,7 +379,6 @@ const Navigation = ({ bg }) => {
                   O mnie
                 </NavigationListItem>
               </Link>
-              {show && <Search mobile className="mobile" bg={bg} />}
             </MobileNavigationList>
           )}
         </AnimatePresence>

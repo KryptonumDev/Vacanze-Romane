@@ -5,7 +5,7 @@ export const fadeOutAnimation = {
   show: {
     opacity: 1,
     transition: {
-      duration: 1,
+      duration: 0.4,
     },
   },
   exit: {
