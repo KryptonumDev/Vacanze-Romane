@@ -66,7 +66,7 @@ const NavStyles = styled(motion.div)`
     text-transform: uppercase;
     line-height: 1.45em;
     letter-spacing: 1px;
-    color: var(--beige-2);
+    color: ${({ bg }) => (bg === "light" ? "var(--brown)" : "var(--beige-2)")};
   }
 
   ul {
@@ -85,7 +85,7 @@ const NavStyles = styled(motion.div)`
     font-weight: normal;
     line-height: 1.12;
     letter-spacing: 1px;
-    color: var(--beige-2);
+    color: ${({ bg }) => (bg === "light" ? "var(--brown)" : "var(--beige-2)")};
     text-decoration: none;
     position: relative;
     padding: 6px 12px;
@@ -97,6 +97,7 @@ const NavStyles = styled(motion.div)`
       width: calc(100% - 12px);
       height: 6px;
       z-index: -1;
+
       background-color: ${({ bg }) =>
         bg === "red"
           ? "var(--light-red)"
@@ -106,7 +107,7 @@ const NavStyles = styled(motion.div)`
           ? "var(--light-brown)"
           : bg === "blue"
           ? "var(--light-blue)"
-          : ""};
+          : "var(--beige-2)"};
       transform: scaleY(0);
       transform-origin: center bottom;
       transition: 0.3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -114,6 +115,7 @@ const NavStyles = styled(motion.div)`
 
     &.active:after,
     &:hover:after,
+    &.italiano:hover:after,
     &:focus:after {
       transform: scaleY(1);
     }
@@ -189,7 +191,9 @@ const FooterStyles = styled.footer`
       ? css`
           color: var(--beige-2);
         `
-      : ""}
+      : css`
+          color: var(--brown);
+        `}
 `
 
 const FooterText = styled(motion.p)`
@@ -228,17 +232,11 @@ const FooterText = styled(motion.p)`
           ? "var(--light-brown)"
           : bg === "blue"
           ? "var(--light-blue)"
-          : ""};
+          : "var(--beige-2)"};
       transform: scaleY(0);
       transform-origin: center bottom;
       transition: 0.3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    /* &:first-child:after {
-      background-color: #3b6dee;
-    }
-    &:last-child:after {
-      background-color: #00ef8b;
-    } */
 
     &.active:after,
     &:hover:after {
@@ -329,7 +327,7 @@ const Footer = ({ bg }) => {
                 ? "var(--beige-2)"
                 : bg === "blue"
                 ? "var(--beige-2)"
-                : ""
+                : "var(--brown)"
             }
           >
             Stronę stworzyli:{" "}

@@ -54,6 +54,7 @@ const PageLayout = ({ children }) => {
     ) {
       return "brown"
     }
+    return "light"
   }
   const getFooterBgFromLocation = () => {
     if (location.pathname === "/" || location.pathname.includes("blog")) {
@@ -72,6 +73,7 @@ const PageLayout = ({ children }) => {
     if (location.pathname.includes("in-italiano")) {
       return "blue"
     }
+    return "light"
   }
 
   return (
