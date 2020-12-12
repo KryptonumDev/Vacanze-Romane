@@ -200,9 +200,54 @@ const PageHeader = ({
       <>
         {!withNav ? (
           <>
-            {title && <h1>{title}</h1>}
-            {subtitle && <h2>{subtitle}</h2>}
-            {paragraph && <p>{paragraph}</p>}
+            {title && (
+              <motion.h1
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: {
+                    duration: 0.4,
+                    delay: 0.2,
+                    ease: [0.39, 0.575, 0.565, 1],
+                  },
+                }}
+                exit={{ opacity: 0 }}
+              >
+                {title}
+              </motion.h1>
+            )}
+            {subtitle && (
+              <motion.h2
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: {
+                    duration: 0.4,
+                    delay: 0.45,
+                    ease: [0.39, 0.575, 0.565, 1],
+                  },
+                }}
+                exit={{ opacity: 0 }}
+              >
+                {subtitle}
+              </motion.h2>
+            )}
+            {paragraph && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: {
+                    duration: 0.4,
+                    delay: 0.7,
+                    ease: [0.39, 0.575, 0.565, 1],
+                  },
+                }}
+                exit={{ opacity: 0 }}
+              >
+                {paragraph}
+              </motion.p>
+            )}
             {fullHeight && (
               <>
                 <StyledImage fluid={imgFluid} />
@@ -217,6 +262,9 @@ const PageHeader = ({
                 className="single"
                 zeroMarginBottom={subheader}
                 textAlign="center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 0.3 } }}
+                exit={{ opacity: 0 }}
               >
                 {paragraph}
               </StyledSingleParagraph>
@@ -231,15 +279,30 @@ const PageHeader = ({
                 margin={
                   article ? "24px 0 148px !important" : "24px 0 70px !important"
                 }
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 0.3 } }}
+                exit={{ opacity: 0 }}
               >
                 {subheader}
               </StyledParagraph>
             )}
             {imgFluid && (
-              <div style={{ width: "100%", position: "relative" }}>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: {
+                    delay: 0.4,
+                    duration: 0.6,
+                    ease: [0.39, 0.575, 0.565, 1],
+                  },
+                }}
+                exit={{ opacity: 0 }}
+                style={{ width: "100%", position: "relative" }}
+              >
                 <ShorterImage fluid={imgFluid} />
                 <HeaderOverlay />
-              </div>
+              </motion.div>
             )}
             {subNav && <PageHeaderNav bg={bg} items={navItems} />}
           </>
@@ -255,6 +318,9 @@ const PageHeader = ({
             fontFamily="Cormorant Garamond !important"
             margin="0 !important"
             textAlign="center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { delay: 0.3 } }}
+            exit={{ opacity: 0 }}
           >
             {subheader}
           </StyledParagraph>
@@ -264,6 +330,9 @@ const PageHeader = ({
             textAlign="center"
             margin="24px 0"
             fontFamily="Lato !important"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { delay: 0.3 } }}
+            exit={{ opacity: 0 }}
           >
             {paragraph}
           </Paragraph>
@@ -279,6 +348,9 @@ const PageHeader = ({
             fontFamily="Cormorant Garamond !important"
             margin="0 !important"
             textAlign="center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { delay: 0.3 } }}
+            exit={{ opacity: 0 }}
           >
             {subheader}
           </StyledParagraph>
@@ -290,6 +362,9 @@ const PageHeader = ({
             margin="24px 0"
             fontFamily="Lato !important"
             textAlign="center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { delay: 0.5 } }}
+            exit={{ opacity: 0 }}
           >
             {paragraph}
           </StyledPlainParagraph>

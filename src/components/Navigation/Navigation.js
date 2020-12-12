@@ -10,7 +10,7 @@ import { useMenuDispatch, useMenuState } from "../contexts/mobileMenuContext"
 import { fadeOutAnimation } from "../animations"
 const NavigationWrapper = styled.nav`
   background-color: var(--bg-home);
-  transition: background-color 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  /* transition: background-color 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53); */
   a {
     text-decoration: none;
     color: var(--brown);
@@ -321,11 +321,6 @@ const Navigation = ({ bg }) => {
               initial="hidden"
               animate={{
                 opacity: 1,
-                transition: {
-                  delay: -0.2,
-                  staggerChildren: 0.1,
-                  delayChildren: 0.2,
-                },
               }}
               exit="exit"
             >
@@ -433,9 +428,11 @@ const MenuToggleButton = styled(motion.button)`
   right: 36px;
   top: 16px;
 
-  &::focus,
+  &:focus,
   &:active {
     outline: none;
+  }
+  &:focus-visible {
     box-shadow: 0 0 0 2px
       ${({ bg }) => (bg === "light" ? "var(--brown)" : "var(--beige-2)")};
   }

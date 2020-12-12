@@ -5,8 +5,9 @@ import { ContentWrapper } from "../../assets/styles/HomeStyles"
 import { Wrapper } from "../Wrapper/Wrapper"
 import { useLocation } from "@reach/router"
 import { useEffect } from "react"
+import { motion } from "framer-motion"
 
-export const PageHeaderStyles = styled.ul`
+export const PageHeaderStyles = styled(motion.ul)`
   list-style: none;
   padding: 0;
   margin: 0;
@@ -86,16 +87,21 @@ const PageHeaderNav = ({ items = [], bg }) => {
   const pathName = useLocation().pathname
   return (
     <StyledContentWrapper bg={bg} padding="40px 56px 40px 102px">
-      <PageHeaderStyles bg={bg}>
+      <PageHeaderStyles
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: { delay: 2, duration: 0.4 } }}
+        exit={{ opacity: 0 }}
+        bg={bg}
+      >
         {items.map(item => (
-          <li key={item.name}>
+          <motion.li key={item.name}>
             <Link
               className={pathName.includes(item.link) ? "active" : ""}
               to={item.link}
             >
               {item.name}
             </Link>
-          </li>
+          </motion.li>
         ))}
       </PageHeaderStyles>
     </StyledContentWrapper>

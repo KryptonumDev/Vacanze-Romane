@@ -31,7 +31,6 @@ const LocationFooterBgMap = {
 
 const PageLayout = ({ children }) => {
   const location = useLocation()
-  console.log(location.pathname)
   const getHeaderBgFromLocation = () => {
     if (location.pathname === "/") {
       return "light"
@@ -80,7 +79,9 @@ const PageLayout = ({ children }) => {
         <Wrapper>
           <GlobalStyle />
           <Navigation bg={getHeaderBgFromLocation()} />
-          <ContentWrapper>{children}</ContentWrapper>
+          <AnimatePresence>
+            <ContentWrapper>{children}</ContentWrapper>
+          </AnimatePresence>
           <Footer bg={getFooterBgFromLocation()} />
         </Wrapper>
         <ScrollToTop

@@ -23,9 +23,7 @@ const CzescPierwszaPage = ({ data }) => {
   const width = useWindowSize()
   const wrapperRef = useRef()
   useEffect(() => {
-    setTimeout(() => {
-      wrapperRef.current.scrollIntoView({ behavior: "smooth" })
-    }, 200)
+    wrapperRef.current.scrollIntoView({ behavior: "smooth" })
   }, [])
   return (
     <>

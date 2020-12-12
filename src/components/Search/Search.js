@@ -366,6 +366,17 @@ const ExitMenu = styled(motion.button)`
   padding: 0;
   margin: 0;
   border: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  &:focus,
+  &:active {
+    outline: none;
+  }
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--beige-2);
+  }
 `
 
 const Search = ({ bg, className, mobile }) => {
@@ -388,11 +399,9 @@ const Search = ({ bg, className, mobile }) => {
       await dispatch({ type: "SET_QUERY", payload: inputValue })
       await menuDispatch({ type: "CLOSE_MENU" })
       navigate("/szukaj")
-      setTimeout(() => {
-        setActive(false)
-        setShowMobileSearch(false)
-        setShowButtonSearch(false)
-      }, 50)
+      setActive(false)
+      setShowMobileSearch(false)
+      setShowButtonSearch(false)
     } else {
       setMessage(
         `Wprowadź tekst o długości co najmniej ${minimalLengthOfQuery} znaków.`

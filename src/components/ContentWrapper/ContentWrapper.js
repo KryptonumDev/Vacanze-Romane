@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import React from "react"
 import styled from "styled-components"
 import { useLocation } from "@reach/router"
@@ -7,24 +7,37 @@ const StyledMain = styled(motion.main)``
 const ContentWrapper = ({ children }) => {
   const location = useLocation()
   return (
-    <StyledMain
-      key={location.pathname}
-      initial="pageInitial"
-      animate="pageAnimate"
-      variants={{
-        pageInitial: {
-          opacity: 0,
-        },
-        pageAnimate: {
-          opacity: 1,
-          transition: {
-            duration: 0.2,
+    <AnimatePresence exitBeforeEnter>
+      <StyledMain
+        key={location.pathname}
+        initial="pageInitial"
+        animate="pageAnimate"
+        exit="pageExit"
+        variants={{
+          pageInitial: {
+            opacity: 0,
+            y: 16,
           },
-        },
-      }}
-    >
-      {children}
-    </StyledMain>
+          pageAnimate: {
+            opacity: 1,
+            y: 0,
+            transition: {
+              duration: 0.3,
+              ease: [0.39, 0.575, 0.565, 1],
+            },
+          },
+          pageExit: {
+            opacity: 0,
+            transition: {
+              duration: 0.3,
+              ease: [0.39, 0.575, 0.565, 1],
+            },
+          },
+        }}
+      >
+        {children}
+      </StyledMain>
+    </AnimatePresence>
   )
 }
 

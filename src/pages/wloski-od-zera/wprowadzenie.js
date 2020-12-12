@@ -4,7 +4,14 @@ import { useEffect } from "react"
 import PageHeader from "../../components/PageHeader/PageHeader"
 import CoursesIntroductorySection from "../../components/SectionsComponents/CoursesIntroductorySection"
 import useWindowSize from "../../utils/useWindowSize"
-import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import {
+  Link,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll"
 
 const navItems = [
   {
@@ -25,10 +32,7 @@ const WprowadzeniePage = ({ data }) => {
   const width = useWindowSize()
   const wrapperRef = useRef()
   useEffect(() => {
-
-    setTimeout(() => {
-      wrapperRef.current.scrollIntoView({ behavior: "smooth" })
-    }, 200)
+    wrapperRef.current.scrollIntoView({ behavior: "smooth" })
   }, [])
   return (
     <>
