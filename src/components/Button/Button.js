@@ -16,12 +16,12 @@ const ButtonStyles = styled(motion.button)`
   transition: background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1),
     color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
 
-    @media only screen and (max-width: 798px) {
-      font-size: 15px;
-      padding: ${({ shorter }) => (shorter ? "13px 10px" : "14px 10px")};
+  @media only screen and (max-width: 798px) {
+    font-size: 15px;
+    padding: ${({ shorter }) => (shorter ? "13px 10px" : "14px 10px")};
 
     min-width: 142px;
-    }
+  }
 
   ${({ disabled }) =>
     disabled &&
@@ -33,8 +33,8 @@ const ButtonStyles = styled(motion.button)`
 
   &:hover {
     ${({ disabled }) =>
-    !disabled &&
-    css`
+      !disabled &&
+      css`
         color: var(--beige-2);
         background-color: var(--dead-green);
         .arrow--right {
@@ -55,8 +55,10 @@ const ButtonStyles = styled(motion.button)`
       &:focus,
       &:active {
         outline: none;
-        color: ${({ disabled }) => disabled ? "var(--beige-2)" : "var(--dead-green)"};
-        background-color: ${({ disabled }) => disabled ? "var(--dead-green)" : "var(--beige-2)"};
+        color: ${({ disabled }) =>
+          disabled ? "var(--beige-2)" : "var(--dead-green)"};
+        background-color: ${({ disabled }) =>
+          disabled ? "var(--dead-green)" : "var(--beige-2)"};
       }
     `}
 
@@ -78,7 +80,8 @@ const ButtonStyles = styled(motion.button)`
   }
 
   .arrow {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     font-size: 32px;
     transition: transform 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
     &--right {
@@ -90,21 +93,21 @@ const ButtonStyles = styled(motion.button)`
   }
   @media only screen and (max-width: 798px) {
     span {
-    font-size: 16px;
-  }
+      font-size: 16px;
+    }
 
-  .arrow {
-    display: inline-block;
-    font-size: 26px;
-    transition: transform 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
-    &--right {
-      margin-left: 6px;
-    }
-    &--left {
-      margin-right: 6px;
+    .arrow {
+      display: inline-block;
+      font-size: 20px;
+      transition: transform 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+      &--right {
+        margin-left: 8px;
+      }
+      &--left {
+        margin-right: 8px;
+      }
     }
   }
-    }
 `
 
 const Button = ({

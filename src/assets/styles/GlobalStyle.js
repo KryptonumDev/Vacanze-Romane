@@ -70,6 +70,38 @@ const GlobalStyles = createGlobalStyle`
   img::selection {
     background-color: transparent;
   }
+  .scroll-to-top {
+    background-color: var(--black);
+    right: 30px;
+    bottom: 30px;
+    position: fixed;
+    z-index: 2;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    transition: opacity 1s ease-in-out;
+    border: none;
+    outline: none;
+    transition: transform .2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    &:hover {
+      transform: matrix(1.1, 0, 0, 1.1, 0, 0);
+    }
+    &:focus, &:active {
+      transform: matrix(0.9, 0, 0, 0.9, 0, 0);
+    }
+
+    @media only screen and (max-width: 798px) {
+      right: 10px;
+      bottom: 20px;
+      width: 28px;
+      height: 28px;
+      svg {
+        width: 22px !important;
+        height: 22px !important;
+      }
+    }
+  }
 `
 
 const GlobalStyle = () => {

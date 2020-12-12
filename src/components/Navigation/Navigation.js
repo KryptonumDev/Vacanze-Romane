@@ -251,7 +251,6 @@ const Navigation = ({ bg }) => {
 
   return (
     <NavigationWrapper bg={bg}>
-      {console.log(data)}
       <Container>
         <Logo>
           <Link to="/">
