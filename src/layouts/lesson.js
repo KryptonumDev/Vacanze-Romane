@@ -260,8 +260,6 @@ const LessonLayout = ({ data, pageContext }) => {
   } = data
 
   const { prev, next } = pageContext
-  console.log(prev, next)
-  console.log(lekcjaPoziom)
 
   const prevLink = prev
     ? `/wloski-od-zera/${slugify(lekcjaPoziom, {

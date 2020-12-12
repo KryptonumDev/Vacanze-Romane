@@ -449,7 +449,6 @@ const Search = ({ bg, className, mobile }) => {
     await setShowMobileSearch(false)
     await setShowButtonSearch(false)
     await setMessage(null)
-    console.log("CLICKED: ", showMobileSearch)
   }
 
   const handleKeyPress = ev => {

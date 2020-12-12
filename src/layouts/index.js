@@ -81,7 +81,7 @@ const PageLayout = ({ children }) => {
           location.pathname === "/"
             ? "Ciao"
             : location.pathname
-                .replaceAll("/", "")
+                .replace(/\//g, "")
                 .split("-")
                 .map(
                   name => `${name.charAt(0).toUpperCase()}${name.substring(1)}`

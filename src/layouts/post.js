@@ -268,7 +268,6 @@ const PostLayout = ({ data }) => {
   }
 
   const baseURLFromCategory = category => {
-    console.log(category)
     const lowerCategory = category.toLowerCase()
     return lowerCategory === "kultura" ||
       lowerCategory === "sztuka" ||
