@@ -18,6 +18,7 @@ import { Link } from "gatsby"
 import slugify from "slugify"
 import Search from "../Search/Search"
 import { useMenuDispatch, useMenuState } from "../contexts/mobileMenuContext"
+import { SeeMore } from "../Lesson/Lesson"
 
 const StyledGrid = styled(motion.div)`
   display: grid;
@@ -119,6 +120,8 @@ const StyledParagraph = styled(Paragraph)`
   }
 `
 
+const StyledSearchParagraph = styled(Paragraph)``
+
 const StyledCategory = styled(Paragraph)`
   @media only screen and (max-width: 798px) {
     font-size: 14px;
@@ -134,10 +137,22 @@ const StyledTitle = styled(Paragraph)`
   }
 `
 
+const StyledLink = styled(Link)`
+  &:hover div {
+    opacity: 1;
+    svg {
+      transform: translateX(4px);
+    }
+  }
+`
+
 const PostPreview = ({ category, slug, title, featuredImage }) => (
   <PostStyles layout>
-    <Link to={slug}>
-      <Image layout fluid={featuredImage.fluid} />
+    <StyledLink to={slug}>
+      <div style={{ position: "relative" }}>
+        <Image layout fluid={featuredImage.fluid} />
+        <SeeMore text="Przejdź" />
+      </div>
       <StyledCategory
         margin="30px 0 0"
         fontFamily="Cormorant Garamond"
@@ -161,7 +176,7 @@ const PostPreview = ({ category, slug, title, featuredImage }) => (
       >
         {title}
       </StyledTitle>
-    </Link>
+    </StyledLink>
   </PostStyles>
 )
 
@@ -214,14 +229,14 @@ const ItalianoSection = forwardRef(
             słów -&nbsp;w&nbsp;taką sieć złowimy sens każdej wypowiedzi po
             włosku.
           </StyledParagraph>
-          <StyledParagraph
+          <StyledSearchParagraph
             textAlign="center"
             fontFamily="Lato"
-            fontSize="18px"
+            fontSize="22px"
             margin="40px 0 0"
           >
             Wyszukaj temat lub zagadnienie językowe, które chcesz poznać.
-          </StyledParagraph>
+          </StyledSearchParagraph>
           <Flex justifyContent="center" alignSelf="center" margin="40px 0 0">
             <Search italiano mobile className="desktop" bg="light" />
           </Flex>

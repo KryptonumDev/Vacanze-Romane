@@ -92,7 +92,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     @media only screen and (max-width: 798px) {
-      right: 10px;
+      right: 20px;
       bottom: 20px;
       width: 28px;
       height: 28px;

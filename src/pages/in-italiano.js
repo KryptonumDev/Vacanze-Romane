@@ -28,6 +28,7 @@ const InItalianoPage = ({ data }) => {
   }
   const {
     allDatoCmsArticle: { nodes },
+    bg,
   } = data
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const InItalianoPage = ({ data }) => {
     <>
       <PageHeader
         paragraph="in italiano"
-        imgFluid={nodes[0]?.featuredimage.fluid}
+        imgFluid={bg.bgImage.fluid}
         bg="blue"
         withNav
       />
@@ -86,6 +87,13 @@ export const query = graphql`
           fluid(maxWidth: 800) {
             ...GatsbyDatoCmsFluid_tracedSVG
           }
+        }
+      }
+    }
+    bg: datoCmsInItalianoPage {
+      bgImage {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
         }
       }
     }

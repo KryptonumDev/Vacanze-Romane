@@ -80,7 +80,7 @@ const StyledCapitalizedText = styled(CapitalizeText)`
   }
 `
 
-const StyledColumnFlex = styled(Flex)`
+export const StyledColumnFlex = styled(Flex)`
   @media only screen and (max-width: 798px) {
     margin-top: 50px;
   }

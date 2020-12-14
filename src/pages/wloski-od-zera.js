@@ -49,7 +49,7 @@ const CoursesPage = ({ data }) => {
     <>
       <PageHeader
         paragraph="corso di italiano da zero"
-        imgFluid={data.image.backgroundImage.fluid}
+        imgFluid={data.image.wloskiOdZeraObraz.fluid}
         bg="green"
         withNav
       />
@@ -74,13 +74,9 @@ const CoursesPage = ({ data }) => {
 
 export const query = graphql`
   {
-    image: datoCmsHomePage {
-      ciaoTitle
-      title
-      courseName
-      subheader
-      backgroundImage {
-        fluid(maxWidth: 800) {
+    image: datoCmsWloskiOdZeraPage {
+      wloskiOdZeraObraz {
+        fluid {
           ...GatsbyDatoCmsFluid_tracedSVG
         }
       }

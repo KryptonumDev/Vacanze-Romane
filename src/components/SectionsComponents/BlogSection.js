@@ -16,6 +16,7 @@ import { useEffect } from "react"
 import Pagination from "../Slider/Pagination"
 import slugify from "slugify"
 import { Link } from "gatsby"
+import { SeeMore } from "../Lesson/Lesson"
 
 export const StyledGrid = styled(motion.div)`
   display: grid;
@@ -86,10 +87,22 @@ const StyledTitle = styled(Paragraph)`
     margin: 14px 0 0;
   }
 `
+
+const StyledLink = styled(Link)`
+  &:hover div {
+    opacity: 1;
+    svg {
+      transform: translateX(4px);
+    }
+  }
+`
 export const PostPreview = ({ category, title, featuredImage, slug, base }) => (
   <PostStyles layout>
-    <Link to={base ? `/${base}/${slug}` : slug}>
-      <Image layout fluid={featuredImage.fluid} />
+    <StyledLink to={base ? `/${base}/${slug}` : slug}>
+      <div style={{ position: "relative" }}>
+        <Image layout fluid={featuredImage.fluid} />
+        <SeeMore text="Przejdź" />
+      </div>
       <StyledCategory
         margin="30px 0 0"
         fontFamily="Cormorant Garamond"
@@ -113,7 +126,7 @@ export const PostPreview = ({ category, title, featuredImage, slug, base }) => (
       >
         {title}
       </StyledTitle>
-    </Link>
+    </StyledLink>
   </PostStyles>
 )
 

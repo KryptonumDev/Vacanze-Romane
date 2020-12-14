@@ -8,7 +8,7 @@ const AboutPage = ({ data }) => {
     <>
       <PageHeader
         paragraph="O mnie"
-        imgFluid={data.datoCmsHomePage.backgroundImage.fluid}
+        imgFluid={data.datoCmsAboutpage.image.fluid}
         bg="brown"
         withNav
       />
@@ -18,14 +18,10 @@ const AboutPage = ({ data }) => {
 }
 export const query = graphql`
   {
-    datoCmsHomePage {
-      ciaoTitle
-      title
-      courseName
-      subheader
-      backgroundImage {
+    datoCmsAboutpage {
+      image {
         fluid {
-          ...GatsbyDatoCmsFluid
+          ...GatsbyDatoCmsFluid_tracedSVG
         }
       }
     }

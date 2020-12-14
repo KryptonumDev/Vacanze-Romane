@@ -23,6 +23,13 @@ const SearchStyles = styled(motion.div)`
       display: none;
       visibility: hidden;
       pointer-events: none;
+      ${({ italiano }) =>
+        italiano &&
+        css`
+          display: flex;
+          visibility: visible;
+          pointer-events: all;
+        `}
     }
   }
   @media only screen and (max-width: 1105px) {
@@ -31,6 +38,13 @@ const SearchStyles = styled(motion.div)`
       display: none;
       visibility: hidden;
       pointer-events: none;
+      ${({ italiano }) =>
+        italiano &&
+        css`
+          display: flex;
+          visibility: visible;
+          pointer-events: all;
+        `}
     }
   }
 
@@ -88,6 +102,7 @@ const SearchModal = styled(motion.div)`
       pointer-events: none;
     }
   }
+
   .btn--close {
     position: absolute;
     right: 52px;
@@ -187,6 +202,7 @@ const SearchModal = styled(motion.div)`
     color: var(--light-brown);
     background-color: var(--bg-top);
     border-color: transparent;
+    border-radius: 0;
     width: 100%;
     transition: border-color 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
     border: 1px solid
@@ -268,7 +284,7 @@ const StyledMessage = styled(motion.p)`
     italiano &&
     css`
       font-size: 13px;
-      bottom: -50px;
+      bottom: -45px !important;
     `}
 `
 
@@ -312,6 +328,7 @@ const InputWrapper = styled(motion.div)`
     color: ${({ bg }) => (bg === "light" ? "var(--brown)" : "var(--beige-2)")};
     padding: 8px 13px;
     height: 42px;
+    border-radius: 0;
     border: 1px solid
       ${({ bg }) =>
         bg === "red"
@@ -472,6 +489,7 @@ const Search = ({ bg, className, mobile, italiano }) => {
         onClick={!mobile && handleOpenModal}
         mobile={mobile}
         mobileSearchShown={showMobileSearch}
+        italiano={italiano}
       >
         <AnimatePresence>
           {message && (

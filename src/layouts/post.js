@@ -13,6 +13,7 @@ import Line from "../components/Line/Line"
 import slugify from "slugify"
 import { useLocation } from "@reach/router"
 import { Helmet } from "react-helmet"
+import { SeeMore } from "../components/Lesson/Lesson"
 
 const PostStyles = styled.article`
   div {
@@ -218,6 +219,14 @@ const StyledArticleTitle = styled(Paragraph)`
   }
 `
 
+const StyledLink = styled(Link)`
+  &:hover div {
+    opacity: 1;
+    svg {
+      transform: translateX(4px);
+    }
+  }
+`
 const PostLayout = ({ data }) => {
   const pathname = useLocation().pathname
   const {
@@ -369,12 +378,15 @@ const PostLayout = ({ data }) => {
             {similarArticles.nodes.length > 0
               ? similarArticles.nodes.map(article => (
                   <article key={article.id}>
-                    <Link
+                    <StyledLink
                       to={`/${baseURLFromCategory(
                         article.category
                       )}/${slugify(article.slug, { lower: true })}`}
                     >
-                      <Image fluid={article.featuredimage.fluid} />
+                      <div style={{ position: "relative" }}>
+                        <Image fluid={article.featuredimage.fluid} />
+                        <SeeMore text="Przejdź" />
+                      </div>
                       <StyledArticleCategory
                         fontFamily="Cormorant Garamond"
                         fontSize="18px"
@@ -396,7 +408,7 @@ const PostLayout = ({ data }) => {
                       >
                         {article.title}
                       </StyledArticleTitle>
-                    </Link>
+                    </StyledLink>
                   </article>
                 ))
               : newArticles.nodes.map(article => (

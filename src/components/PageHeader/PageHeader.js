@@ -92,7 +92,7 @@ const HeaderOverlay = styled(motion.div)`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(20, 16, 13, 0.3);
+  background-color: ${({ home }) => home && "rgba(20, 16, 13, 0.4)"};
 `
 
 const SingleParagraph = styled(motion.p)`
@@ -121,7 +121,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
         ${HeaderOverlay} {
           top: 30vh;
           height: calc(50vh - 61px);
-          background-color: rgba(20, 16, 13, 0.3);
+          background-color: rgba(20, 16, 13, 0.2);
         }
         h1,
         h2,
@@ -186,6 +186,7 @@ const PageHeader = ({
   lesson = false,
   article = false,
   padding,
+  home,
 }) => (
   <StyledContentWrapper
     fullHeight={fullHeight}
@@ -248,7 +249,7 @@ const PageHeader = ({
             {fullHeight && (
               <>
                 <StyledImage fluid={imgFluid} />
-                <HeaderOverlay />
+                <HeaderOverlay home={home} />
               </>
             )}
           </>

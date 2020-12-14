@@ -23,6 +23,7 @@ const BlogPage = ({ data }) => {
   }
   const {
     allDatoCmsArticle: { nodes },
+    bg,
   } = data
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const BlogPage = ({ data }) => {
     <>
       <PageHeader
         paragraph="A tavola"
-        imgFluid={nodes[1]?.featuredimage.fluid}
+        imgFluid={bg.blogBg.fluid}
         bg="red"
         withNav
       />
@@ -76,6 +77,13 @@ export const query = graphql`
           fluid(maxWidth: 800) {
             ...GatsbyDatoCmsFluid_tracedSVG
           }
+        }
+      }
+    }
+    bg: datoCmsBlogPage {
+      blogBg {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
         }
       }
     }

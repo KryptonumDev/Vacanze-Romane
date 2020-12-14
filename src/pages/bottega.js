@@ -8,7 +8,7 @@ const BottegaPage = ({ data }) => {
     <>
       <PageHeader
         paragraph="Bottega"
-        imgFluid={data.datoCmsHomePage.backgroundImage.fluid}
+        imgFluid={data.datoCmsShopPage.bottegaBg.fluid}
         bg="brown"
         withNav
       />
@@ -18,14 +18,10 @@ const BottegaPage = ({ data }) => {
 }
 export const query = graphql`
   {
-    datoCmsHomePage {
-      ciaoTitle
-      title
-      courseName
-      subheader
-      backgroundImage {
+    datoCmsShopPage {
+      bottegaBg {
         fluid {
-          ...GatsbyDatoCmsFluid
+          ...GatsbyDatoCmsFluid_tracedSVG
         }
       }
     }

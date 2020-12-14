@@ -16,6 +16,7 @@ import Image from "gatsby-image"
 import Pagination from "./Pagination"
 import useWindowSize from "../../utils/useWindowSize"
 import { fadeOutAnimation } from "../animations"
+import { SeeMore } from "../Lesson/Lesson"
 
 const StyledGrid = styled(motion.div)`
   display: grid;
@@ -26,6 +27,7 @@ const StyledGrid = styled(motion.div)`
 const ArticlePreview = styled(motion.article)`
   display: flex;
   flex-direction: column;
+  position: relative;
 
   .gatsby-image-wrapper {
     height: 340px;
@@ -42,8 +44,16 @@ const ArticlePreview = styled(motion.article)`
     picture {
       transform: scale(1.05);
     }
+    div {
+      opacity: 1;
+      span {
+        color: var(--beige-2);
+      }
+      svg {
+        transform: translateX(4px);
+      }
+    }
   }
-
   span {
     font-family: "Cormorant Garamond";
     font-size: 18px;
@@ -227,7 +237,10 @@ const Slider = ({ header }) => {
                         exit={{ opacity: 0 }}
                         key={id}
                       >
-                        <Image layout fluid={featuredimage.fluid} />
+                        <div style={{ position: "relative" }}>
+                          <Image layout fluid={featuredimage.fluid} />
+                          <SeeMore text="Przejdź" />
+                        </div>
                         <motion.span
                           initial={{ opacity: 0, y: 4 }}
                           animate={{ opacity: 1, y: 0 }}

@@ -330,13 +330,20 @@ const LessonLayout = ({ data, pageContext }) => {
                     </a>
                   </Flex>
                   <StyledVideoWrapper style={{ marginLeft: "70px" }}>
-                    <ReactPlayer
-                      light
-                      width="100%"
-                      height="100%"
-                      url="https://www.youtube.com/watch?v=25YTx1DeH08"
-                      playIcon={<IoPlayCircleSharp size="135px" color="gray" />}
-                    />
+                    <a
+                      href="https://www.youtube.com/watch?v=25YTx1DeH08"
+                      target="_blank"
+                    >
+                      <ReactPlayer
+                        light
+                        width="100%"
+                        height="100%"
+                        url="https://www.youtube.com/watch?v=25YTx1DeH08"
+                        playIcon={
+                          <IoPlayCircleSharp size="135px" color="gray" />
+                        }
+                      />
+                    </a>
                   </StyledVideoWrapper>
                 </VideoSectionStyles>
               )}

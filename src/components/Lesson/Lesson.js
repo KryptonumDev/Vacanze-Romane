@@ -51,8 +51,8 @@ const LessonStyles = styled(Link)`
   }
   &:hover div {
     opacity: 1;
-    span {
-      opacity: 1;
+    svg {
+      transform: translateX(4px);
     }
   }
 
@@ -96,16 +96,25 @@ const SeemoreStyles = styled.div`
   color: var(--beige-2);
   opacity: 0;
   transform-origin: left center;
-  transition: opacity 0.1s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  transition: opacity 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
   z-index: 2;
 
   span {
-    opacity: 0;
-    transition: opacity 0.2s 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    font-size: 18px;
+    line-height: 1.44em;
+    letter-spacing: 1px;
+    font-family: "Lato" !important;
+    color: var(--beige-2) !important;
+    text-transform: none !important;
+    transition: opacity 0.2s 0.15s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    margin-right: 12px;
+  }
+  svg {
+    transition: transform 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
   }
 `
 
-const SeeMore = ({ text }) => (
+export const SeeMore = ({ text }) => (
   <SeemoreStyles>
     <span>{text}</span> <BsArrowRight size="24px" color="var(--beige-2)" />
   </SeemoreStyles>

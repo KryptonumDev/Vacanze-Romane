@@ -16,6 +16,7 @@ const IndexPage = ({ data }) => (
       bg="light"
       fullHeight
       padding="0 20px"
+      home
     />
     <CiaoSection />
     <HowToLearnSection imgFluid={data.datoCmsHomePage.jakSieUczycObraz.fluid} />
