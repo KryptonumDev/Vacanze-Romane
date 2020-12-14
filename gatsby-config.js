@@ -36,15 +36,38 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-mdx`,
     {
-      resolve: "gatsby-plugin-web-font-loader",
+      /* Include plugin */
+      resolve: "gatsby-omni-font-loader",
+
+      /* Plugin options */
       options: {
-        google: {
-          families: [
-            "Cormorant Garamond:400",
-            "Homemade Apple:400:latin-ext",
-            "Lato:400",
-          ],
-        },
+        /* Enable font loading listener to handle FOUT */
+        enableListener: true,
+
+        /* Preconnect URL-s. This example is for Google Fonts */
+        preconnect: ["https://fonts.gstatic.com"],
+
+        /* Font listener interval (in ms). Default is 300ms. Recommended: >=300ms */
+        interval: 300,
+
+        /* Font listener timeout value (in ms). Default is 30s (30000ms). Listener will no longer check for loaded fonts after timeout, fonts will still be loaded and displayed, but without handling FOUT. */
+        timeout: 30000,
+
+        /* Web fonts. File link should point to font CSS file. */
+        web: [
+          {
+            name: "Homemade Apple",
+            file: "https://fonts.googleapis.com/css2?family=Homemade+Apple",
+          },
+          {
+            name: "Cormorant Garamond",
+            file: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond",
+          },
+          {
+            name: "Lato",
+            file: "https://fonts.googleapis.com/css2?family=Lato",
+          },
+        ],
       },
     },
     `gatsby-plugin-advanced-sitemap`,

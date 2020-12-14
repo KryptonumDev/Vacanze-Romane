@@ -45,6 +45,7 @@ const CrossedStyles = styled(motion.span)`
       left: ${({ textLeft }) => textLeft && "-25px"};
       bottom: ${({ textBottom }) => textBottom && "-40px"};
     }
+    margin-left: ${({ marginLeft }) => (marginLeft ? marginLeft : "")};
     right: ${({ textRight }) => textRight};
     width: 100vw;
   }
@@ -52,6 +53,7 @@ const CrossedStyles = styled(motion.span)`
 
 const Crossed = ({
   margin,
+  marginLeft,
   width,
   height,
   bg,
@@ -82,6 +84,7 @@ const Crossed = ({
     textLeft={textLeft}
     right={right}
     decorSize={decorSize}
+    marginLeft={marginLeft}
   >
     {children}
   </CrossedStyles>

@@ -6,6 +6,8 @@ import {
   Flex,
   Paragraph,
 } from "../../assets/styles/HomeStyles"
+import useWindowSize from "../../utils/useWindowSize"
+import Crossed from "../Crossed/Crossed"
 import Line from "../Line/Line"
 import { Wrapper } from "../Wrapper/Wrapper"
 
@@ -42,7 +44,7 @@ const StyledContent = styled(Paragraph)`
 
 const StyledWaterParagraph = styled(Paragraph)`
   @media only screen and (max-width: 1354px) {
-    margin: 60px 0 0;
+    margin: 80px 0 0;
     font-size: 30px;
   }
   @media only screen and (max-width: 692px) {
@@ -53,7 +55,7 @@ const StyledWaterParagraph = styled(Paragraph)`
 
 const StyledTogether = styled(Paragraph)`
   @media only screen and (max-width: 1354px) {
-    margin: 24px 0 0;
+    /* margin: 24px 0 0; */
     font-size: 30px;
   }
   @media only screen and (max-width: 692px) {
@@ -73,8 +75,9 @@ const StyledDecor = styled(Paragraph)`
 `
 
 const StyledSign = styled(Paragraph)`
+  line-height: 1.3em;
   @media only screen and (max-width: 1354px) {
-    margin: 24px 0 0;
+    margin: 40px 0 0;
     font-size: 30px;
   }
   @media only screen and (max-width: 692px) {
@@ -90,7 +93,10 @@ const StyledCapitalizedText = styled(CapitalizeText)`
   }
 `
 
+const StyledCrossed = styled(Crossed)``
+
 const AboutMeSection = () => {
+  const width = useWindowSize()
   return (
     <Wrapper padding="0" bg="white">
       <StyledContentWrapper direction="column" padding="78px 219px 140px 102px">
@@ -189,21 +195,33 @@ const AboutMeSection = () => {
             Genem.
           </StyledContent>
         </div>
-        <StyledWaterParagraph margin="106px 280px 0 0">
-          Chciałabym - i zrobię wszystko - aby Wasz Italski Gen poczuł się tu
-          jak ryba w wodzie
+        <StyledWaterParagraph margin="106px 240px 0 0">
+          Chciałabym - i zrobię wszystko - aby Wasz Italski Gen poczuł się tu{" "}
+          <StyledCrossed
+            bottom="50%"
+            textBottom="-36px"
+            textLeft={
+              width >= 1337 ? "-180px" : width <= 455 ? "-80px" : "-40px"
+            }
+            marginLeft={
+              width <= 328
+                ? "0"
+                : width <= 407
+                ? "20px"
+                : width <= 455
+                ? "-80px"
+                : "0"
+            }
+            italianText="come un pesce nell’acqua"
+            bg="var(--black)"
+          >
+            jak ryba w wodzie.
+          </StyledCrossed>
         </StyledWaterParagraph>
-        <StyledDecor
-          fontFamily="Homemade Apple"
-          textAlign="right"
-          margin="30px 230px 0"
-        >
-          come un pesce nell’acqua
-        </StyledDecor>
-        <StyledTogether margin="22px 0 0">A wy razem z nim</StyledTogether>
-        <StyledSign fontFamily="Homemade Apple" margin="56px 0 0">
+        <StyledTogether margin="56px 0 0">A wy razem z nim.</StyledTogether>
+        <StyledSign fontFamily="Cormorant Garamond" margin="52px 0 0">
           Monika <br />
-          ps. <br />a jak Italia wybrała sobie Ciebie?
+          PS <br />A jak Italia wybrała sobie Ciebie?
         </StyledSign>
       </StyledContentWrapper>
     </Wrapper>

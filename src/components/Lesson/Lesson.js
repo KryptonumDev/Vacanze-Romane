@@ -1,5 +1,6 @@
 import { Link } from "gatsby"
 import React from "react"
+import { BsArrowRight } from "react-icons/bs"
 import slugify from "slugify"
 import styled from "styled-components"
 
@@ -15,6 +16,7 @@ const LessonStyles = styled(Link)`
   color: var(--black);
   max-height: 144px;
   transition: 0.3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
 
   p {
     font-family: "Lato";
@@ -47,14 +49,17 @@ const LessonStyles = styled(Link)`
       transition: 0.3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
   }
-  &:hover {
-    transform: translateY(-2px);
+  &:hover div {
+    opacity: 1;
+    span {
+      opacity: 1;
+    }
   }
 
-  &:hover h3:after,
+  /* &:hover h3:after,
   &:focus h3:after {
     transform: scaleY(1);
-  }
+  } */
   &:focus {
     outline: none;
   }
@@ -73,8 +78,37 @@ const Lesson = ({ lesson }) => {
         <p>{lesson.lessonNumber}</p>
         <h3>{lesson.lessonTitle}</h3>
       </article>
+      <SeeMore text="Przejdź" />
     </LessonStyles>
   )
 }
+
+const SeemoreStyles = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--brown);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--beige-2);
+  opacity: 0;
+  transform-origin: left center;
+  transition: opacity 0.1s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  z-index: 2;
+
+  span {
+    opacity: 0;
+    transition: opacity 0.2s 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  }
+`
+
+const SeeMore = ({ text }) => (
+  <SeemoreStyles>
+    <span>{text}</span> <BsArrowRight size="24px" color="var(--beige-2)" />
+  </SeemoreStyles>
+)
 
 export default Lesson

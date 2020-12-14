@@ -109,7 +109,7 @@ const HowToLearnSection = ({ imgFluid }) => {
             maxWidth="353px"
           >
             Kurs przygotowany został tak, aby przyswajanie podstaw języka
-            odbywało się w sposób intuicyjny i stopniowy, podobny
+            odbywało się w&nbsp;sposób intuicyjny i&nbsp;stopniowy, podobny
             do&nbsp;sposobu poznawania języka przez dziecko. Ponadto każdemu
             nowemu zagadnieniu towarzyszą obrazowe wyjaśnienia
             i&nbsp;zróżnicowane ćwiczenia.

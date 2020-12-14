@@ -327,9 +327,9 @@ const BlogSection = forwardRef(
                 </StyledCapitalizedText>
                 <Line />
                 <StyledParagraph margin="0 52px 0 5px">
-                  Znam wielu ludzi, którzy ożywiają się i natychmiast
-                  rozpromieniają na dźwięk jakiekolwiek słowa związanego z
-                  Italią.
+                  Znam wielu ludzi, którzy ożywiają się i&nbsp;natychmiast
+                  rozpromieniają na dźwięk jakiegokolwiek słowa związanego
+                  z&nbsp;Italią.
                 </StyledParagraph>
               </Flex>
               <StyledFlex
@@ -345,17 +345,19 @@ const BlogSection = forwardRef(
                   letterSpacing="1px"
                 >
                   Florencja, Prosecco, Michał Anioł, Ferrari, Parmigiano
-                  Reggiano, San Remo, Sardynia, cappuccino, Vespa - o każdym z
-                  tych haseł, i o dziesiątkach innych, miłośnik Włoch gotów jest
-                  rozmawiać godzinami z drugim takim samym jak on maniakiem. I
-                  nieważne, że to akurat będzie ktoś nieznajomy, spotkany
-                  przypadkiem w barze, w samolocie czy u cioci na imieninach.
-                  Italomianiacy rozpoznają się bezbłędnie w największym tłumie.
-                  A gdy się już wzajemnie dopadną, zapominają wtedy o całej
-                  nudnej reszcie świata. <br />
+                  Reggiano, San Remo, Sardynia, cappuccino, Vespa -
+                  o&nbsp;każdym z&nbsp;tych haseł, i&nbsp;o&nbsp;dziesiątkach
+                  innych, miłośnik Włoch gotów jest rozmawiać godzinami
+                  z&nbsp;drugim takim samym jak on maniakiem. I&nbsp;nieważne,
+                  że to akurat będzie ktoś nieznajomy, spotkany przypadkiem
+                  w&nbsp;barze, w&nbsp;samolocie czy u&nbsp;cioci na imieninach.
+                  Italomianiacy rozpoznają się bezbłędnie w&nbsp;największym
+                  tłumie.
+                  <br />A gdy się już wzajemnie dopadną, zapominają wtedy
+                  o&nbsp;całej nudnej reszcie świata. <br />
                   <br />
-                  Wiem, co mówię, bo też mam takie objawy. A przecież nie jestem
-                  żadnym wyjątkiem.
+                  Wiem, co mówię, bo też mam takie objawy. A&nbsp;przecież nie
+                  jestem żadnym wyjątkiem.
                 </StyledParagraphProseco>
               </StyledFlex>
             </StyledContentWrapper>
@@ -385,14 +387,14 @@ const BlogSection = forwardRef(
                     letterSpacing="1px"
                   >
                     O kulturze Włoch, albo o historii? Nie ma sprawy - od czasów
-                    Romulusa jest w czym wybierać...
+                    Romulusa jest w&nbsp;czym wybierać...
                     <br /> O podróżach, wakacjach, krajobrazach i&nbsp;włóczeniu
                     się po Italii? Sama przyjemność!
-                    <br /> O sztuce i architekturze włoskiej? A&nbsp;istnieje
-                    jakaś inna sztuka czy architektura?...
-                    <br /> Że podobno nie samą sztuką człowiek żyje i że czasem
-                    trzeba coś zjeść? Tak mówią tylko ci, którzy nic nie wiedzą,
-                    co to jest włoska sztuka kulinarna.
+                    <br /> O sztuce i&nbsp;architekturze włoskiej?
+                    A&nbsp;istnieje jakaś inna sztuka czy architektura?...
+                    <br /> Że podobno nie samą sztuką człowiek żyje i&nbsp;że
+                    czasem trzeba coś zjeść? Tak mówią tylko ci, którzy nie
+                    wiedzą, co to jest włoska sztuka kulinarna.
                   </Paragraph>
                 </StyledGridContent>
                 <StyledGridWritten

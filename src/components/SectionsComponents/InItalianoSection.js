@@ -16,6 +16,8 @@ import { useEffect } from "react"
 import Pagination from "../Slider/Pagination"
 import { Link } from "gatsby"
 import slugify from "slugify"
+import Search from "../Search/Search"
+import { useMenuDispatch, useMenuState } from "../contexts/mobileMenuContext"
 
 const StyledGrid = styled(motion.div)`
   display: grid;
@@ -64,6 +66,8 @@ const PostStyles = styled(motion.div)`
 `
 
 const StyledContentWrapper = styled(ContentWrapper)`
+  display: flex;
+  flex-direction: column;
   @media only screen and (max-width: 1407px) {
     padding: 90px 102px;
   }
@@ -177,6 +181,8 @@ const ItalianoSection = forwardRef(
   ({ activeCategory, posts, page, setPage, pageLength }, ref) => {
     const [filteredPosts, setFilteredPosts] = useState(posts)
     const [postsNumber, setPostsNumber] = useState(posts.length)
+    const { show } = useMenuState()
+    const dispatch = useMenuDispatch()
 
     useEffect(() => {
       setFilteredPosts(
@@ -208,6 +214,17 @@ const ItalianoSection = forwardRef(
             słów -&nbsp;w&nbsp;taką sieć złowimy sens każdej wypowiedzi po
             włosku.
           </StyledParagraph>
+          <StyledParagraph
+            textAlign="center"
+            fontFamily="Lato"
+            fontSize="18px"
+            margin="40px 0 0"
+          >
+            Wyszukaj temat lub zagadnienie językowe, które chcesz poznać.
+          </StyledParagraph>
+          <Flex justifyContent="center" alignSelf="center" margin="40px 0 0">
+            <Search italiano mobile className="desktop" bg="light" />
+          </Flex>
         </StyledContentWrapper>
         <StyledPostsWrapper
           variants={fadeOutAnimation}

@@ -174,10 +174,11 @@ const CoursesStagesSection = React.forwardRef(
                   letterSpacing="1px"
                   fontFamily="Lato"
                 >
-                  Jeżeli dopiero zaczynasz - zacznij od WPROWADZENIA. Jest to
-                  część wstępna kursu, dzięki której zadomowisz się w podstawach
-                  języka włoskiego i dalsza samodzielna nauka będzie znacnzie
-                  łatwiejsza.
+                  Jeżeli dopiero zaczynasz - zacznij od WPROWADZENIA.
+                  <br />
+                  Jest to część wstępna kursu, dzięki której zadomowisz się
+                  w&nbsp;podstawach języka włoskiego, a&nbsp;dalsza samodzielna
+                  nauka będzie znacznie łatwiejsza.
                 </SecondParagraph>
                 <SecondParagraph
                   margin="32px 0 0"
@@ -186,8 +187,8 @@ const CoursesStagesSection = React.forwardRef(
                   letterSpacing="1px"
                   fontFamily="Lato"
                 >
-                  Kolejny etap, czyli CZĘŚĆ PIERWSZA, pomoże Ci zacząć mówić o
-                  sobie i&nbsp;używać włoskich czasowników.
+                  Kolejny etap, czyli CZĘŚĆ PIERWSZA, pomoże Ci zacząć mówić
+                  o&nbsp;sobie i&nbsp;używać włoskich czasowników.
                 </SecondParagraph>
                 <ThirdParagraph
                   margin="32px 0 0"
@@ -197,10 +198,11 @@ const CoursesStagesSection = React.forwardRef(
                   fontFamily="Lato"
                 >
                   Obie te części kursu przygotują Cię do dalszej nauki, którą
-                  możesz kontunuować samodzielnie, korzystając z dostępnych
+                  możesz kontunuować samodzielnie, korzystając z&nbsp;dostępnych
                   odpłatnie i&nbsp;podzielonych na kolejne etapy lekcji.
+                  <br />
                   Informacje o następnych częściach “Kursu języka włoskiego od
-                  zera” pojawią się w zakłądce KONTYNUACJA.
+                  zera” pojawią się w&nbsp;zakładce KONTYNUACJA.
                 </ThirdParagraph>
               </StyledColumnFlex>
             </StyledContentWrapper>

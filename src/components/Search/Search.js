@@ -263,6 +263,13 @@ const StyledMessage = styled(motion.p)`
     font-size: 12px;
     bottom: 48px;
   }
+
+  ${({ italiano }) =>
+    italiano &&
+    css`
+      font-size: 13px;
+      bottom: -50px;
+    `}
 `
 
 // const MobileStyles = styled(motion.div)`
@@ -379,7 +386,7 @@ const ExitMenu = styled(motion.button)`
   }
 `
 
-const Search = ({ bg, className, mobile }) => {
+const Search = ({ bg, className, mobile, italiano }) => {
   const [active, setActive] = useState(false)
   const [showMobileSearch, setShowMobileSearch] = useState(false)
   const [showButtonSearch, setShowButtonSearch] = useState(false)
@@ -474,6 +481,7 @@ const Search = ({ bg, className, mobile }) => {
               animate="show"
               exit="exit"
               bg={bg}
+              italiano={italiano}
             >
               {message}
             </StyledMessage>
@@ -651,7 +659,7 @@ const Search = ({ bg, className, mobile }) => {
                   />
                 </motion.button>
                 {message && (
-                  <StyledMessage variants={itemAnimation}>
+                  <StyledMessage italiano={italiano} variants={itemAnimation}>
                     {message}
                   </StyledMessage>
                 )}
