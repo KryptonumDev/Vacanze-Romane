@@ -1,11 +1,12 @@
 import { motion } from "framer-motion"
 import { Link } from "gatsby"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled, { css } from "styled-components"
 import { ContentWrapper, Flex } from "../../assets/styles/HomeStyles"
 import useWindowSize from "../../utils/useWindowSize"
 import Line from "../Line/Line"
 import { Wrapper } from "../Wrapper/Wrapper"
+import { useLocation } from "@reach/router"
 
 const NavList = [
   {
@@ -287,8 +288,30 @@ const StyleNavigationWrapper = styled(Flex)`
   }
 `
 
-const Footer = ({ bg }) => {
+const Footer = () => {
   const width = useWindowSize()
+  const [bg, setBg] = useState("red")
+  const location = useLocation()
+
+  useEffect(() => {
+    setBg("brown")
+    if (location.pathname === "/" || location.pathname.includes("blog")) {
+      setBg("red")
+    }
+    if (location.pathname.includes("wloski-od-zera")) {
+      setBg("green")
+    }
+    if (
+      location.pathname.includes("bottega") ||
+      location.pathname.includes("o-mnie") ||
+      location.pathname.includes("szukaj")
+    ) {
+      setBg("brown")
+    }
+    if (location.pathname.includes("in-italiano")) {
+      setBg("blue")
+    }
+  }, [location])
   return (
     <FooterStyles bg={bg}>
       <Wrapper padding="62px 0 0" bg={bg} margin="0">

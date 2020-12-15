@@ -1,13 +1,14 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled, { css } from "styled-components"
 import { Link, useStaticQuery } from "gatsby"
 import { AnimatePresence, motion } from "framer-motion"
 import Search from "../Search/Search"
 import { FiMenu, FiFacebook, FiInstagram, FiYoutube } from "react-icons/fi"
 import { IoClose } from "react-icons/io5"
-
+import { useLocation } from "@reach/router"
 import { useMenuDispatch, useMenuState } from "../contexts/mobileMenuContext"
 import { fadeOutAnimation } from "../animations"
+
 const NavigationWrapper = styled.nav`
   background-color: var(--bg-home);
   transition: background-color 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
@@ -244,10 +245,36 @@ const query = graphql`
   }
 `
 
-const Navigation = ({ bg }) => {
+const Navigation = () => {
   const data = useStaticQuery(query)
   const { show } = useMenuState()
   const dispatch = useMenuDispatch()
+  const [bg, setBg] = useState("light")
+  const location = useLocation()
+
+  useEffect(() => {
+    setBg("brown")
+    if (location.pathname === "/") {
+      setBg("light")
+    }
+    if (location.pathname.includes("wloski-od-zera")) {
+      setBg("green")
+    }
+    if (location.pathname.includes("in-italiano")) {
+      setBg("blue")
+    }
+
+    if (location.pathname.includes("blog")) {
+      setBg("red")
+    }
+    if (
+      location.pathname.includes("bottega") ||
+      location.pathname.includes("o-mnie") ||
+      location.pathname.includes("szukaj")
+    ) {
+      setBg("brown")
+    }
+  }, [location])
 
   return (
     <NavigationWrapper bg={bg}>

@@ -20,59 +20,6 @@ const Wrapper = styled(motion.div)`
 
 const PageLayout = ({ children }) => {
   const location = useLocation()
-  const [headerBg, setHeaderBg] = useState("light")
-  const [footerBg, setFooterBg] = useState("light")
-
-  useEffect(() => {
-    setHeaderBg(getHeaderBgFromLocation())
-    setFooterBg(getFooterBgFromLocation())
-  }, location)
-
-  const getHeaderBgFromLocation = () => {
-    console.log("Get header bg")
-    if (location.pathname === "/") {
-      return "light"
-    }
-    if (location.pathname.includes("wloski-od-zera")) {
-      return "green"
-    }
-    if (location.pathname.includes("in-italiano")) {
-      return "blue"
-    }
-
-    if (location.pathname.includes("blog")) {
-      return "red"
-    }
-
-    if (
-      location.pathname.includes("bottega") ||
-      location.pathname.includes("o-mnie") ||
-      location.pathname.includes("szukaj")
-    ) {
-      return "brown"
-    }
-    return "light"
-  }
-  const getFooterBgFromLocation = () => {
-    console.log("Get footer bg")
-    if (location.pathname === "/" || location.pathname.includes("blog")) {
-      return "red"
-    }
-    if (location.pathname.includes("wloski-od-zera")) {
-      return "green"
-    }
-    if (
-      location.pathname.includes("bottega") ||
-      location.pathname.includes("o-mnie") ||
-      location.pathname.includes("szukaj")
-    ) {
-      return "brown"
-    }
-    if (location.pathname.includes("in-italiano")) {
-      return "blue"
-    }
-    return "light"
-  }
 
   return (
     <>
@@ -95,9 +42,9 @@ const PageLayout = ({ children }) => {
         <SearchProvider>
           <Wrapper>
             <GlobalStyle />
-            <Navigation bg={headerBg} />
+            <Navigation />
             <ContentWrapper>{children}</ContentWrapper>
-            <Footer bg={footerBg} />
+            <Footer />
           </Wrapper>
           <ScrollToTop
             smooth
