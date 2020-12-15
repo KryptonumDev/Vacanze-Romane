@@ -2,6 +2,7 @@ import React from "react"
 import Image from "gatsby-image"
 import { Wrapper } from "../Wrapper/Wrapper"
 import Line from "../Line/Line"
+import { graphql, useStaticQuery } from "gatsby"
 import Crossed from "../Crossed/Crossed"
 import {
   ContentWrapper,
@@ -86,7 +87,19 @@ const StyledOverlay = styled(Overlay)`
   }
 `
 
+const query = graphql`
+  {
+    datoCmsHomePage {
+      crossedPolishWord
+      crossedItalianWord
+      paragraph
+      header
+    }
+  }
+`
+
 const NotOnlyBasicsSection = ({ imgFluid }) => {
+  const data = useStaticQuery(query)
   return (
     <StyledWrapper padding="0 0 103px" direction="row" gap="143px" bg="light">
       <StyledOverlay green right bg="var(--dead-green)" />
@@ -101,7 +114,7 @@ const NotOnlyBasicsSection = ({ imgFluid }) => {
         </StyledImageWrapper>
         <StyledContentFlex className="texts" margin="0 0 0 76px">
           <StyledCapitalizeText color="var(--beige-2)" margin="0 0 0 10px">
-            nie tylko podstawy
+            {data.datoCmsHomePage.header}
           </StyledCapitalizeText>
           <Line bg="var(--beige-2)" width="85%" />
           <StyledParagraph
@@ -110,17 +123,15 @@ const NotOnlyBasicsSection = ({ imgFluid }) => {
             margin="40px 0 0"
             maxWidth="648px"
           >
-            Na kanale Szkoła języka włoskiego VACANZE ROMANE na YouTube
-            dostępnych jest wiele pomocnych filmowych lekcji nt. rozmaitych
-            zagadnień gramatycznych i leksykalnych z zakresu{" "}
+            {data.datoCmsHomePage.paragraph}{" "}
             <StyledCrossed
-              italianText="della lingua italiana"
+              italianText={data.datoCmsHomePage.crossedItalianWord}
               top="50%"
               textBottom="-66px"
               textLeft="90px"
               bg="var(--beige-2)"
             >
-              języka włoskiego
+              {data.datoCmsHomePage.crossedPolishWord}
             </StyledCrossed>
           </StyledParagraph>
         </StyledContentFlex>

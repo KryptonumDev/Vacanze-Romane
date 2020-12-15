@@ -10,7 +10,7 @@ const ContentWrapper = ({ children }) => {
     <AnimatePresence exitBeforeEnter>
       <StyledMain
         key={location.pathname}
-        initial="pageInitial"
+        initial={location.pathname !== "/" ? "pageInitial" : false}
         animate="pageAnimate"
         exit="pageExit"
         variants={{

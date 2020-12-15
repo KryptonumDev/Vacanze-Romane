@@ -13,6 +13,7 @@ import {
   ImageWrapper,
   Flex,
 } from "../../assets/styles/HomeStyles"
+import { graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 
 const StyledContentWrapper = styled(ContentWrapper)`
@@ -75,7 +76,22 @@ const StyledColumnText = styled(ColumnText)`
   font-size: 15px;
 `
 
+const query = graphql`
+  {
+    datoCmsHomePage {
+      crossedTextInItalian
+      crossedTextInPolish
+      howToLearnQuestion
+      subheader
+      title
+      wordInItalian
+      wordInPolish
+    }
+  }
+`
+
 const HowToLearnSection = ({ imgFluid }) => {
+  const data = useStaticQuery(query)
   return (
     <Wrapper direction="row" padding="0" bg="light">
       <Overlay bg="#f1e2cc" />
@@ -87,17 +103,17 @@ const HowToLearnSection = ({ imgFluid }) => {
       >
         <StyledFlex margin="0 45px 0 0" className="texts">
           <StyledCapitalizeText margin="0 0 0 10px">
-            Jak się uczyć?
+            {data.datoCmsHomePage.howToLearnQuestion}
           </StyledCapitalizeText>
           <Line bg="var(--brownOp)" width="85%" />
           <StyledParagraph margin="40px 0 0 28px" maxWidth="648px">
             <StyledCrossed
               top="50%"
               textTop="-36px"
-              italianText="impari"
+              italianText={data.datoCmsHomePage.crossedTextInItalian}
               bg="var(--black)"
             >
-              Uczysz się
+              {data.datoCmsHomePage.crossedTextInPolish}
             </StyledCrossed>{" "}
             już w trakcie oglądania i&nbsp;słuchania kolejnych lekcji,
             <br />
@@ -115,7 +131,8 @@ const HowToLearnSection = ({ imgFluid }) => {
             i&nbsp;zróżnicowane ćwiczenia.
           </StyledColumnText>
           <StyledTextEmphasized margin="60px 0 0">
-            <span className="word">imparare -</span> uczyć się
+            <span className="word">{data.datoCmsHomePage.wordInItalian} -</span>{" "}
+            {data.datoCmsHomePage.wordInPolish}
           </StyledTextEmphasized>
         </StyledFlex>
         <div className="image">

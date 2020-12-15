@@ -10,8 +10,8 @@ const IndexPage = ({ data }) => (
   <>
     <PageHeader
       title={data.datoCmsHomePage.title}
-      subtitle="Internetowa szkoła języka włoskiego"
-      paragraph="dla samouków i nie tylko"
+      subtitle={data.datoCmsHomePage.subheader}
+      paragraph={data.datoCmsHomePage.decorativeText}
       imgFluid={data.datoCmsHomePage.backgroundImage.fluid}
       bg="light"
       fullHeight
@@ -34,6 +34,7 @@ export const query = graphql`
       title
       courseName
       subheader
+      decorativeText
       backgroundImage {
         fluid {
           ...GatsbyDatoCmsFluid

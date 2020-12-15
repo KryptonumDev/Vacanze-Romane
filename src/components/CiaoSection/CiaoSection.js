@@ -8,7 +8,7 @@ import {
   CtaWrapper,
 } from "../../assets/styles/HomeStyles"
 import { motion } from "framer-motion"
-import { Link } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 
 const StyledWrapper = styled(Wrapper)`
@@ -17,30 +17,45 @@ const StyledWrapper = styled(Wrapper)`
   }
 `
 
+const query = graphql`
+  {
+    datoCmsHomePage {
+      ciaoTitle
+      courseName
+      ciaoQuestion
+      ciaoRowText1
+      ciaoRowText2
+      ciaoRowText3
+      ciaoRowText4
+      ciaoButtonTextDecorative
+      ciaoButtonTextNormal
+    }
+  }
+`
+
 const CiaoSection = () => {
+  const data = useStaticQuery(query)
   return (
     <StyledWrapper bg="light">
       <ContentWrapper className="ciao-wrapper">
         <CiaoWrapper>
-          <p className="ciao">Ciao!</p>
+          <p className="ciao">{data.datoCmsHomePage.ciaoTitle}</p>
         </CiaoWrapper>
         <TextWrapper>
           <CourseWrapper>
-            <h2>Kurs włoskiego od zera</h2>
+            <h2>{data.datoCmsHomePage.courseName}</h2>
             <span className="line"></span>
-            <p className="question">Chcesz rozpocząć naukę języka włoskiego?</p>
+            <p className="question">{data.datoCmsHomePage.ciaoQuestion}</p>
           </CourseWrapper>
           <CtaWrapper>
-            <p>Skorzystaj z naszego</p>
-            <p className="corso">corso di italiano da zero</p>
-            <p className="capital">Kursu włoskiego od zera</p>
-            <p className="narrow">
-              Dostępnego bezpłatnie w formie filmów na YouTube, e-booków do
-              pobrania oraz ćwiczeń.
-            </p>
+            <p>{data.datoCmsHomePage.ciaoRowText1}</p>
+            <p className="corso">{data.datoCmsHomePage.ciaoRowText2}</p>
+            <p className="capital">{data.datoCmsHomePage.ciaoRowText3}</p>
+            <p className="narrow">{data.datoCmsHomePage.ciaoRowText4}</p>
             <Link to="/wloski-od-zera">
               <motion.button whileTap={{ scale: 0.9 }}>
-                <span>Si</span>, chętnie
+                <span>{data.datoCmsHomePage.ciaoButtonTextDecorative}</span>,
+                {data.datoCmsHomePage.ciaoButtonTextNormal}
               </motion.button>
             </Link>
           </CtaWrapper>

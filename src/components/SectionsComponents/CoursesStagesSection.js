@@ -13,6 +13,7 @@ import Lesson from "../Lesson/Lesson"
 import Line from "../Line/Line"
 import Pagination from "../Slider/Pagination"
 import { Wrapper } from "../Wrapper/Wrapper"
+import { graphql, useStaticQuery } from "gatsby"
 import CoursesContinueSection from "./CoursesContinueSection"
 import { StyledPostsWrapper } from "./InItalianoSection"
 
@@ -123,8 +124,17 @@ const StyledPosts = styled(StyledPostsWrapper)`
 
 const StyledWrapper = styled(Wrapper)``
 
+const query = graphql`
+  {
+    datoCmsWloskiOdZeraPage {
+      title
+    }
+  }
+`
+
 const CoursesStagesSection = React.forwardRef(
   ({ lessons, activeCourse, page, setPage, pageLength }, ref) => {
+    const data = useStaticQuery(query)
     const [filteredLessons, setFilteredLessons] = useState(lessons)
 
     useEffect(() => {
@@ -155,7 +165,7 @@ const CoursesStagesSection = React.forwardRef(
             >
               <Flex margin="0 16px 0 0" flex="1" flexDirection="column">
                 <StyledCapitalizedText margin="0 0 0 5px">
-                  Etapy kursu od zera
+                  {data.datoCmsWloskiOdZeraPage.capitalized_title}
                 </StyledCapitalizedText>
                 <Line />
                 <StyledParagraph margin="0 52px 0 5px">
