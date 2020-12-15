@@ -172,6 +172,7 @@ const FooterStyles = styled.footer`
     font-weight: normal;
     line-height: 1.11;
     letter-spacing: 1px;
+    color: ${({ bg }) => (bg === "light" ? "var(--brown)" : "var(--beige-2)")};
   }
 
   ${({ bg }) =>

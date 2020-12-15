@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import GlobalStyle from "../assets/styles/GlobalStyle"
 import Navigation from "../components/Navigation/Navigation"
 import ContentWrapper from "../components/ContentWrapper/ContentWrapper"
@@ -18,20 +18,16 @@ const Wrapper = styled(motion.div)`
   margin: 0 auto;
 `
 
-const LocationHeaderBgMap = {
-  "/": "light",
-  "/wloski-od-zera": "green",
-  "/blog": "red",
-}
-
-const LocationFooterBgMap = {
-  "/": "red",
-  "/wloski-od-zera": "green",
-  "/blog/": "blue",
-}
-
 const PageLayout = ({ children }) => {
   const location = useLocation()
+  const [headerBg, setHeaderBg] = useState("light")
+  const [footerBg, setFooterBg] = useState("light")
+
+  useEffect(() => {
+    setHeaderBg(getHeaderBgFromLocation())
+    setFooterBg(getFooterBgFromLocation())
+  }, location)
+
   const getHeaderBgFromLocation = () => {
     if (location.pathname === "/") {
       return "light"
@@ -97,11 +93,9 @@ const PageLayout = ({ children }) => {
         <SearchProvider>
           <Wrapper>
             <GlobalStyle />
-            <Navigation bg={getHeaderBgFromLocation()} />
-            <AnimatePresence>
-              <ContentWrapper>{children}</ContentWrapper>
-            </AnimatePresence>
-            <Footer bg={getFooterBgFromLocation()} />
+            <Navigation bg={headerBg} />
+            <ContentWrapper>{children}</ContentWrapper>
+            <Footer bg={footerBg} />
           </Wrapper>
           <ScrollToTop
             smooth
