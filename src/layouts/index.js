@@ -29,6 +29,7 @@ const PageLayout = ({ children }) => {
   }, location)
 
   const getHeaderBgFromLocation = () => {
+    console.log("Get header bg")
     if (location.pathname === "/") {
       return "light"
     }
@@ -53,6 +54,7 @@ const PageLayout = ({ children }) => {
     return "light"
   }
   const getFooterBgFromLocation = () => {
+    console.log("Get footer bg")
     if (location.pathname === "/" || location.pathname.includes("blog")) {
       return "red"
     }

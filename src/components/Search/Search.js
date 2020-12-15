@@ -486,7 +486,7 @@ const Search = ({ bg, className, mobile, italiano }) => {
     <>
       <SearchStyles
         className={className}
-        onClick={!mobile && handleOpenModal}
+        onClick={!mobile ? handleOpenModal : undefined}
         mobile={mobile}
         mobileSearchShown={showMobileSearch}
         italiano={italiano}
@@ -541,7 +541,7 @@ const Search = ({ bg, className, mobile, italiano }) => {
               }}
               exit={{ opacity: 0 }}
               key="SearchLineWrapper"
-              onClick={mobile && handleShowSearch}
+              onClick={mobile ? handleShowSearch : undefined}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               layout
