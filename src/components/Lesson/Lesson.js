@@ -35,6 +35,10 @@ const LessonStyles = styled(Link)`
     position: relative;
     padding: 6px 12px;
     z-index: 1;
+    @media only screen and (max-width: 645px) {
+      font-size: 18px;
+      margin: 12px 0 0;
+    }
     &:after {
       content: "";
       position: absolute;

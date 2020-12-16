@@ -1,7 +1,7 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled, { css } from "styled-components"
 import Image from "gatsby-image"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import PageHeaderNav from "../PageHeaderNav/PageHeaderNav"
 import { Paragraph } from "../../assets/styles/HomeStyles"
 
@@ -187,194 +187,214 @@ const PageHeader = ({
   article = false,
   padding,
   home,
-}) => (
-  <StyledContentWrapper
-    fullHeight={fullHeight}
-    bg={bg}
-    padding={padding ? padding : !search ? "98px 0px 0" : "65px 0 80px"}
-    centered
-  >
-    {!search && !lesson ? (
-      <>
-        {!withNav ? (
-          <>
-            {title && (
-              <motion.h1
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: {
-                    duration: 1,
-                    delay: 0.2,
-                    ease: [0.39, 0.575, 0.565, 1],
-                  },
-                }}
-                exit={{ opacity: 0 }}
-              >
-                {title}
-              </motion.h1>
-            )}
-            {subtitle && (
-              <motion.h2
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: {
-                    duration: 1,
-                    delay: 0.8,
-                    ease: [0.39, 0.575, 0.565, 1],
-                  },
-                }}
-                exit={{ opacity: 0 }}
-              >
-                {subtitle}
-              </motion.h2>
-            )}
-            {paragraph && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: {
-                    duration: 1,
-                    delay: 1.4,
-                    ease: [0.39, 0.575, 0.565, 1],
-                  },
-                }}
-                exit={{ opacity: 0 }}
-              >
-                {paragraph}
-              </motion.p>
-            )}
-            {fullHeight && (
-              <>
-                <StyledImage fluid={imgFluid} />
-                <HeaderOverlay home={home} />
-              </>
-            )}
-          </>
-        ) : (
-          <>
-            {paragraph && (
-              <StyledSingleParagraph
-                className="single"
-                zeroMarginBottom={subheader}
-                textAlign="center"
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: { duration: 0.8, delay: 0.4 },
-                }}
-                exit={{ opacity: 0 }}
-              >
-                {paragraph}
-              </StyledSingleParagraph>
-            )}
-            {subheader && (
-              <StyledParagraph
-                fontSize="48px !important"
-                lineHeight="1em !important"
-                letterSpacing="1px !important"
-                fontFamily="Cormorant Garamond !important"
-                textAlign="center"
-                margin={
-                  article ? "24px 0 148px !important" : "24px 0 70px !important"
-                }
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: { duration: 0.8, delay: 0.4 },
-                }}
-                exit={{ opacity: 0 }}
-              >
-                {subheader}
-              </StyledParagraph>
-            )}
-            {imgFluid && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: {
-                    delay: 0.9,
-                    duration: 1,
-                    ease: [0.39, 0.575, 0.565, 1],
-                  },
-                }}
-                exit={{ opacity: 0 }}
-                style={{ width: "100%", position: "relative" }}
-              >
-                <ShorterImage fluid={imgFluid} />
-                <HeaderOverlay />
-              </motion.div>
-            )}
-            {subNav && <PageHeaderNav bg={bg} items={navItems} />}
-          </>
-        )}
-      </>
-    ) : !search ? (
-      <>
-        {subheader && (
-          <StyledParagraph
-            fontSize="48px !important"
-            lineHeight="1em !important"
-            letterSpacing="1px !important"
-            fontFamily="Cormorant Garamond !important"
-            margin="0 !important"
-            textAlign="center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { duration: 0.8, delay: 0.4 } }}
-            exit={{ opacity: 0 }}
-          >
-            {subheader}
-          </StyledParagraph>
-        )}
-        {paragraph && (
-          <Paragraph
-            textAlign="center"
-            margin="24px 0"
-            fontFamily="Lato !important"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { duration: 0.8, delay: 0.4 } }}
-            exit={{ opacity: 0 }}
-          >
-            {paragraph}
-          </Paragraph>
-        )}
-      </>
-    ) : (
-      <>
-        {subheader && (
-          <StyledParagraph
-            fontSize="48px !important"
-            lineHeight="1em !important"
-            letterSpacing="1px !important"
-            fontFamily="Cormorant Garamond !important"
-            margin="0 !important"
-            textAlign="center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { duration: 0.8, delay: 0.4 } }}
-            exit={{ opacity: 0 }}
-          >
-            {subheader}
-          </StyledParagraph>
-        )}
-        {paragraph && (
-          <StyledPlainParagraph
-            fontSize="24px"
-            lineHeight="1.08em"
-            margin="24px 0"
-            fontFamily="Lato !important"
-            textAlign="center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { duration: 0.6, delay: 0.5 } }}
-            exit={{ opacity: 0 }}
-          >
-            {paragraph}
-          </StyledPlainParagraph>
-        )}
-      </>
-    )}
-  </StyledContentWrapper>
-)
+  italiano,
+}) => {
+  return (
+    <StyledContentWrapper
+      fullHeight={fullHeight}
+      bg={bg}
+      padding={padding ? padding : !search ? "98px 0px 0" : "65px 0 80px"}
+      centered
+    >
+      {!search && !lesson ? (
+        <>
+          {!withNav ? (
+            <>
+              {title && (
+                <motion.h1
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: {
+                      duration: 1,
+                      delay: 0.2,
+                      ease: [0.39, 0.575, 0.565, 1],
+                    },
+                  }}
+                  exit={{ opacity: 0 }}
+                >
+                  {title}
+                </motion.h1>
+              )}
+              {subtitle && (
+                <motion.h2
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: {
+                      duration: 1,
+                      delay: 0.8,
+                      ease: [0.39, 0.575, 0.565, 1],
+                    },
+                  }}
+                  exit={{ opacity: 0 }}
+                >
+                  {subtitle}
+                </motion.h2>
+              )}
+              {paragraph && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: {
+                      duration: 1,
+                      delay: 1.4,
+                      ease: [0.39, 0.575, 0.565, 1],
+                    },
+                  }}
+                  exit={{ opacity: 0 }}
+                >
+                  {paragraph}
+                </motion.p>
+              )}
+              {fullHeight && (
+                <>
+                  <StyledImage fluid={imgFluid} />
+                  <HeaderOverlay home={home} />
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              {paragraph && (
+                <StyledSingleParagraph
+                  className="single"
+                  zeroMarginBottom={subheader}
+                  textAlign="center"
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { duration: 0.8, delay: 0.4 },
+                  }}
+                  exit={{ opacity: 0 }}
+                >
+                  {paragraph}
+                </StyledSingleParagraph>
+              )}
+              {subheader && (
+                <StyledParagraph
+                  fontSize="48px !important"
+                  lineHeight="1em !important"
+                  letterSpacing="1px !important"
+                  fontFamily="Cormorant Garamond !important"
+                  textAlign="center"
+                  margin={
+                    article
+                      ? "24px 0 148px !important"
+                      : "24px 0 70px !important"
+                  }
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { duration: 0.8, delay: 0.4 },
+                  }}
+                  exit={{ opacity: 0 }}
+                >
+                  {subheader}
+                </StyledParagraph>
+              )}
+              <AnimatePresence exitBeforeEnter>
+                {imgFluid && (
+                  <motion.div
+                    key={imgFluid.src}
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: 1,
+                      transition: {
+                        delay: 0.9,
+                        duration: 1,
+                        ease: [0.39, 0.575, 0.565, 1],
+                      },
+                    }}
+                    exit={{ opacity: 0 }}
+                    style={{ width: "100%", position: "relative" }}
+                  >
+                    <ShorterImage fluid={imgFluid} />
+                    <HeaderOverlay />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              {subNav && <PageHeaderNav bg={bg} items={navItems} />}
+            </>
+          )}
+        </>
+      ) : !search ? (
+        <>
+          {subheader && (
+            <StyledParagraph
+              fontSize="48px !important"
+              lineHeight="1em !important"
+              letterSpacing="1px !important"
+              fontFamily="Cormorant Garamond !important"
+              margin="0 !important"
+              textAlign="center"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.8, delay: 0.4 },
+              }}
+              exit={{ opacity: 0 }}
+            >
+              {subheader}
+            </StyledParagraph>
+          )}
+          {paragraph && (
+            <Paragraph
+              textAlign="center"
+              margin="24px 0"
+              fontFamily="Lato !important"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.8, delay: 0.4 },
+              }}
+              exit={{ opacity: 0 }}
+            >
+              {paragraph}
+            </Paragraph>
+          )}
+        </>
+      ) : (
+        <>
+          {subheader && (
+            <StyledParagraph
+              fontSize="48px !important"
+              lineHeight="1em !important"
+              letterSpacing="1px !important"
+              fontFamily="Cormorant Garamond !important"
+              margin="0 !important"
+              textAlign="center"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.8, delay: 0.4 },
+              }}
+              exit={{ opacity: 0 }}
+            >
+              {subheader}
+            </StyledParagraph>
+          )}
+          {paragraph && (
+            <StyledPlainParagraph
+              fontSize="24px"
+              lineHeight="1.08em"
+              margin="24px 0"
+              fontFamily="Lato !important"
+              textAlign="center"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.6, delay: 0.5 },
+              }}
+              exit={{ opacity: 0 }}
+            >
+              {paragraph}
+            </StyledPlainParagraph>
+          )}
+        </>
+      )}
+    </StyledContentWrapper>
+  )
+}
 export default PageHeader

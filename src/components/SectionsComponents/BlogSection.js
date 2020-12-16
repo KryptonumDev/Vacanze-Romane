@@ -120,7 +120,7 @@ export const PostPreview = ({ category, title, featuredImage, slug, base }) => (
         margin="30px 0 0"
         fontFamily="Lato"
         fontSize="24px"
-        lineHeight="0.75em"
+        lineHeight="1.25em"
         letterSpacing="1px"
         color="var(--black)"
       >

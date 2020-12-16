@@ -33,12 +33,13 @@ const CoursesPage = ({ data }) => {
   const pageLength = 15
   const postsRef = useRef()
 
-  const scroll = () => postsRef.current.scrollIntoView({ behavior: "smooth" })
+  const scroll = () =>
+    postsRef.current.scrollIntoView({ block: "nearest", behavior: "smooth" })
   const handleClick = (e, course) => {
     e.preventDefault()
     setActiveCourse(course)
     setPage(0)
-    scroll()
+    // scroll()
   }
 
   useEffect(() => {

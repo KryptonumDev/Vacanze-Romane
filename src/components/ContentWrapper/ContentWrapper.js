@@ -26,6 +26,16 @@ const ContentWrapper = ({ children }) => {
               ease: [0.39, 0.575, 0.565, 1],
             },
           },
+          pageHomeInitial: {
+            opacity: 0,
+          },
+          pageHomeAnimate: {
+            opacity: 1,
+            transition: {
+              duration: 0.3,
+              ease: [0.39, 0.575, 0.565, 1],
+            },
+          },
           pageExit: {
             opacity: 0,
             transition: {

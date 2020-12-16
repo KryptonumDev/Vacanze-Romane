@@ -69,7 +69,7 @@ const ArticlePreview = styled(motion.article)`
     font-family: "Lato";
     font-size: 24px;
     font-weight: normal;
-    line-height: 0.75em;
+    line-height: 1.25em;
     letter-spacing: 1px;
   }
 

@@ -68,9 +68,9 @@ const StyledFlex = styled(Flex)`
     flex: 2;
   }
 `
-const CoursesContinueSection = forwardRef(({}, ref) => {
+const CoursesContinueSection = forwardRef(({ key }, ref) => {
   return (
-    <StyledContentWrapper padding="0">
+    <StyledContentWrapper key={key} padding="0">
       <StyledFlex margin="0" flex="1" flexDirection="column">
         <StyledCapitalizedText color="var(--brown)" margin="0 0 0 10px">
           KONTYNUACJA “KURSU WŁOSKIEGO OD ZERA”

@@ -402,7 +402,7 @@ const PostLayout = ({ data }) => {
                         fontFamily="Lato"
                         fontSize="24px"
                         fontWeight="500"
-                        lineHeight="0.75em"
+                        lineHeight="1.25em"
                         letterSpacing="1px"
                         margin="0"
                       >
@@ -434,7 +434,7 @@ const PostLayout = ({ data }) => {
                         fontFamily="Lato"
                         fontSize="24px"
                         fontWeight="500"
-                        lineHeight="0.75em"
+                        lineHeight="1.25em"
                         letterSpacing="1px"
                         margin="0"
                       >

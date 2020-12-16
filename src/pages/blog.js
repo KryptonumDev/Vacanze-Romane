@@ -9,7 +9,15 @@ import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigat
 
 const BlogPage = ({ data }) => {
   const categories = ["Kultura", "Sztuka", "Podróże", "Kuchnia"]
-  const [activeCategory, setActiveCategory] = useState(null)
+  const images = {
+    Blog: data.bg.blogBg,
+    Kultura: data.bg.blogKultura,
+    Sztuka: data.bg.blogSztuka,
+    Podróże: data.bg.blogPodrE,
+    Kuchnia: data.bg.blogKuchnia,
+  }
+  const [activeCategory, setActiveCategory] = useState("Blog")
+  const activeImage = images[activeCategory]
   const [page, setPage] = useState(0)
   const pageLength = 6
   const postsRef = useRef()
@@ -19,7 +27,7 @@ const BlogPage = ({ data }) => {
     e.preventDefault()
     setActiveCategory(category)
     setPage(0)
-    postsRef.current.scrollIntoView({ behavior: "smooth" })
+    // postsRef.current.scrollIntoView({ block: "nearest", behavior: "smooth" })
   }
   const {
     allDatoCmsArticle: { nodes },
@@ -29,7 +37,10 @@ const BlogPage = ({ data }) => {
   useEffect(() => {
     if (!firstLaunch) {
       setTimeout(() => {
-        postsRef.current.scrollIntoView({ behavior: "smooth" })
+        postsRef.current.scrollIntoView({
+          block: "nearest",
+          behavior: "smooth",
+        })
       }, 150)
     }
   }, [page])
@@ -42,7 +53,7 @@ const BlogPage = ({ data }) => {
     <>
       <PageHeader
         paragraph="A tavola"
-        imgFluid={bg.blogBg.fluid}
+        imgFluid={activeImage.fluid}
         bg="red"
         withNav
       />
@@ -80,8 +91,29 @@ export const query = graphql`
         }
       }
     }
+
     bg: datoCmsBlogPage {
       blogBg {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+      blogKultura {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+      blogSztuka {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+      blogPodrE {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+      blogKuchnia {
         fluid {
           ...GatsbyDatoCmsFluid_tracedSVG
         }

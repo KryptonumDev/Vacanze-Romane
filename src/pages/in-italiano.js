@@ -10,21 +10,30 @@ import { useRef } from "react"
 
 const InItalianoPage = ({ data }) => {
   const categories = ["Grammatica", "Vocabolario", "Frasi e citazioni"]
-  const [activeCategory, setActiveCategory] = useState(categories[0])
+  const images = {
+    Initaliano: data.bg.bgImage,
+    Grammatica: data.bg.inItalianoGrammatica,
+    Vocabolario: data.bg.inItalianoVocabolario,
+    "Frasi e citazioni": data.bg.inItalianoFrasiECitazioni,
+  }
+  const [activeCategory, setActiveCategory] = useState("Initaliano")
+  const activeImage = images[activeCategory]
   const [page, setPage] = useState(0)
   const pageLength = 6
   const postsRef = useRef()
   const [firstLaunch, setFirstLaunch] = useState(true)
 
   const scroll = () => {
-    postsRef.current.scrollIntoView({ behavior: "smooth" })
+    setTimeout(() => {
+      postsRef.current.scrollIntoView({ block: "nearest", behavior: "smooth" })
+    }, 2600)
   }
 
   const handleClick = (e, category) => {
     e.preventDefault()
     setActiveCategory(category)
     setPage(0)
-    scroll()
+    // scroll()
   }
   const {
     allDatoCmsArticle: { nodes },
@@ -47,7 +56,8 @@ const InItalianoPage = ({ data }) => {
     <>
       <PageHeader
         paragraph="in italiano"
-        imgFluid={bg.bgImage.fluid}
+        imgFluid={activeImage.fluid}
+        italiano
         bg="blue"
         withNav
       />
@@ -90,8 +100,24 @@ export const query = graphql`
         }
       }
     }
+
     bg: datoCmsInItalianoPage {
       bgImage {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+      inItalianoGrammatica {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+      inItalianoVocabolario {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+      inItalianoFrasiECitazioni {
         fluid {
           ...GatsbyDatoCmsFluid_tracedSVG
         }
