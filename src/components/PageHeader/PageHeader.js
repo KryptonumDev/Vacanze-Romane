@@ -188,6 +188,7 @@ const PageHeader = ({
   padding,
   home,
   italiano,
+  blog,
 }) => {
   return (
     <StyledContentWrapper
@@ -299,15 +300,39 @@ const PageHeader = ({
                   <motion.div
                     key={imgFluid.src}
                     initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: 1,
-                      transition: {
-                        delay: 0.9,
-                        duration: 1,
-                        ease: [0.39, 0.575, 0.565, 1],
-                      },
-                    }}
-                    exit={{ opacity: 0 }}
+                    animate={
+                      italiano || blog
+                        ? {
+                            opacity: 1,
+                            transition: {
+                              delay: 0,
+                              duration: 0.4,
+                              ease: [0.39, 0.575, 0.565, 1],
+                            },
+                          }
+                        : {
+                            opacity: 1,
+                            transition: {
+                              delay: 0.9,
+                              duration: 1,
+                              ease: [0.39, 0.575, 0.565, 1],
+                            },
+                          }
+                    }
+                    exit={
+                      italiano || blog
+                        ? {
+                            opacity: 1,
+                            transition: {
+                              delay: 0,
+                              duration: 0.4,
+                              ease: [0.39, 0.575, 0.565, 1],
+                            },
+                          }
+                        : {
+                            opacity: 0,
+                          }
+                    }
                     style={{ width: "100%", position: "relative" }}
                   >
                     <ShorterImage fluid={imgFluid} />

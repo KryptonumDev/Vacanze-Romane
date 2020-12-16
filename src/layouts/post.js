@@ -2,16 +2,11 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import Image from "gatsby-image"
 import PageHeader from "../components/PageHeader/PageHeader"
-import {
-  CapitalizeText,
-  ContentWrapper,
-  Paragraph,
-} from "../assets/styles/HomeStyles"
+import { ContentWrapper, Paragraph } from "../assets/styles/HomeStyles"
 import { Wrapper } from "../components/Wrapper/Wrapper"
 import styled from "styled-components"
 import Line from "../components/Line/Line"
 import slugify from "slugify"
-import { useLocation } from "@reach/router"
 import { Helmet } from "react-helmet"
 import { SeeMore } from "../components/Lesson/Lesson"
 
@@ -228,14 +223,11 @@ const StyledLink = styled(Link)`
   }
 `
 const PostLayout = ({ data }) => {
-  const pathname = useLocation().pathname
   const {
     datoCmsArticle: {
       category,
       title,
       featuredimage,
-      id,
-      slug,
       creationDate,
       articleContent,
     },

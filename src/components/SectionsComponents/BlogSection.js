@@ -96,8 +96,21 @@ const StyledLink = styled(Link)`
     }
   }
 `
-export const PostPreview = ({ category, title, featuredImage, slug, base }) => (
-  <PostStyles layout>
+export const PostPreview = ({
+  category,
+  title,
+  featuredImage,
+  slug,
+  base,
+  key,
+}) => (
+  <PostStyles
+    key={key}
+    layout
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
     <StyledLink to={base ? `/${base}/${slug}` : slug}>
       <div style={{ position: "relative" }}>
         <Image layout fluid={featuredImage.fluid} />
@@ -116,7 +129,6 @@ export const PostPreview = ({ category, title, featuredImage, slug, base }) => (
         {category}
       </StyledCategory>
       <StyledTitle
-        layout
         margin="30px 0 0"
         fontFamily="Lato"
         fontSize="24px"
@@ -272,157 +284,149 @@ const BlogSection = forwardRef(
 
     return (
       <Wrapper padding="0" bg="light" ref={ref}>
-        {activeCategory !== null ? (
-          <>
-            <StyledContentWrapper padding="90px 102px 50px">
-              <StyledGrid
-                key="blog-grid"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                itemsInRow={2}
-                maxHeightOfImages="328px"
-                noPosts={filteredPosts.length === 0}
-              >
-                {filteredPosts.length >= 1 ? (
-                  filteredPosts.map(post => (
-                    <PostPreview
-                      key={post.id}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      slug={slugify(post.slug, { lower: true })}
-                      category={post.category}
-                      title={post.title}
-                      featuredImage={post.featuredimage}
+        <AnimateSharedLayout type="crossfade">
+          <AnimatePresence exitBeforeEnter>
+            {activeCategory !== "Blog" ? (
+              <>
+                <StyledContentWrapper padding="90px 102px 50px">
+                  <StyledGrid
+                    itemsInRow={2}
+                    maxHeightOfImages="328px"
+                    noPosts={filteredPosts.length === 0}
+                  >
+                    {filteredPosts.length >= 1 ? (
+                      filteredPosts.map(post => (
+                        <PostPreview
+                          key={post.id}
+                          slug={slugify(post.slug, { lower: true })}
+                          category={post.category}
+                          title={post.title}
+                          featuredImage={post.featuredimage}
+                        />
+                      ))
+                    ) : (
+                      <StyledNoPosts
+                        variants={fadeOutAnimation}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
+                        fontSize="36px"
+                        lineHeight="1.11em"
+                        letterSpacing="1px"
+                        fontWeight="400"
+                        fontFamily="Cormorant Garamond"
+                      >
+                        Brak artykułów do wyświetlenia.
+                      </StyledNoPosts>
+                    )}
+                  </StyledGrid>
+                </StyledContentWrapper>
+                <StyledPaginationWrapper padding="0 102px 100px">
+                  {postsNumber > 2 && (
+                    <Pagination
+                      length={Math.floor(filteredPosts.length / pageLength)}
+                      page={page}
+                      setPage={setPage}
                     />
-                  ))
-                ) : (
-                  <StyledNoPosts
-                    key="noPosts"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    fontSize="36px"
-                    lineHeight="1.11em"
-                    letterSpacing="1px"
-                    fontWeight="400"
-                    fontFamily="Cormorant Garamond"
+                  )}
+                </StyledPaginationWrapper>
+              </>
+            ) : (
+              <>
+                <StyledContentWrapper
+                  padding="90px 102px 50px"
+                  variants={fadeOutAnimation}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                  key="content"
+                >
+                  <Flex margin="0 5px 0 0" flex="1" flexDirection="column">
+                    <StyledCapitalizedText margin="0 0 0 10px">
+                      A tavola
+                    </StyledCapitalizedText>
+                    <Line />
+                    <StyledParagraph margin="0 52px 0 5px">
+                      Znam wielu ludzi, którzy ożywiają się i&nbsp;natychmiast
+                      rozpromieniają na dźwięk jakiegokolwiek słowa związanego
+                      z&nbsp;Italią.
+                    </StyledParagraph>
+                  </Flex>
+                  <StyledFlex
+                    margin="132px 0 0"
+                    padding="0 0 0 85px"
+                    flex="1"
+                    flexDirection="column"
                   >
-                    Brak artykułów do wyświetlenia.
-                  </StyledNoPosts>
-                )}
-              </StyledGrid>
-            </StyledContentWrapper>
-            <StyledPaginationWrapper padding="0 102px 100px">
-              {postsNumber > 2 && (
-                <Pagination
-                  length={Math.floor(filteredPosts.length / pageLength)}
-                  page={page}
-                  setPage={setPage}
-                />
-              )}
-            </StyledPaginationWrapper>
-          </>
-        ) : (
-          <>
-            <StyledContentWrapper
-              padding="90px 102px 50px"
-              variants={fadeOutAnimation}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              key="content"
-            >
-              <Flex margin="0 5px 0 0" flex="1" flexDirection="column">
-                <StyledCapitalizedText margin="0 0 0 10px">
-                  A tavola
-                </StyledCapitalizedText>
-                <Line />
-                <StyledParagraph margin="0 52px 0 5px">
-                  Znam wielu ludzi, którzy ożywiają się i&nbsp;natychmiast
-                  rozpromieniają na dźwięk jakiegokolwiek słowa związanego
-                  z&nbsp;Italią.
-                </StyledParagraph>
-              </Flex>
-              <StyledFlex
-                margin="132px 0 0"
-                padding="0 0 0 85px"
-                flex="1"
-                flexDirection="column"
-              >
-                <StyledParagraphProseco
-                  fontFamily="Lato"
-                  fontSize="18px"
-                  lineHeight="1.44em"
-                  letterSpacing="1px"
-                >
-                  Florencja, Prosecco, Michał Anioł, Ferrari, Parmigiano
-                  Reggiano, San Remo, Sardynia, cappuccino, Vespa -
-                  o&nbsp;każdym z&nbsp;tych haseł, i&nbsp;o&nbsp;dziesiątkach
-                  innych, miłośnik Włoch gotów jest rozmawiać godzinami
-                  z&nbsp;drugim takim samym jak on maniakiem. I&nbsp;nieważne,
-                  że to akurat będzie ktoś nieznajomy, spotkany przypadkiem
-                  w&nbsp;barze, w&nbsp;samolocie czy u&nbsp;cioci na imieninach.
-                  Italomianiacy rozpoznają się bezbłędnie w&nbsp;największym
-                  tłumie.
-                  <br />A gdy się już wzajemnie dopadną, zapominają wtedy
-                  o&nbsp;całej nudnej reszcie świata. <br />
-                  <br />
-                  Wiem, co mówię, bo też mam takie objawy. A&nbsp;przecież nie
-                  jestem żadnym wyjątkiem.
-                </StyledParagraphProseco>
-              </StyledFlex>
-            </StyledContentWrapper>
-            <StyledPaginationWrapper
-              padding="0 102px 100px"
-              variants={fadeOutAnimation}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-            >
-              <Grid cols="repeat(12, 1fr)" rows="repeat(3, auto)">
-                <StyledGridDecorText gridColumn="2/7" gridRow="0/1">
-                  <StyledParagraphGrid>
-                    Jeżeli chcesz dołączyć do tej niekończącej się, wciągającej
-                    rozmowy, to chętnie podrzucę temat....
-                  </StyledParagraphGrid>
-                </StyledGridDecorText>
-                <StyledGridContent
-                  margin="50px 0 0"
-                  gridColumn="5/11"
-                  gridRow="2/3"
-                >
-                  <Paragraph
-                    fontFamily="Lato"
-                    fontSize="18px"
-                    lineHeight="1.44em"
-                    letterSpacing="1px"
-                  >
-                    O kulturze Włoch, albo o historii? Nie ma sprawy - od czasów
-                    Romulusa jest w&nbsp;czym wybierać...
-                    <br /> O podróżach, wakacjach, krajobrazach i&nbsp;włóczeniu
-                    się po Italii? Sama przyjemność!
-                    <br /> O sztuce i&nbsp;architekturze włoskiej?
-                    A&nbsp;istnieje jakaś inna sztuka czy architektura?...
-                    <br /> Że podobno nie samą sztuką człowiek żyje i&nbsp;że
-                    czasem trzeba coś zjeść? Tak mówią tylko ci, którzy nie
-                    wiedzą, co to jest włoska sztuka kulinarna.
-                  </Paragraph>
-                </StyledGridContent>
-                <StyledGridWritten
-                  margin="60px 0 0"
-                  gridColumn="3/10"
-                  gridRow="3/4"
-                >
-                  <Paragraph fontFamily="Homemade Apple">
-                    Allora, parliamone a tavola!
-                  </Paragraph>
-                </StyledGridWritten>
-              </Grid>
-            </StyledPaginationWrapper>
-          </>
-        )}
+                    <StyledParagraphProseco
+                      fontFamily="Lato"
+                      fontSize="18px"
+                      lineHeight="1.44em"
+                      letterSpacing="1px"
+                    >
+                      Florencja, Prosecco, Michał Anioł, Ferrari, Parmigiano
+                      Reggiano, San Remo, Sardynia, cappuccino, Vespa -
+                      o&nbsp;każdym z&nbsp;tych haseł,
+                      i&nbsp;o&nbsp;dziesiątkach innych, miłośnik Włoch gotów
+                      jest rozmawiać godzinami z&nbsp;drugim takim samym jak on
+                      maniakiem. I&nbsp;nieważne, że to akurat będzie ktoś
+                      nieznajomy, spotkany przypadkiem w&nbsp;barze,
+                      w&nbsp;samolocie czy u&nbsp;cioci na imieninach.
+                      Italomianiacy rozpoznają się bezbłędnie w&nbsp;największym
+                      tłumie.
+                      <br />A gdy się już wzajemnie dopadną, zapominają wtedy
+                      o&nbsp;całej nudnej reszcie świata. <br />
+                      <br />
+                      Wiem, co mówię, bo też mam takie objawy. A&nbsp;przecież
+                      nie jestem żadnym wyjątkiem.
+                    </StyledParagraphProseco>
+                  </StyledFlex>
+                </StyledContentWrapper>
+                <StyledPaginationWrapper padding="0 102px 100px">
+                  <Grid cols="repeat(12, 1fr)" rows="repeat(3, auto)">
+                    <StyledGridDecorText gridColumn="2/7" gridRow="0/1">
+                      <StyledParagraphGrid>
+                        Jeżeli chcesz dołączyć do tej niekończącej się,
+                        wciągającej rozmowy, to chętnie podrzucę temat....
+                      </StyledParagraphGrid>
+                    </StyledGridDecorText>
+                    <StyledGridContent
+                      margin="50px 0 0"
+                      gridColumn="5/11"
+                      gridRow="2/3"
+                    >
+                      <Paragraph
+                        fontFamily="Lato"
+                        fontSize="18px"
+                        lineHeight="1.44em"
+                        letterSpacing="1px"
+                      >
+                        O kulturze Włoch, albo o historii? Nie ma sprawy - od
+                        czasów Romulusa jest w&nbsp;czym wybierać...
+                        <br /> O podróżach, wakacjach, krajobrazach
+                        i&nbsp;włóczeniu się po Italii? Sama przyjemność!
+                        <br /> O sztuce i&nbsp;architekturze włoskiej?
+                        A&nbsp;istnieje jakaś inna sztuka czy architektura?...
+                        <br /> Że podobno nie samą sztuką człowiek żyje
+                        i&nbsp;że czasem trzeba coś zjeść? Tak mówią tylko ci,
+                        którzy nie wiedzą, co to jest włoska sztuka kulinarna.
+                      </Paragraph>
+                    </StyledGridContent>
+                    <StyledGridWritten
+                      margin="60px 0 0"
+                      gridColumn="3/10"
+                      gridRow="3/4"
+                    >
+                      <Paragraph fontFamily="Homemade Apple">
+                        Allora, parliamone a tavola!
+                      </Paragraph>
+                    </StyledGridWritten>
+                  </Grid>
+                </StyledPaginationWrapper>
+              </>
+            )}
+          </AnimatePresence>
+        </AnimateSharedLayout>
       </Wrapper>
     )
   }

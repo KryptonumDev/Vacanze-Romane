@@ -1,13 +1,6 @@
 import React, { forwardRef, useState } from "react"
-import {
-  CapitalizeText,
-  ContentWrapper,
-  Flex,
-  Paragraph,
-} from "../../assets/styles/HomeStyles"
-import Line from "../Line/Line"
+import { ContentWrapper, Flex, Paragraph } from "../../assets/styles/HomeStyles"
 import { Wrapper } from "../Wrapper/Wrapper"
-import Grid, { GridItem } from "../Grid/Grid"
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion"
 import { fadeOutAnimation } from "../animations"
 import Image from "gatsby-image"
@@ -146,8 +139,14 @@ const StyledLink = styled(Link)`
   }
 `
 
-const PostPreview = ({ category, slug, title, featuredImage }) => (
-  <PostStyles layout>
+const PostPreview = ({ category, slug, title, featuredImage, key }) => (
+  <PostStyles
+    key={key}
+    layout
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
     <StyledLink to={slug}>
       <div style={{ position: "relative" }}>
         <Image layout fluid={featuredImage.fluid} />
@@ -161,12 +160,10 @@ const PostPreview = ({ category, slug, title, featuredImage }) => (
         lineHeight="1em"
         letterSpacing="1px"
         color="var(--black)"
-        layout
       >
         {category}
       </StyledCategory>
       <StyledTitle
-        layout
         margin="30px 0 0"
         fontFamily="Lato"
         fontSize="24px"
@@ -196,8 +193,6 @@ const ItalianoSection = forwardRef(
   ({ activeCategory, posts, page, setPage, pageLength }, ref) => {
     const [filteredPosts, setFilteredPosts] = useState(posts)
     const [postsNumber, setPostsNumber] = useState(posts.length)
-    const { show } = useMenuState()
-    const dispatch = useMenuDispatch()
 
     useEffect(() => {
       setFilteredPosts(
@@ -212,22 +207,15 @@ const ItalianoSection = forwardRef(
 
     return (
       <Wrapper padding="0" bg="white">
-        <StyledContentWrapper
-          padding="90px 192px 104px"
-          variants={fadeOutAnimation}
-          initial="hidden"
-          animate="show"
-          exit="exit"
-          key="italianoParagraph"
-        >
+        <StyledContentWrapper padding="90px 192px 104px">
           <StyledParagraph textAlign="center">
-            Ucząc się włoskiego nieustannie poruszasz się od szczegółu do ogółu:
-            od znaczenia słowa do reguł gramatycznych
+            Ucząc się włoskiego nieustannie poruszasz się od&nbsp;szczegółu
+            do&nbsp;ogółu: od&nbsp;znaczenia słowa do&nbsp;reguł gramatycznych
             -&nbsp;i&nbsp;z&nbsp;powrotem.
             <br />
-            Zasady gramatyczne, zasób słownictwa i konkretne przykłady użycia
-            słów -&nbsp;w&nbsp;taką sieć złowimy sens każdej wypowiedzi po
-            włosku.
+            Zasady gramatyczne, zasób słownictwa i&nbsp;konkretne przykłady
+            użycia słów -&nbsp;w&nbsp;taką sieć złowimy sens każdej wypowiedzi
+            po włosku.
           </StyledParagraph>
           <StyledSearchParagraph
             textAlign="center"
@@ -241,54 +229,38 @@ const ItalianoSection = forwardRef(
             <Search italiano mobile className="desktop" bg="light" />
           </Flex>
         </StyledContentWrapper>
-        <StyledPostsWrapper
-          variants={fadeOutAnimation}
-          initial="hidden"
-          animate="show"
-          exit="exit"
-          key="postsGrid"
-          padding="0 102px 50px"
-          ref={ref}
-        >
+        <StyledPostsWrapper padding="0 102px 50px" ref={ref}>
           <AnimateSharedLayout type="crossfade">
-            <StyledGrid
-              variants={fadeOutAnimation}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              itemsInRow={2}
-              noPosts={filteredPosts.length === 0}
-            >
-              {filteredPosts.length >= 1 ? (
-                filteredPosts.map(post => (
-                  <PostPreview
-                    key={post.id}
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    category={post.category}
-                    title={post.title}
-                    slug={slugify(post.slug, { lower: true })}
-                    featuredImage={post.featuredimage}
-                  />
-                ))
-              ) : (
-                <StyledNoPosts
-                  variants={fadeOutAnimation}
-                  initial="hidden"
-                  animate="show"
-                  exit="exit"
-                  fontSize="36px"
-                  lineHeight="1.11em"
-                  letterSpacing="1px"
-                  fontWeight="400"
-                  fontFamily="Cormorant Garamond"
-                >
-                  Brak artykułów do wyświetlenia.
-                </StyledNoPosts>
-              )}
-            </StyledGrid>
+            <AnimatePresence exitBeforeEnter>
+              <StyledGrid itemsInRow={2} noPosts={filteredPosts.length === 0}>
+                {filteredPosts.length >= 1
+                  ? filteredPosts.map(post => (
+                      <PostPreview
+                        key={post.id}
+                        category={post.category}
+                        title={post.title}
+                        slug={slugify(post.slug, { lower: true })}
+                        featuredImage={post.featuredimage}
+                      />
+                    ))
+                  : activeCategory !== "Initaliano" && (
+                      <StyledNoPosts
+                        key="no-posts"
+                        variants={fadeOutAnimation}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
+                        fontSize="36px"
+                        lineHeight="1.11em"
+                        letterSpacing="1px"
+                        fontWeight="400"
+                        fontFamily="Cormorant Garamond"
+                      >
+                        Brak artykułów do wyświetlenia.
+                      </StyledNoPosts>
+                    )}
+              </StyledGrid>
+            </AnimatePresence>
           </AnimateSharedLayout>
         </StyledPostsWrapper>
         <StyledPaginationWrapper padding="0 102px 100px">

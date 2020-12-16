@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
-import slugify from "slugify"
 import PageHeader from "../components/PageHeader/PageHeader"
-import GridWrapper from "../components/GridWrapper/GridWrapper"
-import ArticlePreview from "../components/ArticlePreview/ArticlePreview"
 import ItalianoSection from "../components/SectionsComponents/InItalianoSection"
 import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigation"
 import { useRef } from "react"
@@ -26,7 +23,7 @@ const InItalianoPage = ({ data }) => {
   const scroll = () => {
     setTimeout(() => {
       postsRef.current.scrollIntoView({ block: "nearest", behavior: "smooth" })
-    }, 2600)
+    }, 150)
   }
 
   const handleClick = (e, category) => {
@@ -37,7 +34,6 @@ const InItalianoPage = ({ data }) => {
   }
   const {
     allDatoCmsArticle: { nodes },
-    bg,
   } = data
 
   useEffect(() => {
@@ -57,7 +53,7 @@ const InItalianoPage = ({ data }) => {
       <PageHeader
         paragraph="in italiano"
         imgFluid={activeImage.fluid}
-        italiano
+        italiano={!firstLaunch}
         bg="blue"
         withNav
       />

@@ -221,7 +221,7 @@ const AboutMeSection = () => {
         <StyledTogether margin="56px 0 0">A wy razem z nim.</StyledTogether>
         <StyledSign fontFamily="Cormorant Garamond" margin="52px 0 0">
           Monika <br />
-          PS <br />A jak Italia wybrała sobie Ciebie?
+          P.S. <br />A jak Italia wybrała sobie Ciebie?
         </StyledSign>
       </StyledContentWrapper>
     </Wrapper>

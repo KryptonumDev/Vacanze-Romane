@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import { graphql } from "gatsby"
-import slugify from "slugify"
 import PageHeader from "../components/PageHeader/PageHeader"
-import GridWrapper from "../components/GridWrapper/GridWrapper"
-import ArticlePreview from "../components/ArticlePreview/ArticlePreview"
 import BlogSection from "../components/SectionsComponents/BlogSection"
 import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigation"
 
@@ -31,17 +28,15 @@ const BlogPage = ({ data }) => {
   }
   const {
     allDatoCmsArticle: { nodes },
-    bg,
   } = data
 
   useEffect(() => {
     if (!firstLaunch) {
       setTimeout(() => {
         postsRef.current.scrollIntoView({
-          block: "nearest",
           behavior: "smooth",
         })
-      }, 150)
+      }, 250)
     }
   }, [page])
 
@@ -56,6 +51,7 @@ const BlogPage = ({ data }) => {
         imgFluid={activeImage.fluid}
         bg="red"
         withNav
+        blog={!firstLaunch}
       />
       <CategoryNavigation
         bg="red"

@@ -1,6 +1,5 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import Image from "gatsby-image"
 import PageHeader from "../components/PageHeader/PageHeader"
 import styled from "styled-components"
 import { Wrapper } from "../components/Wrapper/Wrapper"
@@ -249,14 +248,7 @@ const StyledVideoWrapper = styled.div`
 
 const LessonLayout = ({ data, pageContext }) => {
   const {
-    datoCmsLesson: {
-      id,
-      lessonTitle,
-      lessonNumber,
-      lekcjaPoziom,
-      lessonContent,
-    },
-    total: { totalCount },
+    datoCmsLesson: { lessonTitle, lessonNumber, lekcjaPoziom, lessonContent },
   } = data
 
   const { prev, next } = pageContext
@@ -272,8 +264,6 @@ const LessonLayout = ({ data, pageContext }) => {
         lower: true,
       })}/${slugify(next, { lower: true })}`
     : null
-
-  const flatNumber = +lessonNumber.split(".")[1].trim()
 
   return (
     <>
@@ -318,6 +308,7 @@ const LessonLayout = ({ data, pageContext }) => {
                     />
                     <a
                       target="_blank"
+                      rel="noreferrer"
                       href={block.linkPrzycisku}
                       download={block.filename}
                     >
@@ -333,6 +324,7 @@ const LessonLayout = ({ data, pageContext }) => {
                     <a
                       href="https://www.youtube.com/watch?v=25YTx1DeH08"
                       target="_blank"
+                      rel="noreferrer"
                     >
                       <ReactPlayer
                         light

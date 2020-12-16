@@ -285,7 +285,7 @@ const CoursesStagesSection = React.forwardRef(
                   rzeczowników i&nbsp;przymiotników oraz przyswoisz sobie
                   włoskie zaimki dzierżawcze.
                 </StyledParagraph>
-                <StyledParagraph margin="0 0 0 5px">
+                <StyledParagraph space margin="0 0 0 5px">
                   Poznasz budowę włoskich zdań twierdzących i&nbsp;pytających,
                   a&nbsp;także podstawy dotyczące skomplikowanych włoskich{" "}
                   <Crossed
@@ -338,9 +338,12 @@ const CoursesStagesSection = React.forwardRef(
                 <StyledParagraph margin="0 0 0 5px">
                   Dzięki lekcjom “Części Pierwszej” poczujesz się pewnie
                   w&nbsp;gąszczu podstawowych włoskich czasowników regularnych
-                  i&nbsp;nieregularnych. Zaczniesz bez trudu poruszać się w ich
-                  odmianach. A&nbsp;gdy trzeba będzie opowiedzieć krótko
-                  o&nbsp;sobie – po włosku? Nie ma sprawy!{" "}
+                  i&nbsp;nieregularnych.
+                </StyledParagraph>
+                <StyledParagraph space margin="0 0 0 5px">
+                  Zaczniesz bez trudu poruszać się w ich odmianach. A&nbsp;gdy
+                  trzeba będzie opowiedzieć krótko o&nbsp;sobie – po włosku? Nie
+                  ma sprawy!{" "}
                   <Crossed
                     bottom="40%"
                     textBottom="-50px"
@@ -373,12 +376,15 @@ const CoursesStagesSection = React.forwardRef(
                   Jeśli masz już opanowane podstawy “Kursu języka włoskiego od
                   zera”, możesz kontynuować naukę korzystając z&nbsp;pakietów
                   płatnych lekcji.
-                  <br />
+                </StyledParagraph>
+                <StyledParagraph space margin="0 52px 0 5px">
                   Każdy pakiet będzie składał się z&nbsp;wielu filmów,
                   z&nbsp;e-booka&nbsp;dokładnie opisującego materiał
                   z&nbsp;filmów oraz z&nbsp;ćwiczeń na zakończenie każdej
                   filmowej lekcji.
-                  <br />
+                </StyledParagraph>
+
+                <StyledParagraph space margin="0 52px 0 5px">
                   Wszystkie kolejne części kursu dostępne będą do kupienia
                   w&nbsp;zakładce BOTTEGA
                 </StyledParagraph>

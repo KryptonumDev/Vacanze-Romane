@@ -1,25 +1,9 @@
 import { graphql } from "gatsby"
 import React, { useRef, useState } from "react"
 import { useEffect } from "react"
-import slugify from "slugify"
 import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigation"
 import PageHeader from "../components/PageHeader/PageHeader"
 import CoursesStagesSection from "../components/SectionsComponents/CoursesStagesSection"
-
-const navItems = [
-  {
-    name: "Wprowadzenie 0.0",
-    link: "/wloski-od-zera/wprowadzenie",
-  },
-  {
-    name: "Część pierwsza 1.0",
-    link: "/wloski-od-zera/czesc-pierwsza",
-  },
-  {
-    name: "Kontynuacja",
-    link: "/wloski-od-zera/kontynuacja",
-  },
-]
 
 const CoursesPage = ({ data }) => {
   const courses = [
@@ -28,10 +12,18 @@ const CoursesPage = ({ data }) => {
     "Część pierwsza 1.0",
     "Kontynuacja",
   ]
-  const [activeCourse, setActiveCourse] = useState(courses[0])
+  const images = {
+    "Kurs włoskiego od zera": data.image.wloskiOdZeraObraz,
+    "Wprowadzenie 0.0": data.image.wloskiOdZeraWprowadzenieObraz,
+    "Część pierwsza 1.0": data.image.wloskiOdZeraCzescPierwszaObraz,
+    Kontynuacja: data.image.wloskiOdZeraKontynuacja,
+  }
+  const [activeCourse, setActiveCourse] = useState("Kurs włoskiego od zera")
+  const activeImage = images[activeCourse]
   const [page, setPage] = useState(0)
   const pageLength = 15
   const postsRef = useRef()
+  const [firstLaunch, setFirstLaunch] = useState(true)
 
   const scroll = () =>
     postsRef.current.scrollIntoView({ block: "nearest", behavior: "smooth" })
@@ -43,16 +35,27 @@ const CoursesPage = ({ data }) => {
   }
 
   useEffect(() => {
-    setActiveCourse(courses[0])
+    if (!firstLaunch) {
+      setTimeout(() => {
+        postsRef.current.scrollIntoView({
+          behavior: "smooth",
+        })
+      }, 250)
+    }
+  }, [page])
+
+  useEffect(() => {
+    setFirstLaunch(false)
   }, [])
 
   return (
     <>
       <PageHeader
         paragraph={data.image.title}
-        imgFluid={data.image.wloskiOdZeraObraz.fluid}
+        imgFluid={activeImage.fluid}
         bg="green"
         withNav
+        blog={!firstLaunch}
       />
       <CategoryNavigation
         bg="green"
@@ -78,6 +81,21 @@ export const query = graphql`
     image: datoCmsWloskiOdZeraPage {
       title
       wloskiOdZeraObraz {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+      wloskiOdZeraWprowadzenieObraz {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+      wloskiOdZeraKontynuacja {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+      wloskiOdZeraCzescPierwszaObraz {
         fluid {
           ...GatsbyDatoCmsFluid_tracedSVG
         }

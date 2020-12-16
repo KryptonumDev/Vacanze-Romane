@@ -5,10 +5,7 @@ import {
   Flex,
   Paragraph,
 } from "../../assets/styles/HomeStyles"
-import Crossed from "../Crossed/Crossed"
 import Line from "../Line/Line"
-import { Wrapper } from "../Wrapper/Wrapper"
-import Button from "../Button/Button"
 import styled from "styled-components"
 
 const StyledContentWrapper = styled(ContentWrapper)`
@@ -34,12 +31,6 @@ const StyledParagraph = styled(Paragraph)`
   }
 `
 const SecondParagraph = styled(Paragraph)`
-  @media only screen and (max-width: 645px) {
-    font-size: 15px;
-    margin: 16px 0 0;
-  }
-`
-const ThirdParagraph = styled(Paragraph)`
   @media only screen and (max-width: 645px) {
     font-size: 15px;
     margin: 16px 0 0;

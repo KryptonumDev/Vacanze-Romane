@@ -1,16 +1,10 @@
 import { graphql } from "gatsby"
 import React, { useEffect, useState } from "react"
 import PageHeader from "../components/PageHeader/PageHeader"
-import {
-  SearchProvider,
-  useSearchState,
-  useSearchDispatch,
-} from "../components/contexts/searchContext"
+import { useSearchState } from "../components/contexts/searchContext"
 import { Wrapper } from "../components/Wrapper/Wrapper"
 import { ContentWrapper, Flex, Paragraph } from "../assets/styles/HomeStyles"
-import LessonsGrid, {
-  LessonsGridStyles,
-} from "../components/LessonsGrid/LessonsGrid"
+import LessonsGrid from "../components/LessonsGrid/LessonsGrid"
 import { StyledGrid } from "../components/SectionsComponents/BlogSection"
 import { fadeOutAnimation } from "../components/animations"
 import { PostPreview } from "../components/SectionsComponents/BlogSection"
@@ -90,7 +84,6 @@ const SearchPage = ({ data }) => {
   } = data
 
   const { query } = useSearchState()
-  const dispatch = useSearchDispatch()
   const width = useWindowSize()
 
   const [gridPage, setGridPage] = useState(0)

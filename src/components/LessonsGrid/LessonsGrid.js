@@ -26,7 +26,7 @@ const StyledParagraph = styled(Paragraph)`
 
 const LessonsGrid = ({ max = 1, lessons = [] }) => {
   return (
-    <AnimateSharedLayout type="crossfade">
+    <>
       {lessons.length > 0 ? (
         <LessonsGridStyles>
           {lessons.slice(0, max).map(lesson => (
@@ -44,7 +44,7 @@ const LessonsGrid = ({ max = 1, lessons = [] }) => {
           Brak lekcji do wyświetlenia.
         </StyledParagraph>
       )}
-    </AnimateSharedLayout>
+    </>
   )
 }
 

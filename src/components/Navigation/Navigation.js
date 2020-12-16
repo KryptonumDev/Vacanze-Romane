@@ -519,6 +519,7 @@ const SocialMediaBar = ({ bg }) => (
     <li>
       <a
         target="_blank"
+        rel="noreferrer"
         href="https://www.facebook.com/italiano.Vacanze.Romane/"
       >
         <FiFacebook
@@ -528,7 +529,11 @@ const SocialMediaBar = ({ bg }) => (
       </a>
     </li>
     <li>
-      <a target="_blank" href="">
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href="https://www.instagram.com/vacanze_romane__italiano/"
+      >
         <FiInstagram
           color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
           size="26px"
@@ -538,6 +543,7 @@ const SocialMediaBar = ({ bg }) => (
     <li>
       <a
         target="_blank"
+        rel="noreferrer"
         href="https://www.youtube.com/channel/UCXqPFvurDxiAFJknjZC5UbQ"
       >
         <FiYoutube

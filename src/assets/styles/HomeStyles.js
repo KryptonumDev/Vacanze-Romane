@@ -245,6 +245,7 @@ export const Paragraph = styled(motion.p)`
   font-family: ${({ fontFamily }) =>
     fontFamily ? fontFamily : "Cormorant Garamond"};
   margin: ${({ margin }) => (margin ? margin : "0")};
+  margin-top: ${({ space }) => space && "16px !important"};
   max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : "")};
   text-align: ${({ textAlign }) => (textAlign ? textAlign : "left")};
   text-transform: ${({ textTransform }) =>

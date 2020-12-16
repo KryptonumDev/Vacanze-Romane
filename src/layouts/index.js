@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import GlobalStyle from "../assets/styles/GlobalStyle"
 import Navigation from "../components/Navigation/Navigation"
 import ContentWrapper from "../components/ContentWrapper/ContentWrapper"
 import styled from "styled-components"
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { useLocation } from "@reach/router"
 import Footer from "../components/Footer/Footer"
 import { SearchProvider } from "../components/contexts/searchContext"
-import {
-  MenuProvider,
-  useMenuState,
-} from "../components/contexts/mobileMenuContext"
+import { MenuProvider } from "../components/contexts/mobileMenuContext"
 import ScrollToTop from "react-scroll-to-top"
 import { HiOutlineArrowNarrowUp } from "react-icons/hi"
 import { Helmet } from "react-helmet"
+
 const Wrapper = styled(motion.div)`
   margin: 0 auto;
 `
