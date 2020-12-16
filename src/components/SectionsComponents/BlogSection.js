@@ -387,7 +387,7 @@ const BlogSection = forwardRef(
                     <StyledGridDecorText gridColumn="2/7" gridRow="0/1">
                       <StyledParagraphGrid>
                         Jeżeli chcesz dołączyć do tej niekończącej się,
-                        wciągającej rozmowy, to chętnie podrzucę temat....
+                        wciągającej rozmowy, to chętnie podrzucę temat...
                       </StyledParagraphGrid>
                     </StyledGridDecorText>
                     <StyledGridContent

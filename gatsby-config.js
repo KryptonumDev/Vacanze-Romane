@@ -3,7 +3,7 @@ require("dotenv").config()
 module.exports = {
   siteMetadata: {
     title: `Vacanze Romane`,
-    siteUrl: `https://wonderful-allen-76ffff.netlify.app/`,
+    siteUrl: `https://www.wloskiodzera.pl/`,
     description: `Vacanze Romane to internetowa szkoła języka włoskiego. Przeznaczona dla samouków i nie tylko.`,
     author: `@kryptonum`,
   },
@@ -74,8 +74,6 @@ module.exports = {
     {
       resolve: `gatsby-source-datocms`,
       options: {
-        // You can find your read-only API token under the Settings > API tokens
-        // section of your administrative area:
         apiToken: process.env.API_DATO_CMS,
       },
     },
@@ -88,7 +86,7 @@ module.exports = {
         background_color: `#f8f5f1`,
         theme_color: `#f8f5f1`,
         display: `minimal-ui`,
-        icon: `src/assets/images/logo-vacanze.svg`, // This path is relative to the root of the site.
+        icon: `src/assets/images/logo-vacanze.svg`,
       },
     },
     `gatsby-plugin-offline`,
