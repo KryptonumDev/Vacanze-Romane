@@ -255,14 +255,14 @@ const LessonLayout = ({ data, pageContext }) => {
 
   const prevLink = prev
     ? `/wloski-od-zera/${slugify(lekcjaPoziom, {
-        lower: true,
-      })}/${slugify(prev, { lower: true })}`
+      lower: true,
+    })}/${slugify(prev, { lower: true })}`
     : null
 
   const nextLink = next
     ? `/wloski-od-zera/${slugify(lekcjaPoziom, {
-        lower: true,
-      })}/${slugify(next, { lower: true })}`
+      lower: true,
+    })}/${slugify(next, { lower: true })}`
     : null
 
   return (
@@ -322,7 +322,7 @@ const LessonLayout = ({ data, pageContext }) => {
                   </Flex>
                   <StyledVideoWrapper style={{ marginLeft: "70px" }}>
                     <a
-                      href="https://www.youtube.com/watch?v=25YTx1DeH08"
+                      href={block.linkDoWideo}
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -330,7 +330,7 @@ const LessonLayout = ({ data, pageContext }) => {
                         light
                         width="100%"
                         height="100%"
-                        url="https://www.youtube.com/watch?v=25YTx1DeH08"
+                        url={block.linkDoWideo}
                         playIcon={
                           <IoPlayCircleSharp size="135px" color="gray" />
                         }

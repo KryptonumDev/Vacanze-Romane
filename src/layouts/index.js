@@ -11,7 +11,7 @@ import { MenuProvider } from "../components/contexts/mobileMenuContext"
 import ScrollToTop from "react-scroll-to-top"
 import { HiOutlineArrowNarrowUp } from "react-icons/hi"
 import { Helmet } from "react-helmet"
-import { useStaticQuery } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 
 const Wrapper = styled(motion.div)`
   margin: 0 auto;
@@ -35,19 +35,18 @@ const PageLayout = ({ children }) => {
     <>
       <Helmet defer={false}>
         <title>
-          {`Vacanze Romane | ${
-            location.pathname === "/"
+          {`Vacanze Romane | ${location.pathname === "/"
               ? "Ciao"
               : location.pathname
-                  .replace(/\//g, "")
-                  .split("-")
-                  .map(
-                    name =>
-                      `${name.charAt(0).toUpperCase()}${name.substring(1)}`
-                  )
-                  .join(" ")
-                  .replace("Wloski", "Włoski")
-          }`}
+                .replace(/\//g, "")
+                .split("-")
+                .map(
+                  name =>
+                    `${name.charAt(0).toUpperCase()}${name.substring(1)}`
+                )
+                .join(" ")
+                .replace("Wloski", "Włoski")
+            }`}
         </title>
         <meta
           name="title"
