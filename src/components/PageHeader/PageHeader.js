@@ -182,7 +182,6 @@ const PageHeader = ({
   paragraph,
   subheader,
   imgFluid,
-  mobileImgFluid,
   fullHeight,
   withNav,
   subNav,
@@ -341,9 +340,7 @@ const PageHeader = ({
                     }
                     style={{ width: "100%", position: "relative" }}
                   >
-                    <ShorterImage
-                      fluid={width <= 650 ? mobileImgFluid : imgFluid}
-                    />
+                    <ShorterImage fluid={imgFluid} />
                     <HeaderOverlay />
                   </motion.div>
                 )}

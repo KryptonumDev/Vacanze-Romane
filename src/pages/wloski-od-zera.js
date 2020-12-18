@@ -54,9 +54,10 @@ const CoursesPage = ({ data }) => {
     <>
       <PageHeader
         paragraph={data.image.title}
-        imgFluid={activeImage.fluid}
-        mobileImgFluid={
-          width <= 650 ? data.image.wloskiOdZeraObrazMobile.fluid : null
+        imgFluid={
+          activeCourse === "Kurs włoskiego od zera" && width <= 650
+            ? data.image.wloskiOdZeraObrazMobile.fluid
+            : activeImage.fluid
         }
         bg="green"
         withNav
