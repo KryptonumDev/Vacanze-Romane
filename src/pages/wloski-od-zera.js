@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigation"
 import PageHeader from "../components/PageHeader/PageHeader"
 import CoursesStagesSection from "../components/SectionsComponents/CoursesStagesSection"
+import useWindowSize from "../utils/useWindowSize"
 
 const CoursesPage = ({ data }) => {
   const courses = [
@@ -24,6 +25,7 @@ const CoursesPage = ({ data }) => {
   const pageLength = 15
   const postsRef = useRef()
   const [firstLaunch, setFirstLaunch] = useState(true)
+  let width = useWindowSize()
 
   const scroll = () =>
     postsRef.current.scrollIntoView({ block: "nearest", behavior: "smooth" })
@@ -53,6 +55,9 @@ const CoursesPage = ({ data }) => {
       <PageHeader
         paragraph={data.image.title}
         imgFluid={activeImage.fluid}
+        mobileImgFluid={
+          width <= 650 ? data.image.wloskiOdZeraObrazMobile.fluid : null
+        }
         bg="green"
         withNav
         blog={!firstLaunch}
@@ -85,6 +90,12 @@ export const query = graphql`
           ...GatsbyDatoCmsFluid_tracedSVG
         }
       }
+      wloskiOdZeraObrazMobile {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+
       wloskiOdZeraWprowadzenieObraz {
         fluid {
           ...GatsbyDatoCmsFluid_tracedSVG

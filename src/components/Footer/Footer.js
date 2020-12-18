@@ -291,7 +291,7 @@ const StyleNavigationWrapper = styled(Flex)`
 const Footer = () => {
   const width = useWindowSize()
   const [bg, setBg] = useState("red")
-  const location = useLocation()
+  let location = useLocation()
 
   useEffect(() => {
     setBg("brown")

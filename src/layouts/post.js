@@ -30,6 +30,25 @@ const PostStyles = styled.article`
   }
 `
 
+const ImageTitle = styled.p`
+  font-size: 14px;
+  line-height: 1.3em;
+  font-family: "Lato";
+  font-weight: 400;
+  color: var(--black);
+  margin: -50px 0 30px;
+  text-align: center;
+  padding: 0;
+  @media only screen and (min-width: 566px) {
+    font-size: 14px;
+    margin: -60px 0 40px;
+  }
+  @media only screen and (min-width: 767px) {
+    font-size: 16px;
+    margin: -66px 0 60px;
+  }
+`
+
 const PostParagraph = styled.p`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "18px")};
   line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : "1.44em")};
@@ -338,7 +357,12 @@ const PostLayout = ({ data }) => {
                     <PostHeading>{block.headingContent}</PostHeading>
                   )}
                   {block.model.apiKey === "article_image" && (
-                    <Image fluid={block.image.fluid} />
+                    <>
+                      <Image fluid={block.image.fluid} />
+                      {block?.image?.title && (
+                        <ImageTitle>{block?.image?.title}</ImageTitle>
+                      )}
+                    </>
                   )}
                   {block.model.apiKey === "paragraph" && (
                     <PostParagraph
@@ -476,6 +500,7 @@ export const query = graphql`
             apiKey
           }
           image {
+            title
             fluid {
               ...GatsbyDatoCmsFluid_tracedSVG
             }

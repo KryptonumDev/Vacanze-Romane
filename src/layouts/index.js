@@ -28,7 +28,7 @@ const query = graphql`
 `
 
 const PageLayout = ({ children }) => {
-  const location = useLocation()
+  let location = useLocation()
   const data = useStaticQuery(query)
 
   return (

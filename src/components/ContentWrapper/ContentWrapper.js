@@ -5,7 +5,7 @@ import { useLocation } from "@reach/router"
 
 const StyledMain = styled(motion.main)``
 const ContentWrapper = ({ children }) => {
-  const location = useLocation()
+  let location = useLocation()
   return (
     <AnimatePresence exitBeforeEnter>
       <StyledMain

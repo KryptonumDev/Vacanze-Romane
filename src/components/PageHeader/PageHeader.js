@@ -4,6 +4,7 @@ import Image from "gatsby-image"
 import { AnimatePresence, motion } from "framer-motion"
 import PageHeaderNav from "../PageHeaderNav/PageHeaderNav"
 import { Paragraph } from "../../assets/styles/HomeStyles"
+import useWindowSize from "../../utils/useWindowSize"
 
 const ContentWrapper = styled(motion.div)`
   display: flex;
@@ -11,6 +12,9 @@ const ContentWrapper = styled(motion.div)`
   justify-content: center;
   align-items: center;
   height: ${({ fullHeight }) => (fullHeight ? "calc(100vh - 89px)" : "")};
+  @media only screen and (min-width: 868px) {
+    height: ${({ fullHeight }) => (fullHeight ? "calc(120vh - 89px)" : "")};
+  }
   @media only screen and (max-width: 1105px) {
     height: ${({ fullHeight }) => (fullHeight ? "calc(100vh - 60px)" : "")};
   }
@@ -113,15 +117,15 @@ const StyledContentWrapper = styled(ContentWrapper)`
         justify-content: flex-start;
         padding-top: 40px;
         color: var(--brown);
-        height: calc(80vh - 61px);
+        height: calc(100vh - 61px);
         ${StyledImage} {
-          top: 30vh;
-          height: calc(50vh - 61px);
+          top: 40vh;
+          height: calc(60vh - 61px);
         }
         ${HeaderOverlay} {
-          top: 30vh;
-          height: calc(50vh - 61px);
-          background-color: rgba(20, 16, 13, 0.2);
+          top: 40vh;
+          height: calc(60vh - 61px);
+          background-color: rgba(97, 93, 91, 0.2);
         }
         h1,
         h2,
@@ -178,6 +182,7 @@ const PageHeader = ({
   paragraph,
   subheader,
   imgFluid,
+  mobileImgFluid,
   fullHeight,
   withNav,
   subNav,
@@ -190,6 +195,7 @@ const PageHeader = ({
   italiano,
   blog,
 }) => {
+  let width = useWindowSize()
   return (
     <StyledContentWrapper
       fullHeight={fullHeight}
@@ -335,7 +341,9 @@ const PageHeader = ({
                     }
                     style={{ width: "100%", position: "relative" }}
                   >
-                    <ShorterImage fluid={imgFluid} />
+                    <ShorterImage
+                      fluid={width <= 650 ? mobileImgFluid : imgFluid}
+                    />
                     <HeaderOverlay />
                   </motion.div>
                 )}

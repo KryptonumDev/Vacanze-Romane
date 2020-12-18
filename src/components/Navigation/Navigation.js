@@ -250,7 +250,7 @@ const Navigation = () => {
   const { show } = useMenuState()
   const dispatch = useMenuDispatch()
   const [bg, setBg] = useState("light")
-  const location = useLocation()
+  let location = useLocation()
 
   useEffect(() => {
     setBg("brown")
