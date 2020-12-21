@@ -31,12 +31,34 @@ exports.createPages = async ({ graphql, actions }) => {
           id
         }
       }
-      allDatoCmsLesson(sort:{fields:lessonNumber}) {
+      basicLessons: allDatoCmsLesson(
+        filter: { lekcjaPoziom: { eq: "wprowadzenie" } }
+      ) {
         nodes {
           id
+          lessonTitle
           lekcjaPoziom
           lessonNumber
+        }
+      }
+      firstLevelLessons: allDatoCmsLesson(
+        filter: { lekcjaPoziom: { eq: "część pierwsza" } }
+      ) {
+        nodes {
+          id
           lessonTitle
+          lekcjaPoziom
+          lessonNumber
+        }
+      }
+      continueLevelLessons: allDatoCmsLesson(
+        filter: { lekcjaPoziom: { eq: "kontynuacja" } }
+      ) {
+        nodes {
+          id
+          lessonTitle
+          lekcjaPoziom
+          lessonNumber
         }
       }
     }
@@ -70,26 +92,64 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  result.data.allDatoCmsLesson.nodes.forEach((lesson, i) => {
-    const slugifiedTitle = slugify(lesson.lessonTitle, {
-      lower: true,
+  result.data.basicLessons.nodes
+    .sort((a, b) => {
+      return Number(a.lessonNumber) - Number(b.lessonNumber)
     })
-    const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true })
-    createPage({
-      path: `wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`,
-      component: lessonTemplate,
-      context: {
-        id: lesson.id,
-        number: lesson.lessonNumber.split("Lekcja")[1].trim(),
-        prev:
-          (i >= 1 && lesson.lekcjaPoziom === result.data.allDatoCmsLesson.nodes[i - 1].lekcjaPoziom) ? result.data.allDatoCmsLesson.nodes[i - 1].lessonTitle : null,
-        next:
-          i < result.data.allDatoCmsLesson.nodes.length - 1 &&
+    .forEach((lesson, i) => {
+      const slugifiedTitle = slugify(lesson.lessonTitle, {
+        lower: true,
+      })
+      const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true })
+      createPage({
+        path: `wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`,
+        component: lessonTemplate,
+        context: {
+          id: lesson.id,
+          number: lesson.lessonNumber,
+          prev:
+            i >= 1 &&
             lesson.lekcjaPoziom ===
-            result.data.allDatoCmsLesson.nodes[i + 1].lekcjaPoziom
-            ? result.data.allDatoCmsLesson.nodes[i + 1].lessonTitle
-            : null,
-      },
+              result.data.basicLessons.nodes[i - 1].lekcjaPoziom
+              ? result.data.basicLessons.nodes[i - 1].lessonTitle
+              : null,
+          next:
+            i < result.data.basicLessons.nodes.length - 1 &&
+            lesson.lekcjaPoziom ===
+              result.data.basicLessons.nodes[i + 1].lekcjaPoziom
+              ? result.data.basicLessons.nodes[i + 1].lessonTitle
+              : null,
+        },
+      })
     })
-  })
+  result.data.firstLevelLessons.nodes
+    .sort((a, b) => {
+      return Number(a.lessonNumber) - Number(b.lessonNumber)
+    })
+    .forEach((lesson, i) => {
+      const slugifiedTitle = slugify(lesson.lessonTitle, {
+        lower: true,
+      })
+      const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true })
+      createPage({
+        path: `wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`,
+        component: lessonTemplate,
+        context: {
+          id: lesson.id,
+          number: lesson.lessonNumber,
+          prev:
+            i >= 1 &&
+            lesson.lekcjaPoziom ===
+              result.data.firstLevelLessons.nodes[i - 1].lekcjaPoziom
+              ? result.data.firstLevelLessons.nodes[i - 1].lessonTitle
+              : null,
+          next:
+            i < result.data.firstLevelLessons.nodes.length - 1 &&
+            lesson.lekcjaPoziom ===
+              result.data.firstLevelLessons.nodes[i + 1].lekcjaPoziom
+              ? result.data.firstLevelLessons.nodes[i + 1].lessonTitle
+              : null,
+        },
+      })
+    })
 }

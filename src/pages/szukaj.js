@@ -104,12 +104,16 @@ const SearchPage = ({ data }) => {
   useEffect(() => {
     const queryToUse = query.trim().toLowerCase()
     setFilteredLessons(
-      lessons.filter(
-        lesson =>
-          lesson.lessonTitle.toLowerCase().includes(queryToUse) ||
-          lesson.lessonNumber.toLowerCase().includes(queryToUse) ||
-          lesson.lekcjaPoziom.toLowerCase().includes(queryToUse)
-      )
+      lessons
+        .filter(
+          lesson =>
+            lesson.lessonTitle.toLowerCase().includes(queryToUse) ||
+            lesson.lessonNumber.toLowerCase().includes(queryToUse) ||
+            lesson.lekcjaPoziom.toLowerCase().includes(queryToUse)
+        )
+        .sort((a, b) => {
+          return Number(a.lessonNumber) - Number(b.lessonNumber)
+        })
     )
     setFilteredArticles(
       blogArticles.filter(

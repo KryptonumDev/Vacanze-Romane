@@ -1,5 +1,5 @@
 import { Link } from "gatsby"
-import React from "react"
+import React, { useEffect } from "react"
 import { BsArrowRight } from "react-icons/bs"
 import slugify from "slugify"
 import styled from "styled-components"
@@ -70,6 +70,17 @@ const LessonStyles = styled(Link)`
 `
 
 const Lesson = ({ lesson }) => {
+  const parseLessonNumber = (lessonLevel, lessonNumber) => {
+    let number = lessonNumber
+    if (slugify(lessonLevel, { lower: true }) === "wprowadzenie") {
+      number = "0." + number
+    } else if (slugify(lessonLevel, { lower: true }) === "czesc-pierwsza") {
+      number = "1." + number
+    } else if (slugify(lessonLevel, { lower: true }) === "kontynuacja") {
+      number = "2." + number
+    }
+    return number
+  }
   return (
     <LessonStyles
       to={`/wloski-od-zera/${slugify(lesson.lekcjaPoziom, {
@@ -79,7 +90,7 @@ const Lesson = ({ lesson }) => {
       })}`}
     >
       <article>
-        <p>{lesson.lessonNumber}</p>
+        <p>{parseLessonNumber(lesson.lekcjaPoziom, lesson.lessonNumber)}</p>
         <h3>{lesson.lessonTitle}</h3>
       </article>
       <SeeMore text="Przejdź" />

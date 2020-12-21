@@ -158,6 +158,9 @@ const CoursesStagesSection = React.forwardRef(
             .filter(lesson =>
               activeCourse.toLowerCase().includes(lesson.lekcjaPoziom)
             )
+            .sort((a, b) => {
+              return Number(a.lessonNumber) - Number(b.lessonNumber)
+            })
             .slice(page * pageLength, (page + 1) * pageLength)
         )
       } else {

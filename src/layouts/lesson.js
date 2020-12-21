@@ -255,25 +255,40 @@ const LessonLayout = ({ data, pageContext }) => {
 
   const prevLink = prev
     ? `/wloski-od-zera/${slugify(lekcjaPoziom, {
-      lower: true,
-    })}/${slugify(prev, { lower: true })}`
+        lower: true,
+      })}/${slugify(prev, { lower: true })}`
     : null
 
   const nextLink = next
     ? `/wloski-od-zera/${slugify(lekcjaPoziom, {
-      lower: true,
-    })}/${slugify(next, { lower: true })}`
+        lower: true,
+      })}/${slugify(next, { lower: true })}`
     : null
+
+  const parseLessonNumber = (lessonLevel, lessonNumber) => {
+    let number = lessonNumber
+    if (slugify(lessonLevel, { lower: true }) === "wprowadzenie") {
+      number = "0." + number
+    } else if (slugify(lessonLevel, { lower: true }) === "czesc-pierwsza") {
+      number = "1." + number
+    } else if (slugify(lessonLevel, { lower: true }) === "kontynuacja") {
+      number = "2." + number
+    }
+    return number
+  }
 
   return (
     <>
       <Helmet
-        title={`Vacanze Romane | ${lessonNumber.split(" ")[1]} ${lessonTitle}`}
+        title={`Vacanze Romane | Lekcja ${parseLessonNumber(
+          lekcjaPoziom,
+          lessonNumber
+        )} ${lessonTitle}`}
         defer={false}
       />
       <PageHeader
         paragraph={lessonTitle}
-        subheader={lessonNumber}
+        subheader={`Lekcja ${parseLessonNumber(lekcjaPoziom, lessonNumber)}`}
         withNav
         bg="green"
         lesson
