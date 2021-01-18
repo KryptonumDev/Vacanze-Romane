@@ -8,7 +8,7 @@ import Button from "../components/Button/Button"
 import ReactPlayer from "react-player/lazy"
 import { IoPlayCircleSharp } from "react-icons/io5"
 import slugify from "slugify"
-import { Helmet } from "react-helmet"
+import { HelmetDatoCms } from "gatsby-source-datocms"
 
 const WelcomeSectionStyles = styled.section`
   padding: 0 102px;
@@ -248,7 +248,13 @@ const StyledVideoWrapper = styled.div`
 
 const LessonLayout = ({ data, pageContext }) => {
   const {
-    datoCmsLesson: { lessonTitle, lessonNumber, lekcjaPoziom, lessonContent },
+    datoCmsLesson: {
+      lessonTitle,
+      lessonNumber,
+      lekcjaPoziom,
+      lessonContent,
+      seoMetaTags,
+    },
   } = data
 
   const { prev, next } = pageContext
@@ -279,12 +285,9 @@ const LessonLayout = ({ data, pageContext }) => {
 
   return (
     <>
-      <Helmet
-        title={`Vacanze Romane | Lekcja ${parseLessonNumber(
-          lekcjaPoziom,
-          lessonNumber
-        )} ${lessonTitle}`}
-        defer={false}
+      <HelmetDatoCms
+        title={`Vacanze Romane | ${lessonTitle}`}
+        seo={seoMetaTags}
       />
       <PageHeader
         paragraph={lessonTitle}
@@ -406,6 +409,9 @@ export const query = graphql`
       lessonTitle
       lessonNumber
       lekcjaPoziom
+      seoMetaTags {
+        ...GatsbyDatoCmsSeoMetaTags
+      }
       lessonContent {
         ... on DatoCmsWelcomeSection {
           id

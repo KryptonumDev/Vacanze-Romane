@@ -22,7 +22,7 @@ const CoursesPage = ({ data }) => {
   const [activeCourse, setActiveCourse] = useState("Kurs włoskiego od zera")
   const activeImage = images[activeCourse]
   const [page, setPage] = useState(0)
-  const pageLength = 16
+  const pageLength = 17
   const postsRef = useRef()
   const [firstLaunch, setFirstLaunch] = useState(true)
   let width = useWindowSize()

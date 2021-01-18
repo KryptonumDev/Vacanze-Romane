@@ -9,6 +9,7 @@ import Line from "../components/Line/Line"
 import slugify from "slugify"
 import { Helmet } from "react-helmet"
 import { SeeMore } from "../components/Lesson/Lesson"
+import { HelmetDatoCms } from "gatsby-source-datocms"
 
 const PostStyles = styled.article`
   div {
@@ -249,6 +250,7 @@ const PostLayout = ({ data }) => {
       featuredimage,
       creationDate,
       articleContent,
+      seoMetaTags,
     },
     similarArticles,
     newArticles,
@@ -303,10 +305,7 @@ const PostLayout = ({ data }) => {
 
   return (
     <>
-      <Helmet
-        title={`Vacanze Romane | ${data.datoCmsArticle.title}`}
-        defer={false}
-      />
+      <HelmetDatoCms title={`Vacanze Romane | ${title}`} seo={seoMetaTags} />
       <PageHeader
         subheader={title}
         withNav
@@ -479,6 +478,9 @@ export const query = graphql`
       category
       slug
       creationDate
+      seoMetaTags {
+        ...GatsbyDatoCmsSeoMetaTags
+      }
       articleContent {
         ... on DatoCmsParagraph {
           id
