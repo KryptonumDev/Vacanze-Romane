@@ -285,10 +285,7 @@ const LessonLayout = ({ data, pageContext }) => {
 
   return (
     <>
-      <HelmetDatoCms
-        title={`Vacanze Romane | ${lessonTitle}`}
-        seo={seoMetaTags}
-      />
+      <HelmetDatoCms seo={data.datoCmsLesson.seoMetaTags} />
       <PageHeader
         paragraph={lessonTitle}
         subheader={`Lekcja ${parseLessonNumber(lekcjaPoziom, lessonNumber)}`}

@@ -305,7 +305,7 @@ const PostLayout = ({ data }) => {
 
   return (
     <>
-      <HelmetDatoCms title={`Vacanze Romane | ${title}`} seo={seoMetaTags} />
+      <HelmetDatoCms seo={data.datoCmsArticle.seoMetaTags} />
       <PageHeader
         subheader={title}
         withNav
@@ -353,11 +353,13 @@ const PostLayout = ({ data }) => {
               {articleContent.map(block => (
                 <>
                   {block.model.apiKey === "heading_content" && (
-                    <PostHeading>{block.headingContent}</PostHeading>
+                    <PostHeading key={block.id}>
+                      {block.headingContent}
+                    </PostHeading>
                   )}
                   {block.model.apiKey === "article_image" && (
                     <>
-                      <Image fluid={block.image.fluid} />
+                      <Image key={block.id} fluid={block.image.fluid} />
                       {block?.image?.title && (
                         <ImageTitle>{block?.image?.title}</ImageTitle>
                       )}
@@ -365,6 +367,7 @@ const PostLayout = ({ data }) => {
                   )}
                   {block.model.apiKey === "paragraph" && (
                     <PostParagraph
+                      key={block.id}
                       dangerouslySetInnerHTML={{
                         __html: block.paragraphContent,
                       }}
