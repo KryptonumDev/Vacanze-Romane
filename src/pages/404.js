@@ -10,6 +10,7 @@ import {
 } from "../assets/styles/HomeStyles"
 import { fadeOutAnimation } from "../components/animations"
 import Line from "../components/Line/Line"
+import SEO from "../components/SEO/SEO"
 
 const StyledWrapper = styled(motion.div)`
   display: flex;
@@ -68,28 +69,33 @@ const StyledText = styled.p`
 `
 
 const NotFoundPage = () => (
-  <StyledWrapper>
-    <StyledContentWrapper
-      key="content"
-      variants={fadeOutAnimation}
-      initial="hidden"
-      animate="show"
-      exit="exit"
-      padding="90px 0 110px 0"
-    >
-      <Flex margin="0" flex="1" flexDirection="column">
-        <StyledCapitalizedText margin="0 0 0 5px">404</StyledCapitalizedText>
-        <Line />
-        <StyledParagraph>
-          Chyba nie możemy znaleźć strony, której szukasz.
-        </StyledParagraph>
-        <StyledText margin="24px 0 0 0">
-          Przejdź na <StyledLink to="/">stronę główną.</StyledLink>
-        </StyledText>
-      </Flex>
-      <Flex margin="0" flex="1" flexDirection="column"></Flex>
-    </StyledContentWrapper>
-  </StyledWrapper>
+  <>
+    <SEO>
+      <title>Nie znaleziono strony · Szkoła języka włoskiego</title>
+    </SEO>
+    <StyledWrapper>
+      <StyledContentWrapper
+        key="content"
+        variants={fadeOutAnimation}
+        initial="hidden"
+        animate="show"
+        exit="exit"
+        padding="90px 0 110px 0"
+      >
+        <Flex margin="0" flex="1" flexDirection="column">
+          <StyledCapitalizedText margin="0 0 0 5px">404</StyledCapitalizedText>
+          <Line />
+          <StyledParagraph>
+            Chyba nie możemy znaleźć strony, której szukasz.
+          </StyledParagraph>
+          <StyledText margin="24px 0 0 0">
+            Przejdź na <StyledLink to="/">stronę główną.</StyledLink>
+          </StyledText>
+        </Flex>
+        <Flex margin="0" flex="1" flexDirection="column"></Flex>
+      </StyledContentWrapper>
+    </StyledWrapper>
+  </>
 )
 
 export default NotFoundPage

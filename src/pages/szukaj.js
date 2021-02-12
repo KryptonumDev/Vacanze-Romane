@@ -12,6 +12,7 @@ import slugify from "slugify"
 import Pagination from "../components/Slider/Pagination"
 import styled from "styled-components"
 import useWindowSize from "../utils/useWindowSize"
+import SEO from "../components/SEO/SEO"
 
 const StyledParagraph = styled(Paragraph)`
   text-align: center;
@@ -161,6 +162,9 @@ const SearchPage = ({ data }) => {
 
   return (
     <>
+      <SEO>
+        <title>{query && query} · Szkoła języka włoskiego</title>
+      </SEO>
       <PageHeader
         search
         subheader={query ? query : "Brak hasła do wyszukania"}
