@@ -10,6 +10,7 @@ import slugify from "slugify"
 import { Helmet } from "react-helmet"
 import { SeeMore } from "../components/Lesson/Lesson"
 import { HelmetDatoCms } from "gatsby-source-datocms"
+import SEO from "../components/SEO/SEO"
 
 const PostStyles = styled.article`
   div {
@@ -305,7 +306,7 @@ const PostLayout = ({ data }) => {
 
   return (
     <>
-      <HelmetDatoCms seo={data.datoCmsArticle.seoMetaTags} />
+      <SEO meta={data.datoCmsArticle.seoMetaTags} />
       <PageHeader
         subheader={title}
         withNav
@@ -351,7 +352,7 @@ const PostLayout = ({ data }) => {
             </StyledDate>
             <div>
               {articleContent.map(block => (
-                <>
+                <React.Fragment key={block.id}>
                   {block.model.apiKey === "heading_content" && (
                     <PostHeading key={block.id}>
                       {block.headingContent}
@@ -373,7 +374,7 @@ const PostLayout = ({ data }) => {
                       }}
                     ></PostParagraph>
                   )}
-                </>
+                </React.Fragment>
               ))}
             </div>
           </PostStyles>

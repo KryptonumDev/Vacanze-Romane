@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigation"
 import PageHeader from "../components/PageHeader/PageHeader"
 import CoursesStagesSection from "../components/SectionsComponents/CoursesStagesSection"
+import SEO from "../components/SEO/SEO"
 import useWindowSize from "../utils/useWindowSize"
 
 const CoursesPage = ({ data }) => {
@@ -52,6 +53,7 @@ const CoursesPage = ({ data }) => {
 
   return (
     <>
+      <SEO meta={data.image.seoMetaTags} />
       <PageHeader
         paragraph={data.image.title}
         imgFluid={
@@ -86,6 +88,9 @@ export const query = graphql`
   {
     image: datoCmsWloskiOdZeraPage {
       title
+      seoMetaTags {
+        ...GatsbyDatoCmsSeoMetaTags
+      }
       wloskiOdZeraObraz {
         fluid {
           ...GatsbyDatoCmsFluid_tracedSVG

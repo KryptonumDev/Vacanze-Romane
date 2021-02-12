@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import PageHeader from "../components/PageHeader/PageHeader"
 import BlogSection from "../components/SectionsComponents/BlogSection"
 import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigation"
+import SEO from "../components/SEO/SEO"
 
 const BlogPage = ({ data }) => {
   const categories = ["Kultura", "Sztuka", "Podróże", "Kuchnia"]
@@ -46,6 +47,7 @@ const BlogPage = ({ data }) => {
 
   return (
     <>
+      <SEO meta={data.bg.seoMetaTags} />
       <PageHeader
         paragraph="A tavola"
         imgFluid={activeImage.fluid}
@@ -89,6 +91,9 @@ export const query = graphql`
     }
 
     bg: datoCmsBlogPage {
+      seoMetaTags {
+        ...GatsbyDatoCmsSeoMetaTags
+      }
       blogBg {
         fluid {
           ...GatsbyDatoCmsFluid_tracedSVG

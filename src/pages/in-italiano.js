@@ -4,6 +4,7 @@ import PageHeader from "../components/PageHeader/PageHeader"
 import ItalianoSection from "../components/SectionsComponents/InItalianoSection"
 import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigation"
 import { useRef } from "react"
+import SEO from "../components/SEO/SEO"
 
 const InItalianoPage = ({ data }) => {
   const categories = ["Grammatica", "Vocabolario", "Frasi e citazioni"]
@@ -50,6 +51,7 @@ const InItalianoPage = ({ data }) => {
 
   return (
     <>
+      <SEO meta={data.bg.seoMetaTags} />
       <PageHeader
         paragraph="in italiano"
         imgFluid={activeImage.fluid}
@@ -98,6 +100,9 @@ export const query = graphql`
     }
 
     bg: datoCmsInItalianoPage {
+      seoMetaTags {
+        ...GatsbyDatoCmsSeoMetaTags
+      }
       bgImage {
         fluid {
           ...GatsbyDatoCmsFluid_tracedSVG

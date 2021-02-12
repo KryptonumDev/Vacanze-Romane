@@ -5,9 +5,11 @@ import CiaoSection from "../components/CiaoSection/CiaoSection"
 import HowToLearnSection from "../components/HomeComponents/HowToLearnSection"
 import NotOnlyBasicsSection from "../components/HomeComponents/NotOnlyBasicsSection"
 import Slider from "../components/Slider/Slider"
+import SEO from "../components/SEO/SEO"
 
 const IndexPage = ({ data }) => (
   <>
+    <SEO meta={data.datoCmsHomePage.seoMetaTags} />
     <PageHeader
       title={data.datoCmsHomePage.title}
       subtitle={data.datoCmsHomePage.subheader}
@@ -35,6 +37,9 @@ export const query = graphql`
       courseName
       subheader
       decorativeText
+      seoMetaTags {
+        ...GatsbyDatoCmsSeoMetaTags
+      }
       backgroundImage {
         fluid {
           ...GatsbyDatoCmsFluid
