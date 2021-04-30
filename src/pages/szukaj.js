@@ -134,7 +134,7 @@ const SearchPage = ({ data }) => {
     )
     setGridPage(0)
     setItalianoGridPage(0)
-  }, [query])
+  }, [query, blogArticles, italianoArticles, lessons])
 
   useEffect(() => {
     setTotal(

@@ -1,16 +1,14 @@
-import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import React, { useRef, useState } from "react"
 import styled, { css } from "styled-components"
-import { useSearchDispatch, useSearchState } from "../contexts/searchContext"
+import { useSearchDispatch } from "../contexts/searchContext"
 import { RiSearchLine } from "react-icons/ri"
 import { BsArrowRight } from "react-icons/bs"
 import { IoClose } from "react-icons/io5"
 import { Flex } from "../../assets/styles/HomeStyles"
 import { fadeOutAnimation, itemAnimation, listAnimation } from "../animations"
-import { useEffect } from "react"
 import { navigate } from "gatsby"
-import { useLocation } from "@reach/router"
-import { useMenuDispatch, useMenuState } from "../contexts/mobileMenuContext"
+import { useMenuDispatch } from "../contexts/mobileMenuContext"
 
 const SearchStyles = styled(motion.div)`
   cursor: pointer;
@@ -288,17 +286,6 @@ const StyledMessage = styled(motion.p)`
     `}
 `
 
-// const MobileStyles = styled(motion.div)`
-//   ${({ mobile }) =>
-//     mobile &&
-//     css`
-//       display: flex;
-//       justify-content: space-between;
-//       border: 2px solid black;
-//       align-items: center;
-//     `}
-// `
-
 const InputWrapper = styled(motion.div)`
   display: flex;
   align-items: center;
@@ -372,16 +359,6 @@ const BtnSearchWrapper = styled(motion.div)`
   display: ${({ hide }) => hide && "none"};
 `
 
-const Overlay = styled(motion.div)`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  background-color: rgba(0, 0, 0, 0.4);
-`
-
 const ExitMenu = styled(motion.button)`
   position: absolute;
   top: -30px;
@@ -409,7 +386,6 @@ const Search = ({ bg, className, mobile, italiano }) => {
   const [showButtonSearch, setShowButtonSearch] = useState(false)
   const [inputValue, setInputValue] = useState("")
   const dispatch = useSearchDispatch()
-  const query = useSearchState()
   const menuDispatch = useMenuDispatch()
   const [message, setMessage] = useState(null)
 

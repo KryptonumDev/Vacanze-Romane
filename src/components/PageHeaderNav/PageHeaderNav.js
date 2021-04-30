@@ -2,9 +2,7 @@ import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import { ContentWrapper } from "../../assets/styles/HomeStyles"
-import { Wrapper } from "../Wrapper/Wrapper"
 import { useLocation } from "@reach/router"
-import { useEffect } from "react"
 import { motion } from "framer-motion"
 
 export const PageHeaderStyles = styled(motion.ul)`

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import styled from "styled-components"
-import { ImageWrapper, Overlay } from "../../assets/styles/HomeStyles"
+import { Overlay } from "../../assets/styles/HomeStyles"
 
 export const Wrapper = styled(motion.div)`
   display: flex;

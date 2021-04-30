@@ -1,5 +1,5 @@
 import { Link } from "gatsby"
-import React, { useEffect } from "react"
+import React from "react"
 import { BsArrowRight } from "react-icons/bs"
 import slugify from "slugify"
 import styled from "styled-components"

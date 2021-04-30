@@ -1,6 +1,5 @@
-import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import React, { useEffect, useState } from "react"
-import slugify from "slugify"
 import styled from "styled-components"
 import {
   CapitalizeText,
@@ -11,10 +10,7 @@ import {
 import { fadeOutAnimation } from "../animations"
 import Lesson from "../Lesson/Lesson"
 import Line from "../Line/Line"
-import Pagination from "../Slider/Pagination"
 import { Wrapper } from "../Wrapper/Wrapper"
-import { graphql, useStaticQuery } from "gatsby"
-import CoursesContinueSection from "./CoursesContinueSection"
 import { StyledPostsWrapper } from "./InItalianoSection"
 import Crossed from "../Crossed/Crossed"
 
@@ -104,28 +100,6 @@ const StyledFlexMobile = styled(Flex)`
   }
 `
 
-const StyledNoPosts = styled(Paragraph)`
-  text-align: center;
-  @media only screen and (max-width: 1085px) {
-    font-size: 30px;
-  }
-  @media only screen and (max-width: 798px) {
-    font-size: 22px;
-  }
-`
-
-const StyledPaginationWrapper = styled(ContentWrapper)`
-  @media only screen and (max-width: 1407px) {
-    padding: 20px 102px 80px;
-  }
-  @media only screen and (max-width: 1065px) {
-    padding: 0px 60px 80px;
-  }
-  @media only screen and (max-width: 865px) {
-    padding: 0px 30px 80px;
-  }
-`
-
 const StyledPosts = styled(StyledPostsWrapper)`
   padding: 90px 102px 100px;
   @media only screen and (max-width: 1064px) {
@@ -138,17 +112,8 @@ const StyledPosts = styled(StyledPostsWrapper)`
 
 const StyledWrapper = styled(Wrapper)``
 
-const query = graphql`
-  {
-    datoCmsWloskiOdZeraPage {
-      title
-    }
-  }
-`
-
 const CoursesStagesSection = React.forwardRef(
-  ({ lessons, activeCourse, page, setPage, pageLength }, ref) => {
-    const data = useStaticQuery(query)
+  ({ lessons, activeCourse, page, pageLength }, ref) => {
     const [filteredLessons, setFilteredLessons] = useState(lessons)
 
     useEffect(() => {
@@ -166,7 +131,7 @@ const CoursesStagesSection = React.forwardRef(
       } else {
         setFilteredLessons([])
       }
-    }, [activeCourse, page, lessons])
+    }, [activeCourse, page, lessons, pageLength])
 
     return (
       <StyledWrapper ref={ref} padding="0" bg="light">

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import styled, { css } from "styled-components"
 import Image from "gatsby-image"
 import { AnimatePresence, motion } from "framer-motion"
 import PageHeaderNav from "../PageHeaderNav/PageHeaderNav"
 import { Paragraph } from "../../assets/styles/HomeStyles"
-import useWindowSize from "../../utils/useWindowSize"
 
 const ContentWrapper = styled(motion.div)`
   display: flex;
@@ -194,7 +193,6 @@ const PageHeader = ({
   italiano,
   blog,
 }) => {
-  let width = useWindowSize()
   return (
     <StyledContentWrapper
       fullHeight={fullHeight}

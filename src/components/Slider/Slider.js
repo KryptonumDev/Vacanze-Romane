@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import {
   CapitalizeText,
   ContentWrapper,
-  Flex,
   Paragraph,
 } from "../../assets/styles/HomeStyles"
 import styled from "styled-components"
@@ -10,7 +9,6 @@ import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion"
 import Line from "../Line/Line"
 import { Wrapper } from "../Wrapper/Wrapper"
 import { graphql, Link, useStaticQuery } from "gatsby"
-import GridWrapper from "../GridWrapper/GridWrapper"
 import slugify from "slugify"
 import Image from "gatsby-image"
 import Pagination from "./Pagination"
@@ -184,14 +182,6 @@ const Slider = ({ header }) => {
       setPageLength(2)
     }
   }, [width])
-
-  useEffect(() => {
-    if (width <= 645) {
-      setPageLength(1)
-    } else {
-      setPageLength(2)
-    }
-  }, [])
 
   const getBase = category => {
     const italianoCategories = [

@@ -7,9 +7,7 @@ import { Wrapper } from "../components/Wrapper/Wrapper"
 import styled from "styled-components"
 import Line from "../components/Line/Line"
 import slugify from "slugify"
-import { Helmet } from "react-helmet"
 import { SeeMore } from "../components/Lesson/Lesson"
-import { HelmetDatoCms } from "gatsby-source-datocms"
 import SEO from "../components/SEO/SEO"
 
 const PostStyles = styled.article`
@@ -251,7 +249,6 @@ const PostLayout = ({ data }) => {
       featuredimage,
       creationDate,
       articleContent,
-      seoMetaTags,
     },
     similarArticles,
     newArticles,

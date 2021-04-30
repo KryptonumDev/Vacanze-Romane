@@ -247,8 +247,6 @@ const FooterText = styled(motion.p)`
   }
 `
 
-const StyledWrapper = styled(Wrapper)``
-
 const StyledContentWrapper = styled(ContentWrapper)`
   @media only screen and (max-width: 1051px) {
     padding: 0 65px 105px;

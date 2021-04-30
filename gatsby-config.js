@@ -17,24 +17,9 @@ module.exports = {
         path: `${__dirname}/src/assets/images`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `gallery`,
-        path: `${__dirname}/src/assets/images/gallery`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `articles`,
-        path: `${__dirname}/src/data/articles`,
-      },
-    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-layout`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-mdx`,
     {
       /* Include plugin */
       resolve: "gatsby-omni-font-loader",

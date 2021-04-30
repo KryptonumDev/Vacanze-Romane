@@ -3,7 +3,6 @@ import styled from "styled-components"
 import {
   CapitalizeText,
   ContentWrapper,
-  Flex,
   Paragraph,
 } from "../../assets/styles/HomeStyles"
 import useWindowSize from "../../utils/useWindowSize"
@@ -60,17 +59,6 @@ const StyledTogether = styled(Paragraph)`
   }
   @media only screen and (max-width: 692px) {
     font-size: 18px;
-  }
-`
-
-const StyledDecor = styled(Paragraph)`
-  @media only screen and (max-width: 1354px) {
-    margin: 30px 0 0;
-    font-size: 30px;
-  }
-  @media only screen and (max-width: 692px) {
-    font-size: 18px;
-    align-self: flex-start;
   }
 `
 

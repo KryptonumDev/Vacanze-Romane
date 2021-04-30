@@ -43,7 +43,7 @@ const InItalianoPage = ({ data }) => {
         scroll()
       }, 150)
     }
-  }, [page])
+  }, [page, firstLaunch])
 
   useEffect(() => {
     setFirstLaunch(false)

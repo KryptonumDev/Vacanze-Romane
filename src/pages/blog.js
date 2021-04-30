@@ -39,7 +39,7 @@ const BlogPage = ({ data }) => {
         })
       }, 250)
     }
-  }, [page])
+  }, [page, firstLaunch])
 
   useEffect(() => {
     setFirstLaunch(false)

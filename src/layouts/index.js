@@ -11,8 +11,6 @@ import { MenuProvider } from "../components/contexts/mobileMenuContext"
 import ScrollToTop from "react-scroll-to-top"
 import { HiOutlineArrowNarrowUp } from "react-icons/hi"
 import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
-import { HelmetDatoCms } from "gatsby-source-datocms"
 
 const Wrapper = styled(motion.div)`
   margin: 0 auto;

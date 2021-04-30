@@ -10,7 +10,6 @@ import {
   ColumnText,
   TextEmphasized,
   Overlay,
-  ImageWrapper,
   Flex,
 } from "../../assets/styles/HomeStyles"
 import { graphql, useStaticQuery } from "gatsby"

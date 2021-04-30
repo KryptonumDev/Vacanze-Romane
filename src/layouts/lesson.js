@@ -248,13 +248,7 @@ const StyledVideoWrapper = styled.div`
 
 const LessonLayout = ({ data, pageContext }) => {
   const {
-    datoCmsLesson: {
-      lessonTitle,
-      lessonNumber,
-      lekcjaPoziom,
-      lessonContent,
-      seoMetaTags,
-    },
+    datoCmsLesson: { lessonTitle, lessonNumber, lekcjaPoziom, lessonContent },
   } = data
 
   const { prev, next } = pageContext

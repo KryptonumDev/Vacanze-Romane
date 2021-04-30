@@ -10,7 +10,6 @@ import Pagination from "../Slider/Pagination"
 import { Link } from "gatsby"
 import slugify from "slugify"
 import Search from "../Search/Search"
-import { useMenuDispatch, useMenuState } from "../contexts/mobileMenuContext"
 import { SeeMore } from "../Lesson/Lesson"
 
 const StyledGrid = styled(motion.div)`
@@ -203,7 +202,7 @@ const ItalianoSection = forwardRef(
       setPostsNumber(
         posts.filter(post => post.category === activeCategory).length
       )
-    }, [activeCategory, page, posts])
+    }, [activeCategory, page, posts, pageLength])
 
     return (
       <Wrapper padding="0" bg="white">

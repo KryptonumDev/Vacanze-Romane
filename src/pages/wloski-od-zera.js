@@ -28,8 +28,6 @@ const CoursesPage = ({ data }) => {
   const [firstLaunch, setFirstLaunch] = useState(true)
   let width = useWindowSize()
 
-  const scroll = () =>
-    postsRef.current.scrollIntoView({ block: "nearest", behavior: "smooth" })
   const handleClick = (e, course) => {
     e.preventDefault()
     setActiveCourse(course)
@@ -45,7 +43,7 @@ const CoursesPage = ({ data }) => {
         })
       }, 250)
     }
-  }, [page])
+  }, [page, firstLaunch])
 
   useEffect(() => {
     setFirstLaunch(false)

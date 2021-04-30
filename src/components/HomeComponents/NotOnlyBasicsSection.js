@@ -8,10 +8,7 @@ import {
   ContentWrapper,
   CapitalizeText,
   Paragraph,
-  ColumnText,
-  TextEmphasized,
   Overlay,
-  ImageWrapper,
   Flex,
 } from "../../assets/styles/HomeStyles"
 import styled from "styled-components"
