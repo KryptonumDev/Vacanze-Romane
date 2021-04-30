@@ -38,14 +38,6 @@ const InItalianoPage = ({ data }) => {
   } = data
 
   useEffect(() => {
-    if (!firstLaunch) {
-      setTimeout(() => {
-        scroll()
-      }, 150)
-    }
-  }, [page, firstLaunch])
-
-  useEffect(() => {
     setFirstLaunch(false)
   }, [])
 

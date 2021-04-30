@@ -31,20 +31,6 @@ const BlogPage = ({ data }) => {
     allDatoCmsArticle: { nodes },
   } = data
 
-  useEffect(() => {
-    if (!firstLaunch) {
-      setTimeout(() => {
-        postsRef.current.scrollIntoView({
-          behavior: "smooth",
-        })
-      }, 250)
-    }
-  }, [page, firstLaunch])
-
-  useEffect(() => {
-    setFirstLaunch(false)
-  }, [])
-
   return (
     <>
       <SEO meta={data.bg.seoMetaTags} />
