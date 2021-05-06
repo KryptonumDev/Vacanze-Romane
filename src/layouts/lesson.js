@@ -32,7 +32,7 @@ const WelcomeSectionStyles = styled.section`
   }
 `
 
-const CenteredParagraph = styled.p`
+const CenteredParagraph = styled.div`
   font-family: "Cormorant Garamond";
   font-size: 36px;
   font-weight: normal;
@@ -65,7 +65,7 @@ const CenteredParagraph = styled.p`
   }
 `
 
-const SmallerParagraph = styled.p`
+const SmallerParagraph = styled.div`
   font-family: "Lato";
   font-size: 18px;
   line-height: 1.44em;

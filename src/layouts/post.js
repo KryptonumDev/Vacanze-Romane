@@ -49,7 +49,7 @@ const ImageTitle = styled.p`
   }
 `
 
-const PostParagraph = styled.p`
+const PostParagraph = styled.div`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "18px")};
   line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : "1.44em")};
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
@@ -369,7 +369,7 @@ const PostLayout = ({ data }) => {
                       dangerouslySetInnerHTML={{
                         __html: block.paragraphContent,
                       }}
-                    ></PostParagraph>
+                    />
                   )}
                 </React.Fragment>
               ))}
