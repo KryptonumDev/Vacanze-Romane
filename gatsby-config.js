@@ -20,6 +20,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-layout`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-netlify`,
     {
       /* Include plugin */
       resolve: "gatsby-omni-font-loader",
