@@ -367,27 +367,32 @@ const LessonLayout = ({ data, pageContext }) => {
             </React.Fragment>
           ))}
         </StyledContentWrapper>
-        <StyledButtonsWrapper
-          justifyContent="space-between"
-          padding="80px 370px 100px"
-        >
-          <Link to={prevLink}>
-            <Button
-              bg="green"
-              disabled={prevLink === null}
-              arrowLeft
-              text="Poprzednia"
-            />
-          </Link>
-          <Link to={nextLink}>
-            <Button
-              bg="green"
-              disabled={nextLink === null}
-              arrowRight
-              text="Następna"
-            />
-          </Link>
-        </StyledButtonsWrapper>
+        
+          <StyledButtonsWrapper
+            justifyContent="space-between"
+            padding="80px 370px 100px"
+          >
+          {lessonTitle !== '"Włoski od zera" Część Druga 2.0.' && (
+<>
+            <Link to={prevLink}>
+              <Button
+                bg="green"
+                disabled={prevLink === null}
+                arrowLeft
+                text="Poprzednia"
+              />
+            </Link>
+            <Link to={nextLink}>
+              <Button
+                bg="green"
+                disabled={nextLink === null}
+                arrowRight
+                text="Następna"
+              />
+            </Link>
+</>
+          )}
+          </StyledButtonsWrapper>
       </Wrapper>
     </>
   )

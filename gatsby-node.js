@@ -152,4 +152,34 @@ exports.createPages = async ({ graphql, actions }) => {
         },
       })
     })
+    result.data.continueLevelLessons.nodes
+      .sort((a, b) => {
+        return Number(a.lessonNumber) - Number(b.lessonNumber)
+      })
+      .forEach((lesson, i) => {
+        const slugifiedTitle = slugify(lesson.lessonTitle, {
+          lower: true,
+        })
+        const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true })
+        createPage({
+          path: `wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`,
+          component: lessonTemplate,
+          context: {
+            id: lesson.id,
+            number: lesson.lessonNumber,
+            prev:
+              i >= 1 &&
+              lesson.lekcjaPoziom ===
+                result.data.continueLevelLessons.nodes[i - 1].lekcjaPoziom
+                ? result.data.continueLevelLessons.nodes[i - 1].lessonTitle
+                : null,
+            next:
+              i < result.data.continueLevelLessons.nodes.length - 1 &&
+              lesson.lekcjaPoziom ===
+                result.data.continueLevelLessons.nodes[i + 1].lekcjaPoziom
+                ? result.data.continueLevelLessons.nodes[i + 1].lessonTitle
+                : null,
+          },
+        })
+      })
 }
