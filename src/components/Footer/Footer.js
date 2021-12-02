@@ -353,10 +353,20 @@ const Footer = () => {
             }
           >
             Stronę stworzyli:{" "}
-            <motion.a href="https://agathadesign.co.uk">Agatha Design</motion.a>{" "}
+            <motion.a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://agathadesign.co.uk"
+            >
+              Agatha Design
+            </motion.a>{" "}
             &{" "}
-            <motion.a href="https://kryptonumstudio.com">
-              Kryptonum Studio
+            <motion.a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://www.kryptonum.eu"
+            >
+              Kryptonum
             </motion.a>
           </FooterText>
         </LineWrapper>
