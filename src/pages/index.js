@@ -6,6 +6,7 @@ import HowToLearnSection from "../components/HomeComponents/HowToLearnSection"
 import NotOnlyBasicsSection from "../components/HomeComponents/NotOnlyBasicsSection"
 import Slider from "../components/Slider/Slider"
 import SEO from "../components/SEO/SEO"
+import GrammarProblemsSection from "../components/GrammarProblemsSection/GrammarProblemsSection"
 
 const IndexPage = ({ data }) => (
   <>
@@ -24,6 +25,17 @@ const IndexPage = ({ data }) => (
     <HowToLearnSection imgFluid={data.datoCmsHomePage.jakSieUczycObraz.fluid} />
     <NotOnlyBasicsSection
       imgFluid={data.datoCmsHomePage.nieTylkoPodstawyObraz.fluid}
+    />
+    <GrammarProblemsSection
+      sectionTitle={data.datoCmsHomePage.sectionTitle}
+      sectionQuestionTitle={data.datoCmsHomePage.sectionQuestionTitle}
+      sectionQuestionTitleItalian={
+        data.datoCmsHomePage.sectionQuestionTitleItalian
+      }
+      buttonText={data.datoCmsHomePage.buttonText}
+      paragraphText={data.datoCmsHomePage.paragraphText}
+      fluidImg1={data.datoCmsHomePage.problemsImg1.gatsbyImageData}
+      fluidImg2={data.datoCmsHomePage.problemsImg2.gatsbyImageData}
     />
     <Slider header="Ostatnio na blogu" />
   </>
@@ -55,6 +67,19 @@ export const query = graphql`
         fluid {
           ...GatsbyDatoCmsFluid
         }
+      }
+      sectionTitle
+      sectionQuestionTitle
+      sectionQuestionTitleItalian
+      buttonText
+      paragraphText {
+        value
+      }
+      problemsImg1 {
+        gatsbyImageData
+      }
+      problemsImg2 {
+        gatsbyImageData
       }
     }
   }
