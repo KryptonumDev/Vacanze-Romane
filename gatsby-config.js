@@ -2,9 +2,9 @@ require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
-    title: `Vacanze Romane`,
+    title: `Włoski od zera`,
     siteUrl: `https://www.wloskiodzera.pl/`,
-    description: `Vacanze Romane to internetowa szkoła języka włoskiego. Przeznaczona dla samouków i nie tylko.`,
+    description: `Włoski od zera to internetowa nauka języka włoskiego od zera. Przeznaczona dla samouków i nie tylko.`,
     author: `@kryptonum`,
   },
   flags: {
