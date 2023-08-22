@@ -229,8 +229,8 @@ const ItalianoSection = forwardRef(
           </Flex>
         </StyledContentWrapper>
         <StyledPostsWrapper padding="0 102px 50px" ref={ref}>
-          <AnimateSharedLayout type="crossfade">
-            <AnimatePresence exitBeforeEnter>
+          {/* <AnimateSharedLayout type="crossfade"> */}
+            <AnimatePresence mode='wait'>
               <StyledGrid itemsInRow={2} noPosts={filteredPosts.length === 0}>
                 {filteredPosts.length >= 1
                   ? filteredPosts.map(post => (
@@ -260,7 +260,7 @@ const ItalianoSection = forwardRef(
                     )}
               </StyledGrid>
             </AnimatePresence>
-          </AnimateSharedLayout>
+          {/* </AnimateSharedLayout> */}
         </StyledPostsWrapper>
         <StyledPaginationWrapper padding="0 102px 100px">
           {postsNumber > 2 && (

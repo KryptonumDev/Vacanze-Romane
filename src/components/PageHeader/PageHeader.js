@@ -298,7 +298,7 @@ const PageHeader = ({
                   {subheader}
                 </StyledParagraph>
               )}
-              <AnimatePresence exitBeforeEnter>
+              <AnimatePresence mode='wait'>
                 {imgFluid && (
                   <motion.div
                     key={imgFluid.src}

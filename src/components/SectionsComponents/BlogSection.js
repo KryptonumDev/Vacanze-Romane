@@ -8,7 +8,9 @@ import {
 import Line from "../Line/Line"
 import { Wrapper } from "../Wrapper/Wrapper"
 import Grid, { GridItem } from "../Grid/Grid"
-import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion"
+import { AnimatePresence, 
+  // AnimateSharedLayout, 
+  motion } from "framer-motion"
 import { fadeOutAnimation } from "../animations"
 import Image from "gatsby-image"
 import styled, { css } from "styled-components"
@@ -284,8 +286,8 @@ const BlogSection = forwardRef(
 
     return (
       <Wrapper padding="0" bg="light" ref={ref}>
-        <AnimateSharedLayout type="crossfade">
-          <AnimatePresence exitBeforeEnter>
+        {/* <AnimateSharedLayout type="crossfade"> */}
+          <AnimatePresence mode='wait'>
             {activeCategory !== "Blog" ? (
               <>
                 <StyledContentWrapper padding="90px 102px 50px">
@@ -426,7 +428,7 @@ const BlogSection = forwardRef(
               </>
             )}
           </AnimatePresence>
-        </AnimateSharedLayout>
+        {/* </AnimateSharedLayout> */}
       </Wrapper>
     )
   }

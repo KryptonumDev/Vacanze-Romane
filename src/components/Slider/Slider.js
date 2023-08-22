@@ -5,7 +5,9 @@ import {
   Paragraph,
 } from "../../assets/styles/HomeStyles"
 import styled from "styled-components"
-import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion"
+import { motion,
+  // AnimateSharedLayout  , 
+  AnimatePresence} from "framer-motion"
 import Line from "../Line/Line"
 import { Wrapper } from "../Wrapper/Wrapper"
 import { graphql, Link, useStaticQuery } from "gatsby"
@@ -207,9 +209,9 @@ const Slider = ({ header }) => {
           {header}
         </StyledCapitalizedText>
         <Line bg="var(--brownOp)" width="50%" />
-        <AnimateSharedLayout type="crossfade">
+        {/* <AnimateSharedLayout type="crossfade"> */}
           <SliderGrid>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence mode='wait'>
               {data.allDatoCmsArticle.nodes.length >= 1 ? (
                 data.allDatoCmsArticle.nodes
                   .slice(page * pageLength, (page + 1) * pageLength)
@@ -265,7 +267,7 @@ const Slider = ({ header }) => {
               )}
             </AnimatePresence>
           </SliderGrid>
-        </AnimateSharedLayout>
+        {/* </AnimateSharedLayout> */}
         {data.allDatoCmsArticle.nodes.length >= 1 && (
           <Pagination
             length={Math.floor(
