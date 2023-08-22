@@ -7,9 +7,6 @@ module.exports = {
     description: `Włoski od zera to internetowa nauka języka włoskiego od zera. Przeznaczona dla samouków i nie tylko.`,
     author: `@kryptonum`,
   },
-  flags: {
-    DEV_SSR: false,
-  },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
@@ -26,24 +23,12 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-netlify`,
     {
-      /* Include plugin */
       resolve: "gatsby-omni-font-loader",
-
-      /* Plugin options */
       options: {
-        /* Enable font loading listener to handle FOUT */
         enableListener: true,
-
-        /* Preconnect URL-s. This example is for Google Fonts */
         preconnect: ["https://fonts.gstatic.com"],
-
-        /* Font listener interval (in ms). Default is 300ms. Recommended: >=300ms */
         interval: 300,
-
-        /* Font listener timeout value (in ms). Default is 30s (30000ms). Listener will no longer check for loaded fonts after timeout, fonts will still be loaded and displayed, but without handling FOUT. */
         timeout: 30000,
-
-        /* Web fonts. File link should point to font CSS file. */
         web: [
           {
             name: "Homemade Apple",
@@ -60,7 +45,7 @@ module.exports = {
         ],
       },
     },
-    `gatsby-plugin-advanced-sitemap`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-source-datocms`,
       options: {

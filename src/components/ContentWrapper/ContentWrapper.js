@@ -7,7 +7,7 @@ const StyledMain = styled(motion.main)``
 const ContentWrapper = ({ children }) => {
   let location = useLocation()
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode='wait'>
       <StyledMain
         key={location.pathname}
         initial={location.pathname !== "/" ? "pageInitial" : false}

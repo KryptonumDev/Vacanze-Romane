@@ -99,6 +99,8 @@ exports.createPages = async ({ graphql, actions }) => {
     .forEach((lesson, i) => {
       const slugifiedTitle = slugify(lesson.lessonTitle, {
         lower: true,
+        strict: true,
+        trim: true
       })
       const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true })
       createPage({

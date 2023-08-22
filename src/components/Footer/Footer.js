@@ -14,7 +14,7 @@ const NavList = [
     items: [
       { name: "Ciao!", link: "/" },
       { name: "in italiano", link: "/in-italiano" },
-      { name: "Bottega", link: "/bottega" },
+      { name: "Sklep", link: "/sklep" },
       { name: "o mnie", link: "/o-mnie" },
     ],
   },

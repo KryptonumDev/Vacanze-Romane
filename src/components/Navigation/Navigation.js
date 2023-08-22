@@ -321,7 +321,7 @@ const Navigation = () => {
               Blog
             </NavigationListItem>
           </Link>
-          <Link activeClassName="active" to="/bottega">
+          <Link activeClassName="active" to="/sklep">
             <NavigationListItem
               bg={bg}
               onClick={() => dispatch({ type: "CLOSE_MENU" })}
@@ -384,7 +384,7 @@ const Navigation = () => {
                   Blog
                 </NavigationListItem>
               </Link>
-              <Link activeClassName="active" to="/bottega">
+              <Link activeClassName="active" to="/sklep">
                 <NavigationListItem
                   bg={bg}
                   onClick={() => dispatch({ type: "CLOSE_MENU" })}
