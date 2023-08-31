@@ -380,7 +380,7 @@ const SearchPage = ({ data }) => {
 }
 export const query = graphql`
   {
-    lessons: allDatoCmsLesson(sort: { fields: lessonNumber }) {
+    lessons: allDatoCmsLesson(sort: {lessonNumber: ASC}) {
       nodes {
         id
         lekcjaPoziom
@@ -389,7 +389,7 @@ export const query = graphql`
       }
     }
     blogArticles: allDatoCmsArticle(
-      filter: { category: { in: ["Kultura", "Podróże", "Kuchnia", "Sztuka"] } }
+      filter: {category: {in: ["Kultura", "Podróże", "Kuchnia", "Sztuka"]}}
     ) {
       nodes {
         title
@@ -403,11 +403,8 @@ export const query = graphql`
         }
       }
     }
-
     italianoArticles: allDatoCmsArticle(
-      filter: {
-        category: { in: ["Frasi e citazioni", "Grammatica", "Vocabolario"] }
-      }
+      filter: {category: {in: ["Frasi e citazioni", "Grammatica", "Vocabolario"]}}
     ) {
       nodes {
         title

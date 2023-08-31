@@ -1,6 +1,5 @@
 import { graphql } from "gatsby"
 import React, { useRef, useState } from "react"
-import { useEffect } from "react"
 import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigation"
 import PageHeader from "../components/PageHeader/PageHeader"
 import CoursesStagesSection from "../components/SectionsComponents/CoursesStagesSection"
@@ -85,7 +84,6 @@ export const query = graphql`
           ...GatsbyDatoCmsFluid_tracedSVG
         }
       }
-
       wloskiOdZeraWprowadzenieObraz {
         fluid {
           ...GatsbyDatoCmsFluid_tracedSVG
@@ -102,7 +100,7 @@ export const query = graphql`
         }
       }
     }
-    lessons: allDatoCmsLesson(sort: { fields: lessonNumber }) {
+    lessons: allDatoCmsLesson(sort: {lessonNumber: ASC}) {
       nodes {
         id
         lekcjaPoziom

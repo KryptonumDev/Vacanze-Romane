@@ -1,12 +1,25 @@
 const path = require(`path`)
 var slugify = require("slugify")
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const blogPostTemplate = path.resolve(`src/layouts/post.js`)
   const lessonTemplate = path.resolve(`src/layouts/lesson.js`)
+  const productTemplate = path.resolve(`src/layouts/product.js`)
   const result = await graphql(`
     query allArticlesAndLessons {
+      wp {
+        products {
+          nodes {
+            title
+            id
+            slug
+          }
+        }
+      }
       redArticles: allDatoCmsArticle(
         filter: {
           category: { in: ["Kultura", "Sztuka", "Podróże", "Kuchnia"] }
@@ -63,6 +76,17 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
+
+  result.data.wp.products.nodes.forEach(product => {
+    createPage({
+      path: `/sklep/${product.slug}`,
+      component: productTemplate,
+      context: {
+        id: product.id,
+        title: product.title,
+      },
+    })
+  })
 
   result.data.redArticles.nodes.forEach(article => {
     const slugifiedTitle = slugify(article.slug, {

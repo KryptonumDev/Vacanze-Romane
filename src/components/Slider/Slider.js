@@ -95,7 +95,7 @@ const ArticlePreview = styled(motion.article)`
 const query = graphql`
   {
     allDatoCmsArticle(
-      sort: { fields: meta___publishedAt, order: DESC }
+      sort: { creationDate: DESC }
       limit: 6
     ) {
       nodes {

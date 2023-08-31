@@ -300,7 +300,7 @@ const Footer = () => {
       setBg("green")
     }
     if (
-      location.pathname.includes("bottega") ||
+      location.pathname.includes("sklep") ||
       location.pathname.includes("o-mnie") ||
       location.pathname.includes("szukaj")
     ) {

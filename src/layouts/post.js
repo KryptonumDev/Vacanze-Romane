@@ -467,77 +467,43 @@ const PostLayout = ({ data }) => {
 }
 
 export const query = graphql`
-  query PostQuery($id: String!, $category: String!) {
-    datoCmsArticle(id: { eq: $id }) {
-      featuredimage {
-        fluid {
-          ...GatsbyDatoCmsFluid_tracedSVG
-        }
-      }
-      id
-      title
-      category
-      slug
-      creationDate
-      seoMetaTags {
-        ...GatsbyDatoCmsSeoMetaTags
-      }
-      articleContent {
-        ... on DatoCmsParagraph {
-          id
-          model {
-            apiKey
-          }
-          paragraphContent
-        }
-        ... on DatoCmsHeadingContent {
-          id
-          model {
-            apiKey
-          }
-          headingContent
-        }
-        ... on DatoCmsArticleImage {
-          id
-          model {
-            apiKey
-          }
-          image {
-            title
-            fluid {
-              ...GatsbyDatoCmsFluid_tracedSVG
-            }
-          }
-        }
+query PostQuery($id: String!, $category: String!) {
+  datoCmsArticle(id: {eq: $id}) {
+    featuredimage {
+      fluid {
+        ...GatsbyDatoCmsFluid_tracedSVG
       }
     }
-    similarArticles: allDatoCmsArticle(
-      filter: { category: { eq: $category }, id: { ne: $id } }
-      limit: 3
-    ) {
-      nodes {
-        title
-        category
-        id
-        slug
-        featuredimage {
-          fluid {
-            ...GatsbyDatoCmsFluid_tracedSVG
-          }
-        }
-      }
+    id
+    title
+    category
+    slug
+    creationDate
+    seoMetaTags {
+      ...GatsbyDatoCmsSeoMetaTags
     }
-    newArticles: allDatoCmsArticle(
-      filter: { id: { ne: $id } }
-      limit: 3
-      sort: { fields: creationDate, order: DESC }
-    ) {
-      nodes {
-        title
-        category
+    articleContent {
+      ... on DatoCmsParagraph {
         id
-        slug
-        featuredimage {
+        model {
+          apiKey
+        }
+        paragraphContent
+      }
+      ... on DatoCmsHeadingContent {
+        id
+        model {
+          apiKey
+        }
+        headingContent
+      }
+      ... on DatoCmsArticleImage {
+        id
+        model {
+          apiKey
+        }
+        image {
+          title
           fluid {
             ...GatsbyDatoCmsFluid_tracedSVG
           }
@@ -545,6 +511,40 @@ export const query = graphql`
       }
     }
   }
+  similarArticles: allDatoCmsArticle(
+    filter: {category: {eq: $category}, id: {ne: $id}}
+    limit: 3
+  ) {
+    nodes {
+      title
+      category
+      id
+      slug
+      featuredimage {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+    }
+  }
+  newArticles: allDatoCmsArticle(
+    filter: {id: {ne: $id}}
+    limit: 3
+    sort: {creationDate: DESC}
+  ) {
+    nodes {
+      title
+      category
+      id
+      slug
+      featuredimage {
+        fluid {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+    }
+  }
+}
 `
 
 export default PostLayout

@@ -23,6 +23,14 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-netlify`,
     {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "WordPress",
+        fieldName: "wp",
+        url: "https://wloskiodzera.headlesshub.com/graphql",
+      },
+    },
+    {
       resolve: "gatsby-omni-font-loader",
       options: {
         enableListener: true,
@@ -64,6 +72,5 @@ module.exports = {
         icon: `src/assets/images/logo-vacanze.svg`,
       },
     },
-    `gatsby-plugin-offline`,
   ],
 }
