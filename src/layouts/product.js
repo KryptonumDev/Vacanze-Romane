@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 // import PageHeader from "../components/PageHeader/PageHeader"
-import SEO from "../components/SEO/SEO"
+// import SEO from "../components/SEO/SEO"
 
 const ProductLayout = ({ data }) => {
   return (

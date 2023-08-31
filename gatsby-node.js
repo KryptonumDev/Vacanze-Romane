@@ -9,6 +9,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const blogPostTemplate = path.resolve(`src/layouts/post.js`)
   const lessonTemplate = path.resolve(`src/layouts/lesson.js`)
   const productTemplate = path.resolve(`src/layouts/product.js`)
+  const productFreeTemplate = path.resolve(`src/layouts/product-free-summary.js`)
   const result = await graphql(`
     query allArticlesAndLessons {
       wp {
@@ -17,6 +18,11 @@ exports.createPages = async ({ graphql, actions }) => {
             title
             id
             slug
+            productTags {
+              nodes {
+                slug
+              }
+            }
           }
         }
       }
@@ -86,6 +92,17 @@ exports.createPages = async ({ graphql, actions }) => {
         title: product.title,
       },
     })
+    //include slug free
+    if(product.productTags.nodes.some(tag => tag.slug === 'free')){
+      createPage({
+        path: `/sklep/podsumowanie/${product.slug}`,
+        component: productFreeTemplate,
+        context: {
+          id: product.id,
+          title: product.title,
+        },
+      })
+    }
   })
 
   result.data.redArticles.nodes.forEach(article => {
