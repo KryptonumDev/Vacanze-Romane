@@ -7,6 +7,7 @@ import NotOnlyBasicsSection from "../components/HomeComponents/NotOnlyBasicsSect
 import Slider from "../components/Slider/Slider"
 import SEO from "../components/SEO/SEO"
 import GrammarProblemsSection from "../components/GrammarProblemsSection/GrammarProblemsSection"
+import ItalianVacations from "../components/HomeComponents/ItalianVacations"
 
 const IndexPage = ({ data }) => (
   <>
@@ -22,6 +23,7 @@ const IndexPage = ({ data }) => (
       home
     />
     <CiaoSection />
+    <ItalianVacations />
     <HowToLearnSection imgFluid={data.datoCmsHomePage.jakSieUczycObraz.fluid} />
     <NotOnlyBasicsSection
       imgFluid={data.datoCmsHomePage.nieTylkoPodstawyObraz.fluid}
