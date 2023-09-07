@@ -64,6 +64,6 @@ module.exports = {
         icon: `src/assets/images/logo-vacanze.svg`,
       },
     },
-    `gatsby-plugin-offline`,
+    // `gatsby-plugin-offline`,
   ],
 }
