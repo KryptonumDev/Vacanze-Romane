@@ -169,6 +169,7 @@ const ImagesWrapper = styled.div`
     aspect-ratio: 321/375;
   }
   }
+}
 `
 
 const GrammarProblemsSection = ({
