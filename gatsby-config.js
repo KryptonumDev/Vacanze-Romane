@@ -7,6 +7,7 @@ module.exports = {
     description: `Włoski od zera to internetowa nauka języka włoskiego od zera. Przeznaczona dla samouków i nie tylko.`,
     author: `@kryptonum`,
   },
+  trailingSlash: "always",
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
