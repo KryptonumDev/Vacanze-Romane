@@ -42,8 +42,8 @@ export default function AddToCart({ children, quantity, product }) {
   return (
     <div >
       {showViewCart ? (
-        <Button style={{ position: "relative", zIndex: 3 }} className="add-to-cart" href="/koszyk">
-          Pokaż koszyk
+        <Button style={{ position: "relative", zIndex: 3 }} className="add-to-cart" href='/zamowienie'>
+          Przejdż do zamówienia
         </Button>
       ) : (
         <Button

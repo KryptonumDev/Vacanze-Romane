@@ -131,7 +131,6 @@ const Button = styled(Link)`
   @media (max-width: 480px) {
     width: 100%;
   }
-
 `
 
 const query = graphql`

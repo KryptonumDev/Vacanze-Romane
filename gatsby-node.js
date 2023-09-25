@@ -95,7 +95,7 @@ exports.createPages = async ({ graphql, actions }) => {
     //include slug free
     if(product.productTags.nodes.some(tag => tag.slug === 'free')){
       createPage({
-        path: `/sklep/podsumowanie/${product.slug}`,
+        path: `/sklep/${product.slug}/podziekowanie`,
         component: productFreeTemplate,
         context: {
           id: product.id,

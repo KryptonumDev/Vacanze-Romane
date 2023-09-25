@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import AddToCart from "../AddToCart/AddToCart"
 import Price from "../Price/Price"
+import { Link } from "gatsby"
 
 export default function ShopGrid({ products }) {
   return (
@@ -13,6 +14,7 @@ export default function ShopGrid({ products }) {
       <ProductsGrid>
         {products?.map(product => (
           <ProductCard>
+            <Link to={`/sklep/${product.slug}`} />
             {/* <StaticImage
               src={product.featuredImage.node.mediaItemUrl}
               alt={product.featuredImage.node.altText}
@@ -109,8 +111,17 @@ const ProductCard = styled.div`
   grid-template-rows: auto 1fr auto auto;
   grid-template-areas: 'image' 'title' 'price' 'add-to-cart';
 
+  >a{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
   .add-to-cart{
     grid-area: add-to-cart;
+    position: relative;
+    z-index: 2;
   }
 
   .price{
