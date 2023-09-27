@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { fetchQuery } from "../utils/fetchQuery";
 
-export const useQuery = (query, { variables, onComplited = () => { }, onError = () => { } }) => {
+export const useQuery = (query, obj) => {
   if (!query) throw new Error('Query is required')
+  const { variables, onCompleted = () => { }, onError = () => { } } = obj || {}
 
-  const makeRequst = () => {
+  const makeRequest = () => {
     setLoading(true)
     fetchQuery({ query, variables })
       .then(({ status, body }) => {
         setLoading(false)
-        onComplited(body, status)
+        onCompleted({
+          status,
+          body,
+          error: null
+        })
         if (response.body !== null || response.error !== null) setPreviousResponse(response)
         setResponse({
           status,
@@ -38,8 +43,8 @@ export const useQuery = (query, { variables, onComplited = () => { }, onError = 
   });
 
   useEffect(() => {
-    makeRequst();
-  }, [query, variables]);
+    makeRequest();
+  }, []);
 
-  return { revalidate: makeRequst, data: response, loading, previousResponse };
+  return { revalidate: makeRequest, data: response, loading, previousResponse };
 }

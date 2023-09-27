@@ -1,7 +1,6 @@
-/**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/ssr-apis/
- */
+import React from "react"
+import { AppProvider } from "./src/context/app-context"
 
-// You can delete this file if you're not using it
+export const wrapPageElement = ({ element, props }) => {
+    return <AppProvider {...props}>{element}</AppProvider>
+}

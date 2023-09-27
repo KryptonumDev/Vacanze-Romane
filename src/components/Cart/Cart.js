@@ -1,27 +1,40 @@
 import { Link } from "gatsby"
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { styled } from "styled-components"
 import { useQuery } from "../../hooks/useQuery"
+import { AppContext } from "../../context/app-context"
 
 export const Cart = ({ bg }) => {
 
   const [isOpened, setIsOpened] = useState(false)
-  const [cart, setCart] = useState({ items: [], total: 0 })
-  // const { revalidate, data, loading } = useQuery(`
-  //   query Cart {
-  //     cart {
-  //       total
-  //     }
-  //   }
-  // `, {
-  //   variables: {},
-  //   onComplited: (data, status) => {
-  //     console.log(data, status)
-  //   },
-  //   onError: (error) => {
-  //     console.log(error)
-  //   }
-  // })
+  let [cart, setCart] = useContext(AppContext)
+  const { revalidate, data, loading } = useQuery(`
+    query Cart {
+      cart {
+        total
+        contents {
+          nodes {
+            id
+            product {
+              node {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  `, {
+    variables: {},
+    onCompleted: ({ body, status }) => {
+      debugger
+      setCart(body.data.cart)
+    },
+    onError: (error) => {
+      debugger
+      console.log(error)
+    }
+  })
 
   return (
     <>
@@ -40,7 +53,7 @@ export const Cart = ({ bg }) => {
           </button>
         </Flex>
 
-        {cart.items.length > 0 ? (
+        {cart?.contents?.nodes?.length > 0 ? (
           <>
             <div className="cart">
             </div>

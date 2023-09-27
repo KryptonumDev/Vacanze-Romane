@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { v4 } from 'uuid';
 import { Link } from "gatsby";
 
 import ADD_TO_CART from "../../mutations/ADD_TO_CART";
 import { useMutation } from "../../hooks/useMutation";
 import { styled } from "styled-components";
+import { AppContext } from "../../context/app-context";
 
 export default function AddToCart({ children, quantity, product }) {
 
@@ -14,7 +15,7 @@ export default function AddToCart({ children, quantity, product }) {
     quantity: quantity || 1,
   };
 
-  const [cart, setCart] = useState(null);
+  const [cart, setCart] = useContext(AppContext);
   const [showViewCart, setShowViewCart] = useState(false);
   const [requestError, setRequestError] = useState(null);
 
@@ -23,6 +24,7 @@ export default function AddToCart({ children, quantity, product }) {
       input: productQryInput,
     },
     onCompleted: (res) => {
+      debugger
       setCart(res?.data?.addToCart || null);
       setShowViewCart(true)
     },
