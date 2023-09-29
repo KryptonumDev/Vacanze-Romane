@@ -251,7 +251,9 @@ const SearchPage = ({ data }) => {
                             initial="hidden"
                             animate="show"
                             exit="exit"
-                            slug={slugify(post.slug, { lower: true })}
+                            slug={slugify(post.slug, { lower: true,
+        strict: true,
+        trim: true })}
                             base="blog"
                             category={post.category}
                             title={post.title}
@@ -315,7 +317,9 @@ const SearchPage = ({ data }) => {
                             initial="hidden"
                             animate="show"
                             exit="exit"
-                            slug={slugify(post.slug, { lower: true })}
+                            slug={slugify(post.slug, { lower: true,
+        strict: true,
+        trim: true })}
                             base="in-italiano"
                             category={post.category}
                             title={post.title}

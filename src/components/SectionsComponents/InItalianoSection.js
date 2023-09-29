@@ -238,7 +238,9 @@ const ItalianoSection = forwardRef(
                         key={post.id}
                         category={post.category}
                         title={post.title}
-                        slug={slugify(post.slug, { lower: true })}
+                        slug={slugify(post.slug, { lower: true,
+        strict: true,
+        trim: true })}
                         featuredImage={post.featuredimage}
                       />
                     ))

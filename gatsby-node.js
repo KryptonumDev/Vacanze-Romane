@@ -67,6 +67,8 @@ exports.createPages = async ({ graphql, actions }) => {
   result.data.redArticles.nodes.forEach(article => {
     const slugifiedTitle = slugify(article.slug, {
       lower: true,
+      strict: true,
+      trim: true
     })
     createPage({
       path: `blog/${slugifiedTitle}`,
@@ -81,6 +83,8 @@ exports.createPages = async ({ graphql, actions }) => {
   result.data.blueArticles.nodes.forEach(article => {
     const slugifiedTitle = slugify(article.slug, {
       lower: true,
+      strict: true,
+      trim: true
     })
     createPage({
       path: `in-italiano/${slugifiedTitle}`,
@@ -102,7 +106,9 @@ exports.createPages = async ({ graphql, actions }) => {
         strict: true,
         trim: true
       })
-      const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true })
+      const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true,
+        strict: true,
+        trim: true })
       createPage({
         path: `wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`,
         component: lessonTemplate,
@@ -131,8 +137,12 @@ exports.createPages = async ({ graphql, actions }) => {
     .forEach((lesson, i) => {
       const slugifiedTitle = slugify(lesson.lessonTitle, {
         lower: true,
+        strict: true,
+        trim: true
       })
-      const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true })
+      const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true,
+        strict: true,
+        trim: true })
       createPage({
         path: `wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`,
         component: lessonTemplate,
@@ -161,8 +171,12 @@ exports.createPages = async ({ graphql, actions }) => {
       .forEach((lesson, i) => {
         const slugifiedTitle = slugify(lesson.lessonTitle, {
           lower: true,
+          strict: true,
+          trim: true
         })
-        const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true })
+        const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true,
+          strict: true,
+          trim: true })
         createPage({
           path: `wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`,
           component: lessonTemplate,

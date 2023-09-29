@@ -300,7 +300,9 @@ const BlogSection = forwardRef(
                       filteredPosts.map(post => (
                         <PostPreview
                           key={post.id}
-                          slug={slugify(post.slug, { lower: true })}
+                          slug={slugify(post.slug, { lower: true,
+        strict: true,
+        trim: true })}
                           category={post.category}
                           title={post.title}
                           featuredImage={post.featuredimage}
