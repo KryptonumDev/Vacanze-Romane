@@ -220,6 +220,8 @@ const Slider = ({ header }) => {
                       key={id}
                       to={`${getBase(category)}/${slugify(slug, {
                         lower: true,
+        strict: true,
+        trim: true
                       })}`}
                     >
                       <ArticlePreview

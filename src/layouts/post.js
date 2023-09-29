@@ -397,7 +397,9 @@ const PostLayout = ({ data }) => {
                     <StyledLink
                       to={`/${baseURLFromCategory(
                         article.category
-                      )}/${slugify(article.slug, { lower: true })}`}
+                      )}/${slugify(article.slug, { lower: true,
+        strict: true,
+        trim: true })}`}
                     >
                       <div style={{ position: "relative" }}>
                         <Image fluid={article.featuredimage.fluid} />
@@ -432,7 +434,9 @@ const PostLayout = ({ data }) => {
                     <Link
                       to={`/${baseURLFromCategory(
                         article.category
-                      )}/${slugify(article.slug, { lower: true })}`}
+                      )}/${slugify(article.slug, { lower: true,
+        strict: true,
+        trim: true })}`}
                     >
                       <Image fluid={article.featuredimage.fluid} />
                       <StyledArticleCategory

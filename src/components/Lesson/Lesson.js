@@ -72,11 +72,17 @@ const LessonStyles = styled(Link)`
 const Lesson = ({ lesson }) => {
   const parseLessonNumber = (lessonLevel, lessonNumber) => {
     let number = lessonNumber
-    if (slugify(lessonLevel, { lower: true }) === "wprowadzenie") {
+    if (slugify(lessonLevel, { lower: true,
+      strict: true,
+      trim: true }) === "wprowadzenie") {
       number = "0." + number
-    } else if (slugify(lessonLevel, { lower: true }) === "czesc-pierwsza") {
+    } else if (slugify(lessonLevel, { lower: true,
+      strict: true,
+      trim: true }) === "czesc-pierwsza") {
       number = "1." + number
-    } else if (slugify(lessonLevel, { lower: true }) === "kontynuacja") {
+    } else if (slugify(lessonLevel, { lower: true,
+      strict: true,
+      trim: true }) === "kontynuacja") {
       number = "2." + number
     }
     return number
@@ -85,8 +91,12 @@ const Lesson = ({ lesson }) => {
     <LessonStyles
       to={`/wloski-od-zera/${slugify(lesson.lekcjaPoziom, {
         lower: true,
+        strict: true,
+        trim: true
       })}/${slugify(lesson.lessonTitle, {
         lower: true,
+        strict: true,
+        trim: true
       })}`}
     >
       <article>
