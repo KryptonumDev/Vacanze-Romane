@@ -13,11 +13,13 @@ export default function CartItem({ products, remove, data }) {
             <p title={data.product.node.name}>{data.product.node.name}</p>
             <p dangerouslySetInnerHTML={{ __html: data.total }} />
           </div>
-          <small>Poziom 1</small>
+          {/* <small>Poziom 1</small> */}
         </div>
         <div className="flex">
-          <p>counter</p>
-          <button className="remove" onClick={(e) => { remove(e, data.key, products) }}>Usuń</button>
+          <p>Ilość: {data.quantity}</p>
+          {remove && (
+            <button className="remove" onClick={(e) => { remove(e, data.key, products) }}>Usuń</button>
+          )}
         </div>
       </div>
     </Wrapper>

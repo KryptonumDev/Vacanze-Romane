@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { fetchQuery } from "../utils/fetchQuery";
 
 export const useMutation = (query, { variables, onCompleted = () => { }, onError = () => { } }) => {

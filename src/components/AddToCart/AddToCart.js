@@ -12,7 +12,7 @@ export default function AddToCart({ children, quantity, product }) {
   const productQryInput = {
     clientMutationId: v4(),
     productId: product.productId,
-    quantity: quantity || 1,
+    quantity: Number(quantity) || 1,
   };
 
   const [cart, setCart] = useContext(AppContext);

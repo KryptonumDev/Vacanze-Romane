@@ -2,6 +2,9 @@ import React from "react"
 import { styled } from "styled-components"
 
 export default function Form({ paymentMethods, shipping, register, shippingValue }) {
+
+ 
+
   return (
     <Wrapper>
       <fieldset>
@@ -63,7 +66,7 @@ const Wrapper = styled.div`
   height: fit-content;
 
   .radio{
-    margin-top: 16px;
+    margin-top: 24px;
     background: var(--white, #FEFEFE);
     padding: 16px;
     display: block;
@@ -159,7 +162,6 @@ const Wrapper = styled.div`
     font-weight: 400;
     line-height: 111.111%;
     letter-spacing: 1px;
-    margin-bottom: 48px;
   }
 
   input{

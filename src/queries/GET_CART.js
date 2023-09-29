@@ -7,6 +7,8 @@ query GET_CART {
   }
   cart {
     contents {
+      itemCount
+      productCount
       nodes {
         key
         extraData {

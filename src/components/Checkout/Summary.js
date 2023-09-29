@@ -1,10 +1,32 @@
 import React from "react"
 import { styled } from "styled-components"
+import CartItem from "../Cart/CartItem"
 
-export default function Summary() {
+export default function Summary({cart}) {
   return (
     <Wrapper>
       <h2>Podsumowanie</h2>
+      {cart.contents.nodes.map((item, index) => (
+        <CartItem key={index} data={item} products={cart.contents.nodes} />
+      ))}
+
+      <div>
+        <div className="flex">
+          <p>Wartość produktów</p>
+          <p dangerouslySetInnerHTML={{__html: cart.subtotal}}/>
+        </div>
+        <div className="flex">
+          <p>Dostawa</p>
+          <p dangerouslySetInnerHTML={{__html: cart.shippingTotal}}/>
+        </div>
+      </div>
+
+      <div>
+        <div className="flex">
+          <p>Razem</p>
+          <p dangerouslySetInnerHTML={{__html: cart.total}}/>
+        </div>
+      </div>
     </Wrapper>
   )
 }

@@ -61,9 +61,15 @@ export const Cart = ({ bg }) => {
       });
     }
   };
+
   return (
     <>
       <LocButton bg={bg} onClick={() => { setIsOpened(true) }}>
+        {
+          cart?.contents?.nodes?.length > 0 && (
+            <span>{cart.contents.itemCount}</span>
+          )
+        }
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 11.0002V7.00024C16 4.79111 14.2091 3.00024 12 3.00024C9.79086 3.00024 8 4.79111 8 7.00024V11.0002M5 9.00024H19L20 21.0002H4L5 9.00024Z" stroke="#32251D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
@@ -90,7 +96,7 @@ export const Cart = ({ bg }) => {
               <div className="info">
                 <Flex>
                   <p>Podsumowanie</p>
-                  <p>{cart.total}&nbsp;zł</p>
+                  <p dangerouslySetInnerHTML={{ __html: cart.subtotal }}></p>
                 </Flex>
                 <p><small>Koszt wysyłki jest podliczany podczas płatności</small></p>
               </div>
@@ -122,6 +128,17 @@ const LocButton = styled.button`
   border: none;
   background-color: transparent;
   margin-left: 8px;
+  position: relative;
+
+  span{
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fefefe;
+  }
 
   svg{
     path{

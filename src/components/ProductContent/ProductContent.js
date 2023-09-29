@@ -39,12 +39,12 @@ const NoOptionsMessage = props => {
 
 
 export default function Content({ data, data: { productTags, product, title, content, featuredImage, price } }) {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm()
 
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState(options[0])
 
   const handleChange = selectedOption => {
-    setSelectedOption(selectedOption);
+    setSelectedOption(selectedOption)
   }
 
   const onSubmit = data => {
@@ -98,7 +98,7 @@ export default function Content({ data, data: { productTags, product, title, con
               options={options}
               isSearchable={false} 
             />
-            <AddToCart product={data} />
+            <AddToCart quantity={selectedOption.value} product={data} />
           </>
         )}
         {product.courseContent?.length > 0 && (

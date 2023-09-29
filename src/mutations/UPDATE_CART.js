@@ -15,6 +15,8 @@ mutation UPDATE_CART($input: UpdateItemQuantitiesInput!) {
     }
     cart {
       contents {
+        itemCount
+        productCount
         nodes {
           key
           extraData {

@@ -12,7 +12,7 @@ export const AppProvider = (props) => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             let cartData = localStorage.getItem('woo-next-cart');
-            cartData = null !== cartData ? JSON.parse(cartData) : '';
+            cartData = cartData ? JSON.parse(cartData) : {contents: {nodes: []}, total: 0};
             setCart(cartData);
         }
     }, []);

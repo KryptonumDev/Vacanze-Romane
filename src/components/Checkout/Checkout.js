@@ -1,10 +1,12 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import styled from "styled-components"
 import Form from "./Form"
 import Summary from "./Summary"
 import { AppContext } from "../../context/app-context"
 import { useForm } from "react-hook-form"
 import Img from './../../assets/images/p24.png'
+import { useMutation } from "../../hooks/useMutation"
+import SET_SHIPPING_METHOD from "../../mutations/SET_SHIPPING_METHOD"
 
 const paymentMethods = [
   {
@@ -34,14 +36,14 @@ const paymentMethods = [
 ]
 
 export default function Checkout() {
-  let [cart] = useContext(AppContext)
+  let [cart, setCart] = useContext(AppContext)
 
   if (cart.contents.nodes.length === 0) return null
 
-  return <ChildComponent cart={cart} />
+  return <ChildComponent cart={cart} setCart={setCart} />
 }
 
-const ChildComponent = ({ cart }) => {
+const ChildComponent = ({ cart, setCart }) => {
   const {
     register,
     handleSubmit,
@@ -54,15 +56,37 @@ const ChildComponent = ({ cart }) => {
       'payment': '0',
     }
   })
-  debugger
+
   const onSubmit = (data) => console.log(data)
   const shippingValue = watch('shipping')
+
+  const { request, loading } = useMutation(SET_SHIPPING_METHOD, {
+    variables: {
+      input: {
+        shippingMethods: shippingValue,
+      },
+    },
+    onCompleted: ({ body }) => {
+      debugger
+      localStorage.setItem('woo-next-cart', JSON.stringify(body?.data?.updateShippingMethod?.cart))
+      setCart(body?.data?.updateShippingMethod?.cart)
+    },
+    onError: (error) => {
+      debugger
+      console.log(error.message)
+    }
+  })
+
+  useEffect(() => {
+    if (shippingValue !== cart?.chosenShippingMethods?.[0])
+      request()
+  }, [shippingValue])
 
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
       <div className="container">
         <Form paymentMethods={paymentMethods} register={register} shippingValue={shippingValue} shipping={cart.availableShippingMethods[0].rates} />
-        <Summary />
+        <Summary cart={cart} />
       </div>
     </Wrapper>
   )

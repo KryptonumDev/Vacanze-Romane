@@ -1,10 +1,7 @@
 
-const ADD_TO_CART = `
-    mutation ADD_TO_CART($input: AddToCartInput!) {
-      addToCart(input: $input) {
-        cartItem {
-          total
-        }
+const SET_SHIPPING_METHOD = `
+    mutation SET_SHIPPING_METHOD($input: UpdateShippingMethodInput!) {
+      updateShippingMethod(input: $input) {
         cart {
           contents {
             itemCount
@@ -116,4 +113,4 @@ const ADD_TO_CART = `
     }
 `;
 
-export default ADD_TO_CART;
+export default SET_SHIPPING_METHOD;
