@@ -1,16 +1,7 @@
 import React from "react"
-import { useForm } from "react-hook-form"
 import { styled } from "styled-components"
 
-export default function Form() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm()
-
-  const onSubmit = (data) => console.log(data)
+export default function Form({ paymentMethods, shipping, register, shippingValue }) {
   return (
     <Wrapper>
       <fieldset>
@@ -23,18 +14,20 @@ export default function Form() {
       </fieldset>
       <fieldset>
         <legend>Płatność</legend>
-        <label className="radio">
-          <input type="radio" />
-          <span className="circle" />
-          <div className="description">
-            <p>Proszę o płatność przelewem tradycyjnym i podanie w tytule numeru zamówienia. Dane do przelewu:</p>
-            <p>
-              13 1090 1346 0000 0001 0343 4077
-              Santander Bank Polska
-              Monika Kruzel
-            </p>
-          </div>
-        </label>
+        {paymentMethods.map((el, index) => (
+          <label className="radio">
+            <input {...register('payment')} value={index} type="radio" />
+            <span className="circle">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.3335 8.6665L6.00016 11.3332L12.6668 4.6665" stroke="#F1E2CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <div className="description">
+              <p className="title">{el.name}</p>
+              <p className="text" dangerouslySetInnerHTML={{__html: el.description}}></p>
+            </div>
+          </label>
+        ))}
       </fieldset>
       <fieldset>
         <legend>Dane do faktury</legend>
@@ -47,13 +40,100 @@ export default function Form() {
       </fieldset>
       <fieldset>
         <legend>Metody dostawy</legend>
+        {shipping.map(el => (
+          <label className={`radio ${shippingValue === `${el.methodId}:${el.instanceId}` ? 'active' : ''}`}>
+            <input {...register('shipping')} value={`${el.methodId}:${el.instanceId}`} type="radio" />
+            <span className="circle">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.3335 8.6665L6.00016 11.3332L12.6668 4.6665" stroke="#F1E2CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <div className="description">
+              <p className="title">{el.label}</p>
+            </div>
+            <p className="price">{el.cost}&nbsp;zł</p>
+          </label>
+        ))}
       </fieldset>
     </Wrapper>
   )
 }
 
-const Wrapper = styled.form`
+const Wrapper = styled.div`
   height: fit-content;
+
+  .radio{
+    margin-top: 16px;
+    background: var(--white, #FEFEFE);
+    padding: 16px;
+    display: block;
+    display: grid;
+    grid-template-columns: 24px 1fr auto;
+    gap: 24px;
+    position: relative;
+    border: 1px solid var(--grey, #E0E0E0);
+    box-sizing: border-box;
+
+    .description{
+      p+p{
+        margin-top: 8px;
+      }
+
+      .title{
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 144.444%;
+        letter-spacing: 1px;
+      }
+
+      .text{
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 180%;
+        letter-spacing: 1px;
+      }
+    }
+
+    &.active{
+      border: 2px solid var(--light-blue, #262478);
+      padding: 15px;
+    }
+
+    input{
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      visibility: hidden
+    }
+
+    input ~ span{
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--grey, #E0E0E0);
+
+      svg{
+        opacity: 0;
+      }
+    }
+
+    input:checked ~ span{
+      background: var(--light-blue, #262478);
+      border: 1px solid #262478;
+
+      svg{
+        opacity: 1;
+      }
+    }
+  }
   
   fieldset{
     border: none;

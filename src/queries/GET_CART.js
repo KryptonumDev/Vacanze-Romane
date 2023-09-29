@@ -112,6 +112,7 @@ query GET_CART {
         instanceId
       }
     }
+    chosenShippingMethods
     needsShippingAddress
   }
 }

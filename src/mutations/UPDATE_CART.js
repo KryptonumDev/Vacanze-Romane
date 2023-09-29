@@ -120,6 +120,7 @@ mutation UPDATE_CART($input: UpdateItemQuantitiesInput!) {
           instanceId
         }
       }
+      chosenShippingMethods
       needsShippingAddress
     }
   }

@@ -107,6 +107,7 @@ const ADD_TO_CART = `
               instanceId
             }
           }
+          chosenShippingMethods
           needsShippingAddress
         }
       }
