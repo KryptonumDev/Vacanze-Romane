@@ -8,8 +8,8 @@ export default function ShopGrid({ products }) {
   return (
     <Wrapper>
       <Info>
-        <h2>Nauka języka włoskiego od podstaw – samouczkowe kursy i lekcje włoskiego dla początkujących</h2>
-        <p>Włoski od zera – sklep z kursami i lekcjami do nauki języka włoskiego od podstaw! To jak szkoła języka włoskiego z szerokim wyborem kursów, lekcji idealnych dla początkujących, którzy chcą rozpocząć przygodę z włoskim. Materiały tworzę, bo sama jestem pasjonatką Italii i wszyskiego, co włoskie. Umożliwią Ci one efektywną naukę i zapewnią solidne zrozumienie podstaw języka włoskiego. Rozpocznij swoją przygodę z Italią dzięki samouczkowym kursom, produktom i lekcjom.</p>
+        <h2>Nauka języka włoskiego od podstaw - samouczkowe kursy i lekcje włoskiego dla początkujących</h2>
+        <p>Włoski od zera - sklep z kursami i lekcjami do nauki języka włoskiego od podstaw! To jak szkoła języka włoskiego z szerokim wyborem kursów, lekcji idealnych dla początkujących, którzy chcą rozpocząć przygodę z włoskim. Materiały tworzę, bo sama jestem pasjonatką Italii i wszyskiego, co włoskie. Umożliwią Ci one efektywną naukę i zapewnią solidne zrozumienie podstaw języka włoskiego. Rozpocznij swoją przygodę z Italią dzięki samouczkowym kursom, produktom i lekcjom.</p>
       </Info>
       <ProductsGrid>
         {products?.map(product => (
@@ -26,13 +26,43 @@ export default function ShopGrid({ products }) {
             </div>
             <p className="title">{product.title}</p>
             <Price price={product.price} regularPrice={product.regularPrice} />
-            <AddToCart product={product}>Chcę ten kurs!</AddToCart>
+            <Button className="add-to-cart" to={`/sklep/${product.slug}`} >Chcę ten kurs!</Button>
+            {/* <AddToCart product={product}></AddToCart> */}
           </ProductCard>
         ))}
       </ProductsGrid>
     </Wrapper>
   )
 }
+
+const Button = styled(Link)`
+  display: block;
+  margin-top: 24px;
+  background: var(--brown);
+  padding: 16px 32px;
+  color: var(--beige-2);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 144.444%;
+  letter-spacing: 1px;
+  text-decoration: unset;
+  text-align: center;
+
+  transition: background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1),
+    color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+    color: var(--beige-2);
+    background-color: var(--dead-green);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+  `
 
 const Info = styled.div`
   margin-bottom: clamp(36px, calc(64vw/7.68), 92px);

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import TwoColumnList from "./TwoColumnListPart"
 import OneColumnList from "./OneColumnListPart"
@@ -8,9 +8,45 @@ import AddToCart from './../AddToCart/AddToCart'
 import { useForm } from "react-hook-form"
 import { email } from './../../constants/regex'
 import { Input } from './../Input/Input'
+import Select, { components } from 'react-select';
 
-export default function Content({ data: { slug, productTags, product, title, content, featuredImage, price } }) {
+const options = [
+  { value: '1', label: '1 produkt' },
+  { value: '2', label: '2 produkty' },
+  { value: '3', label: '3 produkty' },
+  { value: '4', label: '4 produkty' },
+  { value: '5', label: '5 produktów' },
+];
+
+const DropdownIndicator = props => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="58" height="58" fill="#32251D" />
+        <path d="M36 26L29 33L22 26" stroke="#F1E2CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </components.DropdownIndicator>
+  )
+}
+
+const NoOptionsMessage = props => {
+  return (
+    <components.NoOptionsMessage {...props}>
+      <span>Brak wyników</span>
+    </components.NoOptionsMessage>
+  );
+};
+
+
+export default function Content({ data, data: { productTags, product, title, content, featuredImage, price } }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+
+  const handleChange = selectedOption => {
+    setSelectedOption(selectedOption);
+  }
+
   const onSubmit = data => {
     // submit CF7 and redirect to - /sklep/${slug}/podziekowanie
   };
@@ -19,22 +55,24 @@ export default function Content({ data: { slug, productTags, product, title, con
     <Wrapper>
       <img src={featuredImage.node.mediaItemUrl} alt={featuredImage.node.altText} />
       <div className="left">
-        <div className="content">
-          {product.sections.map(section => {
-            switch (section.fieldGroupName) {
-              case 'Product_Product_Sections_TwoColumnList':
-                return <TwoColumnList data={section} />
-              case 'Product_Product_Sections_OneColumnList':
-                return <OneColumnList data={section} />
-              case 'Product_Product_Sections_Video':
-                return <Video data={section} />
-              case 'Product_Product_Sections_TwoColumnCards':
-                return <TwoColumnCards data={section} />
-              default:
-                return null
-            }
-          })}
-        </div>
+        {product.sections.length > 0 && (
+          <div className="content">
+            {product.sections.map(section => {
+              switch (section.fieldGroupName) {
+                case 'Product_Product_Sections_TwoColumnList':
+                  return <TwoColumnList data={section} />
+                case 'Product_Product_Sections_OneColumnList':
+                  return <OneColumnList data={section} />
+                case 'Product_Product_Sections_Video':
+                  return <Video data={section} />
+                case 'Product_Product_Sections_TwoColumnCards':
+                  return <TwoColumnCards data={section} />
+                default:
+                  return null
+              }
+            })}
+          </div>
+        )}
       </div>
       <div className="aside">
         <h2>{title}</h2>
@@ -50,17 +88,32 @@ export default function Content({ data: { slug, productTags, product, title, con
             <Button>Chcę ten kurs!</Button>
           </form>
         ) : (
-          <AddToCart />
+          <>
+            <Select
+              className="counter"
+              classNamePrefix="counter"
+              components={{ DropdownIndicator, NoOptionsMessage }}
+              value={selectedOption}
+              onChange={handleChange}
+              options={options}
+              isSearchable={false} 
+            />
+            <AddToCart product={data} />
+          </>
         )}
-        <h3>Ten kurs obejmuje</h3>
-        <ul>
-          {product.courseContent?.map((el, i) => (
-            <li key={el.text + i}>
-              <img src={el.icon.mediaItemUrl} alt={el.icon.altText} />
-              <p>{el.text}</p>
-            </li>
-          ))}
-        </ul>
+        {product.courseContent?.length > 0 && (
+          <>
+            <h3>Ten kurs obejmuje</h3>
+            <ul>
+              {product.courseContent?.map((el, i) => (
+                <li key={el.text + i}>
+                  <img src={el.icon.mediaItemUrl} alt={el.icon.altText} />
+                  <p>{el.text}</p>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     </Wrapper>
   )
@@ -100,6 +153,10 @@ const Wrapper = styled.section`
 
   @media (max-width: 480px) {
     padding: 0 16px;
+  }
+
+  .add-to-cart{
+    margin-top: 16px;
   }
 
   img{
@@ -177,6 +234,7 @@ const Wrapper = styled.section`
       font-weight: 400;
       line-height: 160%;
       letter-spacing: 1px;
+      margin-bottom: 36px;
     }
 
     h3{
@@ -201,6 +259,71 @@ const Wrapper = styled.section`
           margin-bottom: 0;
         }
       }
+    }
+  }
+
+  .counter{
+
+    .counter__control {
+      border: 1px solid var(--brown, #32251D);
+      border-radius: 0px;
+      padding: 0 0 0 16px;
+      box-shadow: unset !important;
+    }
+
+    .counter__indicator {
+      padding: 0;
+    }
+
+    .counter__single-value{
+      color: var(--brown, #32251D);
+      font-feature-settings: 'clig' off, 'liga' off;
+      font-family: Lato;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 26px;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+
+    .counter__menu {
+      z-index: 5;
+      margin: 0;
+      border-radius: 0px;
+    }
+
+    .counter__menu-list{
+      padding: 0;
+    }
+
+    .counter__option {
+      border: 1px solid var(--brown, #32251D);
+      border-top: unset;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      transition: all .24s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+      color: var(--brown, #32251D);
+      font-feature-settings: 'clig' off, 'liga' off;
+      font-family: Lato;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 26px; /* 144.444% */
+      letter-spacing: 1px;
+    }
+
+    .counter__option--is-focused{
+      background-color: var(--dead-green);
+      color: #F1E2CC;
+    }
+
+    .counter__option--is-selected{
+      background-color: #32251D;
+      color: #F1E2CC;
     }
   }
 `

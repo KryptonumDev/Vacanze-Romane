@@ -32,6 +32,7 @@ export const query = graphql`
             slug
           }
         }
+        productId
         title
         slug
         content

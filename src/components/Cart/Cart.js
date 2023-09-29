@@ -3,39 +3,64 @@ import React, { useContext, useState } from "react"
 import { styled } from "styled-components"
 import { useQuery } from "../../hooks/useQuery"
 import { AppContext } from "../../context/app-context"
+import GET_CART from "../../queries/GET_CART"
+import UPDATE_CART from '../../mutations/UPDATE_CART'
+import CartItem from "./CartItem"
+import { useMutation } from "../../hooks/useMutation"
+import { v4 } from "uuid";
+import { getUpdatedItems } from './../../utils/getUpdatedItems'
 
 export const Cart = ({ bg }) => {
 
   const [isOpened, setIsOpened] = useState(false)
   let [cart, setCart] = useContext(AppContext)
-  const { revalidate, data, loading } = useQuery(`
-    query Cart {
-      cart {
-        total
-        contents {
-          nodes {
-            id
-            product {
-              node {
-                name
-              }
-            }
-          }
-        }
-      }
-    }
-  `, {
+
+  const { revalidate, data } = useQuery(GET_CART, {
     variables: {},
     onCompleted: ({ body, status }) => {
-      debugger
+      localStorage.setItem('woo-next-cart', JSON.stringify(body.data.cart))
       setCart(body.data.cart)
     },
     onError: (error) => {
-      debugger
-      console.log(error)
+      console.log(error.message)
     }
   })
 
+  const { request: updateCart } = useMutation(UPDATE_CART, {
+    onCompleted: ({ body }) => {
+      // Update cart in the localStorage.
+      localStorage.setItem('woo-next-cart', JSON.stringify(body.data.updateItemQuantities.cart));
+      // Update cart data in React Context.
+
+      setCart(body.data.updateItemQuantities.cart);
+      // setInnerLoading(false)
+    },
+    onError: (error) => {
+      // setInnerLoading(false)
+      if (error) {
+        console.log(error.message);
+      }
+    }
+  });
+
+  const handleRemoveProductClick = (event, key, products) => {
+    event.stopPropagation();
+    if (products.length) {
+
+      // By passing the newQty to 0 in updateCart Mutation, it will remove the item.
+      const newQty = 0;
+      const updatedItems = getUpdatedItems(products, newQty, key);
+      // setInnerLoading(true)
+      updateCart({
+        variables: {
+          input: {
+            clientMutationId: v4(),
+            items: updatedItems
+          }
+        },
+      });
+    }
+  };
   return (
     <>
       <LocButton bg={bg} onClick={() => { setIsOpened(true) }}>
@@ -56,13 +81,16 @@ export const Cart = ({ bg }) => {
         {cart?.contents?.nodes?.length > 0 ? (
           <>
             <div className="cart">
+              {cart?.contents?.nodes.map(el => (
+                <CartItem products={cart?.contents?.nodes} remove={handleRemoveProductClick} data={el} />
+              ))}
             </div>
             <div>
               <hr />
               <div className="info">
                 <Flex>
                   <p>Podsumowanie</p>
-                  <p>50.00 zł</p>
+                  <p>{cart.total}&nbsp;zł</p>
                 </Flex>
                 <p><small>Koszt wysyłki jest podliczany podczas płatności</small></p>
               </div>

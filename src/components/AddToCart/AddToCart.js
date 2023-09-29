@@ -23,9 +23,9 @@ export default function AddToCart({ children, quantity, product }) {
     variables: {
       input: productQryInput,
     },
-    onCompleted: (res) => {
-      debugger
-      setCart(res?.data?.addToCart || null);
+    onCompleted: ({body}) => {
+      localStorage.setItem('woo-next-cart', JSON.stringify(body?.data?.addToCart?.cart))
+      setCart(body?.data?.addToCart?.cart)
       setShowViewCart(true)
     },
     onError: (error) => {

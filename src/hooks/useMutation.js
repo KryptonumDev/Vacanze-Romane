@@ -4,12 +4,16 @@ import { fetchQuery } from "../utils/fetchQuery";
 export const useMutation = (query, { variables, onCompleted = () => { }, onError = () => { } }) => {
   if (!query) throw new Error('Query is required')
 
-  const makeRequest = () => {
+  const makeRequest = (props = {}) => {
     setLoading(true)
-    fetchQuery({ query, variables })
+    fetchQuery({ query, variables: variables || props?.variables || undefined })
       .then(({ status, body }) => {
         setLoading(false)
-        onCompleted(body, status)
+        onCompleted({
+          status,
+          body,
+          error: null
+        })
         if (response.body !== null || response.error !== null) setPreviousResponse(response)
         setResponse({
           status,

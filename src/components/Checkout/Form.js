@@ -1,27 +1,48 @@
 import React from "react"
+import { useForm } from "react-hook-form"
 import { styled } from "styled-components"
 
 export default function Form() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = (data) => console.log(data)
   return (
     <Wrapper>
       <fieldset>
         <legend>Dane Kontaktowe</legend>
         <div className="flex">
-          <input placeholder="Imię"/>
-          <input placeholder="Nazwisko"/>
+          <input placeholder="Imię" />
+          <input placeholder="Nazwisko" />
         </div>
-        <input placeholder="Adres-email"/>
+        <input placeholder="Adres-email" />
       </fieldset>
       <fieldset>
         <legend>Płatność</legend>
+        <label className="radio">
+          <input type="radio" />
+          <span className="circle" />
+          <div className="description">
+            <p>Proszę o płatność przelewem tradycyjnym i podanie w tytule numeru zamówienia. Dane do przelewu:</p>
+            <p>
+              13 1090 1346 0000 0001 0343 4077
+              Santander Bank Polska
+              Monika Kruzel
+            </p>
+          </div>
+        </label>
       </fieldset>
       <fieldset>
-        <legend>Wysyłka</legend>
-        <input placeholder="Kraj" defaultValue='Polska'/>
+        <legend>Dane do faktury</legend>
+        <input placeholder="Kraj" defaultValue='Polska' />
         <input placeholder="Ulica i numer" />
         <div className="flex">
-          <input placeholder="Kod pocztowy"/>
-          <input placeholder="Miejscowość"/>
+          <input placeholder="Kod pocztowy" />
+          <input placeholder="Miejscowość" />
         </div>
       </fieldset>
       <fieldset>
