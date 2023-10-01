@@ -13,8 +13,6 @@ export default async function handler(req, res) {
       .then(response => response.json())
       .then(async (response) => {
         console.log(response)
-        if (response.responseCode == '0') throw new Error(response.error)
-
         if (response.data.status == 1 || response.data.status == 2) {
           return res.redirect(`${req.query.origin}/dziekujemy/`)
         } else {
