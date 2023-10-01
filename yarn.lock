@@ -1717,6 +1717,13 @@
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.5.tgz#b32366c89b43c6f8cefbdefac778b9c828e3ba8c"
   integrity sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==
 
+"@ingameltd/node-przelewy24@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@ingameltd/node-przelewy24/-/node-przelewy24-2.1.0.tgz#a66f12d6f6da6382f61085a2738faafc8f5876d5"
+  integrity sha512-dE7hZOSpARc8kI21yUTOBkBYmRzthTagG7oYxMWP8a/SBZwA7S19DSP/sga8awVB7A+T6EZvt+UJZn13VjfOcQ==
+  dependencies:
+    axios "^0.21.1"
+
 "@jridgewell/gen-mapping@^0.3.0", "@jridgewell/gen-mapping@^0.3.2":
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/@jridgewell/gen-mapping/-/gen-mapping-0.3.3.tgz#7e02e6eb5df901aaedb08514203b096614024098"

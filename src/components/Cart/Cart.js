@@ -71,7 +71,7 @@ export const Cart = ({ bg }) => {
           )
         }
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 11.0002V7.00024C16 4.79111 14.2091 3.00024 12 3.00024C9.79086 3.00024 8 4.79111 8 7.00024V11.0002M5 9.00024H19L20 21.0002H4L5 9.00024Z" stroke="#32251D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M16 11.0002V7.00024C16 4.79111 14.2091 3.00024 12 3.00024C9.79086 3.00024 8 4.79111 8 7.00024V11.0002M5 9.00024H19L20 21.0002H4L5 9.00024Z" stroke="#32251D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </LocButton>
       <Popup className={isOpened ? 'active' : ''}>
@@ -79,7 +79,7 @@ export const Cart = ({ bg }) => {
           <h3>Koszyk</h3>
           <button onClick={() => { setIsOpened(false) }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 18L18 6M6 6L18 18" stroke="#32251D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M6 18L18 6M6 6L18 18" stroke="#32251D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         </Flex>
@@ -129,6 +129,12 @@ const LocButton = styled.button`
   background-color: transparent;
   margin-left: 8px;
   position: relative;
+
+  @media (max-width: 1105px) {
+    position: absolute;
+    right: 80px;
+    top: 8px;
+  }
 
   span{
     position: absolute;

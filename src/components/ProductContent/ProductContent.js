@@ -23,7 +23,7 @@ const DropdownIndicator = props => {
     <components.DropdownIndicator {...props}>
       <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="58" height="58" fill="#32251D" />
-        <path d="M36 26L29 33L22 26" stroke="#F1E2CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M36 26L29 33L22 26" stroke="#F1E2CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </components.DropdownIndicator>
   )
@@ -38,7 +38,7 @@ const NoOptionsMessage = props => {
 };
 
 
-export default function Content({ data, data: { productTags, product, title, content, featuredImage, price } }) {
+export default function Content({ data, data: { productTags, product, title, content, featuredImage, price, regularPrice } }) {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   const [selectedOption, setSelectedOption] = useState(options[0])
@@ -77,7 +77,7 @@ export default function Content({ data, data: { productTags, product, title, con
       <div className="aside">
         <h2>{title}</h2>
         <p className="price" dangerouslySetInnerHTML={{ __html: price }} />
-        <p className="omnibus">Najniźsza cena 30 dni przed zmianą: <span dangerouslySetInnerHTML={{ __html: price }} /> brutto</p>
+        <p className="omnibus">Najniźsza cena 30 dni przed zmianą: <span dangerouslySetInnerHTML={{ __html: regularPrice }} /> brutto</p>
         <div className="text" dangerouslySetInnerHTML={{ __html: content }} />
         {productTags.nodes.some(tag => tag.slug === 'free') ? (
           <form onSubmit={handleSubmit(onSubmit)}>

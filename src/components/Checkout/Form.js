@@ -1,24 +1,33 @@
 import React from "react"
 import { styled } from "styled-components"
 
-export default function Form({ paymentMethods, shipping, register, shippingValue }) {
+export default function Form({ paymentValue, paymentMethods, shipping, register, shippingValue, errors }) {
 
- 
+
 
   return (
     <Wrapper>
       <fieldset>
         <legend>Dane Kontaktowe</legend>
         <div className="flex">
-          <input placeholder="Imię" />
-          <input placeholder="Nazwisko" />
+          <label>
+            <input className={errors['name'] ? 'errored' : ''} {...register('name', { required: true, minLength: 3 })} placeholder="Imię" />
+            {errors['name'] && <span className="error">To pole jest wymagane</span>}
+          </label>
+          <label>
+            <input className={errors['surname'] ? 'errored' : ''} {...register('surname', { required: true, minLength: 3 })} placeholder="Nazwisko" />
+            {errors['surname'] && <span className="error">To pole jest wymagane</span>}
+          </label>
         </div>
-        <input placeholder="Adres-email" />
+        <label>
+          <input className={errors['e-mail'] ? 'errored' : ''} {...register('e-mail', { required: true, pattern: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })} placeholder="Adres-email" />
+          {errors['e-mail'] && <span className="error">To pole jest wymagane</span>}
+        </label>
       </fieldset>
       <fieldset>
         <legend>Płatność</legend>
         {paymentMethods.map((el, index) => (
-          <label className="radio">
+          <label className={`radio ${paymentValue == index ? 'active' : ''}`}>
             <input {...register('payment')} value={index} type="radio" />
             <span className="circle">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,18 +36,30 @@ export default function Form({ paymentMethods, shipping, register, shippingValue
             </span>
             <div className="description">
               <p className="title">{el.name}</p>
-              <p className="text" dangerouslySetInnerHTML={{__html: el.description}}></p>
+              <p className="text" dangerouslySetInnerHTML={{ __html: el.description }}></p>
             </div>
           </label>
         ))}
       </fieldset>
       <fieldset>
         <legend>Dane do faktury</legend>
-        <input placeholder="Kraj" defaultValue='Polska' />
-        <input placeholder="Ulica i numer" />
+        <label>
+          <input className={errors['country'] ? 'errored' : ''} {...register('country', { required: true, minLength: 3 })} placeholder="Kraj" />
+          {errors['country'] && <span className="error">To pole jest wymagane</span>}
+        </label>
+        <label>
+          <input className={errors['address'] ? 'errored' : ''} {...register('address', { required: true, minLength: 3 })} placeholder="Ulica i numer" />
+          {errors['address'] && <span className="error">To pole jest wymagane</span>}
+        </label>
         <div className="flex">
-          <input placeholder="Kod pocztowy" />
-          <input placeholder="Miejscowość" />
+          <label>
+            <input className={errors['post-code'] ? 'errored' : ''} {...register('post-code', { required: true, minLength: 3, pattern: /^[0-9]{2}-[0-9]{3}$/i })} placeholder="Kod pocztowy" />
+            {errors['post-code'] && <span className="error">To pole jest wymagane</span>}
+          </label>
+          <label>
+            <input className={errors['city'] ? 'errored' : ''} {...register('city', { required: true, minLength: 3 })} placeholder="Miejscowość" />
+            {errors['city'] && <span className="error">To pole jest wymagane</span>}
+          </label>
         </div>
       </fieldset>
       <fieldset>
@@ -64,6 +85,30 @@ export default function Form({ paymentMethods, shipping, register, shippingValue
 
 const Wrapper = styled.div`
   height: fit-content;
+
+  label{
+    position: relative;
+    display: block;
+
+    .error{
+      position: absolute;
+      left: 32px;
+      bottom: -4px;
+      transform: translateY(100%);
+
+      color: #E20;
+      font-feature-settings: 'clig' off, 'liga' off;
+      font-family: Lato;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    input.errored{
+      border: 1px solid #E20;
+    }
+  }
 
   .radio{
     margin-top: 24px;
@@ -98,12 +143,12 @@ const Wrapper = styled.div`
         font-weight: 400;
         line-height: 180%;
         letter-spacing: 1px;
+        word-break: break-word;
       }
     }
 
     &.active{
-      border: 2px solid var(--light-blue, #262478);
-      padding: 15px;
+      border: 1px solid var(--light-blue, #262478);
     }
 
     input{
@@ -137,51 +182,14 @@ const Wrapper = styled.div`
       }
     }
   }
-  
-  fieldset{
-    border: none;
-    margin-top: 48px;
-
-    &:first-child{
-      margin-top: 0;
-    }
-  }
 
   .flex{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-  }
 
-  legend{
-    color: #000;
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-family: Cormorant Garamond;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 111.111%;
-    letter-spacing: 1px;
-  }
-
-  input{
-    border: 1px solid var(--grey, #E0E0E0);
-    background: var(--white, #FEFEFE);
-    padding: 16px 32px;
-    width: 100%;
-    margin-top: 24px;
-
-    color: #000000;
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-family: Lato;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 144.444%;
-    letter-spacing: 1px;
-
-    &::placeholder{
-      color: var(--grey-1, #808080);
+    @media (max-width: 420px) {
+      display: block;
     }
   }
 `

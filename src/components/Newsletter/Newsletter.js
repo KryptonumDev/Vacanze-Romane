@@ -18,12 +18,12 @@ export const Newsletter = () => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label className="input">
-            <input placeholder="Adres-email" {...register("email", { required: true, pattern: emailPattern })} />
+            <input className={errors.email ? 'errored' : ''} placeholder="Adres-email" {...register("email", { required: true, pattern: emailPattern })} />
             <AnimatePresence mode="wait">
               {errors.email && <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="error">To pole jest wymagane</motion.span>}
             </AnimatePresence>
           </label>
-          <button>Zapisuje się!</button>
+          <Button>Zapisuje się!</Button>
           <label className='checkbox'>
             <input type="checkbox" {...register("privacy", { required: true })} />
             <span className="checkbox" />
@@ -90,15 +90,6 @@ const Wrapper = styled.div`
     }
   }
 
-  button{
-    background: var(--brown, #32251D);
-    color: #FEFBF5;
-    padding: 16px 32px;
-    text-align: center;
-    width: 100%;
-    display: block;
-  }
-
   form{
     width: 100%;
     max-width: 558px;
@@ -109,15 +100,35 @@ const Wrapper = styled.div`
       position: relative;
 
       input{
-        border: 1px solid var(--brown, #32251D);
-        background: var(--bg-home, #FEFBF5);
+        border: 1px solid var(--grey, #E0E0E0);
+        background: var(--white, #FEFEFE);
         padding: 16px 32px;
+        width: 100%;
+        margin-top: 24px;
+
+        color: #000000;
+        font-feature-settings: 'clig' off, 'liga' off;
         font-family: Lato;
         font-size: 18px;
+        font-style: normal;
         font-weight: 400;
-        line-height: 144.444%; 
+        line-height: 144.444%;
         letter-spacing: 1px;
-        width: 100%;
+
+        transition: all .2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+        &::placeholder{
+          color: var(--grey-1, #808080);
+        }
+
+        &.errored{
+          border: 1px solid #E20;
+        }
+
+        &:focus, &:focus-visible{
+          outline: none;
+          border: 1px solid var(--brown, #32251D) !important;
+        }
       }
 
       .error {
@@ -207,5 +218,35 @@ const Wrapper = styled.div`
         }
       }
     }
+  }
+`
+
+const Button = styled.button`
+  display: block;
+  background: var(--brown);
+  padding: 16px 32px;
+  color: var(--beige-2);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 144.444%;
+  letter-spacing: 1px;
+  text-decoration: unset;
+  text-align: center;
+  border: none;
+  width: 100%;
+
+  transition: background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1),
+    color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+    color: var(--beige-2);
+    background-color: var(--dead-green);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
   }
 `

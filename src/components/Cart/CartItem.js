@@ -11,14 +11,19 @@ export default function CartItem({ products, remove, data }) {
         <div>
           <div className="elipsis-flex">
             <p title={data.product.node.name}>{data.product.node.name}</p>
-            <p dangerouslySetInnerHTML={{ __html: data.total }} />
+            <p className={data.product.node.regularPrice !== data.product.node.price ? 'red' : ''} dangerouslySetInnerHTML={{ __html: data.product.node.price }} />
           </div>
-          {/* <small>Poziom 1</small> */}
+          <div className="elipsis-flex">
+            <small>Poziom 1</small>
+            {data.product.node.regularPrice !== data.product.node.price && (
+              <p className="old-price" dangerouslySetInnerHTML={{ __html: data.product.node.regularPrice }} />
+            )}
+          </div>
         </div>
         <div className="flex">
           <p>Ilość: {data.quantity}</p>
           {remove && (
-            <button className="remove" onClick={(e) => { remove(e, data.key, products) }}>Usuń</button>
+            <button type="button" className="remove" onClick={(e) => { remove(e, data.key, products) }}>Usuń</button>
           )}
         </div>
       </div>
@@ -33,6 +38,7 @@ const Wrapper = styled.div`
   margin-top: 24px;
   padding-bottom: 24px;
   border-bottom: 1px solid var(--grey, #E0E0E0);
+  max-width: 500px;
 
   .inform-part{
     display: flex;
@@ -95,6 +101,19 @@ const Wrapper = styled.div`
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       font-size: 18px;
+
+      &.red{
+        color: var(--light-red, #7B2938);
+      }
+
+      &.old-price{
+        color: var(--grey-1, #808080);
+        font-size: 15px;
+        line-height:  160%;
+        letter-spacing: 1px;
+        text-decoration-line: line-through;
+        text-decoration: line-through;
+      }
     }
   }
 

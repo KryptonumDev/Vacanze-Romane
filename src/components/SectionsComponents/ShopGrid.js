@@ -62,7 +62,7 @@ const Button = styled(Link)`
   @media (max-width: 480px) {
     width: 100%;
   }
-  `
+`
 
 const Info = styled.div`
   margin-bottom: clamp(36px, calc(64vw/7.68), 92px);
