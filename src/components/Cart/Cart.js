@@ -1,5 +1,5 @@
 import { Link } from "gatsby"
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { styled } from "styled-components"
 import { useQuery } from "../../hooks/useQuery"
 import { AppContext } from "../../context/app-context"
@@ -62,6 +62,21 @@ export const Cart = ({ bg }) => {
     }
   };
 
+  
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey)
+    }
+  }, []);
+
+  const handleEscapeKey = (e) => {
+    if (e.key === "Escape") {
+      setIsOpened(false);
+    }
+  }
+
   return (
     <>
       <LocButton bg={bg} onClick={() => { setIsOpened(true) }}>
@@ -100,7 +115,7 @@ export const Cart = ({ bg }) => {
                 </Flex>
                 <p><small>Koszt wysyłki jest podliczany podczas płatności</small></p>
               </div>
-              <Link to="/zamowienie">
+              <Link onClick={() => { setIsOpened(false) }} to="/zamowienie">
                 Przejdź do zamówienia
               </Link>
             </div>
@@ -108,7 +123,7 @@ export const Cart = ({ bg }) => {
         ) : (
           <div className="placeholder">
             <p>Twój koszyk jest pusty</p>
-            <Link to="/sklep">
+            <Link onClick={() => { setIsOpened(false) }} to="/sklep">
               Przejdź do sklepu
             </Link>
           </div>

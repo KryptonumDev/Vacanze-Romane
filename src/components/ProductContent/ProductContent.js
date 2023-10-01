@@ -305,6 +305,7 @@ const Wrapper = styled.section`
       align-items: center;
       justify-content: flex-start;
       transition: all .24s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+      cursor: pointer;
 
       color: var(--brown, #32251D);
       font-feature-settings: 'clig' off, 'liga' off;

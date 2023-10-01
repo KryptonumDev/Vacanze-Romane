@@ -50,7 +50,6 @@ const Box = styled.div`
   padding: 24px;
   border: 1px solid var(--grey, #E0E0E0);
   background: var(--white, #FEFEFE);
-  margin-bottom: 48px;
 
   @media (max-width: 876px){
     margin-bottom: 0;
@@ -91,6 +90,10 @@ const Wrapper = styled.aside`
   height: fit-content;
   position: sticky;
   top: 48px;
+
+  @media (max-width: 1024px) {
+    position: static;
+  }
 
   @media (max-width: 876px) {
     display: flex;

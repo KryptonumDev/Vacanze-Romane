@@ -55,7 +55,7 @@ export default function AddToCart({ children, quantity, product }) {
           onClick={handleAddToCartClick}
           style={{ position: "relative", zIndex: 3 }}
         >
-          {loading ? 'Dodaje do koszyka...' : children ? children : 'Dodaj do koszyka'}
+          {loading ? 'Dodaję do koszyka...' : children ? children : 'Dodaj do koszyka'}
         </Button>
       )}
     </div>

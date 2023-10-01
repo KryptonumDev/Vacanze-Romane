@@ -15,7 +15,9 @@ const NavList = [
       { name: "Ciao!", link: "/" },
       { name: "in italiano", link: "/in-italiano" },
       { name: "Sklep", link: "/sklep" },
-      { name: "o mnie", link: "/o-mnie" },
+      { name: "O mnie", link: "/o-mnie" },
+      { name: "Polityka prywatności", link: "/polityka-prywatnosci" },
+      { name: "Regulamin sklepu", link: "/regulamin" }
     ],
   },
   {
@@ -37,7 +39,7 @@ const NavList = [
         name: "Youtube",
         href: "https://www.youtube.com/channel/UCXqPFvurDxiAFJknjZC5UbQ",
       },
-      { name: "Instagram", href: "https://instagram.com" },
+      { name: "Instagram", href: "https://www.instagram.com/vacanze_romane__italiano/" },
     ],
   },
 ]
@@ -100,15 +102,15 @@ const NavStyles = styled(motion.div)`
       z-index: -1;
 
       background-color: ${({ bg }) =>
-        bg === "red"
-          ? "var(--light-red)"
-          : bg === "green"
-          ? "var(--light-green)"
-          : bg === "brown"
+    bg === "red"
+      ? "var(--light-red)"
+      : bg === "green"
+        ? "var(--light-green)"
+        : bg === "brown"
           ? "var(--light-brown)"
           : bg === "blue"
-          ? "var(--light-blue)"
-          : "var(--beige-2)"};
+            ? "var(--light-blue)"
+            : "var(--beige-2)"};
       transform: scaleY(0);
       transform-origin: center bottom;
       transition: 0.3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -182,18 +184,18 @@ const FooterStyles = styled.footer`
           color: var(--beige-2);
         `
       : bg === "green"
-      ? css`
+        ? css`
           color: var(--beige-2);
         `
-      : bg === "brown"
-      ? css`
+        : bg === "brown"
+          ? css`
           color: var(--beige-2);
         `
-      : bg === "blue"
-      ? css`
+          : bg === "blue"
+            ? css`
           color: var(--beige-2);
         `
-      : css`
+            : css`
           color: var(--brown);
         `}
 `
@@ -226,15 +228,15 @@ const FooterText = styled(motion.p)`
       height: 6px;
       z-index: -1;
       background-color: ${({ bg }) =>
-        bg === "red"
-          ? "var(--light-red)"
-          : bg === "green"
-          ? "var(--light-green)"
-          : bg === "brown"
+    bg === "red"
+      ? "var(--light-red)"
+      : bg === "green"
+        ? "var(--light-green)"
+        : bg === "brown"
           ? "var(--light-brown)"
           : bg === "blue"
-          ? "var(--light-blue)"
-          : "var(--beige-2)"};
+            ? "var(--light-blue)"
+            : "var(--beige-2)"};
       transform: scaleY(0);
       transform-origin: center bottom;
       transition: 0.3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -330,12 +332,12 @@ const Footer = () => {
               bg === "red"
                 ? "var(--beige-2)"
                 : bg === "brown"
-                ? "var(--beige-2)"
-                : bg === "blue"
-                ? "var(--beige-2)"
-                : bg === "green"
-                ? "var(--beige-2)"
-                : ""
+                  ? "var(--beige-2)"
+                  : bg === "blue"
+                    ? "var(--beige-2)"
+                    : bg === "green"
+                      ? "var(--beige-2)"
+                      : ""
             }
           />
           <FooterText
@@ -344,12 +346,12 @@ const Footer = () => {
               bg === "red"
                 ? "var(--beige-2)"
                 : bg === "green"
-                ? "var(--beige-2)"
-                : bg === "brown"
-                ? "var(--beige-2)"
-                : bg === "blue"
-                ? "var(--beige-2)"
-                : "var(--brown)"
+                  ? "var(--beige-2)"
+                  : bg === "brown"
+                    ? "var(--beige-2)"
+                    : bg === "blue"
+                      ? "var(--beige-2)"
+                      : "var(--brown)"
             }
           >
             Stronę stworzyli:{" "}
@@ -364,7 +366,7 @@ const Footer = () => {
             <motion.a
               target="_blank"
               rel="noreferrer noopener"
-              href="https://www.kryptonum.eu"
+              href="https://kryptonum.eu/pl"
             >
               Kryptonum
             </motion.a>

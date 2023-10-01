@@ -30,7 +30,7 @@ export const BlogNews = () => {
     <Wrapper>
       <div className='container'>
         <h2>Ostatnio na blogu</h2>
-        <Link className="link">Zobacz wszystkie wpisy</Link>
+        <Link className="link" to="/blog">Zobacz wszystkie wpisy</Link>
         <div className="grid">
           {allDatoCmsArticle.nodes.map((article, index) => (
             <Link to={`/${blogCategories.includes(article.category) ? 'in-italiano' : 'blog'}/${slugify(article.slug, { lower: true })}`} className="card">

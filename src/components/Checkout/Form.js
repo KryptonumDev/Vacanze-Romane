@@ -121,6 +121,7 @@ const Wrapper = styled.div`
     position: relative;
     border: 1px solid var(--grey, #E0E0E0);
     box-sizing: border-box;
+    cursor: pointer;
 
     .description{
       p+p{

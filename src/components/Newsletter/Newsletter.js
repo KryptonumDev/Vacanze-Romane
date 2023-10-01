@@ -9,6 +9,8 @@ export const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)
 export const Newsletter = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
+
+  
   return (
     <Wrapper>
       <div className='container'>
@@ -23,7 +25,7 @@ export const Newsletter = () => {
               {errors.email && <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="error">To pole jest wymagane</motion.span>}
             </AnimatePresence>
           </label>
-          <Button>Zapisuje się!</Button>
+          <Button>Zapisuję się!</Button>
           <label className='checkbox'>
             <input type="checkbox" {...register("privacy", { required: true })} />
             <span className="checkbox" />

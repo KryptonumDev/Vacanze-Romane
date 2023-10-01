@@ -35,7 +35,7 @@ const paymentMethods = [
     methodId: 'bacs',
   },
   {
-    name: 'Płatności elektroniczna',
+    name: 'Płatności elektroniczne',
     description: `
       <img src='${Img}' alt='przelewy24'/>
     `,
@@ -211,6 +211,7 @@ const ChildComponent = ({ remove, cart, setCart }) => {
         </div>
         <Form paymentValue={paymentValue} errors={errors} paymentMethods={paymentMethods} register={register} shippingValue={shippingValue} shipping={cart.availableShippingMethods[0].rates} />
         <Summary register={register} remove={remove} cart={cart} />
+      <Button>Złóż zamówienie</Button>
       </div>
     </Wrapper>
   )
@@ -238,13 +239,13 @@ const Wrapper = styled.form`
   .container{
     display: grid;
     grid-template-columns: 564fr 458fr;
-    gap: clamp(24px, calc(106vw/14.4), 106px);
+    gap: 0 clamp(24px, calc(106vw/14.4), 106px);
     max-width: 1440px;
     padding: 72px 100px;
     margin: 0 auto;
 
     @media (max-width: 1051px) {
-      padding: 54px 65px;
+      padding: 54px 30px;
       gap: 24px;
     }
 
@@ -271,7 +272,7 @@ const Wrapper = styled.form`
   
   fieldset{
     border: none;
-    margin-top: 48px;
+    margin-top: clamp(24px, calc(48vw/14.4), 48px);
 
     &:first-child{
       margin-top: 0;
@@ -315,5 +316,35 @@ const Wrapper = styled.form`
       outline: none;
       border: 1px solid var(--brown, #32251D) !important;
     }
+  }
+`
+
+const Button = styled.button`
+  display: block;
+  background: var(--brown);
+  padding: 16px 32px;
+  color: var(--beige-2);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 144.444%;
+  letter-spacing: 1px;
+  text-decoration: unset;
+  text-align: center;
+  border: none;
+  margin: 32px auto 0 auto;
+
+  transition: background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1),
+    color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+    color: var(--beige-2);
+    background-color: var(--dead-green);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
   }
 `
