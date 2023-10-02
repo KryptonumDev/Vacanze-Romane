@@ -7,6 +7,8 @@ mutation CHECKOUT_MUTATION( $input: CheckoutInput! ) {
       firstName
     }
     order {
+      paymentMethod
+      paymentMethodTitle
       billing {
         email
         firstName

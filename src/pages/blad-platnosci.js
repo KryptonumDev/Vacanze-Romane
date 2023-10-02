@@ -1,0 +1,136 @@
+import React from "react"
+import { graphql } from "gatsby"
+import PageHeader from "../components/PageHeader/PageHeader"
+import { styled } from "styled-components"
+import { Newsletter } from "../components/Newsletter/Newsletter"
+// import SEO from "../components/SEO/SEO"
+
+const ProductLayout = ({ data }) => {
+  return (
+    <>
+      {/* <SEO meta={data.datoCmsArticle.seoMetaTags} /> */}
+      <PageHeader
+        subheader={'Problem z dokonaniem płatności.'}
+        withNav
+        bg={'brown'}
+      />
+      <Summary>
+        <h2>Przepraszamy, wygląda na to, że wystąpił problem z dokonaniem płatności.</h2>
+        <p>Ups! Wygląda na to, że coś poszło nie tak podczas dokonywania płatności. Nie martw się, jestem tutaj, aby Ci pomóc! </p>
+        <ul>
+          <li>
+            &#x2022; Upewnij się, że wprowadzone dane są poprawne i zgodne z informacjami na Twojej karcie płatniczej.
+          </li>
+          <li>
+            &#x2022; Sprawdź, czy nie masz aktywnego blokowania płatności na swojej karcie lub koncie bankowym.
+          </li>
+          <li>
+            &#x2022; Upewnij się, że masz wystarczającą ilość środków na koncie lub dostępność kredytu.
+          </li>
+        </ul>
+        {/* <p>
+        </p> */}
+        <Button>
+          Spróbuj jeszcze raz
+        </Button>
+        <p>
+          Jeśli mimo prób nadal napotykasz na trudności, nie martw się! Jesteśmy tutaj, aby Ci pomóc. Napisz do nas na adres <a href="mail:kontakt@wloskiodzera.pl">kontakt@wloskiodzera.pl</a> i opisz dokładnie, jaki problem napotkałeś. Postaramy się znaleźć rozwiązanie razem.
+        </p>
+      </Summary>
+      <Newsletter />
+    </>
+  )
+}
+
+export const query = graphql`
+  query ProductQuery($id: ID!) {
+    wp{
+      product(id: $id, idType: ID) {
+        title
+        content
+      }
+    }
+  }
+`
+
+export default ProductLayout
+
+
+const Summary = styled.div`
+  max-width: 750px;
+  margin: 0 auto;
+  text-align: center;
+  padding: clamp(32px, calc(64vw/7.68), 78px) clamp(16px, calc(16vw/4.8), 32px);
+
+  h2{
+    color: #000;
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Cormorant Garamond;
+    font-size: clamp(24px, calc(30vw/7.68), 36px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 111.111%;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+
+a{
+  color: #000;
+}
+
+  p{
+    margin-top: 16px;
+    color: #000;
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Lato;
+    font-size: clamp(15px, calc(16vw/7.68), 18px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 144.444%;
+    letter-spacing: 1px;
+  }
+
+  ul{
+    max-width: 450px;
+    margin: 0 auto;
+    li{
+      list-style: none;
+      margin-top: 24px;
+      color: #000;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 160%;
+      letter-spacing: 1px;
+    }
+  }
+`
+
+const Button = styled.button`
+  display: block;
+  background: var(--brown);
+  padding: 16px 32px;
+  color: var(--beige-2);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 144.444%;
+  letter-spacing: 1px;
+  text-decoration: unset;
+  text-align: center;
+  border: none;
+  margin: 32px 0 0 0;
+  width: 100%;
+
+  transition: background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1),
+    color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+    color: var(--beige-2);
+    background-color: var(--dead-green);
+  }
+`

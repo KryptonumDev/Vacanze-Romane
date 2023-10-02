@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import Form from "./Form"
 import Summary from "./Summary"
@@ -16,6 +16,7 @@ import CHECKOUT from '../../mutations/CHECKOUT'
 import { useQuery } from "../../hooks/useQuery"
 import { createCheckoutData, generateParams } from '../../utils/generateCheckoutData'
 import axios from "axios"
+import Overlay from "../Overlay/Overlay"
 
 const paymentMethods = [
   {
@@ -28,7 +29,7 @@ const paymentMethods = [
     methodId: 'bacs',
   },
   {
-    name: 'Możesz zapłacić także zwykłym przekazem Pay Pal dla odbiorcy:',
+    name: 'Możesz zapłacić także zwykłym przekazemPay Pal dla odbiorcy:',
     description: `
       jezyk.wloski.od.zera@gmail.com
     `,
@@ -46,6 +47,7 @@ const paymentMethods = [
 
 export default function Checkout() {
   let [cart, setCart] = useContext(AppContext)
+  const [loading, setLoading] = useState(false)
 
   const { } = useQuery(GET_CART, {
     onCompleted: ({ body, status }) => {
@@ -72,10 +74,10 @@ export default function Checkout() {
       if (body.data.updateItemQuantities.cart.contents?.nodes?.length === 0) {
         window.location.href = '/sklep'
       }
-      // setInnerLoading(false)
+      setLoading(false)
     },
     onError: (error) => {
-      // setInnerLoading(false)
+      setLoading(false)
       if (error) {
         console.log(error.message);
       }
@@ -89,7 +91,7 @@ export default function Checkout() {
       // By passing the newQty to 0 in updateCart Mutation, it will remove the item.
       const newQty = 0;
       const updatedItems = getUpdatedItems(products, newQty, key);
-      // setInnerLoading(true)
+      setLoading(true)
       updateCart({
         variables: {
           input: {
@@ -103,10 +105,10 @@ export default function Checkout() {
 
   if (cart.contents.nodes.length === 0) return null
 
-  return <ChildComponent remove={handleRemoveProductClick} cart={cart} setCart={setCart} />
+  return <ChildComponent loading={loading} setLoading={setLoading} remove={handleRemoveProductClick} cart={cart} setCart={setCart} />
 }
 
-const ChildComponent = ({ remove, cart, setCart }) => {
+const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
   const {
     register,
     handleSubmit,
@@ -128,14 +130,15 @@ const ChildComponent = ({ remove, cart, setCart }) => {
     }
   })
 
-
   const { request: checkout } = useMutation(CHECKOUT, {
     onCompleted: ({ body: { data } }) => {
       debugger
-      // if (data.checkout.order.total == 0) {
-      //   window.location.href = `https://www.psychodietmed.pl/api/complete-free-order/?id=${data.checkout.order.orderNumber}`
-      //   return;
-      // }
+      if (data.checkout.order.paymentMethod !== 'p24') {
+        localStorage.setItem('woo-next-cart', null);
+        window.location.href = `${window?.location?.origin}/platnosc-przelewem?id=${data.checkout.order.orderNumber}&amount=${data.checkout.order.total}`
+        return;
+      }
+
       axios.post('/api/create-transaction', {
         "description": 'Zamówienie w sklepie Włoski od zera nr. ' + data.checkout.order.orderNumber,
         "id": data.checkout.order.orderNumber,
@@ -152,21 +155,22 @@ const ChildComponent = ({ remove, cart, setCart }) => {
             localStorage.setItem('payLink', value.data.link)
             window.location.href = value.data.link
           }
-          // setInnerLoading(false)
+          setLoading(false)
         })
         .catch(error => {
-          debugger
-          // setInnerLoading(false)
-          alert(error)
+          setLoading(false)
+          alert(error.message)
         });
     },
     onError: (error) => {
-      alert(error)
+      debugger
+      setLoading(false)
+      alert(error.message)
     }
   });
 
   const onSubmit = (data) => {
-    // setLoading(true)
+    setLoading(true)
     const orderBody = createCheckoutData(data, paymentMethods)
     checkout({
       variables: {
@@ -178,7 +182,7 @@ const ChildComponent = ({ remove, cart, setCart }) => {
   const shippingValue = watch('shipping')
   const paymentValue = watch('payment')
 
-  const { request, loading } = useMutation(SET_SHIPPING_METHOD, {
+  const { request } = useMutation(SET_SHIPPING_METHOD, {
     variables: {
       input: {
         shippingMethods: shippingValue,
@@ -187,19 +191,24 @@ const ChildComponent = ({ remove, cart, setCart }) => {
     onCompleted: ({ body }) => {
       localStorage.setItem('woo-next-cart', JSON.stringify(body?.data?.updateShippingMethod?.cart))
       setCart(body?.data?.updateShippingMethod?.cart)
+      setLoading(false)
     },
     onError: (error) => {
+      setLoading(false)
       console.log(error.message)
     }
   })
 
   useEffect(() => {
-    if (shippingValue !== cart?.chosenShippingMethods?.[0])
+    if (shippingValue !== cart?.chosenShippingMethods?.[0]) {
+      setLoading(true)
       request()
+    }
   }, [shippingValue])
 
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
+      <Overlay state={loading} />
       <div className="container">
         <div className="summary-mobile">
           <h2>Podsumowanie</h2>
@@ -211,7 +220,7 @@ const ChildComponent = ({ remove, cart, setCart }) => {
         </div>
         <Form paymentValue={paymentValue} errors={errors} paymentMethods={paymentMethods} register={register} shippingValue={shippingValue} shipping={cart.availableShippingMethods[0].rates} />
         <Summary register={register} remove={remove} cart={cart} />
-      <Button>Złóż zamówienie</Button>
+        <Button>Złóż zamówienie</Button>
       </div>
     </Wrapper>
   )

@@ -5,9 +5,9 @@ export default function Video({ data: { title, video, file, linkTitle } }) {
   return (
     <Wrapper>
       <h3 className="title" dangerouslySetInnerHTML={{ __html: title }} />
-      <iframe className="frame" src={video} />
+      <iframe title='video' className="frame" src={video} />
       {(linkTitle && file) && (
-        <Button target="__blank" rel="noopener noreferer" href={file.mediaItemUrl} download>
+        <Button target="_blank" rel="noopener noreferrer" href={file.mediaItemUrl} download>
           {linkTitle}
         </Button>
       )}

@@ -6,6 +6,7 @@ import ADD_TO_CART from "../../mutations/ADD_TO_CART";
 import { useMutation } from "../../hooks/useMutation";
 import { styled } from "styled-components";
 import { AppContext } from "../../context/app-context";
+import Overlay from "../Overlay/Overlay";
 
 export default function AddToCart({ children, quantity, product }) {
 
@@ -17,32 +18,32 @@ export default function AddToCart({ children, quantity, product }) {
 
   const [cart, setCart] = useContext(AppContext);
   const [showViewCart, setShowViewCart] = useState(false);
-  const [requestError, setRequestError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const { request, data, loading } = useMutation(ADD_TO_CART, {
+  const { request, data } = useMutation(ADD_TO_CART, {
     variables: {
       input: productQryInput,
     },
-    onCompleted: ({body}) => {
+    onCompleted: ({ body }) => {
       localStorage.setItem('woo-next-cart', JSON.stringify(body?.data?.addToCart?.cart))
       setCart(body?.data?.addToCart?.cart)
       setShowViewCart(true)
+      setLoading(false)
     },
     onError: (error) => {
-      if (error) {
-        setRequestError(error?.message ?? '');
-      }
+      setLoading(false)
       console.log(error.message)
     }
   });
 
   const handleAddToCartClick = () => {
-    setRequestError(null);
+    setLoading(true)
     request();
   };
 
   return (
     <div >
+      <Overlay state={loading} />
       {showViewCart ? (
         <Button style={{ position: "relative", zIndex: 3 }} className="add-to-cart" href='/zamowienie'>
           Przejdż do zamówienia

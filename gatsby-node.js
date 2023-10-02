@@ -10,6 +10,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const lessonTemplate = path.resolve(`src/layouts/lesson.js`)
   const productTemplate = path.resolve(`src/layouts/product.js`)
   const productFreeTemplate = path.resolve(`src/layouts/product-free-summary.js`)
+  const productThankYouTemplate = path.resolve(`src/layouts/product-summary.js`)
   const result = await graphql(`
     query allArticlesAndLessons {
       wp {

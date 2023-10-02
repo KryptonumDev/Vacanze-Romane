@@ -9,11 +9,13 @@ import CartItem from "./CartItem"
 import { useMutation } from "../../hooks/useMutation"
 import { v4 } from "uuid";
 import { getUpdatedItems } from './../../utils/getUpdatedItems'
+import OverlayC from "../Overlay/Overlay"
 
 export const Cart = ({ bg }) => {
 
   const [isOpened, setIsOpened] = useState(false)
-  let [cart, setCart] = useContext(AppContext)
+  const [cart, setCart] = useContext(AppContext)
+  const [loading, setLoading] = useState(false)
 
   const { revalidate, data } = useQuery(GET_CART, {
     variables: {},
@@ -33,19 +35,18 @@ export const Cart = ({ bg }) => {
       // Update cart data in React Context.
 
       setCart(body.data.updateItemQuantities.cart);
-      // setInnerLoading(false)
+      setLoading(false)
     },
     onError: (error) => {
-      // setInnerLoading(false)
-      if (error) {
-        console.log(error.message);
-      }
+      setLoading(false)
+      console.log(error.message);
     }
   });
 
   const handleRemoveProductClick = (event, key, products) => {
     event.stopPropagation();
     if (products.length) {
+      setLoading(true)
 
       // By passing the newQty to 0 in updateCart Mutation, it will remove the item.
       const newQty = 0;
@@ -62,7 +63,7 @@ export const Cart = ({ bg }) => {
     }
   };
 
-  
+
 
   useEffect(() => {
     document.addEventListener("keydown", handleEscapeKey);
@@ -79,6 +80,7 @@ export const Cart = ({ bg }) => {
 
   return (
     <>
+      <OverlayC state={loading} />
       <LocButton bg={bg} onClick={() => { setIsOpened(true) }}>
         {
           cart?.contents?.nodes?.length > 0 && (

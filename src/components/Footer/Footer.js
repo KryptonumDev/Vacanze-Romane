@@ -34,12 +34,18 @@ const NavList = [
       {
         name: "Facebook!",
         href: "https://www.facebook.com/italiano.Vacanze.Romane/",
+        target: "_blank",
       },
       {
         name: "Youtube",
         href: "https://www.youtube.com/channel/UCXqPFvurDxiAFJknjZC5UbQ",
+        target: "_blank",
       },
-      { name: "Instagram", href: "https://www.instagram.com/vacanze_romane__italiano/" },
+      { 
+        name: "Instagram", 
+        href: "https://www.instagram.com/vacanze_romane__italiano/" ,
+        target: "_blank",
+      },
     ],
   },
 ]
@@ -157,7 +163,7 @@ const FooterNavigation = ({ bg }) => (
                 </li>
               ) : (
                 <li>
-                  <a href={item.href}>{item.name}</a>
+                  <a target="_blank" rel="noopener noreferrer" href={item.href}>{item.name}</a>
                 </li>
               )}
             </React.Fragment>

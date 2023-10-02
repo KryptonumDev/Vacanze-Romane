@@ -35,7 +35,9 @@ export const createCheckoutData = (order, paymentMethods) => {
     shippingMethod: order.shipping || null,
     // transactionId: order.transactionId,
     // isPaid: order.isPaid,
-    // metaData: []
+    // metaData: [
+    //   { key: "paczkomat_id", value: "KRA30A" }
+    // ]
   };
 
   // if (order.shippingMethod) {

@@ -18,7 +18,7 @@ export default function TwoColumnCards({ data: { title, text, list } }) {
               ))}
             </ul>
             {(item.file && item.linkTitle) && (
-              <Button target="__blank" rel="noopener noreferer" href={item.file.mediaItemUrl} download>
+              <Button target="_blank" rel="noopener noreferrer" href={item.file.mediaItemUrl} download>
                 {item.linkTitle}
               </Button>
             )}
