@@ -1,14 +1,19 @@
 import React from "react"
-// import SEO from "../components/SEO/SEO"
 import { Newsletter } from "../components/Newsletter/Newsletter"
 import { graphql } from "gatsby"
 import Checkout from "../components/Checkout/Checkout"
+import { Helmet } from "react-helmet"
 
 const ZamowieniePage = () => {
   return (
     <>
-      {/* <SEO meta={data.datoCmsShopPage.seoMetaTags} /> */}
-      <Checkout/>
+      <Helmet>
+        <title>Wloski od zera. Zamówienie</title>
+        <meta name="description" content='' />
+        <meta name='robots' content="noindex" />
+        {/* TODO: description */}
+      </Helmet>
+      <Checkout />
       <Newsletter />
     </>
   )

@@ -3,12 +3,17 @@ import { graphql } from "gatsby"
 import PageHeader from "../components/PageHeader/PageHeader"
 import { styled } from "styled-components"
 import { Newsletter } from "../components/Newsletter/Newsletter"
-// import SEO from "../components/SEO/SEO"
+import { Helmet } from "react-helmet"
 
 const ProductLayout = ({ data }) => {
   return (
     <>
-      {/* <SEO meta={data.datoCmsArticle.seoMetaTags} /> */}
+      <Helmet>
+        <title>Wloski od zera. Dziękujemy</title>
+        <meta name="description" content='' />
+        <meta name='robots' content="noindex" />
+        {/* TODO: description */}
+      </Helmet>
       <PageHeader
         subheader={'Dziękujemy za zakup w sklepie „Włoski od Zera“'}
         withNav
@@ -17,7 +22,7 @@ const ProductLayout = ({ data }) => {
       <Summary>
         <h2>Cieszę się, że zdecydowałeś/aś się skorzystać z naszego produktu.</h2>
         <p>
-        Twój zakup został pomyślnie zrealizowany. Na podany przez Ciebie adres e-mail otrzymasz wkróte informacje o płatności oraz informację o przetwarzaniu twojego zamówienia</p>
+          Twój zakup został pomyślnie zrealizowany. Na podany przez Ciebie adres e-mail otrzymasz wkróte informacje o płatności oraz informację o przetwarzaniu twojego zamówienia</p>
         <p>
           Jeśli masz jakiekolwiek pytania lub potrzebujesz wsparcia, nie wahaj się skontaktować. Jesteśm tutaj, aby Ci pomóc na każdym kroku Twojej nauki i podróży!
         </p>

@@ -4,12 +4,15 @@ import PageHeader from "../components/PageHeader/PageHeader"
 import { BlogNews } from "../components/BlogNews/BlogNews"
 import Content from "../components/ProductContent/ProductContent"
 // import PageHeader from "../components/PageHeader/PageHeader"
-// import SEO from "../components/SEO/SEO"
+import { Helmet } from "react-helmet"
 
-const ProductLayout = ({ data }) => {
+const ProductLayout = ({ data, data: { wp: { product: { seo } } } }) => {
   return (
     <>
-      {/* <SEO meta={data.datoCmsArticle.seoMetaTags} /> */}
+      <Helmet>
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.metaDesc} />
+      </Helmet>
       <PageHeader
         // paragraph={data.wp.product.title}
         subheader={data.wp.product.title}
@@ -27,6 +30,10 @@ export const query = graphql`
   query ProductQuery($id: ID!) {
     wp{
       product(id: $id, idType: ID) {
+        seo {
+          title
+          metaDesc
+        }
         productTags {
           nodes {
             slug

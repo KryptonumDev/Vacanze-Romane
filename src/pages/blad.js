@@ -3,13 +3,17 @@ import { graphql } from "gatsby"
 import PageHeader from "../components/PageHeader/PageHeader"
 import { styled } from "styled-components"
 import { Newsletter } from "../components/Newsletter/Newsletter"
-import Overlay from "../components/Overlay/Overlay"
-// import SEO from "../components/SEO/SEO"
+import { Helmet } from "react-helmet"
 
 const ProductLayout = ({ data }) => {
   return (
     <>
-      {/* <SEO meta={data.datoCmsArticle.seoMetaTags} /> */}
+      <Helmet>
+        <title>Wloski od zera. Błąd</title>
+        <meta name="description" content='' />
+        <meta name='robots' content="noindex" />
+        {/* TODO: description */}
+      </Helmet>
       <PageHeader
         subheader={'Problem z przetwarzaniem zamówienia.'}
         withNav

@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import PageHeader from "../components/PageHeader/PageHeader"
 import { styled } from "styled-components"
 import { Newsletter } from "../components/Newsletter/Newsletter"
-// import SEO from "../components/SEO/SEO"
+import { Helmet } from "react-helmet"
 
 const ProductLayout = ({ data }) => {
 
@@ -11,7 +11,7 @@ const ProductLayout = ({ data }) => {
   const [amount, setAmount] = React.useState('')
 
   React.useEffect(() => {
-    if(typeof window !== 'undefined'){
+    if (typeof window !== 'undefined') {
       // get id from url param
       const urlParams = new URLSearchParams(window.location.search);
       const orderNumber = urlParams.get('id')
@@ -23,7 +23,12 @@ const ProductLayout = ({ data }) => {
 
   return (
     <>
-      {/* <SEO meta={data.datoCmsArticle.seoMetaTags} /> */}
+      <Helmet>
+        <title>Wloski od zera. Dane do przelewu</title>
+        <meta name="description" content='' />
+        <meta name='robots' content="noindex" />
+        {/* TODO: description */}
+      </Helmet>
       <PageHeader
         subheader={'Dziękujemy za zakup w sklepie „Włoski od Zera“'}
         withNav

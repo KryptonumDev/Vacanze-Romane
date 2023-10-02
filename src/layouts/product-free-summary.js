@@ -3,12 +3,15 @@ import { graphql } from "gatsby"
 import PageHeader from "../components/PageHeader/PageHeader"
 import { styled } from "styled-components"
 import { BlogNews } from "../components/BlogNews/BlogNews"
-// import SEO from "../components/SEO/SEO"
+import { Helmet } from "react-helmet"
 
-const ProductLayout = ({ data }) => {
+const ProductLayout = ({ data, data: { wp: { product: { seo } } } }) => {
   return (
     <>
-      {/* <SEO meta={data.datoCmsArticle.seoMetaTags} /> */}
+      <Helmet>
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.metaDesc} />
+      </Helmet>
       <PageHeader
         subheader={data.wp.product.title}
         withNav
@@ -16,14 +19,14 @@ const ProductLayout = ({ data }) => {
         bg={'brown'}
       />
       <Summary>
-        <h2>Sprawdź swój e-mail! </h2>
+        <h2>Sprawdź swój e-mail!</h2>
         <p>
           Dziękuję za wykupienie kursu!Na podany przez Ciebie adres e-mail otrzymasz wkróte informacje o płatności oraz dostęp do materiałów kursowych. </p>
         <p>
-          Jeszcze raz dziękuję za zaufanie i dołączenie do naszej społeczności uczących się włoskiego z Vacanze Romane. Jeśli masz jakiekolwiek pytania - skontaktuj się ze mną! Jestem tu, aby Ci pomóc na każdym etapie Twojej nauki. Cieszę się, że będziemy razem odkrywać i rozwijać nowe umiejętności!
+          Jeszcze raz dziękuję za zaufanie i dołączenie do naszej społeczności uczących się włoskiego z Vacanze Romane. Jeśli masz jakiekolwiek pytania - skontaktuj się ze mną! Jestem tu, aby Ci pomóc na każdym etapie Twojej nauki. Cieszę się, że będziemy razem odkrywać i rozwijać nowe umiejętności!
         </p>
       </Summary>
-      <BlogNews/>
+      <BlogNews />
     </>
   )
 }
@@ -34,6 +37,10 @@ export const query = graphql`
       product(id: $id, idType: ID) {
         title
         content
+        seo {
+          title
+          metaDesc
+        }
       }
     }
   }
