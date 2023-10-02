@@ -1,11 +1,10 @@
 import React from "react"
-import { graphql } from "gatsby"
 import PageHeader from "../components/PageHeader/PageHeader"
 import { styled } from "styled-components"
 import { Newsletter } from "../components/Newsletter/Newsletter"
 import { Helmet } from "react-helmet"
 
-const ProductLayout = ({ data }) => {
+const ProductLayout = () => {
 
   const [orderNumber, setOrderNumber] = React.useState('')
   const [amount, setAmount] = React.useState('')
@@ -58,19 +57,7 @@ const ProductLayout = ({ data }) => {
   )
 }
 
-export const query = graphql`
-  query ProductQuery($id: ID!) {
-    wp{
-      product(id: $id, idType: ID) {
-        title
-        content
-      }
-    }
-  }
-`
-
 export default ProductLayout
-
 
 const Summary = styled.div`
   max-width: 750px;

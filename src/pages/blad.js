@@ -1,11 +1,10 @@
 import React from "react"
-import { graphql } from "gatsby"
 import PageHeader from "../components/PageHeader/PageHeader"
 import { styled } from "styled-components"
 import { Newsletter } from "../components/Newsletter/Newsletter"
 import { Helmet } from "react-helmet"
 
-const ProductLayout = ({ data }) => {
+const ProductLayout = () => {
   return (
     <>
       <Helmet>
@@ -30,17 +29,6 @@ const ProductLayout = ({ data }) => {
     </>
   )
 }
-
-export const query = graphql`
-  query ProductQuery($id: ID!) {
-    wp{
-      product(id: $id, idType: ID) {
-        title
-        content
-      }
-    }
-  }
-`
 
 export default ProductLayout
 

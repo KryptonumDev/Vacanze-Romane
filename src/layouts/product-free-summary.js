@@ -32,7 +32,7 @@ const ProductLayout = ({ data, data: { wp: { product: { seo } } } }) => {
 }
 
 export const query = graphql`
-  query ProductQuery($id: ID!) {
+  query ProductSummaryQuery($id: ID!) {
     wp{
       product(id: $id, idType: ID) {
         title
