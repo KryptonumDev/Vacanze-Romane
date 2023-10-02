@@ -40,7 +40,7 @@ const paymentMethods = [
     description: `
       <img src='${Img}' alt='przelewy24'/>
     `,
-    methodId: 'p24',
+    methodId: 'przelewy24',
   }
 
 ]
@@ -130,9 +130,12 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
     }
   })
 
+  const [orderBody, setOrderBody] = useState(null)
+
   const { request: checkout } = useMutation(CHECKOUT, {
     onCompleted: ({ body: { data } }) => {
-      if (data.checkout.order.paymentMethod !== 'p24') {
+      debugger
+      if (data.checkout.order.paymentMethod !== "przelewy24") {
         localStorage.setItem('woo-next-cart', null);
         window.location.href = `${window?.location?.origin}/platnosc-przelewem?id=${data.checkout.order.orderNumber}&amount=${data.checkout.order.total}`
         return;
@@ -149,11 +152,9 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
         "urlStatus": `${window?.location?.origin}/api/complete-transaction?session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}`,
       })
         .then(function (value) {
-          if (value.data.link) {
-            localStorage.setItem('woo-next-cart', null);
-            localStorage.setItem('payLink', value.data.link)
-            window.location.href = value.data.link
-          }
+          localStorage.setItem('woo-next-cart', null);
+          localStorage.setItem('payLink', value.data.link)
+          window.location.href = value.data.link
           setLoading(false)
         })
         .catch(error => {
@@ -162,6 +163,16 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
         });
     },
     onError: (error) => {
+      debugger
+      if (error.message === "Proszę wybrać paczkomat") {
+        // checkout({
+        //   variables: {
+        //     input: orderBody
+        //   }
+        // })
+        return;
+      }
+
       setLoading(false)
       alert(error.message)
     }
@@ -169,11 +180,11 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
 
   const onSubmit = (data) => {
     setLoading(true)
-    const orderBody = createCheckoutData(data, paymentMethods)
-    console.log(orderBody)
+    const order = createCheckoutData(data, paymentMethods)
+    setOrderBody(order)
     checkout({
       variables: {
-        input: orderBody
+        input: order
       }
     })
   }
