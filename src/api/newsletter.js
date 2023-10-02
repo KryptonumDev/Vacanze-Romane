@@ -1,5 +1,5 @@
-export async function handler(req, res) {
-  const { group_id, name, email } = req.body
+export default async function handler(req, res) {
+  const { group_id, email } = req.body
   try {
     const headers = {
       'Content-Type': 'application/json',
@@ -11,7 +11,6 @@ export async function handler(req, res) {
       method: 'POST',
       headers,
       body: JSON.stringify({
-        name,
         email,
       }),
     });

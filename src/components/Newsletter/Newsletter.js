@@ -1,29 +1,48 @@
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "gatsby";
-import React from "react"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form";
 import { styled } from "styled-components"
 
 export const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
+
 export const Newsletter = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const [status, setStatus] = useState(null)
+
   const onSubmit = data => {
     axios.post('/api/newsletter', {
       email: data.email,
-      name: data.name,
       group_id: '100932655831320068',
     }).then(res => {
-      debugger
-    }).catch(err => {
-      debugger
+      setStatus(res.success)
+    }).catch(() => {
+      setStatus(false)
     })
   }
 
 
   return (
     <Wrapper>
+      <AnimatePresence>
+        {status === true && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="success">
+            <h2>Dziękujemy za Zapis na Newsletter!</h2>
+            <p>Cieszymy się, że dołączyłeś/łaś do naszej społeczności! Twój zapis na nasz newsletter został pomyślnie zarejestrowany.</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {status === false && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="success">
+            <h2>Błąd Przy Zapisie na Newsletter</h2>
+            <p>Przepraszamy za wszelkie niedogodności, ale wygląda na to, że coś poszło nie tak podczas próby zapisu na nasz newsletter. Sprawdź, czy poprawnie wprowadziłeś/łaś swoje dane kontaktowe i spróbuj ponownie.</p>
+            <Button onClick={() => { setStatus(null) }}>Spróbuj jeszcze raz</Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className='container'>
         <div className="left">
           <h2>Powiadom mnie o nowościach!</h2>
@@ -54,24 +73,45 @@ export const Newsletter = () => {
 const Wrapper = styled.div`
   background: #F1E2CC;
   padding: clamp(48px, calc(64vw/7.68), 72px) 0;
+  position: relative;
 
-  .left{
-    h2{
-      color: var(--brown, #32251D);
-      font-family: Cormorant Garamond;
-      font-size: clamp(18px, calc(36vw/7.68), 36px);
-      font-weight: 300;
-      line-height: 111.111%;
-      letter-spacing: 1px;
-      margin-bottom: 24px;
-    } 
+  h2{
+    color: var(--brown, #32251D);
+    font-family: Cormorant Garamond;
+    font-size: clamp(18px, calc(36vw/7.68), 36px);
+    font-weight: 300;
+    line-height: 111.111%;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  } 
+
+  p{
+    color: var(--brown, #32251D);
+    font-size: clamp(15px, calc(18vw/7.68), 18px);
+    font-weight: 400;
+    line-height: 144.444%;
+    letter-spacing: 1px;
+  }
+
+  .success{
+    position: absolute;
+    inset: 0 16px;
+    z-index: 3;
+    background: #F1E2CC;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    button{
+      width: fit-content;
+      margin-top: 36px;
+    }
 
     p{
-      color: var(--brown, #32251D);
-      font-size: clamp(15px, calc(18vw/7.68), 18px);
-      font-weight: 400;
-      line-height: 144.444%;
-      letter-spacing: 1px;
+      max-width: 500px;
+      margin: 0 auto;
     }
   }
 
@@ -117,7 +157,6 @@ const Wrapper = styled.div`
         background: var(--white, #FEFEFE);
         padding: 16px 32px;
         width: 100%;
-        margin-top: 24px;
 
         color: #000000;
         font-feature-settings: 'clig' off, 'liga' off;
