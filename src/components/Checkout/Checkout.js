@@ -132,7 +132,6 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
 
   const { request: checkout } = useMutation(CHECKOUT, {
     onCompleted: ({ body: { data } }) => {
-      debugger
       if (data.checkout.order.paymentMethod !== 'p24') {
         localStorage.setItem('woo-next-cart', null);
         window.location.href = `${window?.location?.origin}/platnosc-przelewem?id=${data.checkout.order.orderNumber}&amount=${data.checkout.order.total}`
@@ -163,7 +162,6 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
         });
     },
     onError: (error) => {
-      debugger
       setLoading(false)
       alert(error.message)
     }
@@ -172,6 +170,7 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
   const onSubmit = (data) => {
     setLoading(true)
     const orderBody = createCheckoutData(data, paymentMethods)
+    console.log(orderBody)
     checkout({
       variables: {
         input: orderBody
