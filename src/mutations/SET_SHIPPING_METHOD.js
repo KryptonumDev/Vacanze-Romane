@@ -13,6 +13,9 @@ const SET_SHIPPING_METHOD = `
                 key
               }
               product {
+                product {
+                  level
+                }
                 node {
                   id
                   productId: databaseId

@@ -146,6 +146,12 @@ const LocButton = styled.button`
   background-color: transparent;
   margin-left: 8px;
   position: relative;
+  transition: all .2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transform-origin: 50% 50%;
+
+  &:hover{
+    transform: scale(1.08);
+  }
 
   @media (max-width: 1105px) {
     position: absolute;

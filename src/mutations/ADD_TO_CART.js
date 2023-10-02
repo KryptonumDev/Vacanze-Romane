@@ -16,6 +16,9 @@ const ADD_TO_CART = `
                 key
               }
               product {
+                product {
+                  level
+                }
                 node {
                   id
                   productId: databaseId

@@ -14,7 +14,11 @@ export default function CartItem({ products, remove, data }) {
             <p className={data.product.node.regularPrice !== data.product.node.price ? 'red' : ''} dangerouslySetInnerHTML={{ __html: data.product.node.price }} />
           </div>
           <div className="elipsis-flex">
-            <small>Poziom 1</small>
+            {data.product.node.product.level ? (
+              <small>Poziom {data.product.node.product.level}</small>
+            ) : (
+              <span />
+            )}
             {data.product.node.regularPrice !== data.product.node.price && (
               <p className="old-price" dangerouslySetInnerHTML={{ __html: data.product.node.regularPrice }} />
             )}

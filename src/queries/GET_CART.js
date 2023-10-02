@@ -17,6 +17,9 @@ query GET_CART {
         }
         product {
           node {
+            product {
+              level
+            }
             productCategories {
               nodes {
                 slug

@@ -24,6 +24,9 @@ mutation UPDATE_CART($input: UpdateItemQuantitiesInput!) {
             key
           }
           product {
+            product {
+              level
+            }
             node {
               productCategories {
                 nodes {

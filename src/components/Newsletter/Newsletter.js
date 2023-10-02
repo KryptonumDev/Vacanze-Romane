@@ -1,3 +1,4 @@
+import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "gatsby";
 import React from "react"
@@ -8,9 +9,19 @@ export const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)
 
 export const Newsletter = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    axios.post('/api/newsletter', {
+      email: data.email,
+      name: data.name,
+      group_id: '100932655831320068',
+    }).then(res => {
+      debugger
+    }).catch(err => {
+      debugger
+    })
+  }
 
-  
+
   return (
     <Wrapper>
       <div className='container'>
