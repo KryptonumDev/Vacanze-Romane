@@ -14,7 +14,7 @@ const p24 = new P24(
 export default async function handler(req, res) {
   try {
     const { merchantId, posId, sessionId, amount, originAmount, currency, orderId, methodId, statement, sign } = req.body
-    
+
     const id = req.query.id
 
     const response = await p24.verifyTransaction({
@@ -48,17 +48,7 @@ export default async function handler(req, res) {
       }),
       cache: 'no-cache',
     })
-
-    if (order.status !== 200) {
-      console.log(order)
-      return res.status(order.status).json({ res: response, order: order })
-    }
-
-    if (response.status !== 200) {
-      console.log(response)
-      return res.status(response.status).json({ res: response, order: order })
-    }
-
+    
     return res.status(200).json({ res: response, order: order })
   } catch (err) {
     console.log(err)
