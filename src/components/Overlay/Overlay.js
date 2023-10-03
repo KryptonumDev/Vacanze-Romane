@@ -7,7 +7,7 @@ export default function Overlay({ state }) {
     <AnimatePresence>
       {state && (
         <Wrapper initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
-          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+          <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
         </Wrapper>
       )}
     </AnimatePresence>

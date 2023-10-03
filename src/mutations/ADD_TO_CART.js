@@ -16,10 +16,10 @@ const ADD_TO_CART = `
                 key
               }
               product {
-                product {
-                  level
-                }
                 node {
+                  product {
+                    level
+                  }
                   id
                   productId: databaseId
                   name
