@@ -1,9 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { styled } from "styled-components"
 
-export default function Form({ paymentValue, paymentMethods, shipping, register, shippingValue, errors }) {
-
-
+export default function Form({ setOpenedParcelMachine, parcelMachine, paymentValue, paymentMethods, shipping, register, shippingValue, errors }) {
 
   return (
     <Wrapper>
@@ -65,8 +63,8 @@ export default function Form({ paymentValue, paymentMethods, shipping, register,
       <fieldset>
         <legend>Metody dostawy</legend>
         {shipping.map(el => (
-          <label className={`radio ${shippingValue === `${el.methodId}:${el.instanceId}` ? 'active' : ''}`}>
-            <input {...register('shipping')} value={`${el.methodId}:${el.instanceId}`} type="radio" />
+          <label className={`radio ${shippingValue === `${el.methodId}:${el.instanceId}` ? 'active' : ''}  ${errors['shipping'] ? 'errored' : ''}`}>
+            <input {...register('shipping', { required: true })} value={`${el.methodId}:${el.instanceId}`} type="radio" />
             <span className="circle">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.3335 8.6665L6.00016 11.3332L12.6668 4.6665" stroke="#F1E2CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -74,36 +72,47 @@ export default function Form({ paymentValue, paymentMethods, shipping, register,
             </span>
             <div className="description">
               <p className="title">{el.label}</p>
+              {el.label.includes('paczkomat') && (
+                <>
+                  <p className="text">Wybrany paczkomat : {parcelMachine ? `${parcelMachine.address.line1}, ${parcelMachine.address.line2}` : 'Najbliższy do adresu wskazanego w danych do faktury'}</p>
+                  <button type="button" onClick={() => { setOpenedParcelMachine(true) }}>{parcelMachine ? 'Zmienić paczkomat' : 'Wybrać paczkomat'}</button>
+                </>
+              )}
             </div>
             <p className="price">{el.cost}&nbsp;zł</p>
           </label>
         ))}
-      </fieldset>
-    </Wrapper>
+        {errors['shipping'] && <span className="error">Proszę wybrać sposób dostawy</span>}
+      </fieldset >
+    </Wrapper >
   )
 }
 
 const Wrapper = styled.div`
   height: fit-content;
 
+  fieldset{
+    position: relative;
+  }
+
+  .error{
+    position: absolute;
+    left: 32px;
+    bottom: -4px;
+    transform: translateY(100%);
+
+    color: #E20;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Lato;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
   label{
     position: relative;
     display: block;
-
-    .error{
-      position: absolute;
-      left: 32px;
-      bottom: -4px;
-      transform: translateY(100%);
-
-      color: #E20;
-      font-feature-settings: 'clig' off, 'liga' off;
-      font-family: Lato;
-      font-size: 10px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
 
     input.errored{
       border: 1px solid #E20;
@@ -123,9 +132,20 @@ const Wrapper = styled.div`
     box-sizing: border-box;
     cursor: pointer;
 
+    &.errored{
+      border: 1px solid #E20;
+    }
+
     .description{
       p+p{
         margin-top: 8px;
+      }
+
+      button{
+        margin-top: 8px;
+        border: none;
+        background-color: transparent;
+        text-decoration: underline;
       }
 
       .title{

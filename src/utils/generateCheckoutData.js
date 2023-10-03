@@ -1,6 +1,7 @@
 import { v4 } from 'uuid';
 
-export const createCheckoutData = (order, paymentMethods) => {
+export const createCheckoutData = (order, paymentMethods, needInpost, parcelMachine) => {
+  debugger
   const checkoutData = {
     clientMutationId: v4(),
     shipping: {
@@ -29,14 +30,14 @@ export const createCheckoutData = (order, paymentMethods) => {
       phone: '',
       company: '',
     },
-    customerNote: order.comment,
+    customerNote: order.comment + (needInpost ? parcelMachine ? ` Numer paczkomatu: ${parcelMachine.name}` : ' Najbliższy paczkomat do adresu rozliczeniowego' : ''),
     shipToDifferentAddress: false,
     paymentMethod: paymentMethods[order.payment].methodId,
     shippingMethod: order.shipping || null,
     // transactionId: order.transactionId,
     // isPaid: order.isPaid,
     // metaData: [
-    //   { key: "paczkomat_id", value: "KRA30A" }
+    //   { key: "paczkomat_id", value: "KRA30A" },
     // ]
   };
 

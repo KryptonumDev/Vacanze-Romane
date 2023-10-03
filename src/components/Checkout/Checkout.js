@@ -14,9 +14,11 @@ import { v4 } from "uuid"
 import GET_CART from "../../queries/GET_CART"
 import CHECKOUT from '../../mutations/CHECKOUT'
 import { useQuery } from "../../hooks/useQuery"
-import { createCheckoutData, generateParams } from '../../utils/generateCheckoutData'
+import { createCheckoutData } from '../../utils/generateCheckoutData'
 import axios from "axios"
 import Overlay from "../Overlay/Overlay"
+import { InpostGeowidget } from "react-inpost-geowidget";
+import { AnimatePresence, motion } from "framer-motion"
 
 const paymentMethods = [
   {
@@ -126,17 +128,17 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
       'address': 'ul. Kraszewskiego 10/2',
       'post-code': '30-110',
       'city': 'Kraków'
-
     }
   })
 
   const [orderBody, setOrderBody] = useState(null)
+  const [parcelMachine, setParcelMachine] = useState(null)
+  const [openedParcelMachine, setOpenedParcelMachine] = useState(false)
 
   const { request: checkout } = useMutation(CHECKOUT, {
     onCompleted: ({ body: { data } }) => {
-      debugger
       if (data.checkout.order.paymentMethod !== "przelewy24") {
-        localStorage.setItem('woo-next-cart', null);
+        localStorage.setItem('woo-next-cart', JSON.stringify({ contents: { nodes: [] }, total: 0 }));
         window.location.href = `${window?.location?.origin}/platnosc-przelewem?id=${data.checkout.order.orderNumber}&amount=${data.checkout.order.total}`
         return;
       }
@@ -163,13 +165,13 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
         });
     },
     onError: (error) => {
-      debugger
       if (error.message === "Proszę wybrać paczkomat") {
-        // checkout({
-        //   variables: {
-        //     input: orderBody
-        //   }
-        // })
+        debugger
+        checkout({
+          variables: {
+            input: orderBody
+          }
+        })
         return;
       }
 
@@ -180,14 +182,20 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
 
   const onSubmit = (data) => {
     setLoading(true)
-    const order = createCheckoutData(data, paymentMethods)
+    const needInpost = !!cart.availableShippingMethods[0].rates.find(el => el.label.includes('paczkomat'))
+    const order = createCheckoutData(data, paymentMethods, needInpost, parcelMachine)
     setOrderBody(order)
-    checkout({
-      variables: {
-        input: order
-      }
-    })
   }
+
+  useEffect(() => {
+    if (orderBody) {
+      checkout({
+        variables: {
+          input: orderBody
+        }
+      })
+    }
+  }, [orderBody])
 
   const shippingValue = watch('shipping')
   const paymentValue = watch('payment')
@@ -216,6 +224,11 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
     }
   }, [shippingValue])
 
+  const onPointCallback = (e) => {
+    setParcelMachine(e)
+    setOpenedParcelMachine(false)
+  }
+
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
       <Overlay state={loading} />
@@ -228,13 +241,72 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
             ))}
           </div>
         </div>
-        <Form paymentValue={paymentValue} errors={errors} paymentMethods={paymentMethods} register={register} shippingValue={shippingValue} shipping={cart.availableShippingMethods[0].rates} />
+        <Form setOpenedParcelMachine={setOpenedParcelMachine} parcelMachine={parcelMachine} paymentValue={paymentValue} errors={errors} paymentMethods={paymentMethods} register={register} shippingValue={shippingValue} shipping={cart.availableShippingMethods[0].rates} />
         <Summary register={register} remove={remove} cart={cart} />
         <Button>Złóż zamówienie</Button>
       </div>
+      <AnimatePresence>
+        {openedParcelMachine && (
+          <Map initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div className="content">
+              <div className="flex">
+                <h2>Punkty odbioru (płatne z góry)</h2>
+                <button type="button">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 26L26 14M14 14L26 26" stroke="#32251D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </div>
+              <InpostGeowidget
+                token={`eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzQlpXVzFNZzVlQnpDYU1XU3JvTlBjRWFveFpXcW9Ua2FuZVB3X291LWxvIn0.eyJleHAiOjIwMTE2OTY5ODAsImlhdCI6MTY5NjMzNjk4MCwianRpIjoiYWM1NTM3NmMtNDkxYi00YjYxLTk0MzMtOTYyNDEzZmU0ODJmIiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5pbnBvc3QucGwvYXV0aC9yZWFsbXMvZXh0ZXJuYWwiLCJzdWIiOiJmOjEyNDc1MDUxLTFjMDMtNGU1OS1iYTBjLTJiNDU2OTVlZjUzNTotZnNGcklJckhpWHFTWUJkRVp5YXpMejlvSWdmSk9tOE9VYS1RRXVWYl9BIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoic2hpcHgiLCJzZXNzaW9uX3N0YXRlIjoiMTYyZjg3YmMtYWRhNi00ODk3LTkwMzktMTYwMDM2NjE1YTAzIiwic2NvcGUiOiJvcGVuaWQgYXBpOmFwaXBvaW50cyIsInNpZCI6IjE2MmY4N2JjLWFkYTYtNDg5Ny05MDM5LTE2MDAzNjYxNWEwMyIsImFsbG93ZWRfcmVmZXJyZXJzIjoiIiwidXVpZCI6IjBkNzk0YzIwLTNmMjAtNGJhOS04MGY4LWIyMDdiMTA2MGE4OCJ9.TBgQGHZim2OIRaH7Ajt5PIJEsylQsKDPVgfIAs64ymsEVRBKJBIIbwkaXCc7lmvloVGcjkfBiiduursWoNupm8CeSjjhgODjw5pIyFzYu9g3FpeCHpbbekO8BYe3cmfrJJwm1r-4QjR3pK3RhFxciSjHV1IbXc0uBLsD4U-gk4eLB8ZSR4WHIr491vuvVhDggRVkM7A8o0Yn2dREGU0W7jSlV2f8Q3kh9tO-lL7C8YheGNFzRoxi1dmteLoe9ytXFceUMgOTkLN65J_AHoWO38ZiD0ZezyZnRpaH1SxuyPWpUzZmZ7c7mRzlqZEKLm0mYTDw36Gx0r9E7ujSgR_kiw`}
+                onPoint={onPointCallback}
+              />
+            </div>
+          </Map>
+        )}
+      </AnimatePresence>
     </Wrapper>
   )
 }
+
+const Map = styled(motion.div)`
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.50);
+  z-index: 40;
+
+  .content{
+    max-width: 800px;
+    max-height: 600px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--grey, #E0E0E0);
+    background: var(--white, #FEFEFE);
+    padding: 24px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+
+    .flex{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 24px;
+
+      h2{
+        font-size: 24px;
+        margin-bottom: 0;
+      }
+
+      button{
+        height: fit-content;
+        border: none;
+        background-color: transparent;
+      }
+    }
+  }
+`
 
 const Wrapper = styled.form`
   background-color: #F8F5F1;

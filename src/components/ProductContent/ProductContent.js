@@ -9,6 +9,8 @@ import { useForm } from "react-hook-form"
 import { email } from './../../constants/regex'
 import { Input } from './../Input/Input'
 import Select, { components } from 'react-select';
+import Text from "./TextPart"
+import Flex from "./FlexPart"
 
 const options = [
   { value: '1', label: '1 produkt' },
@@ -67,6 +69,10 @@ export default function Content({ data, data: { productTags, product, title, con
                   return <Video data={section} />
                 case 'Product_Product_Sections_TwoColumnCards':
                   return <TwoColumnCards data={section} />
+                case 'Product_Product_Sections_FlexSection':
+                  return <Flex data={section} />
+                case 'Product_Product_Sections_TextSection':
+                  return <Text data={section} />
                 default:
                   return null
               }
@@ -96,7 +102,7 @@ export default function Content({ data, data: { productTags, product, title, con
               value={selectedOption}
               onChange={handleChange}
               options={options}
-              isSearchable={false} 
+              isSearchable={false}
             />
             <AddToCart quantity={selectedOption.value} product={data} />
           </>

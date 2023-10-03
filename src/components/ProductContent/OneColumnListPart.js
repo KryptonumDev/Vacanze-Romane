@@ -38,6 +38,12 @@ const Wrapper = styled.div`
       line-height: 160%;
       letter-spacing: 1px;
 
+      *{
+        font-size: 15px;
+        line-height: 160%;
+        letter-spacing: 1px;
+      }
+
       &::before{
         content: url(${Arrow});
         position: absolute;

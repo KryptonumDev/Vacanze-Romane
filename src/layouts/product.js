@@ -107,6 +107,20 @@ export const query = graphql`
                 text
               }
             }
+            ... on WordPress_Product_Product_Sections_TextSection {
+              fieldGroupName
+              content
+              title
+            }
+            ... on WordPress_Product_Product_Sections_FlexSection {
+              fieldGroupName
+              content
+              title
+              image {
+                altText
+                mediaItemUrl
+              }
+            }
           }
         }
       }

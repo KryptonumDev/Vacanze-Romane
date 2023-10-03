@@ -7,7 +7,7 @@ export default function TwoColumnCards({ data: { title, text, list } }) {
     <Wrapper>
       <h3 className="title" dangerouslySetInnerHTML={{ __html: title }} />
       <p className="text" dangerouslySetInnerHTML={{ __html: text }} />
-      <ul className="list">
+      <ul className={"list" + list.length > 1 ? ' columns' : ''}>
         {list.map(item => (
           <li>
             <h4>{item.title}</h4>
@@ -49,19 +49,22 @@ const Wrapper = styled.div`
   .list{
     margin: 36px 0 0 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 24px;
 
-    @media (max-width: 1240px) {
-      grid-template-columns: 1fr;
-    }
-
-    @media (max-width: 964px) {
+    &.columns{
       grid-template-columns: 1fr 1fr;
-    } 
-    
-    @media (max-width: 700px) {
-      grid-template-columns: 1fr;
+
+      @media (max-width: 1240px) {
+        grid-template-columns: 1fr;
+      }
+
+      @media (max-width: 964px) {
+        grid-template-columns: 1fr 1fr;
+      } 
+
+      @media (max-width: 700px) {
+        grid-template-columns: 1fr;
+      }
     }
       
     >li{

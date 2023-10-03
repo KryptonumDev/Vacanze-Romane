@@ -42,13 +42,13 @@ export default async function handler(req, res) {
           input: {
             clientMutationId: v4(),
             orderId: Number(id),
-            status: "COMPLETED",
+            status: "PROCESSING",
           },
         }
       }),
       cache: 'no-cache',
     })
-    
+
     return res.status(200).json({ res: response, order: order })
   } catch (err) {
     console.log(err)

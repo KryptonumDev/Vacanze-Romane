@@ -12102,6 +12102,11 @@ react-icons@^4.10.1:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.11.0.tgz#4b0e31c9bfc919608095cc429c4f1846f4d66c65"
   integrity sha512-V+4khzYcE5EBk/BvcuYRq6V/osf11ODUM2J8hg2FDSswRrGvqiYUYPRy4OdrWaQOBj4NcpJfmHZLNaD+VH0TyA==
 
+react-inpost-geowidget@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-inpost-geowidget/-/react-inpost-geowidget-1.1.1.tgz#788e32d324650f404ff1a17f9971305c515e1bcc"
+  integrity sha512-2G6XpOerBFYw1vsP46RUxMD/Uy/EmdMoLFBnKCY0jHcQw1xwFIo/RIXL2o43bCNjDLkMO4Tkjp6nMCC7eeRrZg==
+
 react-intersection-observer@^9.4.3:
   version "9.5.2"
   resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-9.5.2.tgz#f68363a1ff292323c0808201b58134307a1626d0"

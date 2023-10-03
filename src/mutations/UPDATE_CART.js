@@ -24,10 +24,10 @@ mutation UPDATE_CART($input: UpdateItemQuantitiesInput!) {
             key
           }
           product {
-            product {
-              level
-            }
             node {
+              product {
+                level
+              }
               productCategories {
                 nodes {
                   slug
