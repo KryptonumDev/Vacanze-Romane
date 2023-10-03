@@ -15,8 +15,7 @@ export default async function handler(req, res) {
   try {
     const { merchantId, posId, sessionId, amount, originAmount, currency, orderId, methodId, statement, sign } = req.body
     
-    const { searchParams } = new URL(req.url)
-    const id = searchParams.get('id')
+    const id = req.query.id
 
     const response = await p24.verifyTransaction({
       amount: amount,
