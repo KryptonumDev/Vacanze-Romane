@@ -7,18 +7,20 @@ export default function TwoColumnCards({ data: { title, text, list } }) {
     <Wrapper>
       <h3 className="title" dangerouslySetInnerHTML={{ __html: title }} />
       <p className="text" dangerouslySetInnerHTML={{ __html: text }} />
-      <ul className={"list" + list.length > 1 ? ' columns' : ''}>
+      <ul className={"list" + (list.length > 1 ? ' columns' : '')}>
         {list.map(item => (
           <li>
-            <h4>{item.title}</h4>
-            <p className="price">{item.price}</p>
-            <ul>
-              {item?.list?.map(item => (
-                <li dangerouslySetInnerHTML={{ __html: item.text }} />
-              ))}
-            </ul>
-            {(item.file && item.linkTitle) && (
-              <Button target="_blank" rel="noopener noreferrer" href={item.file.mediaItemUrl} download>
+            {item.title && <h4>{item.title}</h4>}
+            {item.price && <h4>{<p className="price">{item.price}</p>}</h4>}
+            {item?.list?.length > 0 && (
+              <ul>
+                {item?.list?.map(item => (
+                  <li dangerouslySetInnerHTML={{ __html: item.text }} />
+                ))}
+              </ul>
+            )}
+            {(item.linkTitle) && (
+              <Button target="_blank" rel="noopener noreferrer" href={item?.file?.mediaItemUrl} download>
                 {item.linkTitle}
               </Button>
             )}

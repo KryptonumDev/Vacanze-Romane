@@ -13,6 +13,7 @@ import Text from "./TextPart"
 import Flex from "./FlexPart"
 import Overlay from "../Overlay/Overlay"
 import axios from "axios"
+import Arrow from '../../assets/images/arrow-right.svg'
 
 const options = [
   { value: '1', label: '1 produkt' },
@@ -147,7 +148,7 @@ export default function Content({ data, data: { slug, productId, productTags, pr
         {product.courseContent?.length > 0 && (
           <>
             <h3>Ten kurs obejmuje</h3>
-            <ul>
+            <ul className="course-content">
               {product.courseContent?.map((el, i) => (
                 <li key={el.text + i}>
                   <img src={el.icon.mediaItemUrl} alt={el.icon.altText} />
@@ -278,6 +279,42 @@ const Wrapper = styled.section`
       line-height: 160%;
       letter-spacing: 1px;
       margin-bottom: 36px;
+
+      ul{
+        margin: 16px 0;
+        display: grid;
+        gap: 16px;
+        
+        li{
+          list-style: none;
+          padding-left: 40px;
+          position: relative;
+          font-size: 15px;
+          line-height: 160%;
+          letter-spacing: 1px;
+
+          *{
+            font-size: 15px;
+            line-height: 160%;
+            letter-spacing: 1px;
+          }
+
+          &::before{
+            content: url(${Arrow});
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--light-green, #2A4536);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 4px;
+          }
+        }
+      }
     }
 
     h3{
@@ -290,7 +327,7 @@ const Wrapper = styled.section`
       font-weight: 400;
     }
 
-    ul{
+    .course-content{
       display: grid;
       gap: 16px;
       li{
