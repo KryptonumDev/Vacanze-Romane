@@ -42,7 +42,7 @@ const NoOptionsMessage = props => {
 };
 
 
-export default function Content({ data, data: { productId, productTags, product, title, content, featuredImage, price, regularPrice } }) {
+export default function Content({ data, data: { slug, productId, productTags, product, title, content, featuredImage, price, regularPrice } }) {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   const [selectedOption, setSelectedOption] = useState(options[0])
@@ -64,17 +64,18 @@ export default function Content({ data, data: { productId, productTags, product,
       ],
       email: data.mail
     })
-      .then(function () {
+      .then(function (res) {
 
-        const url = `https://wloskiodzera.headlesshub.com/wp-json/contact-form-7/v1/contact-forms/14/feedback`;
         let body = new FormData()
-        body.append('mail', data.email)
+        body.append('mail', data.mail)
+        body.append('id', res.data.number)
+        body.append('amount', res.data.total + ' ' +  res.data.currency_symbol)
 
-        axios.post(url, body)
+        axios.post('https://wloskiodzera.headlesshub.com/wp-json/contact-form-7/v1/contact-forms/14/feedback', body)
           .then(function (response) {
             console.log(response);
             setLoading(false)
-            window.location.href = `/sklep/${product.slug}/podziekowanie`
+            window.location.href = `/sklep/${slug}/podziekowanie`
           })
           .catch(function (error) {
             console.log(error);

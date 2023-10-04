@@ -20,11 +20,11 @@ export default async function handler(req, res) {
       },
       line_items: item,
     })
-      .then(response => response.json())
       .then((response) => {
-        res.json(response);
+        console.log(response.data);
+        res.json(response.data);
       }).catch((error) => {
-        res.json(error);
+        res.status(500).json(error);
       });
   } catch (err) {
     return res.status(500).json({ err: err });
