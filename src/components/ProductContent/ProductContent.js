@@ -11,6 +11,8 @@ import { Input } from './../Input/Input'
 import Select, { components } from 'react-select';
 import Text from "./TextPart"
 import Flex from "./FlexPart"
+import Overlay from "../Overlay/Overlay"
+import axios from "axios"
 
 const options = [
   { value: '1', label: '1 produkt' },
@@ -40,21 +42,55 @@ const NoOptionsMessage = props => {
 };
 
 
-export default function Content({ data, data: { productTags, product, title, content, featuredImage, price, regularPrice } }) {
+export default function Content({ data, data: { productId, productTags, product, title, content, featuredImage, price, regularPrice } }) {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   const [selectedOption, setSelectedOption] = useState(options[0])
+  const [loading, setLoading] = useState(false)
 
   const handleChange = selectedOption => {
     setSelectedOption(selectedOption)
   }
 
   const onSubmit = data => {
-    // submit CF7 and redirect to - /sklep/${slug}/podziekowanie
+    setLoading(true)
+
+    axios.post('/api/free-product', {
+      item: [
+        {
+          product_id: productId,
+          quantity: 1
+        }
+      ],
+      email: data.mail
+    })
+      .then(function () {
+
+        const url = `https://wloskiodzera.headlesshub.com/wp-json/contact-form-7/v1/contact-forms/14/feedback`;
+        let body = new FormData()
+        body.append('mail', data.email)
+
+        axios.post(url, body)
+          .then(function (response) {
+            console.log(response);
+            setLoading(false)
+            window.location.href = `/sklep/${product.slug}/podziekowanie`
+          })
+          .catch(function (error) {
+            console.log(error);
+            setLoading(false)
+          });
+      })
+      .catch(function (error) {
+        setLoading(false)
+        console.log(error);
+      });
+
   };
 
   return (
     <Wrapper>
+      <Overlay state={loading} />
       <img src={featuredImage.node.mediaItemUrl} alt={featuredImage.node.altText} />
       <div className="left">
         {product.sections.length > 0 && (

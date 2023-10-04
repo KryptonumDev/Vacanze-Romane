@@ -50,6 +50,7 @@ export default function AddToCart({ children, quantity, product }) {
         </Button>
       ) : (
         <Button
+          type="button"
           as='button'
           className="add-to-cart"
           disabled={loading}
