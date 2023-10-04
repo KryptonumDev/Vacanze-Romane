@@ -9,12 +9,12 @@ const api = new WooCommerceRestApi({
 
 
 export default async function handler(req, res) {
-  const { item, email } = req.body
+  const { item, email, price } = req.body
   try {
     api.post('orders', {
       payment_method: 'bacs',
       payment_method_title: 'Direct Bank Transfer',
-      set_paid: false,
+      set_paid: !price,
       billing: {
         email: email,
       },

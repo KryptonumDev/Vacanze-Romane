@@ -44,6 +44,7 @@ const NoOptionsMessage = props => {
 
 
 export default function Content({ data, data: { slug, productId, productTags, product, title, content, featuredImage, price, regularPrice } }) {
+  debugger
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   const [selectedOption, setSelectedOption] = useState(options[0])
@@ -63,14 +64,15 @@ export default function Content({ data, data: { slug, productId, productTags, pr
           quantity: 1
         }
       ],
-      email: data.mail
+      email: data.mail,
+      price: price
     })
       .then(function (res) {
 
         let body = new FormData()
         body.append('mail', data.mail)
         body.append('id', res.data.number)
-        body.append('amount', res.data.total + ' ' +  res.data.currency_symbol)
+        body.append('amount', res.data.total + ' ' + res.data.currency_symbol)
 
         axios.post('https://wloskiodzera.headlesshub.com/wp-json/contact-form-7/v1/contact-forms/14/feedback', body)
           .then(function (response) {
@@ -120,31 +122,34 @@ export default function Content({ data, data: { slug, productId, productTags, pr
       </div>
       <div className="aside">
         <h2>{title}</h2>
-        <p className="price" dangerouslySetInnerHTML={{ __html: price }} />
-        <p className="omnibus">Najniźsza cena 30 dni przed zmianą: <span dangerouslySetInnerHTML={{ __html: regularPrice }} /> brutto</p>
+        {price
+          ? <p className="price" dangerouslySetInnerHTML={{ __html: price }} />
+          : <p className="price" dangerouslySetInnerHTML={{ __html: '0&nbsp;zł' }} />}
+        {regularPrice && <p className="omnibus">Najniźsza cena 30 dni przed zmianą: <span dangerouslySetInnerHTML={{ __html: regularPrice }} /> brutto</p>}
         <div className="text" dangerouslySetInnerHTML={{ __html: content }} />
-        {productTags.nodes.some(tag => tag.slug === 'free') ? (
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <label>
-              <span>Adres-email</span>
-              <Input placeholder="Adres-email" type="email" {...register('mail', { required: true, pattern: email })} />
-            </label>
-            <Button>Chcę ten kurs!</Button>
-          </form>
-        ) : (
-          <>
-            <Select
-              className="counter"
-              classNamePrefix="counter"
-              components={{ DropdownIndicator, NoOptionsMessage }}
-              value={selectedOption}
-              onChange={handleChange}
-              options={options}
-              isSearchable={false}
-            />
-            <AddToCart quantity={selectedOption.value} product={data} />
-          </>
-        )}
+        {productTags.nodes.some(tag => tag.slug === 'free')
+          ? (
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <label>
+                <span>Adres-email</span>
+                <Input placeholder="Adres-email" type="email" {...register('mail', { required: true, pattern: email })} />
+              </label>
+              <Button>{price ? 'Chcę ten kurs!' : 'Pobieram bezpłatnie!'}</Button>
+            </form>
+          ) : (
+            <>
+              <Select
+                className="counter"
+                classNamePrefix="counter"
+                components={{ DropdownIndicator, NoOptionsMessage }}
+                value={selectedOption}
+                onChange={handleChange}
+                options={options}
+                isSearchable={false}
+              />
+              <AddToCart quantity={selectedOption.value} product={data} />
+            </>
+          )}
         {product.courseContent?.length > 0 && (
           <>
             <h3>Ten kurs obejmuje</h3>
