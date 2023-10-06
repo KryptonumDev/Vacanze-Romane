@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   }
 
   .list{
-    margin-top: 16px;
+    margin: 16px 0;
     display: grid;
     gap: 16px;
     

@@ -49,7 +49,7 @@ const ProductLayout = () => {
           <b>jezyk.wloski.od.zera@gmail.com</b>
         </p>
         <p>
-          Jeśli masz jakiekolwiek pytania lub potrzebujesz wsparcia, nie wahaj się skontaktować. Jesteśm tutaj, aby Ci pomóc na każdym kroku Twojej nauki i podróży!
+          Jeśli masz jakiekolwiek pytania lub potrzebujesz wsparcia, napisz do mnie. Jestem tutaj, aby Ci pomóc na każdym krokuTwojej nauki!
         </p>
       </Summary>
       <Newsletter />

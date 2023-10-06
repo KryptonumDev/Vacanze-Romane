@@ -19,7 +19,6 @@ export default function Price({ price, regularPrice }) {
 }
 
 const Wrapper = styled.div`
-  margin-bottom: 16px;
 
   p{
     color: #000;

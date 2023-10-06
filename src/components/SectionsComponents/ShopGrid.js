@@ -8,8 +8,8 @@ export default function ShopGrid({ products }) {
   return (
     <Wrapper>
       <Info>
-        <h2>Nauka języka włoskiego od podstaw - samouczkowe kursy i lekcje włoskiego dla początkujących</h2>
-        <p>Włoski od zera - sklep z kursami i lekcjami do nauki języka włoskiego od podstaw! To jak szkoła języka włoskiego z szerokim wyborem kursów, lekcji idealnych dla początkujących, którzy chcą rozpocząć przygodę z włoskim. Materiały tworzę, bo sama jestem pasjonatką Italii i wszyskiego, co włoskie. Umożliwią Ci one efektywną naukę i zapewnią solidne zrozumienie podstaw języka włoskiego. Rozpocznij swoją przygodę z Italią dzięki samouczkowym kursom, produktom i lekcjom.</p>
+        <h2>Nauka języka włoskiego od podstaw - samouczkowe kursy i lekcje włoskiego dla&nbsp;początkujących</h2>
+        <p>Włoski od zera - sklep z kursami i lekcjami do nauki języka włoskiego od podstaw! <br/>To jak szkoła języka włoskiego z szerokim wyborem kursów i lekcji idealnych dla początkujących, którzy chcą rozpocząć przygodę z włoskim. Materiały tworzę, bo sama jestem pasjonatką Italii i wszyskiego, co włoskie. Umożliwią Ci one efektywną naukę i zapewnią solidne zrozumienie podstaw języka włoskiego. Rozpocznij swoją przygodę z Italią dzięki samouczkowym kursom, produktom i lekcjom.</p>
       </Info>
       <ProductsGrid>
         {products?.map(product => (
@@ -37,7 +37,7 @@ export default function ShopGrid({ products }) {
 
 const Button = styled(Link)`
   display: block;
-  margin-top: 24px;
+  margin-top: 16px;
   background: var(--brown);
   padding: 16px 32px;
   color: var(--beige-2);
@@ -123,7 +123,7 @@ const Wrapper = styled.div`
 const ProductsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 48px clamp(24px, calc(24vw/7.68), 70px);
+  gap: 64px clamp(24px, calc(24vw/7.68), 70px);
   
   @media (max-width: 720px) {
     grid-template-columns: 1fr 1fr;

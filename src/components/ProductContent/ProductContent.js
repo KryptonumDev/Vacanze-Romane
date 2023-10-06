@@ -44,7 +44,6 @@ const NoOptionsMessage = props => {
 
 
 export default function Content({ data, data: { slug, productId, productTags, product, title, content, featuredImage, price, regularPrice } }) {
-  debugger
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   const [selectedOption, setSelectedOption] = useState(options[0])

@@ -29,7 +29,7 @@ const Wrapper = styled.div`
   }
 
   ul{
-    margin-top: 16px;
+    margin: 16px 0;
     display: grid;
     gap: 16px;
     
