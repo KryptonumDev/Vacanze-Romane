@@ -38,7 +38,7 @@ const ProductLayout = () => {
           Spróbuj jeszcze raz
         </Button>
         <p>
-          Jeśli mimo prób nadal napotykasz na trudności, nie martw się! Jesteśmy tutaj, aby Ci pomóc. Napisz do nas na adres <a href="mail:kontakt@wloskiodzera.pl">kontakt@wloskiodzera.pl</a> i opisz dokładnie, jaki problem napotkałeś. Postaramy się znaleźć rozwiązanie razem.
+          Jeśli mimo prób nadal napotykasz na trudności, nie martw się! Jesteśmy tutaj, aby Ci pomóc. Napisz do nas na adres <a href="mail:jezyk.wloski.od.zera@gmail.com">jezyk.wloski.od.zera@gmail.com</a> i opisz dokładnie, jaki problem napotkałeś. Postaramy się znaleźć rozwiązanie razem.
         </p>
       </Summary>
       <Newsletter />

@@ -23,7 +23,7 @@ const ProductLayout = () => {
         <p>
           Twój zakup został pomyślnie zrealizowany. Na podany przez Ciebie adres e-mail otrzymasz wkróte informacje o płatności oraz informację o przetwarzaniu twojego zamówienia</p>
         <p>
-          Jeśli masz jakiekolwiek pytania lub potrzebujesz wsparcia, nie wahaj się skontaktować. Jesteśm tutaj, aby Ci pomóc na każdym kroku Twojej nauki i podróży!
+          Jeśli masz jakiekolwiek pytania lub potrzebujesz wsparcia, napisz do mnie. Jesteśm tutaj, aby Ci pomóc na każdym kroku Twojej nauki!
         </p>
       </Summary>
       <Newsletter />

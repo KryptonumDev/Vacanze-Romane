@@ -116,6 +116,9 @@ export const query = graphql`
               fieldGroupName
               content
               title
+              link{
+                url
+              }
               image {
                 altText
                 mediaItemUrl

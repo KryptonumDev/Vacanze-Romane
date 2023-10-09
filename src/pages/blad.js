@@ -22,7 +22,7 @@ const ProductLayout = () => {
         <h2>Przepraszamy, wygląda na to, że wystąpił problem z przetwarzaniem zamówienia.</h2>
         <p>Ups! Wygląda na to, że coś poszło nie tak podczas zapisywania zamówienia do bazy dannych. Nie martw się, jestem tutaj, aby Ci pomóc! </p>
         <p>
-          Napisz do nas na adres <a href="mail:kontakt@wloskiodzera.pl">kontakt@wloskiodzera.pl</a> i opisz dokładnie, jaki problem napotkałeś. Postaramy się znaleźć rozwiązanie razem.
+          Napisz do nas na adres <a href="mail:jezyk.wloski.od.zera@gmail.com">jezyk.wloski.od.zera@gmail.com</a> i opisz dokładnie, jaki problem napotkałeś. Postaramy się znaleźć rozwiązanie razem.
         </p>
       </Summary>
       <Newsletter />

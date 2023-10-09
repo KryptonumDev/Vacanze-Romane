@@ -31,7 +31,7 @@ const paymentMethods = [
     methodId: 'bacs',
   },
   {
-    name: 'Możesz zapłacić także zwykłym przekazemPay Pal dla odbiorcy:',
+    name: 'Możesz zapłacić także zwykłym przekazem Pay Pal dla odbiorcy:',
     description: `
       jezyk.wloski.od.zera@gmail.com
     `,

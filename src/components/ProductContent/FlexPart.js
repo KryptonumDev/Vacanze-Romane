@@ -1,12 +1,19 @@
+import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 
-export default function Flex({ data: { title, image, content } }) {
+export default function Flex({ data: { title, image, content, link } }) {
   return (
     <Wrapper>
       <h3 className="title" dangerouslySetInnerHTML={{ __html: title }} />
       <div className="flex">
-        <img src={image.mediaItemUrl} alt={image.altText} />
+        {link.url ? (
+          <Link to={link.url}>
+            <img src={image.mediaItemUrl} alt={image.altText} />
+          </Link>
+        ) : (
+          <img src={image.mediaItemUrl} alt={image.altText} />
+        )}
         <div className="text" dangerouslySetInnerHTML={{ __html: content }} />
       </div>
     </Wrapper>

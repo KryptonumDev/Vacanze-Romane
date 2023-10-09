@@ -21,7 +21,7 @@ const ProductLayout = ({ data, data: { wp: { product: { seo } } } }) => {
       <Summary>
         <h2>Sprawdź swój e-mail!</h2>
         <p>
-          Dziękuję za wykupienie kursu!Na podany przez Ciebie adres e-mail otrzymasz wkróte informacje o płatności oraz dostęp do materiałów kursowych. </p>
+          Dziękuję za wykupienie kursu! Na podany przez Ciebie adres e-mail otrzymasz wkrótce informacje o płatności oraz dostęp do materiałów kursowych. </p>
         <p>
           Jeszcze raz dziękuję za zaufanie i dołączenie do naszej społeczności uczących się włoskiego z Vacanze Romane. Jeśli masz jakiekolwiek pytania - skontaktuj się ze mną! Jestem tu, aby Ci pomóc na każdym etapie Twojej nauki. Cieszę się, że będziemy razem odkrywać i rozwijać nowe umiejętności!
         </p>
