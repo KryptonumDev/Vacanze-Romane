@@ -68,6 +68,11 @@ export default function Content({ data, data: { slug, productId, productTags, pr
     })
       .then(function (res) {
 
+        if(!price){
+          window.location.href = `/sklep/${slug}/podziekowanie`
+          return
+        }
+
         let body = new FormData()
         body.append('mail', data.mail)
         body.append('id', res.data.number)
