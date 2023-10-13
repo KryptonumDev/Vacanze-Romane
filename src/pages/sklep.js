@@ -11,7 +11,7 @@ const BottegaPage = ({ data }) => {
     <>
       <SEO meta={data.datoCmsShopPage.seoMetaTags} />
       <PageHeader
-        paragraph="Sklep"
+        paragraph="bottega"
         imgFluid={data.datoCmsShopPage.bottegaBg.fluid}
         bg="brown"
         withNav
