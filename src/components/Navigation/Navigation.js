@@ -390,7 +390,7 @@ const Navigation = () => {
                   bg={bg}
                   onClick={() => dispatch({ type: "CLOSE_MENU" })}
                 >
-                  Sklep
+                  bottega
                 </NavigationListItem>
               </Link>
               <Link activeClassName="active" to="/o-mnie">
