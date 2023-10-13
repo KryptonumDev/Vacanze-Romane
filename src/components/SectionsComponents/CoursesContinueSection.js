@@ -82,7 +82,7 @@ const CoursesContinueSection = forwardRef(({ key }, ref) => {
           filmowej lekcji.
           <br />
           Wszystkie kolejne części kursu dostępne będą do kupienia w zakładce
-          BOTTEGA
+          Sklep
         </StyledParagraph>
       </StyledFlex>
       <StyledColumnFlex margin="140px 0 0 15px" flex="1" flexDirection="column">

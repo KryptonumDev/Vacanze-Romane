@@ -48,6 +48,14 @@ module.exports = {
     },
     `gatsby-plugin-sitemap`,
     {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "WordPress",
+        fieldName: "wp",
+        url: "https://wloskiodzera.headlesshub.com/graphql",
+      },
+    },
+    {
       resolve: `gatsby-source-datocms`,
       options: {
         apiToken: process.env.API_DATO_CMS,

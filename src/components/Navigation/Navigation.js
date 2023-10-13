@@ -8,6 +8,7 @@ import { IoClose } from "react-icons/io5"
 import { useLocation } from "@reach/router"
 import { useMenuDispatch, useMenuState } from "../contexts/mobileMenuContext"
 import { fadeOutAnimation } from "../animations"
+import { Cart } from "../Cart/Cart"
 
 const NavigationWrapper = styled.nav`
   background-color: var(--bg-home);
@@ -149,29 +150,29 @@ const NavigationList = styled(motion.ul)`
 const MobileNavigationList = styled(motion.ul)`
   display: flex;
   list-style: none;
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    padding-top: 100px;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding-right: 0;
-    background-color: ${({ bg }) =>
-    bg === "green"
-      ? "var(--dead-green)"
-      : bg === "red"
-        ? "var(--dark-red)"
-        : bg === "blue"
-          ? "var(--blue)"
-          : bg === "brown"
-            ? "var(--brown)"
-            : "var(--bg-top)"};
-    z-index: 5;
-    color: var(--beige-2);
-  }
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 100px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-right: 0;
+  background-color: ${({ bg }) => 
+  bg === "green"
+    ? "var(--dead-green)"
+    : bg === "red"
+      ? "var(--dark-red)"
+      : bg === "blue"
+        ? "var(--blue)"
+        : bg === "brown"
+          ? "var(--brown)"
+          : "var(--bg-top)"};
+  z-index: 5;
+  color: var(--beige-2);
+
   a {
     font-family: "Cormorant Garamond";
     position: relative;
@@ -268,7 +269,7 @@ const Navigation = () => {
       setBg("red")
     }
     if (
-      location.pathname.includes("bottega") ||
+      location.pathname.includes("sklep") ||
       location.pathname.includes("o-mnie") ||
       location.pathname.includes("szukaj")
     ) {
@@ -326,7 +327,7 @@ const Navigation = () => {
               bg={bg}
               onClick={() => dispatch({ type: "CLOSE_MENU" })}
             >
-              Bottega
+              Sklep
             </NavigationListItem>
           </Link>
           <Link activeClassName="active" to="/o-mnie">
@@ -389,7 +390,7 @@ const Navigation = () => {
                   bg={bg}
                   onClick={() => dispatch({ type: "CLOSE_MENU" })}
                 >
-                  Bottega
+                  Sklep
                 </NavigationListItem>
               </Link>
               <Link activeClassName="active" to="/o-mnie">
@@ -417,12 +418,13 @@ const Navigation = () => {
               size="28px"
             />
           ) : (
-              <FiMenu
-                color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
-                size="28px"
-              />
-            )}
+            <FiMenu
+              color={bg === "light" ? "var(--brown)" : "var(--beige-2)"}
+              size="28px"
+            />
+          )}
         </MenuToggleButton>
+        <Cart bg={bg} />
         <AnimatePresence>
           {show && (
             <SocialMediaBar

@@ -54,8 +54,7 @@ const CiaoSection = () => {
             <p className="narrow">{data.datoCmsHomePage.ciaoRowText4}</p>
             <Link to="/wloski-od-zera">
               <motion.button whileTap={{ scale: 0.9 }}>
-                <span>{data.datoCmsHomePage.ciaoButtonTextDecorative}</span>,
-                {data.datoCmsHomePage.ciaoButtonTextNormal}
+                <span>{data.datoCmsHomePage.ciaoButtonTextDecorative}</span>, {data.datoCmsHomePage.ciaoButtonTextNormal}
               </motion.button>
             </Link>
           </CtaWrapper>

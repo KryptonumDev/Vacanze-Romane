@@ -354,7 +354,7 @@ const CoursesStagesSection = React.forwardRef(
 
                 <StyledParagraph space margin="0 52px 0 5px">
                   Wszystkie kolejne części kursu dostępne będą do kupienia
-                  w&nbsp;zakładce BOTTEGA
+                  w&nbsp;zakładce Sklep
                 </StyledParagraph>
               </StyledFlexMobile>
               <StyledColumnFlex
