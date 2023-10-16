@@ -121,13 +121,6 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
     defaultValues: {
       'shipping': cart?.chosenShippingMethods?.[0],
       'payment': '0',
-      'name': 'Bogdan',
-      'surname': 'Kruzel',
-      'e-mail': 'sheva@gmail.com',
-      'country': 'Polska',
-      'address': 'ul. Kraszewskiego 10/2',
-      'post-code': '30-110',
-      'city': 'Kraków'
     }
   })
 
