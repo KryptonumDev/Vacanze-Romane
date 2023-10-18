@@ -6,12 +6,20 @@ import Content from "../components/ProductContent/ProductContent"
 // import PageHeader from "../components/PageHeader/PageHeader"
 import { Helmet } from "react-helmet"
 
-const ProductLayout = ({ data, data: { wp: { product: { seo } } } }) => {
+const ProductLayout = ({ data, data: { wp: { product: { seo, featuredImage } } } }) => {
   return (
     <>
       <Helmet>
         <title>{seo.title}</title>
+        <meta property="twitter:title" content={seo.title} />
+        <meta property="og:title" content={seo.title} />
+
         <meta name="description" content={seo.metaDesc} />
+        <meta property="twitter:description" content={seo.metaDesc} />
+        <meta property="og:description" content={seo.metaDesc} />
+
+        <meta property="og:image" content={featuredImage.node.mediaItemUrl}/>
+        <meta property="twitter:image" content={featuredImage.node.mediaItemUrl}/>
       </Helmet>
       <PageHeader
         // paragraph={data.wp.product.title}
