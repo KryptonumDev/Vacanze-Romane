@@ -14,7 +14,7 @@ export const createCheckoutData = (order, paymentMethods, needInpost, parcelMach
       state: '',
       postcode: order['post-code'],
       email: order['e-mail'],
-      phone: '',
+      phone: order.phone,
       company: '',
     },
     billing: {
@@ -27,7 +27,7 @@ export const createCheckoutData = (order, paymentMethods, needInpost, parcelMach
       state: '',
       postcode: order['post-code'],
       email: order['e-mail'],
-      phone: '',
+      phone: order.phone,
       company: '',
     },
     customerNote: order.comment + (needInpost ? parcelMachine ? ` Numer paczkomatu: ${parcelMachine.name}` : ' Najbliższy paczkomat do adresu rozliczeniowego' : ''),

@@ -17,10 +17,16 @@ export default function Form({ setOpenedParcelMachine, parcelMachine, paymentVal
             {errors['surname'] && <span className="error">To pole jest wymagane</span>}
           </label>
         </div>
-        <label>
-          <input className={errors['e-mail'] ? 'errored' : ''} {...register('e-mail', { required: true, pattern: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })} placeholder="Adres-email" />
-          {errors['e-mail'] && <span className="error">To pole jest wymagane</span>}
-        </label>
+        <div className="flex">
+          <label>
+            <input className={errors['e-mail'] ? 'errored' : ''} {...register('e-mail', { required: true, pattern: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })} placeholder="Adres-email" />
+            {errors['e-mail'] && <span className="error">To pole jest wymagane</span>}
+          </label>
+          <label>
+            <input className={errors['phone'] ? 'errored' : ''} {...register('phone', { required: true, pattern: /^(?:\+\d{1,3}|0\d{1,3}|00\d{1,2})?(?:\s?\(\d+\))?(?:[-\/\s.]|\d)+$/g })} placeholder="Numer telefonu" />
+            {errors['phone'] && <span className="error">To pole jest wymagane</span>}
+          </label>
+        </div>
       </fieldset>
       <fieldset>
         <legend>Płatność</legend>
