@@ -6,52 +6,25 @@ import { PageHeaderStyles } from "../PageHeaderNav/PageHeaderNav"
 import { Wrapper } from "../Wrapper/Wrapper"
 
 const NavStyles = styled.li`
-  margin-right: 103px;
-  @media only screen and (max-width: 1250px) {
-    margin-right: 88px;
-    &:last-child {
-      margin-right: 0 !important;
-    }
-  }
-  @media only screen and (max-width: 1131px) {
-    margin-right: 60px !important;
-    &:last-child {
-      margin-right: 0 !important;
-    }
-  }
-  @media only screen and (max-width: 1006px) {
-    margin-right: 40px !important;
-    &:last-child {
-      margin-right: 0 !important;
-    }
-  }
-  @media only screen and (max-width: 863px) {
-    margin-right: 0 !important;
-  }
+  margin-right: 0 !important;
+  
   button {
     text-decoration: none;
     color: ${({ bg }) =>
-      bg === "green"
-        ? "var(--beige-2)"
-        : bg === "red"
+    bg === "green"
+      ? "var(--beige-2)"
+      : bg === "red"
         ? "var(--beige-2)"
         : bg === "blue"
-        ? "var(--beige-2)"
-        : ""};
+          ? "var(--beige-2)"
+          : ""};
     position: relative;
     background-color: transparent;
     border: none;
     font-family: "Lato";
-    font-size: 24px;
+    font-size: 18px;
     line-height: 0.6em;
     letter-spacing: 1px;
-
-    @media only screen and (max-width: 1263px) {
-      font-size: 20px;
-    }
-    @media only screen and (max-width: 1006px) {
-      font-size: 18px;
-    }
 
     &:after {
       content: "";
@@ -62,11 +35,11 @@ const NavStyles = styled.li`
       height: 6px;
       z-index: -1;
       background-color: ${({ bg }) =>
-        bg === "red"
-          ? "var(--light-red)"
-          : bg === "green"
-          ? "var(--light-green)"
-          : bg === "blue"
+    bg === "red"
+      ? "var(--light-red)"
+      : bg === "green"
+        ? "var(--light-green)"
+        : bg === "blue"
           ? "var(--light-blue)"
           : ""};
       transform: scaleY(0);
@@ -110,7 +83,7 @@ const CategoryNavigation = ({
   return (
     <Wrapper padding="0" bg={bg}>
       <StyledContentWrapper bg={bg} padding="40px 56px 40px 102px">
-        <PageHeaderStyles bg={bg}>
+        <PageHeaderStyles bg={bg} className="blog">
           {categories.map(category => (
             <NavStyles
               italiano={italiano}
@@ -120,10 +93,10 @@ const CategoryNavigation = ({
             >
               <motion.button
                 whileTap={{ scale: 0.9 }}
-                onClick={e => setActiveCategory(e, category)}
-                className={activeCategory === category ? "active" : ""}
+                onClick={e => setActiveCategory(e, category.name)}
+                className={activeCategory === category.name ? "active" : ""}
               >
-                {category}
+                {category.name} ({category.count})
               </motion.button>
             </NavStyles>
           ))}
