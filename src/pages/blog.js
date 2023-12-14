@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 import { graphql } from "gatsby"
 import PageHeader from "../components/PageHeader/PageHeader"
 import BlogSection from "../components/SectionsComponents/BlogSection"
@@ -6,7 +6,6 @@ import CategoryNavigation from "../components/CategoryNavigation/CategoryNavigat
 import SEO from "../components/SEO/SEO"
 
 const BlogPage = ({ data }) => {
-  const categories = ["Kultura", "Sztuka", "Podróże", "Kuchnia"]
   const images = {
     Blog: data.bg.blogBg,
     Kultura: data.bg.blogKultura,
@@ -16,7 +15,7 @@ const BlogPage = ({ data }) => {
   }
   const [activeCategory, setActiveCategory] = useState("Blog")
   const activeImage = images[activeCategory]
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(1)
   const pageLength = 6
   const postsRef = useRef()
   const [firstLaunch, setFirstLaunch] = useState(true)
@@ -24,19 +23,38 @@ const BlogPage = ({ data }) => {
   const handleClick = (e, category) => {
     e.preventDefault()
     setActiveCategory(category)
-    setPage(0)
+    setPage(1)
     // postsRef.current.scrollIntoView({ block: "nearest", behavior: "smooth" })
   }
   const {
     allDatoCmsArticle: { nodes },
   } = data
 
+  const categories = useMemo(() => {
+    let obj = nodes.reduce((acc, cur) => {
+      if (acc[cur.category]) {
+        acc[cur.category]++
+      } else {
+        acc[cur.category] = 1
+      }
+      return acc
+    }, {})
+
+    let arr = []
+    let acceoted = ["Kultura", "Sztuka", "Podróże", "Kuchnia"]
+    for (let key in obj) {
+      if (!acceoted.includes(key)) continue
+      arr.push({ name: key, count: obj[key] })
+    }
+    return arr
+  }, [nodes])
+
   return (
     <>
       <SEO meta={data.bg.seoMetaTags} />
       <PageHeader
         paragraph="A tavola"
-        imgFluid={activeImage.fluid}
+        imgFluid={activeImage?.fluid || images.Blog.fluid}
         bg="red"
         withNav
         blog={!firstLaunch}
@@ -63,6 +81,7 @@ const BlogPage = ({ data }) => {
 export const query = graphql`
   {
     allDatoCmsArticle {
+      totalCount
       nodes {
         title
         slug

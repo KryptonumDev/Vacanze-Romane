@@ -11,6 +11,25 @@ export const PageHeaderStyles = styled(motion.ul)`
   margin: 0;
   display: flex;
 
+  &.blog{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    @media (max-width: 959px) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      li {
+        margin: 28px 0 0;
+        &:first-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+
   li {
     margin-right: 88px;
     font-family: "Lato";
