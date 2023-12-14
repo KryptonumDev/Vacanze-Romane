@@ -12,22 +12,28 @@ export const PageHeaderStyles = styled(motion.ul)`
   display: flex;
 
   &.blog{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
     @media (max-width: 959px) {
+
+      li{
+        margin-top: 0 !important;
+      }
+      flex-direction: row;
+    }
+
+    @media (max-width: 480px) {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      margin: 0 auto;
 
       li {
-        margin: 28px 0 0;
+        margin: 28px 0 0 0 !important;
         &:first-child {
-          margin: 0;
+          margin: 0 !important;
         }
       }
     }
+
   }
 
   li {
@@ -63,7 +69,7 @@ export const PageHeaderStyles = styled(motion.ul)`
   a {
     text-decoration: none;
     color: ${({ bg }) =>
-      bg === "green" ? "var(--beige-2)" : bg === "red" ? "var(--beige-2)" : ""};
+    bg === "green" ? "var(--beige-2)" : bg === "red" ? "var(--beige-2)" : ""};
     position: relative;
     &:after {
       content: "";
@@ -74,11 +80,11 @@ export const PageHeaderStyles = styled(motion.ul)`
       height: 6px;
       z-index: -1;
       background-color: ${({ bg }) =>
-        bg === "red"
-          ? "var(--light-red)"
-          : bg === "green"
-          ? "var(--light-green)"
-          : ""};
+    bg === "red"
+      ? "var(--light-red)"
+      : bg === "green"
+        ? "var(--light-green)"
+        : ""};
       transform: scaleY(0);
       transform-origin: center bottom;
       transition: 0.3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
