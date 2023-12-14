@@ -6,7 +6,7 @@ import { PageHeaderStyles } from "../PageHeaderNav/PageHeaderNav"
 import { Wrapper } from "../Wrapper/Wrapper"
 
 const NavStyles = styled.li`
-  margin-right: 32px !important;
+  margin-right: 0 !important;
   
   button {
     text-decoration: none;
@@ -62,6 +62,7 @@ const NavStyles = styled.li`
 const StyledContentWrapper = styled(ContentWrapper)`
   @media only screen and (max-width: 1128px) {
     padding: 40px 56px;
+    justify-content: center;
   }
   @media only screen and (max-width: 1005px) {
     padding: 40px 30px;
