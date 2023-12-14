@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import PageHeader from "../components/PageHeader/PageHeader"
 import ItalianoSection from "../components/SectionsComponents/InItalianoSection"
@@ -7,6 +7,7 @@ import { useRef } from "react"
 import SEO from "../components/SEO/SEO"
 
 const InItalianoPage = ({ data }) => {
+  const categories = ["Grammatica", "Vocabolario", "Frasi e citazioni"]
   const images = {
     Initaliano: data.bg.bgImage,
     Grammatica: data.bg.inItalianoGrammatica,
@@ -15,7 +16,7 @@ const InItalianoPage = ({ data }) => {
   }
   const [activeCategory, setActiveCategory] = useState("Initaliano")
   const activeImage = images[activeCategory]
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
   const pageLength = 6
   const postsRef = useRef()
   const [firstLaunch, setFirstLaunch] = useState(true)
@@ -29,7 +30,7 @@ const InItalianoPage = ({ data }) => {
   const handleClick = (e, category) => {
     e.preventDefault()
     setActiveCategory(category)
-    setPage(1)
+    setPage(0)
     // scroll()
   }
   const {
@@ -39,25 +40,6 @@ const InItalianoPage = ({ data }) => {
   useEffect(() => {
     setFirstLaunch(false)
   }, [])
-
-  const categories = useMemo(() => {
-    let obj = nodes.reduce((acc, cur) => {
-      if (acc[cur.category]) {
-        acc[cur.category]++
-      } else {
-        acc[cur.category] = 1
-      }
-      return acc
-    }, {})
-
-    let arr = []
-    let acceoted = ["Grammatica", "Vocabolario", "Frasi e citazioni"]
-    for (let key in obj) {
-      if (!acceoted.includes(key)) continue
-      arr.push({ name: key, count: obj[key] })
-    }
-    return arr
-  }, [nodes])
 
   return (
     <>
