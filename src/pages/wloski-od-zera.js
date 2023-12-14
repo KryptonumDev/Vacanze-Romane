@@ -53,7 +53,6 @@ const CoursesPage = ({ data }) => {
         categories={courses}
         activeCategory={activeCourse}
         setActiveCategory={handleClick}
-        courses
       />
       <CoursesStagesSection
         lessons={data.lessons.nodes}

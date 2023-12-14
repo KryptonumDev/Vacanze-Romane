@@ -11,31 +11,6 @@ export const PageHeaderStyles = styled(motion.ul)`
   margin: 0;
   display: flex;
 
-  &.blog{
-    @media (max-width: 959px) {
-
-      li{
-        margin-top: 0 !important;
-      }
-      flex-direction: row;
-    }
-
-    @media (max-width: 480px) {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto;
-
-      li {
-        margin: 28px 0 0 0 !important;
-        &:first-child {
-          margin: 0 !important;
-        }
-      }
-    }
-
-  }
-
   li {
     margin-right: 88px;
     font-family: "Lato";
@@ -51,6 +26,7 @@ export const PageHeaderStyles = styled(motion.ul)`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
 
     li {
       margin: 28px 0 0;

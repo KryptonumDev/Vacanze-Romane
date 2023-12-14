@@ -40,24 +40,7 @@ const InItalianoPage = ({ data }) => {
     setFirstLaunch(false)
   }, [])
 
-  const categories = useMemo(() => {
-    let obj = nodes.reduce((acc, cur) => {
-      if (acc[cur.category]) {
-        acc[cur.category]++
-      } else {
-        acc[cur.category] = 1
-      }
-      return acc
-    }, {})
-
-    let arr = []
-    let acceoted = ["Grammatica", "Vocabolario", "Frasi e citazioni"]
-    for (let key in obj) {
-      if (!acceoted.includes(key)) continue
-      arr.push({ name: key, count: obj[key] })
-    }
-    return arr
-  }, [nodes])
+  const categories = ["Grammatica", "Vocabolario", "Frasi e citazioni"]
 
   return (
     <>

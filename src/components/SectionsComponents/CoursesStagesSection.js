@@ -135,7 +135,7 @@ const CoursesStagesSection = React.forwardRef(
 
     return (
       <StyledWrapper ref={ref} padding="0" bg="light">
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
           {activeCourse === "Kurs włoskiego od zera" ? (
             <StyledContentWrapper
               key="content"

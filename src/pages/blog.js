@@ -30,24 +30,7 @@ const BlogPage = ({ data }) => {
     allDatoCmsArticle: { nodes },
   } = data
 
-  const categories = useMemo(() => {
-    let obj = nodes.reduce((acc, cur) => {
-      if (acc[cur.category]) {
-        acc[cur.category]++
-      } else {
-        acc[cur.category] = 1
-      }
-      return acc
-    }, {})
-
-    let arr = []
-    let acceoted = ["Kultura", "Sztuka", "Podróże", "Kuchnia"]
-    for (let key in obj) {
-      if (!acceoted.includes(key)) continue
-      arr.push({ name: key, count: obj[key] })
-    }
-    return arr
-  }, [nodes])
+  const categories = ["Kultura", "Sztuka", "Podróże", "Kuchnia"]
 
   return (
     <>
