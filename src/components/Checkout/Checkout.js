@@ -4,7 +4,7 @@ import Form from "./Form"
 import Summary from "./Summary"
 import { AppContext } from "../../context/app-context"
 import { useForm } from "react-hook-form"
-import Img from './../../assets/images/p24.png'
+import Img from "./../../assets/images/p24.png"
 import { useMutation } from "../../hooks/useMutation"
 import SET_SHIPPING_METHOD from "../../mutations/SET_SHIPPING_METHOD"
 import CartItem from "../Cart/CartItem"
@@ -12,102 +12,104 @@ import UPDATE_CART from "../../mutations/UPDATE_CART"
 import { getUpdatedItems } from "../../utils/getUpdatedItems"
 import { v4 } from "uuid"
 import GET_CART from "../../queries/GET_CART"
-import CHECKOUT from '../../mutations/CHECKOUT'
+import CHECKOUT from "../../mutations/CHECKOUT"
 import { useQuery } from "../../hooks/useQuery"
-import { createCheckoutData } from '../../utils/generateCheckoutData'
+import { createCheckoutData } from "../../utils/generateCheckoutData"
 import axios from "axios"
 import Overlay from "../Overlay/Overlay"
-import { InpostGeowidget } from "react-inpost-geowidget";
+import { InpostGeowidget } from "react-inpost-geowidget"
 import { AnimatePresence, motion } from "framer-motion"
 
 const paymentMethods = [
   {
-    name: 'Proszę o płatność przelewem tradycyjnym i podanie w tytule numeru zamówienia. Dane do przelewu:',
+    name: "Proszę o płatność przelewem tradycyjnym i podanie w tytule numeru zamówienia. Dane do przelewu:",
     description: `
-      13 1090 1346 0000 0001 0343 4077<br/>
-      Santander Bank Polska<br/>
+      57 1140 2004 0000 3502 8521 3430<br/>
+      mBank<br/>
       Monika Kruzel
     `,
-    methodId: 'bacs',
+    methodId: "bacs",
   },
   {
-    name: 'Możesz zapłacić także zwykłym przekazem Pay Pal dla odbiorcy:',
-    description: `
-      jezyk.wloski.od.zera@gmail.com
-    `,
-    methodId: 'bacs',
-  },
-  {
-    name: 'Płatności elektroniczne',
+    name: "Płatności elektroniczne",
     description: `
       <img src='${Img}' alt='przelewy24'/>
     `,
-    methodId: 'przelewy24',
-  }
-
+    methodId: "przelewy24",
+  },
 ]
 
 export default function Checkout() {
   let [cart, setCart] = useContext(AppContext)
   const [loading, setLoading] = useState(false)
 
-  const { } = useQuery(GET_CART, {
-    onCompleted: ({ body, status }) => {
-      localStorage.setItem('woo-next-cart', JSON.stringify(body.data.cart))
+  const {} = useQuery(GET_CART, {
+    onCompleted: ({ body }) => {
+      localStorage.setItem("woo-next-cart", JSON.stringify(body.data.cart))
       setCart(body.data.cart)
 
       if (body.data.cart.contents?.nodes?.length === 0) {
-        window.location.href = '/sklep'
+        window.location.href = "/sklep"
       }
     },
-    onError: (error) => {
+    onError: error => {
       console.log(error.message)
-    }
+    },
   })
 
   const { request: updateCart } = useMutation(UPDATE_CART, {
     onCompleted: ({ body }) => {
       // Update cart in the localStorage.
-      localStorage.setItem('woo-next-cart', JSON.stringify(body.data.updateItemQuantities.cart));
+      localStorage.setItem(
+        "woo-next-cart",
+        JSON.stringify(body.data.updateItemQuantities.cart),
+      )
       // Update cart data in React Context.
 
-      setCart(body.data.updateItemQuantities.cart);
+      setCart(body.data.updateItemQuantities.cart)
 
       if (body.data.updateItemQuantities.cart.contents?.nodes?.length === 0) {
-        window.location.href = '/sklep'
+        window.location.href = "/sklep"
       }
       setLoading(false)
     },
-    onError: (error) => {
+    onError: error => {
       setLoading(false)
       if (error) {
-        console.log(error.message);
+        console.log(error.message)
       }
-    }
-  });
+    },
+  })
 
   const handleRemoveProductClick = (event, key, products) => {
-    event.stopPropagation();
+    event.stopPropagation()
     if (products.length) {
-
       // By passing the newQty to 0 in updateCart Mutation, it will remove the item.
-      const newQty = 0;
-      const updatedItems = getUpdatedItems(products, newQty, key);
+      const newQty = 0
+      const updatedItems = getUpdatedItems(products, newQty, key)
       setLoading(true)
       updateCart({
         variables: {
           input: {
             clientMutationId: v4(),
-            items: updatedItems
-          }
+            items: updatedItems,
+          },
         },
-      });
+      })
     }
-  };
+  }
 
   if (cart.contents.nodes.length === 0) return null
 
-  return <ChildComponent loading={loading} setLoading={setLoading} remove={handleRemoveProductClick} cart={cart} setCart={setCart} />
+  return (
+    <ChildComponent
+      loading={loading}
+      setLoading={setLoading}
+      remove={handleRemoveProductClick}
+      cart={cart}
+      setCart={setCart}
+    />
+  )
 }
 
 const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
@@ -117,11 +119,11 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
     watch,
     formState: { errors },
   } = useForm({
-    mode: 'oBlur',
+    mode: "oBlur",
     defaultValues: {
-      'shipping': cart?.chosenShippingMethods?.[0],
-      'payment': '0',
-    }
+      shipping: cart?.chosenShippingMethods?.[0],
+      payment: "0",
+    },
   })
 
   const [orderBody, setOrderBody] = useState(null)
@@ -131,52 +133,70 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
   const { request: checkout } = useMutation(CHECKOUT, {
     onCompleted: ({ body: { data } }) => {
       if (data.checkout.order.paymentMethod !== "przelewy24") {
-        localStorage.setItem('woo-next-cart', JSON.stringify({ contents: { nodes: [] }, total: 0 }));
+        localStorage.setItem(
+          "woo-next-cart",
+          JSON.stringify({ contents: { nodes: [] }, total: 0 }),
+        )
         window.location.href = `${window?.location?.origin}/platnosc-przelewem?id=${data.checkout.order.orderNumber}&amount=${data.checkout.order.total}`
-        return;
+        return
       }
 
-      axios.post('/api/create-transaction', {
-        "description": 'Zamówienie w sklepie Włoski od zera nr. ' + data.checkout.order.orderNumber,
-        "id": data.checkout.order.orderNumber,
-        "key": data.checkout.order.orderKey,
-        "amount": data.checkout.order.total * 100,
-        "sessionId": data.checkout.order.orderKey,
-        "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
-        "urlReturn": `${window?.location?.origin}/api/verify-transaction?session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}&origin=${window?.location?.origin}`,
-        "urlStatus": `${window?.location?.origin}/api/complete-transaction?session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}`,
-      })
+      axios
+        .post("/api/create-transaction", {
+          description:
+            "Zamówienie w sklepie Włoski od zera nr. " +
+            data.checkout.order.orderNumber,
+          id: data.checkout.order.orderNumber,
+          key: data.checkout.order.orderKey,
+          amount: data.checkout.order.total * 100,
+          sessionId: data.checkout.order.orderKey,
+          email:
+            data.checkout.customer.email ||
+            data.checkout.order.billing.email ||
+            data.checkout.order.shipping.email,
+          urlReturn: `${window?.location?.origin}/api/verify-transaction?session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}&origin=${window?.location?.origin}`,
+          urlStatus: `${window?.location?.origin}/api/complete-transaction?session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}`,
+        })
         .then(function (value) {
-          localStorage.setItem('woo-next-cart', null);
-          localStorage.setItem('payLink', value.data.link)
+          localStorage.setItem("woo-next-cart", null)
+          localStorage.setItem("payLink", value.data.link)
           window.location.href = value.data.link
           setLoading(false)
         })
         .catch(error => {
           setLoading(false)
           alert(error.message)
-        });
+        })
     },
-    onError: (error) => {
+    onError: error => {
       if (error.message === "Proszę wybrać paczkomat") {
         debugger
         checkout({
           variables: {
-            input: orderBody
-          }
+            input: orderBody,
+          },
         })
-        return;
+        return
       }
 
       setLoading(false)
       alert(error.message)
-    }
-  });
+    },
+  })
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     setLoading(true)
-    const needInpost = !!cart.availableShippingMethods[0].rates.find(el => el.label.includes('paczkomat'))
-    const order = createCheckoutData(data, paymentMethods, needInpost, parcelMachine)
+    const needInpost = cart.needsShippingAddress
+      ? !!cart.availableShippingMethods[0].rates.find(el =>
+          el.label.includes("paczkomat"),
+        )
+      : false
+    const order = createCheckoutData(
+      data,
+      paymentMethods,
+      needInpost,
+      parcelMachine,
+    )
     setOrderBody(order)
   }
 
@@ -184,14 +204,14 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
     if (orderBody) {
       checkout({
         variables: {
-          input: orderBody
-        }
+          input: orderBody,
+        },
       })
     }
   }, [orderBody])
 
-  const shippingValue = watch('shipping')
-  const paymentValue = watch('payment')
+  const shippingValue = watch("shipping")
+  const paymentValue = watch("payment")
 
   const { request } = useMutation(SET_SHIPPING_METHOD, {
     variables: {
@@ -200,14 +220,17 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
       },
     },
     onCompleted: ({ body }) => {
-      localStorage.setItem('woo-next-cart', JSON.stringify(body?.data?.updateShippingMethod?.cart))
+      localStorage.setItem(
+        "woo-next-cart",
+        JSON.stringify(body?.data?.updateShippingMethod?.cart),
+      )
       setCart(body?.data?.updateShippingMethod?.cart)
       setLoading(false)
     },
-    onError: (error) => {
+    onError: error => {
       setLoading(false)
       console.log(error.message)
-    }
+    },
   })
 
   useEffect(() => {
@@ -217,7 +240,7 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
     }
   }, [shippingValue])
 
-  const onPointCallback = (e) => {
+  const onPointCallback = e => {
     setParcelMachine(e)
     setOpenedParcelMachine(false)
   }
@@ -230,23 +253,53 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
           <h2>Podsumowanie</h2>
           <div>
             {cart.contents.nodes.map((item, index) => (
-              <CartItem remove={remove} key={index} data={item} products={cart.contents.nodes} />
+              <CartItem
+                remove={remove}
+                key={index}
+                data={item}
+                products={cart.contents.nodes}
+              />
             ))}
           </div>
         </div>
-        <Form setOpenedParcelMachine={setOpenedParcelMachine} parcelMachine={parcelMachine} paymentValue={paymentValue} errors={errors} paymentMethods={paymentMethods} register={register} shippingValue={shippingValue} shipping={cart.availableShippingMethods[0].rates} />
+        <Form
+          setOpenedParcelMachine={setOpenedParcelMachine}
+          parcelMachine={parcelMachine}
+          paymentValue={paymentValue}
+          errors={errors}
+          paymentMethods={paymentMethods}
+          register={register}
+          shippingValue={shippingValue}
+          shipping={cart.needsShippingAddress ? cart.availableShippingMethods[0].rates : false}
+        />
         <Summary register={register} remove={remove} cart={cart} />
         <Button>Złóż zamówienie</Button>
       </div>
       <AnimatePresence>
         {openedParcelMachine && (
-          <Map initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <Map
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
             <div className="content">
               <div className="flex">
                 <h2>Punkty odbioru (płatne z góry)</h2>
                 <button type="button">
-                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M14 26L26 14M14 14L26 26" stroke="#32251D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M14 26L26 14M14 14L26 26"
+                      stroke="#32251D"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </button>
               </div>
@@ -268,31 +321,31 @@ const Map = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.50);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 40;
 
-  .content{
+  .content {
     max-width: 800px;
     max-height: 600px;
     width: 100%;
     height: 100%;
-    border: 1px solid var(--grey, #E0E0E0);
-    background: var(--white, #FEFEFE);
+    border: 1px solid var(--grey, #e0e0e0);
+    background: var(--white, #fefefe);
     padding: 24px;
     display: grid;
     grid-template-rows: auto 1fr;
 
-    .flex{
+    .flex {
       display: flex;
       justify-content: space-between;
       margin-bottom: 24px;
 
-      h2{
+      h2 {
         font-size: 24px;
         margin-bottom: 0;
       }
 
-      button{
+      button {
         height: fit-content;
         border: none;
         background-color: transparent;
@@ -302,12 +355,14 @@ const Map = styled(motion.div)`
 `
 
 const Wrapper = styled.form`
-  background-color: #F8F5F1;
+  background-color: #f8f5f1;
 
-  h2{
+  h2 {
     color: #000;
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-family: 'Cormorant Garamond';
+    font-feature-settings:
+      "clig" off,
+      "liga" off;
+    font-family: "Cormorant Garamond";
     font-size: 36px;
     font-style: normal;
     font-weight: 400;
@@ -316,14 +371,14 @@ const Wrapper = styled.form`
     margin-bottom: 48px;
   }
 
-  .summary-mobile{
+  .summary-mobile {
     display: none;
   }
 
-  .container{
+  .container {
     display: grid;
     grid-template-columns: 564fr 458fr;
-    gap: 0 clamp(24px, calc(106vw/14.4), 106px);
+    gap: 0 clamp(24px, calc(106vw / 14.4), 106px);
     max-width: 1440px;
     padding: 72px 100px;
     margin: 0 auto;
@@ -336,7 +391,7 @@ const Wrapper = styled.form`
     @media (max-width: 876px) {
       grid-template-columns: 1fr;
 
-      .summary-mobile{
+      .summary-mobile {
         display: block;
       }
     }
@@ -353,19 +408,21 @@ const Wrapper = styled.form`
       flex-direction: column;
     }
   }
-  
-  fieldset{
-    border: none;
-    margin-top: clamp(24px, calc(48vw/14.4), 48px);
 
-    &:first-child{
+  fieldset {
+    border: none;
+    margin-top: clamp(24px, calc(48vw / 14.4), 48px);
+
+    &:first-child {
       margin-top: 0;
     }
   }
 
-  legend{
+  legend {
     color: #000;
-    font-feature-settings: 'clig' off, 'liga' off;
+    font-feature-settings:
+      "clig" off,
+      "liga" off;
     font-family: Cormorant Garamond;
     font-size: 36px;
     font-style: normal;
@@ -374,15 +431,18 @@ const Wrapper = styled.form`
     letter-spacing: 1px;
   }
 
-  input, textarea{
-    border: 1px solid var(--grey, #E0E0E0);
-    background: var(--white, #FEFEFE);
+  input,
+  textarea {
+    border: 1px solid var(--grey, #e0e0e0);
+    background: var(--white, #fefefe);
     padding: 16px 32px;
     width: 100%;
     margin-top: 24px;
 
     color: #000000;
-    font-feature-settings: 'clig' off, 'liga' off;
+    font-feature-settings:
+      "clig" off,
+      "liga" off;
     font-family: Lato;
     font-size: 18px;
     font-style: normal;
@@ -390,15 +450,16 @@ const Wrapper = styled.form`
     line-height: 144.444%;
     letter-spacing: 1px;
 
-    transition: all .2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    transition: all 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
-    &::placeholder{
+    &::placeholder {
       color: var(--grey-1, #808080);
     }
 
-    &:focus, &:focus-visible{
+    &:focus,
+    &:focus-visible {
       outline: none;
-      border: 1px solid var(--brown, #32251D) !important;
+      border: 1px solid var(--brown, #32251d) !important;
     }
   }
 `
@@ -417,7 +478,8 @@ const Button = styled.button`
   border: none;
   margin: 32px auto 0 auto;
 
-  transition: background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1),
+  transition:
+    background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1),
     color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
 
   &:hover,

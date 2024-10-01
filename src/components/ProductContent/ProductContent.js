@@ -142,7 +142,7 @@ export default function Content({ data, data: { slug, productId, productTags, pr
             </form>
           ) : (
             <>
-              <Select
+              {/* <Select
                 className="counter"
                 classNamePrefix="counter"
                 components={{ DropdownIndicator, NoOptionsMessage }}
@@ -150,7 +150,7 @@ export default function Content({ data, data: { slug, productId, productTags, pr
                 onChange={handleChange}
                 options={options}
                 isSearchable={false}
-              />
+              /> */}
               <AddToCart quantity={selectedOption.value} product={data} />
             </>
           )}
