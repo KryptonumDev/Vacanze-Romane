@@ -170,7 +170,6 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
     },
     onError: error => {
       if (error.message === "Proszę wybrać paczkomat") {
-        debugger
         checkout({
           variables: {
             input: orderBody,

@@ -1,7 +1,6 @@
 import { v4 } from 'uuid';
 
 export const createCheckoutData = (order, paymentMethods, needInpost, parcelMachine) => {
-  debugger
   const checkoutData = {
     clientMutationId: v4(),
     shipping: {
