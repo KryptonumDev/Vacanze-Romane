@@ -141,6 +141,8 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
         return
       }
 
+      console.log(data)
+
       axios
         .post("/api/create-transaction", {
           description:
