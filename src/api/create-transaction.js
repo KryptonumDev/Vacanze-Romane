@@ -21,6 +21,7 @@ export default async function handler(req, res) {
     const { amount, email, urlReturn, urlStatus, description, key, id, logsData } = req.body
 
     console.log(logsData)
+    console.log(amount)
 
     const order = {
       sessionId: key,

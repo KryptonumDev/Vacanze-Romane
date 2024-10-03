@@ -150,7 +150,7 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
             data.checkout.order.orderNumber,
           id: data.checkout.order.orderNumber,
           key: data.checkout.order.orderKey,
-          amount: data.checkout.order.total * 100,
+          amount: Number(data.checkout.order.total) * 100,
           sessionId: data.checkout.order.orderKey,
           email:
             data.checkout.customer.email ||
