@@ -4,7 +4,7 @@ import {
   Country,
   Language,
   Encoding,
-} from "@ingameltd/node-przelewy24";
+} from "@ingameltd/node-przelewy24"
 
 const p24 = new P24(
   Number(process.env.P24_MERCHANT_ID),
@@ -12,9 +12,9 @@ const p24 = new P24(
   process.env.P24_REST_API_KEY,
   process.env.P24_CRC,
   {
-    sandbox: false
-  }
-);
+    sandbox: false,
+  },
+)
 
 export default async function handler(req, res) {
   try {
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
     const order = {
       sessionId: key,
-      amount: Number(amount).toFixed(2),
+      amount: Math.round(Number(amount)),
       currency: Currency.PLN,
       description: description,
       email: email,
