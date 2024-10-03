@@ -141,8 +141,6 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
         return
       }
 
-      console.log(data)
-
       axios
         .post("/api/create-transaction", {
           description:
@@ -158,7 +156,6 @@ const ChildComponent = ({ loading, setLoading, remove, cart, setCart }) => {
             data.checkout.order.shipping.email,
           urlReturn: `${window?.location?.origin}/api/verify-transaction?session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}&origin=${window?.location?.origin}`,
           urlStatus: `${window?.location?.origin}/api/complete-transaction?session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}`,
-          logsData: data,
         })
         .then(function (value) {
           localStorage.setItem("woo-next-cart", null)

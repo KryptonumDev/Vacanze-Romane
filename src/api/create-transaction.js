@@ -18,14 +18,11 @@ const p24 = new P24(
 
 export default async function handler(req, res) {
   try {
-    const { amount, email, urlReturn, urlStatus, description, key, id, logsData } = req.body
-
-    console.log(logsData)
-    console.log(amount)
+    const { amount, email, urlReturn, urlStatus, description, key } = req.body
 
     const order = {
       sessionId: key,
-      amount: Number(amount),
+      amount: Number(amount).toFixed(2),
       currency: Currency.PLN,
       description: description,
       email: email,
