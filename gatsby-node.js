@@ -13,7 +13,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(`
     query allArticlesAndLessons {
       wp {
-        products {
+        products(first: 1000) {
           nodes {
             title
             id
@@ -93,7 +93,7 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
     //include slug free
-    if(product.productTags.nodes.some(tag => tag.slug === 'free')){
+    if (product.productTags.nodes.some(tag => tag.slug === 'free')) {
       createPage({
         path: `/sklep/${product.slug}/podziekowanie`,
         component: productFreeTemplate,
@@ -147,9 +147,11 @@ exports.createPages = async ({ graphql, actions }) => {
         strict: true,
         trim: true
       })
-      const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true,
+      const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, {
+        lower: true,
         strict: true,
-        trim: true })
+        trim: true
+      })
       createPage({
         path: `wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`,
         component: lessonTemplate,
@@ -158,13 +160,13 @@ exports.createPages = async ({ graphql, actions }) => {
           number: lesson.lessonNumber,
           prev:
             i >= 1 &&
-            lesson.lekcjaPoziom ===
+              lesson.lekcjaPoziom ===
               result.data.basicLessons.nodes[i - 1].lekcjaPoziom
               ? result.data.basicLessons.nodes[i - 1].lessonTitle
               : null,
           next:
             i < result.data.basicLessons.nodes.length - 1 &&
-            lesson.lekcjaPoziom ===
+              lesson.lekcjaPoziom ===
               result.data.basicLessons.nodes[i + 1].lekcjaPoziom
               ? result.data.basicLessons.nodes[i + 1].lessonTitle
               : null,
@@ -181,9 +183,11 @@ exports.createPages = async ({ graphql, actions }) => {
         strict: true,
         trim: true
       })
-      const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true,
+      const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, {
+        lower: true,
         strict: true,
-        trim: true })
+        trim: true
+      })
       createPage({
         path: `wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`,
         component: lessonTemplate,
@@ -192,51 +196,53 @@ exports.createPages = async ({ graphql, actions }) => {
           number: lesson.lessonNumber,
           prev:
             i >= 1 &&
-            lesson.lekcjaPoziom ===
+              lesson.lekcjaPoziom ===
               result.data.firstLevelLessons.nodes[i - 1].lekcjaPoziom
               ? result.data.firstLevelLessons.nodes[i - 1].lessonTitle
               : null,
           next:
             i < result.data.firstLevelLessons.nodes.length - 1 &&
-            lesson.lekcjaPoziom ===
+              lesson.lekcjaPoziom ===
               result.data.firstLevelLessons.nodes[i + 1].lekcjaPoziom
               ? result.data.firstLevelLessons.nodes[i + 1].lessonTitle
               : null,
         },
       })
     })
-    result.data.continueLevelLessons.nodes
-      .sort((a, b) => {
-        return Number(a.lessonNumber) - Number(b.lessonNumber)
+  result.data.continueLevelLessons.nodes
+    .sort((a, b) => {
+      return Number(a.lessonNumber) - Number(b.lessonNumber)
+    })
+    .forEach((lesson, i) => {
+      const slugifiedTitle = slugify(lesson.lessonTitle, {
+        lower: true,
+        strict: true,
+        trim: true
       })
-      .forEach((lesson, i) => {
-        const slugifiedTitle = slugify(lesson.lessonTitle, {
-          lower: true,
-          strict: true,
-          trim: true
-        })
-        const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, { lower: true,
-          strict: true,
-          trim: true })
-        createPage({
-          path: `wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`,
-          component: lessonTemplate,
-          context: {
-            id: lesson.id,
-            number: lesson.lessonNumber,
-            prev:
-              i >= 1 &&
-              lesson.lekcjaPoziom ===
-                result.data.continueLevelLessons.nodes[i - 1].lekcjaPoziom
-                ? result.data.continueLevelLessons.nodes[i - 1].lessonTitle
-                : null,
-            next:
-              i < result.data.continueLevelLessons.nodes.length - 1 &&
-              lesson.lekcjaPoziom ===
-                result.data.continueLevelLessons.nodes[i + 1].lekcjaPoziom
-                ? result.data.continueLevelLessons.nodes[i + 1].lessonTitle
-                : null,
-          },
-        })
+      const slugifiedBaseUrl = slugify(lesson.lekcjaPoziom, {
+        lower: true,
+        strict: true,
+        trim: true
       })
+      createPage({
+        path: `wloski-od-zera/${slugifiedBaseUrl}/${slugifiedTitle}`,
+        component: lessonTemplate,
+        context: {
+          id: lesson.id,
+          number: lesson.lessonNumber,
+          prev:
+            i >= 1 &&
+              lesson.lekcjaPoziom ===
+              result.data.continueLevelLessons.nodes[i - 1].lekcjaPoziom
+              ? result.data.continueLevelLessons.nodes[i - 1].lessonTitle
+              : null,
+          next:
+            i < result.data.continueLevelLessons.nodes.length - 1 &&
+              lesson.lekcjaPoziom ===
+              result.data.continueLevelLessons.nodes[i + 1].lekcjaPoziom
+              ? result.data.continueLevelLessons.nodes[i + 1].lessonTitle
+              : null,
+        },
+      })
+    })
 }
